@@ -1,23 +1,28 @@
-export default function Navbar(){
+import MenuIcon from '@mui/icons-material/Menu';
+import { Avatar, IconButton } from '@mui/material';
+
+export default function Navbar({setIsDrawerOn, isDrawerOn} : {
+    setIsDrawerOn: React.Dispatch<React.SetStateAction<boolean>>,
+    isDrawerOn: boolean
+}){
     return(
         <nav className={`navbar navbar-expand-lg bg-primary`}>
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">Navbar</a>
-                <ul className="navbar-nav">
+            <div className="container-fluid py-1">
+                <IconButton type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" onClick={() => setIsDrawerOn(!isDrawerOn)} sx={{
+                    visibility: isDrawerOn ? 'hidden' : 'visible'
+                }}>
+                    <MenuIcon/>
+                </IconButton>
+                <ul className="navbar-nav me-3">
                     <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Features</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link disabled" aria-disabled="true">Disabled</a>
+                        <div className='d-flex align-items-center'>
+                            <Avatar src='https://th.bing.com/th/id/OIP.RczLHpGhBtKxRuaNCKv_KQAAAA?pid=ImgDet&rs=1'/>
+                            <div className='ms-2'>
+                                Vithun Chandra
+                            </div>
+                        </div> 
                     </li>
                 </ul>
-                <button className="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar">Enable both scrolling & backdrop</button>
             </div>
         </nav>
     )

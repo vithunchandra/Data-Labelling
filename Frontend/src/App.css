@@ -1,13 +1,7 @@
-*{
-    margin: 0;
-    box-sizing: border-box;
-    padding: 0;
-}
-
 body{
     min-height: 100vh;
 }
 
 #sidebar-nav{
-    width: 160px;
+    width: 250px;
 }
