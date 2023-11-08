@@ -15,3 +15,15 @@ body{
 #sidebar-nav{
     width: 250px;
 }
+
+table{
+    table-layout: fixed;
+}
+
+.test{
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space-collapse: collapse;
+    text-wrap: nowrap;
+    max-width: 200px;
+}

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Navbar from "./Navbar";
-import Offcanvas from "./Offcanvas";
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -8,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/Inbox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link, Outlet } from "react-router-dom";
-import { Button, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 export default function MainLayout({navigation, role}: {navigation: NavigationInterface[], role: string}){
     const [isDrawerOn, setIsDrawerOn] = useState(true);
@@ -57,7 +56,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                 </div>
                 <div className="col ms-3 d-flex flex-column">
                     <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn}></Navbar>
-                    <div className="container bg-white overflow-auto mt-3 rounded-2 shadow-sm">
+                    <div className="container-fluid overflow-auto">
                         <Outlet></Outlet>
                     </div>
                 </div>

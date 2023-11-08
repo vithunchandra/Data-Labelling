@@ -5,15 +5,69 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
-        "finish_date": "25 November 2023"
+        "finish_date": "25 November 2023",
+        "data": [
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh"
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh."
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            }
+        ]
     },
     {
         "name": "text summarization",
-        "requester": "Kazusa Touma",
+        "requester": "kazusa touma",
         "profile_image": "https://picsum.photos/200",
         "type": "summarization",
         "status": false,
-        "finish_date": "14 Desember 2023"
+        "finish_date": "14 Desember 2023",
+        "data": [
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh"
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh."
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            }
+        ]
     },
     {
         "name": "text classification",
@@ -21,7 +75,34 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
-        "finish_date": "25 November 2023"
+        "finish_date": "25 November 2023",
+        "data": [
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh"
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh."
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            }
+        ]
     },
     {
         "name": "text classification",
@@ -29,7 +110,34 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
-        "finish_date": "25 November 2023"
+        "finish_date": "25 November 2023",
+        "data": [
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh"
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh."
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            }
+        ]
     },
     {
         "name": "text classification",
@@ -37,6 +145,33 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
-        "finish_date": "25 November 2023"
+        "finish_date": "25 November 2023",
+        "data": [
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh"
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "label": "ed quis molestie nibh."
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "Unlabeled",
+                "label": ""
+            }
+        ]
     }
 ]
