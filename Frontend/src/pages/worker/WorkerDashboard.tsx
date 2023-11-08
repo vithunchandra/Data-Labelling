@@ -1,3 +1,3 @@
 export default function WorkerDashboard(){
-    return <h1>Worker Dashboard</h1>
+    return <h1>Hello WOrld</h1>
 }

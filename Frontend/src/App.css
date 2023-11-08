@@ -1,14 +1,15 @@
 :root{
-    --bg-primary: #b5c2ca;
+    --bg-primary: #f5f5f5;
     --color-primary: black;
-}
-
-*{
-    box-sizing: border-box;
 }
 
 body{
     min-height: 100vh;
+}
+
+#root{
+    height: 100vh;
+    background-color: var(--bg-primary);
 }
 
 #sidebar-nav{

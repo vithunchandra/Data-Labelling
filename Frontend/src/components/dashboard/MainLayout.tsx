@@ -22,12 +22,12 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
     };
 
     return(
-        <div className="w-100 d-flex align-items-center p-4">
-            <div className="row flex-nowrap w-100 g-0">
+        <div className="w-100 h-100 p-4">
+            <div className="row flex-nowrap h-100 g-0">
                 <div className="col-auto">
-                    <div id="sidebar" className="collapse collapse-horizontal show bg-light rounded-4">
-                        <div id="sidebar-nav" style={{height: "90vh"}}>
-                            <div className="w-100 d-flex align-items-center justify-content-between ps-3 py-2 fs-3 border-bottom border-2 fw-bold">
+                    <div id="sidebar" className="collapse collapse-horizontal bg-white show h-100 rounded-2 shadow-sm">
+                        <div id="sidebar-nav">
+                            <div className="w-100 d-flex align-items-center justify-content-between ps-3 py-2 fs-3 fw-bold">
                                 <div className="d-flex align-items-center fs-3 fw-bold">
                                     <img src="../../../public/Logo.png" className="me-2" style={{width: "50px"}}></img>
                                     <span>Datle</span>
@@ -36,11 +36,13 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                                     <ChevronLeftIcon fontSize="large" />
                                 </IconButton>
                             </div>
-                            <List>
+                            <List className="px-2">
                                 {
                                     navigation.map((item, index) => {
                                         return <Link to={item.path} className="text-decoration-none text-black" key={index}>
-                                            <ListItemButton>
+                                            <ListItemButton sx={{
+                                                marginY: "5px"
+                                            }}>
                                                 <ListItemIcon>
                                                     <InboxIcon />
                                                 </ListItemIcon>
@@ -53,9 +55,9 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                         </div>
                     </div>
                 </div>
-                <div className="col ms-3">
+                <div className="col ms-3 d-flex flex-column">
                     <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn}></Navbar>
-                    <div className="container bg-light rounded-4">
+                    <div className="container bg-white overflow-auto mt-3 rounded-2 shadow-sm">
                         <Outlet></Outlet>
                     </div>
                 </div>
