@@ -22,13 +22,16 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
     };
 
     return(
-        <div className="w-100">
-            <div className="row flex-nowrap g-0">
+        <div className="w-100 d-flex align-items-center p-4">
+            <div className="row flex-nowrap w-100 g-0">
                 <div className="col-auto">
-                    <div id="sidebar" className="collapse collapse-horizontal show border-end">
-                        <div id="sidebar-nav" className="min-vh-100">
+                    <div id="sidebar" className="collapse collapse-horizontal show bg-light rounded-4">
+                        <div id="sidebar-nav" style={{height: "90vh"}}>
                             <div className="w-100 d-flex align-items-center justify-content-between ps-3 py-2 fs-3 border-bottom border-2 fw-bold">
-                                <div className="fs-2 fw-bold">{role}</div>
+                                <div className="d-flex align-items-center fs-3 fw-bold">
+                                    <img src="../../../public/Logo.png" className="me-2" style={{width: "50px"}}></img>
+                                    <span>Datle</span>
+                                </div>
                                 <IconButton data-bs-toggle="collapse" data-bs-target="#sidebar" onClick={() => setIsDrawerOn(!isDrawerOn)}>
                                     <ChevronLeftIcon fontSize="large" />
                                 </IconButton>
@@ -50,9 +53,11 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                         </div>
                     </div>
                 </div>
-                <div className="col">
+                <div className="col ms-3">
                     <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn}></Navbar>
-                    <Outlet></Outlet>
+                    <div className="container bg-light rounded-4">
+                        <Outlet></Outlet>
+                    </div>
                 </div>
             </div>
         </div>

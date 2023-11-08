@@ -1,0 +1,42 @@
+[
+    {
+        "name": "text classification",
+        "requester": "vithun chandra",
+        "profile_image": "https://picsum.photos/200",
+        "type": "classification",
+        "status": true,
+        "finish_date": "25 November 2023"
+    },
+    {
+        "name": "text summarization",
+        "requester": "Kazusa Touma",
+        "profile_image": "https://picsum.photos/200",
+        "type": "summarization",
+        "status": false,
+        "finish_date": "14 Desember 2023"
+    },
+    {
+        "name": "text classification",
+        "requester": "vithun chandra",
+        "profile_image": "https://picsum.photos/200",
+        "type": "classification",
+        "status": true,
+        "finish_date": "25 November 2023"
+    },
+    {
+        "name": "text classification",
+        "requester": "vithun chandra",
+        "profile_image": "https://picsum.photos/200",
+        "type": "classification",
+        "status": true,
+        "finish_date": "25 November 2023"
+    },
+    {
+        "name": "text classification",
+        "requester": "vithun chandra",
+        "profile_image": "https://picsum.photos/200",
+        "type": "classification",
+        "status": true,
+        "finish_date": "25 November 2023"
+    }
+]

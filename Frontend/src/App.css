@@ -1,3 +1,12 @@
+:root{
+    --bg-primary: #b5c2ca;
+    --color-primary: black;
+}
+
+*{
+    box-sizing: border-box;
+}
+
 body{
     min-height: 100vh;
 }

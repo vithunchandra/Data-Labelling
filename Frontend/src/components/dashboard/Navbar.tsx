@@ -6,7 +6,7 @@ export default function Navbar({setIsDrawerOn, isDrawerOn} : {
     isDrawerOn: boolean
 }){
     return(
-        <nav className={`navbar navbar-expand-lg bg-primary`}>
+        <nav className={`navbar navbar-expand-lg bg-primary bg-light rounded-4`}>
             <div className="container-fluid py-1">
                 <IconButton type="button" data-bs-toggle="collapse" data-bs-target="#sidebar" onClick={() => setIsDrawerOn(!isDrawerOn)} sx={{
                     visibility: isDrawerOn ? 'hidden' : 'visible'
