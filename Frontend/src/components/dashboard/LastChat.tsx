@@ -21,7 +21,6 @@ export default function LastChat({chat}: {chat: Chat[]}){
                         </div>
                         <div className='col-auto text-secondary text-end'>{item.date}</div>
                     </div>
-                    
                 })
             }
         </>

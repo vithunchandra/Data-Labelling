@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -11,7 +11,8 @@ import { IconButton } from "@mui/material";
 
 export default function MainLayout({navigation, role}: {navigation: NavigationInterface[], role: string}){
     const [isDrawerOn, setIsDrawerOn] = useState(true);
-    const [selectedIndex, setSelectedIndex] = useState(1);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [pageName, setPageName] = useState(navigation[selectedIndex].name)
 
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -19,6 +20,10 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
     ) => {
         setSelectedIndex(index);
     };
+
+    useEffect(() => {
+        setPageName(navigation[selectedIndex].name)
+    }, [selectedIndex])
 
     return(
         <div className="w-100 h-100 p-4">
@@ -39,9 +44,11 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                                 {
                                     navigation.map((item, index) => {
                                         return <Link to={item.path} className="text-decoration-none text-black" key={index}>
-                                            <ListItemButton sx={{
-                                                marginY: "5px"
-                                            }}>
+                                            <ListItemButton
+                                            selected={selectedIndex === index}
+                                            onClick={(event) => handleListItemClick(event, index)}
+                                            sx={{marginY: "5px"}}
+                                            >
                                                 <ListItemIcon>
                                                     <InboxIcon />
                                                 </ListItemIcon>
@@ -55,7 +62,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                     </div>
                 </div>
                 <div className="col ms-3 d-flex flex-column">
-                    <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn}></Navbar>
+                    <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName}></Navbar>
                     <div className="container-fluid overflow-auto">
                         <Outlet></Outlet>
                     </div>
