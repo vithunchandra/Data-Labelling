@@ -1,5 +1,7 @@
+import MainLayout from "../../components/dashboard/MainLayout";
+import { adminNavigation } from "../../route";
 export default function Admin (){
-    return(
-        <h1>Admin</h1>
+    return(        
+        <MainLayout navigation={adminNavigation} role="Admin"></MainLayout>
     )
 }
