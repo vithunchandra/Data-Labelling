@@ -26,7 +26,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
     }, [selectedIndex])
 
     return(
-        <div className="w-100 h-100 p-4">
+        <div className="w-100 h-100">
             <div className="row flex-nowrap h-100 g-0">
                 <div className="col-auto">
                     <div id="sidebar" className="collapse collapse-horizontal bg-white show h-100 rounded-2 shadow-sm">
@@ -61,9 +61,9 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                         </div>
                     </div>
                 </div>
-                <div className="col ms-3 d-flex flex-column">
+                <div className="col m-3 d-flex flex-column">
                     <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName}></Navbar>
-                    <div className="container-fluid overflow-auto">
+                    <div className="container-fluid h-100 mt-4 overflow-auto">
                         <Outlet></Outlet>
                     </div>
                 </div>

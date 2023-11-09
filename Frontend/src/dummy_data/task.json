@@ -5,7 +5,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "0.5Rp/char + 10Rp/jenis label",
+        "start_date": "14 November 2023",
         "finish_date": "25 November 2023",
+        "credibility": 50,
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -40,7 +44,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "summarization",
         "status": false,
+        "price": "0.5Rp/char + 10Rp/jenis label",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "14 Desember 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -75,7 +83,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "0.5Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -110,7 +122,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "0.5Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -145,7 +161,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "1 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -180,7 +200,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "1 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -215,7 +239,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "summarization",
         "status": false,
+        "price": "1 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "14 Desember 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -250,7 +278,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "1.5 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -285,7 +317,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "1.5 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -320,7 +356,11 @@
         "profile_image": "https://picsum.photos/200",
         "type": "classification",
         "status": true,
+        "price": "1.5 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
+        "credibility": 50,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",

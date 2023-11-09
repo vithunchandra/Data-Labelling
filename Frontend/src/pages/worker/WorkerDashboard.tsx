@@ -31,8 +31,8 @@ export default function WorkerDashboard(){
 
     return(
         <>
-            <div className="mw-100">
-                <div className="display-6 fw-lighter mt-3">
+            <div className="mw-100 h-100 d-flex flex-column">
+                <div className="display-6 fw-lighter">
                     Welcome Back, Vithun Chandra
                     <WavingHandIcon sx={{color: '#E8BEAC'}} fontSize='large' className='mx-2'/>
                 </div>

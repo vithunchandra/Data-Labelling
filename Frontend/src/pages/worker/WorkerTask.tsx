@@ -9,7 +9,7 @@ export default function WorkerTask(){
     ]
 
     return(
-        <div className="w-100 mt-4">
+        <div className="w-100">
             <div className="row align-items-center g-0 justify-content-between bg-white rounded-2 p-2 shadow-sm fs-3">
                 <div className="col-auto">
                     Your Progress

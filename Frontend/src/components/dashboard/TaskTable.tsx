@@ -1,6 +1,7 @@
 import { Avatar, Button } from "@mui/material";
 import Task from "../../interface/TaskInterface";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { Link } from "react-router-dom";
 
 export default function TaskTable({task}: {task: Task[]}){
     return(
@@ -49,7 +50,9 @@ export default function TaskTable({task}: {task: Task[]}){
                                     </span>
                                 </td>
                                 <td className="align-middle">
-                                    <Button variant="contained" startIcon={<InfoOutlinedIcon />}>Detail</Button>
+                                    <Link to={index.toString()}>
+                                        <Button variant="contained" startIcon={<InfoOutlinedIcon />}>Detail</Button>
+                                    </Link>
                                 </td>
                             </tr>
                         )

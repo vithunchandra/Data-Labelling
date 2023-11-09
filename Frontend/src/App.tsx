@@ -3,15 +3,19 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  Routes,
   RouterProvider,
 } from "react-router-dom";
 import Signup from "./pages/Signup";
 import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
-import { adminNavigation, requesterNavigation, workerNavigation } from "./route";
+import { adminNavigation, requesterNavigation } from "./route";
 import AddTaskType from "./pages/admin/AddTaskType";
+import WorkerDashboard from "./pages/worker/WorkerDashboard";
+import WorkerTask from "./pages/worker/WorkerTask";
+import Marketplace from "./pages/worker/Marketplace";
+import MarketTaskDetail, { loader } from "./pages/worker/MarketTaskDetail";
+import TaskDetail, { taskDetailLoader } from "./pages/worker/TaskDetail";
 
 function App() {
   const router = createBrowserRouter(
@@ -47,17 +51,12 @@ function App() {
           );
         })}
       </Route>,
-      <Route path="/worker" element={<Worker />}>
-        {workerNavigation.map((item, index) => {
-          return (
-            <Route
-              key={index}
-              index={index === 0 && true}
-              path={item.path}
-              element={item.element}
-            ></Route>
-          );
-        })}
+      <Route path="worker" element={<Worker />}>
+        <Route index element={<WorkerDashboard />}></Route>
+        <Route path="marketplace" element={<Marketplace />}></Route>
+        <Route path="task" element={<WorkerTask />}></Route>
+        <Route path="task/:task_id" element={<TaskDetail />} loader={taskDetailLoader as any}></Route>
+        <Route path="marketplace/:task_id" element={<MarketTaskDetail />} loader={loader as any}></Route>
       </Route>,
     ])
   );
