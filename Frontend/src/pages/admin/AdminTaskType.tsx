@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import taskType from "../../dummy_data/task_type.json";
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function AdminTaskType() {
   const [data, setData] = useState(taskType);
@@ -20,6 +22,9 @@ export default function AdminTaskType() {
 
   return (
     <div className="container">
+      <Link to={'/admin/task_type/add_task'}>
+        <Button variant="contained">Add Task</Button>
+      </Link>
       <h1 className="my-3">Admin Task Type</h1>
       <table className="table table-striped">
         <thead>

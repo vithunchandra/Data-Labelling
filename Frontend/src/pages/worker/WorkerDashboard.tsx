@@ -11,17 +11,17 @@ import LastChat from '../../components/dashboard/LastChat';
 export default function WorkerDashboard(){
     const progressInfo = [
         {
-            icon: <InventoryIcon sx={{fontSize: '60px'}} color='info'></InventoryIcon>,
+            icon: <InventoryIcon sx={{fontSize: '40px'}} color='info'></InventoryIcon>,
             titleText: 'Total Task',
             text: '10'
         },
         {
-            icon: <AssignmentTurnedInIcon sx={{fontSize: '60px'}} color='success'></AssignmentTurnedInIcon>,
+            icon: <AssignmentTurnedInIcon sx={{fontSize: '40px'}} color='success'></AssignmentTurnedInIcon>,
             titleText: 'Finished Task',
             text: '3'
         },
         {
-            icon: <AssignmentIcon sx={{fontSize: '60px'}} color='action'></AssignmentIcon>,
+            icon: <AssignmentIcon sx={{fontSize: '40px'}} color='action'></AssignmentIcon>,
             titleText: 'Ongoing Task',
             text: '7'
         },
@@ -40,7 +40,7 @@ export default function WorkerDashboard(){
                 <div className='my-3 fs-5'>
                     Current Task Progress:
                 </div>
-                <div className='row align-items-center'>
+                <div className='row align-items-center justify-content-between rounded-2 bg-white shadow-sm p-2 g-0'>
                     {
                         progressInfo.map((item, index) => {
                             return <ProgressInfo icon={item.icon} titleText={item.titleText} text={item.text} key={index}></ProgressInfo>
@@ -48,7 +48,7 @@ export default function WorkerDashboard(){
                     }
                 </div>
                 
-                <div className='row justify-content-between align-items-stretch mt-5 g-0'>
+                <div className='row justify-content-between align-items-stretch mt-4 g-0'>
                     <div className='col-7 bg-white rounded-2 shadow-sm p-3'>
                         <LastTask task={lastTask}></LastTask>
                     </div>

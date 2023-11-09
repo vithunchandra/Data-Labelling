@@ -68,5 +68,5 @@ export const adminNavigation = [
     icon: <i className="bi bi-house"></i>,
     element: <AdminKeuangan />,
     path: "/admin/keuangan",
-  },
+  }
 ]

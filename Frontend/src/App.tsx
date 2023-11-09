@@ -11,6 +11,7 @@ import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
 import { adminNavigation, requesterNavigation, workerNavigation } from "./route";
+import AddTaskType from "./pages/admin/AddTaskType";
 
 function App() {
   const router = createBrowserRouter(
@@ -27,6 +28,12 @@ function App() {
             ></Route>
           );
         })}
+        <Route
+          path="/admin/task_type/add_task"
+          element={<AddTaskType></AddTaskType>}
+        >
+
+        </Route>
       </Route>,
       <Route path="/requester" element={<Requester />}>
         {requesterNavigation.map((item, index) => {
