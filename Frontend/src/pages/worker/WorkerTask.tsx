@@ -1,7 +1,8 @@
-import DataTable from "../../components/dashboard/DataTable"
-import Filters from "../../components/dashboard/Filters"
+import DataTable from "../../components/worker/DataTable"
+import Filters from "../../components/worker/Filters"
 import { TaskType } from "../../enum/TaskType"
 import task from '../../dummy_data/task.json'
+import TaskTable from "../../components/worker/TaskTable"
 
 export default function WorkerTask(){
     const taskType = [
@@ -25,7 +26,7 @@ export default function WorkerTask(){
             </div>
 
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
-                <DataTable data={task[0].data}></DataTable>
+                <TaskTable task={task} />
             </div>  
         </div>
     )

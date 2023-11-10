@@ -16,6 +16,7 @@ import WorkerTask from "./pages/worker/WorkerTask";
 import Marketplace from "./pages/worker/Marketplace";
 import MarketTaskDetail, { loader } from "./pages/worker/MarketTaskDetail";
 import TaskDetail, { taskDetailLoader } from "./pages/worker/TaskDetail";
+import TaskData, { taskDataLoader } from "./pages/worker/TaskData";
 
 function App() {
   const router = createBrowserRouter(
@@ -54,9 +55,10 @@ function App() {
       <Route path="worker" element={<Worker />}>
         <Route index element={<WorkerDashboard />}></Route>
         <Route path="marketplace" element={<Marketplace />}></Route>
+        <Route path="marketplace/:task_id" element={<MarketTaskDetail />} loader={loader as any}></Route>
         <Route path="task" element={<WorkerTask />}></Route>
         <Route path="task/:task_id" element={<TaskDetail />} loader={taskDetailLoader as any}></Route>
-        <Route path="marketplace/:task_id" element={<MarketTaskDetail />} loader={loader as any}></Route>
+        <Route path="task/:task_id/viewdata" element={<TaskData />} loader={taskDataLoader as any}></Route>
       </Route>,
     ])
   );

@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function MarketTaskDetail(){
-    const [taskId, setTaskId] = useState(useLoaderData() as number);
+    const [taskId, setTaskId] = useState(parseInt(useLoaderData() as string));
     let task = tasks[taskId];
     const navigate = useNavigate()
     const taskData = [

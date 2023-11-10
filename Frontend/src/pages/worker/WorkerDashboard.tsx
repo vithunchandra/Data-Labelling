@@ -2,11 +2,11 @@ import WavingHandIcon from '@mui/icons-material/WavingHand';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import AssignmentIcon from '@mui/icons-material/Assignment';
-import ProgressInfo from '../../components/dashboard/ProgressInfo';
+import ProgressInfo from '../../components/worker/ProgressInfo';
 import task from '../../dummy_data/task.json';
-import LastTask from '../../components/dashboard/LastTask';
+import LastTask from '../../components/worker/LastTask';
 import chat from '../../dummy_data/chat.json';
-import LastChat from '../../components/dashboard/LastChat';
+import LastChat from '../../components/worker/LastChat';
 
 export default function WorkerDashboard(){
     const progressInfo = [

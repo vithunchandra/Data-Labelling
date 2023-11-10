@@ -1,4 +1,4 @@
-import TaskTable from "../../components/dashboard/TaskTable";
+import TaskTable from "../../components/worker/TaskTable";
 import task from '../../dummy_data/task.json';
 
 export default function Marketplace(){
