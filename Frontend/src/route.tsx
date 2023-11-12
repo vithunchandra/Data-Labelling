@@ -8,6 +8,7 @@ import WorkerDashboard from "./pages/worker/WorkerDashboard";
 import WorkerTask from "./pages/worker/WorkerTask";
 import TopUp from "./pages/requester/TopUp";
 import { Route } from "react-router-dom";
+import MonitorTask from "./pages/requester/MonitorTask";
 
 export const workerNavigation = [
   {
@@ -41,13 +42,19 @@ export const requesterNavigation = [
     name: "Create Task",
     icon: <i className="bi bi-createtask"></i>,
     element: <CreateTask />,
-    path: "/requester/create+task",
+    path: "/requester/create_task",
+  },
+  {
+    name: "Monitor Task",
+    icon: <i className="bi bi-monitortask"></i>,
+    element: <MonitorTask />,
+    path: "/requester/monitor_task",
   },
   {
     name: "Top Up",
     icon: <i className="bi bi-topup"></i>,
     element: <TopUp />,
-    path: "/requester/top+up",
+    path: "/requester/top_up",
   },
 ];
 

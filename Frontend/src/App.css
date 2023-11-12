@@ -27,3 +27,7 @@ table{
     text-wrap: nowrap;
     max-width: 200px;
 }
+
+textarea::-webkit-scrollbar{
+    display: none;
+}
