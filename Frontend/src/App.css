@@ -16,6 +16,10 @@ body{
     width: 250px;
 }
 
+#chat{
+    width: 400px;
+}
+
 table{
     table-layout: fixed;
 }
