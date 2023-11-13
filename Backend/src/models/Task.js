@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { Schema } = require("mongoose");
 
 const taskSchema = new mongoose.Schema(
   {
@@ -7,6 +8,26 @@ const taskSchema = new mongoose.Schema(
     possible_label: [String],
     start_date: Date,
     end_date: Date,
+    requester: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    task_type: {
+      type: Schema.Types.ObjectId,
+      ref: "Task_Type",
+    },
+    data: {
+      type: [Schema.Types.ObjectId],
+      ref: "Data",
+    },
+    ban_list: {
+      type: [Schema.Types.ObjectId],
+      ref: "User",
+    },
+    chat: {
+      type: [Schema.Types.ObjectId],
+      ref: "Chat",
+    },
   },
   { collection: "Task" }
 );

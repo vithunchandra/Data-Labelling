@@ -19,6 +19,7 @@ POST /login
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const dotenv = require("dotenv");
+const cors = require("cors");
 dotenv.config();
 
 const app = express();
@@ -41,6 +42,12 @@ const { User, Task, Task_Type, Data, Chat } = require("./src/models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    optionsSuccessStatus: 200,
+  })
+);
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/data", dataRouter);
