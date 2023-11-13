@@ -32,6 +32,10 @@ table{
     max-width: 200px;
 }
 
+.chat-background{
+    background: linear-gradient(rgba(0, 238, 48, 0.2), rgba(0, 238, 48, 0.2));
+}
+
 textarea::-webkit-scrollbar{
     display: none;
 }

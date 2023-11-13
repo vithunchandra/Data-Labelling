@@ -4,8 +4,13 @@ import { Outlet, useLoaderData } from 'react-router-dom';
 import { ChatOutlined, ChevronLeft, ChevronRight, InfoOutlined, List } from '@mui/icons-material';
 import { Button, Collapse, IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Chat from '../../components/worker/Chat';
+import users from '../../dummy_data/user.json';
+import chats from '../../dummy_data/chat_2.json';
 
 export default function TaskDetail(){
+    const user = users[1];
+    const targetUser = users[0];
     const [taskIndex, setTaskIndex] = useState(parseInt(useLoaderData() as string));
     const [isChatActive, setIsChatActive] = useState(true);
     let task = tasks[taskIndex];
@@ -69,15 +74,15 @@ export default function TaskDetail(){
                     </div>
                 </div>
 
-                <div className='col-auto'>
+                <div className='col-auto h-100'>
                     {/* <Collapse orientation='horizontal' in={isChatActive}>
                         <div id='chat-wrapper'>
                             <div className='chat'></div>
                         </div>
                     </Collapse> */}
                     <div id='chat-wrapper' className='collapse collapse-horizontal h-100 show'>
-                        <div id='chat' className='h-100 ms-3 p-2 rounded-2 shadow-sm bg-white'>
-
+                        <div id='chat' className='h-100 ms-4'>
+                            <Chat user={user} targetUser={targetUser} chats={chats}/>
                         </div>
                     </div>
                 </div>

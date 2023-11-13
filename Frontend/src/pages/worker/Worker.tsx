@@ -1,4 +1,4 @@
-import MainLayout from "../../components/worker/MainLayout";
+import MainLayout from "../../components/MainLayout";
 import {workerNavigation} from "../../route";
 
 export default function Worker (){
