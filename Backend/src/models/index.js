@@ -9,12 +9,19 @@ const Task = require("./Task");
 
 Data.schema.add({
   worker: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: "User",
   },
   chat: {
     type: [Schema.Types.ObjectId],
     ref: "Chat",
+  },
+});
+
+Chat.schema.add({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
   },
 });
 
@@ -34,6 +41,10 @@ Task.schema.add({
   ban_list: {
     type: [Schema.Types.ObjectId],
     ref: "User",
+  },
+  chat: {
+    type: [Schema.Types.ObjectId],
+    ref: "Chat",
   },
 });
 

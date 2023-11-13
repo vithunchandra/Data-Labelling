@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const ChatSchema = new mongoose.Schema(
   {
     text_chat: String,
+    timestamp: Date,
   },
   { collection: "Chat" }
 );
