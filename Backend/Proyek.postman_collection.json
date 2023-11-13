@@ -43,7 +43,87 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "andi",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "andi123",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "143"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8f-dSPXU18iXWK3an+mCD4Jmb784J0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Nov 2023 07:56:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Berhasil\",\n    \"user\": {\n        \"_id\": \"6551d661ef7d2fd458ee72d0\",\n        \"username\": \"andi\",\n        \"name\": \"Andi\",\n        \"role\": \"worker\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Register",
@@ -65,7 +145,97 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "andi",
+											"type": "default"
+										},
+										{
+											"key": "password",
+											"value": "andi123",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "Andi",
+											"type": "default"
+										},
+										{
+											"key": "role",
+											"value": "worker",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-J+73KNx2Ps5EOy5QysxK3AhxZtA\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Nov 2023 08:02:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Username sudah terpakai\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -101,7 +271,81 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add Task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_id_requester\": \"654c815962140c6e35390101\",\r\n    \"task_name\": \"Positive VS Negative\",\r\n    \"task_description\": \"sentiment analysis of positive vs negative 2\",\r\n    \"possible_label\": [\r\n        \"Positive\",\r\n        \"Negative\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/task/create_task",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"create_task"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "293"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"125-0YXFXYsauNBiaiL6XE/lW88Brv4\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 13 Nov 2023 08:04:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Create Task Suceed\",\n    \"data\": {\n        \"task_name\": \"Positive VS Negative\",\n        \"task_description\": \"sentiment analysis of positive vs negative 2\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"requester\": \"654c815962140c6e35390101\",\n        \"data\": [],\n        \"ban_list\": [],\n        \"chat\": [],\n        \"_id\": \"6551d87e222388a9befad3a0\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				}
 			]
 		}
