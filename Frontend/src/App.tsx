@@ -26,6 +26,7 @@ import MonitorTask from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
 import Labelling, { labelllingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
+import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
 
 function App() {
   const router = createBrowserRouter(
@@ -67,6 +68,7 @@ function App() {
         <Route path="create_task/add" element={<AddTask />}></Route>
         <Route path="create_task/:task_id" element={<EditTask />} loader={taskEditLoader as any}></Route>
         <Route path="monitor_task" element={<MonitorTask />}></Route>
+        <Route path="monitor_task/:task_id" element={<DetailTask /> } loader={taskMonitorLoader as any}></Route>
         <Route path="top_up" element={<TopUp />}></Route>
       </Route>,
     ])

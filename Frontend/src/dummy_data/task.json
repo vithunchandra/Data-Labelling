@@ -12,36 +12,102 @@
             "Very Good"
         ],
         "status": true,
-        "price": "0.5Rp/char + 10Rp/jenis label",
+        "price": "0.5Rp/char",
         "start_date": "14 November 2023",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": "Neutral"
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": "Very Bad"
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": "Very Good"
+                    },
+                    {
+                        "worker": "",
+                        "label": "Very Bad"
+                    },
+                    {
+                        "worker": "",
+                        "label": "Neutral"
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -51,36 +117,142 @@
         "profile_image": "https://picsum.photos/200",
         "type": "summarization",
         "status": false,
-        "price": "0.5Rp/char + 10Rp/jenis label",
+        "price": "0.5Rp/char",
         "start_date": "14 November 2023",
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "14 Desember 2023",
         "credibility": 50,
+        "total_worker": 5,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "ed quis molestie nibh"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": "ed quis molestie nibh"
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": "ed quis molestie nibh"
+                    },
+                    {
+                        "worker": "",
+                        "label": "ed quis molestie nibh"
+                    },
+                    {
+                        "worker": "",
+                        "label": "ed quis molestie nibh"
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "ed quis molestie nibh."
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": "ed quis molestie nibh"
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": "ed quis molestie nibh"
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -102,31 +274,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -148,31 +386,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -194,31 +498,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -240,31 +610,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -279,31 +715,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "14 Desember 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "ed quis molestie nibh"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "ed quis molestie nibh."
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -325,31 +827,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -371,31 +939,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     },
@@ -417,31 +1051,97 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
+        "total_worker": 3,
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
-                "label": "Very Bad"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Neutral"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "labeled",
-                "label": "Very Good"
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "Unlabeled",
-                "label": ""
+                "labels": [
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    },
+                    {
+                        "worker": "",
+                        "label": ""
+                    }
+                ]
             }
         ]
     }

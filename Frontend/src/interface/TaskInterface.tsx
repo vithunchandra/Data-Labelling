@@ -5,7 +5,11 @@ export default interface Task{
     requester: string,
     profile_image: string,
     type: string,
+    price: string,
     status: boolean,
     finish_date: string,
+    credibility: number,
+    instruction: string,
+    total_worker: number,
     data: Data[]
 }

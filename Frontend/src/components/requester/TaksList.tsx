@@ -17,7 +17,7 @@ export default function TaskList ({task}: {task: Task[]}) {
                     <th className="align-middle text-center" style={{
                         width: '15%'
                     }}>Total Data</th>
-                    <th className="align-middle"  style={{
+                    <th className="align-middle text-center"  style={{
                         width: '10%'
                     }}>Action</th>
                 </tr>
@@ -30,7 +30,7 @@ export default function TaskList ({task}: {task: Task[]}) {
                                 <td className="align-middle">{index + 1}</td>
                                 <td className="align-middle text-capitalize text-truncate">{item.name}</td>
                                 <td className="align-middle text-center">{item.data.length}</td>
-                                <td className="align-middle">
+                                <td className="align-middle text-center">
                                     {item.status ? 
                                         <Button variant="contained" startIcon={<EditIcon />} disabled>Edit</Button>
                                         :

@@ -21,7 +21,7 @@ export default function DataList({data, editIndex, setEditIndex, register} : {da
                     <th className="align-middle text-center" style={{
                         width: '15%'
                     }}>Status</th>
-                    <th className="align-middle"  style={{
+                    <th className="align-middle text-center"  style={{
                         width: '10%'
                     }}>Action</th>
                 </tr>
@@ -38,7 +38,7 @@ export default function DataList({data, editIndex, setEditIndex, register} : {da
                                     <td className="align-middle text-capitalize text-truncate">{item.data}</td>
                                 }
                                 <td className="align-middle text-center">{item.status}</td>
-                                <td className="align-middle">
+                                <td className="align-middle text-center">
                                     {item.status == "labeled" ? 
                                         <Button type="button" variant="outlined" startIcon={<EditIcon />} disabled>Edit</Button>
                                         :
