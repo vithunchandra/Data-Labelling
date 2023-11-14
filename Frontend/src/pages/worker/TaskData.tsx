@@ -29,7 +29,6 @@ export default function TaskData(){
                                 <InputLabel id="status">Status</InputLabel>
                                 <Select
                                     labelId='status'
-                                    onChange={selectChange}
                                     label="Status"
                                     defaultValue=''
                                 >

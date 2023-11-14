@@ -24,6 +24,8 @@ import EditTask, { taskEditLoader } from "./pages/requester/EditTask";
 import TopUp from "./pages/requester/TopUp";
 import MonitorTask from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
+import Labelling, { labelllingLoader } from "./pages/worker/Labelling";
+import MyWallet from "./pages/worker/MyWallet";
 
 function App() {
   const router = createBrowserRouter(
@@ -56,7 +58,9 @@ function App() {
         <Route path="task/:task_id" element={<Task />} loader={taskDetailLoader as any}>
           <Route index element={<TaskInformation />} loader={taskDetailLoader as any}></Route>
           <Route path="viewdata" element={<TaskData />} loader={taskDataLoader as any}></Route>
+          <Route path="viewdata/:data_id" loader={labelllingLoader as any} element={<Labelling />}></Route> 
         </Route>
+        <Route path='wallet' element={<MyWallet />}></Route>
       </Route>,
       <Route path="requester" element={<Requester />}>
         <Route index element={<RequesterDashboard />}></Route>

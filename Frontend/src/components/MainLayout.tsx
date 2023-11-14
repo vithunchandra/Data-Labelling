@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/Inbox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link, Outlet } from "react-router-dom";
-import { IconButton } from "@mui/material";
+import { Avatar, IconButton } from "@mui/material";
 
 export default function MainLayout({navigation, role}: {navigation: NavigationInterface[], role: string}){
     const [isDrawerOn, setIsDrawerOn] = useState(true);
@@ -30,7 +30,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
             <div className="row flex-nowrap h-100 g-0">
                 <div className="col-auto">
                     <div id="sidebar" className="collapse collapse-horizontal bg-white show h-100 rounded-2 shadow-sm">
-                        <div id="sidebar-nav">
+                        <div id="sidebar-nav" className="d-flex flex-column h-100">
                             <div className="w-100 d-flex align-items-center justify-content-between ps-3 py-2 fs-3 fw-bold">
                                 <div className="d-flex align-items-center fs-3 fw-bold">
                                     <img src="../../../public/Logo.png" className="me-2" style={{width: "50px"}}></img>
@@ -40,7 +40,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                                     <ChevronLeftIcon fontSize="large" />
                                 </IconButton>
                             </div>
-                            <List className="px-2">
+                            <List>
                                 {
                                     navigation.map((item, index) => {
                                         return <Link to={item.path} className="text-decoration-none text-black" key={index}>
@@ -50,7 +50,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                                             sx={{marginY: "5px"}}
                                             >
                                                 <ListItemIcon>
-                                                    <InboxIcon />
+                                                    {item.icon}
                                                 </ListItemIcon>
                                                 <ListItemText primary={item.name}></ListItemText>
                                             </ListItemButton>
@@ -58,6 +58,10 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                                     })
                                 }
                             </List>
+                            <div className="flex-fill"></div>
+                            <div className='d-flex align-items-center py-2 px-2 border-top border-3 fs-6'>
+                                Created By <span className="ms-1 d-inline-block text-primary"> @DatleTeams</span><br />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -11,25 +11,9 @@ import chats from '../../dummy_data/chat_2.json';
 export default function TaskDetail(){
     const user = users[1];
     const targetUser = users[0];
-    const [taskIndex, setTaskIndex] = useState(parseInt(useLoaderData() as string));
+    const taskIndex = parseInt(useLoaderData() as string);
     const [isChatActive, setIsChatActive] = useState(true);
     let task = tasks[taskIndex];
-
-    function previous(){
-        if(taskIndex > 0){
-            setTaskIndex(taskIndex - 1)
-        }
-    }
-
-    function next(){
-        if(task.data.length - 1 > taskIndex){
-            setTaskIndex(taskIndex + 1)
-        }
-    }
-    
-    useEffect(() => {
-        task = tasks[taskIndex];
-    }, [taskIndex])
 
     return(
         <div className='w-100 h-100'>
@@ -39,6 +23,11 @@ export default function TaskDetail(){
                         <div className='row justify-content-between align-items-center g-0'>
                             <div className='col-auto fs-2 fw-bold'>{task.name}</div>
                             <div className='col-auto'>
+                                <Link to={'./viewdata'}>
+                                    <IconButton color='warning'>
+                                        <List />
+                                    </IconButton>
+                                </Link>
                                 <Link to={'./'}>
                                     <IconButton color='primary'>
                                         <InfoOutlined/>
@@ -59,7 +48,7 @@ export default function TaskDetail(){
                         <Outlet />
                     </div>
 
-                    <div className="row align-items-end">
+                    {/* <div className="row align-items-end">
                         <div className="col-auto">
                             <Button variant="contained" startIcon={<ChevronLeft />} onClick={previous}>Previous</Button>
                         </div>
@@ -71,7 +60,7 @@ export default function TaskDetail(){
                         <div className="col-auto">
                             <Button variant="contained" endIcon={<ChevronRight />} onClick={next}>Next</Button>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className='col-auto h-100'>

@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import Data from "../../interface/DataInterface";
+import { Link } from "react-router-dom";
 
 export default function DataTable({data} : {data: Data[]}){
     return(
@@ -25,12 +26,14 @@ export default function DataTable({data} : {data: Data[]}){
                 {
                     data.map((item, index) => {
                         return(
-                            <tr>
+                            <tr key={index}>
                                 <td className="align-middle">{index + 1}</td>
                                 <td className="align-middle text-truncate">{item.data}</td>
                                 <td className="align-middle text-center" >{item.status}</td>
                                 <td className="align-middle text-center">
-                                    <Button variant="outlined" startIcon={<CreateOutlinedIcon />}>Label</Button>
+                                    <Link to={`./${index}`}>
+                                        <Button variant="outlined" startIcon={<CreateOutlinedIcon />}>Label</Button>
+                                    </Link>
                                 </td>
                             </tr>
                         )

@@ -1,8 +1,11 @@
 import ChatIcon from '@mui/icons-material/Chat';
 import Chat from '../../interface/ChatInterface';
 import { Avatar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function LastChat({chat}: {chat: Chat[]}){
+    const navigate = useNavigate()
+
     return(
         <>
             <div className="d-flex align-items-center">
@@ -11,7 +14,9 @@ export default function LastChat({chat}: {chat: Chat[]}){
             </div>
             {
                 chat.map((item, index) => {
-                    return <div className='row align-items-center g-0 my-3' key={index}>
+                    return <div className='row align-items-center p-2 g-0 my-2 card-hover' key={index} onClick={() => {
+                        navigate('task/1')
+                    }}>
                         <div className='col-auto'>
                             <Avatar src={item.profile_image}></Avatar>
                         </div>

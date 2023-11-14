@@ -12,7 +12,7 @@ export default function Message(
     return(
         <div className={`d-flex justify-content-${position} my-3`}>
             <div className="col-8">
-                <div className={`text-bg-${color} rounded-2 p-2`} style={{borderTopLeftRadius: 0}}>
+                <div id={`${position === 'start' ? 'left-message-border' : 'right-message-border'}`} className={`text-bg-${color} rounded-2 px-3 py-2`}>
                     {message}
                 </div>
             </div>

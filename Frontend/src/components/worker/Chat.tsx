@@ -12,10 +12,10 @@ export default function Chat({user, targetUser, chats}: {
     return(
         <div className='d-flex h-100 py-1 flex-column'>
             <div className='d-flex align-items-center p-2 rounded-top-2 shadow-sm bg-white'>
-                <Avatar src={targetUser.profile_image}/>
+                <Avatar className='me-2' src={targetUser.profile_image}/>
                 <span className='fw-bold'>{targetUser.name}</span>
             </div>
-            <div className='flex-fill overflow-y-auto p-2 shadow-sm chat-background' style={{scrollbarWidth: 'none'}}>
+            <div className='flex-fill overflow-y-auto p-2 shadow' style={{scrollbarWidth: 'none'}}>
                 {
                     chats.map((chat, index) => {
                         return <Message 

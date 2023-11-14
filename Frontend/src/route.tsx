@@ -7,28 +7,35 @@ import Marketplace from "./pages/worker/Marketplace";
 import WorkerDashboard from "./pages/worker/WorkerDashboard";
 import WorkerTask from "./pages/worker/WorkerTask";
 import TopUp from "./pages/requester/TopUp";
-import { Route } from "react-router-dom";
 import MonitorTask from "./pages/requester/MonitorTask";
+import { Assignment, Dashboard, ListAlt, Wallet } from "@mui/icons-material";
+import MyWallet from "./pages/worker/MyWallet";
 
 export const workerNavigation = [
   {
     name: "Dashboard",
-    icon: <i className="bi bi-house"></i>,
+    icon: <Dashboard color="info" sx={{fontSize: '30px'}}/>,
     element: <WorkerDashboard />,
     path: "/worker",
   },
   {
     name: "Marketplace",
-    icon: <i className="bi bi-shop"></i>,
+    icon: <ListAlt color="warning" sx={{fontSize: '30px'}}/>,
     element: <Marketplace />,
     path: "/worker/marketplace",
   },
   {
     name: "Task",
-    icon: <i className="bi bi-list-task"></i>,
+    icon: <Assignment color="primary" sx={{fontSize: '30px'}}/>,
     element: <WorkerTask />,
     path: "/worker/task",
   },
+  {
+    name: "Wallet",
+    icon: <Wallet color="success" sx={{fontSize: '30px'}}/>,
+    element: <MyWallet />,
+    path: '/worker/wallet'
+  }
 ];
 
 export const requesterNavigation = [

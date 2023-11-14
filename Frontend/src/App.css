@@ -36,6 +36,19 @@ table{
     background: linear-gradient(rgba(0, 238, 48, 0.2), rgba(0, 238, 48, 0.2));
 }
 
+#left-message-border{
+    border-top-left-radius: 0px !important;
+}
+
+#right-message-border{
+    border-top-right-radius: 0px !important;
+}
+
+.card-hover:hover{
+    background-color: var(--bg-primary);
+    cursor: pointer;
+}
+
 textarea::-webkit-scrollbar{
     display: none;
 }
