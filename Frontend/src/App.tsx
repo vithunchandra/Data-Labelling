@@ -43,10 +43,9 @@ function App() {
           );
         })}
         <Route
-          path="/admin/task_type/add_task"
+          path="/admin/task_type/add"
           element={<AddTaskType></AddTaskType>}
         >
-
         </Route>
       </Route>,
 

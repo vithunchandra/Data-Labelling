@@ -1,21 +1,21 @@
 [
   {
-    "_id": 1,
+    "_id": "TP1",
     "name": "Translation",
     "price": 1.5
   },
   {
-    "_id": 2,
+    "_id": "TP2",
     "name": "Summary",
     "price": 1
   },
   {
-    "_id": 3,
+    "_id": "TP3",
     "name": "AI Summary Checking",
     "price": 0.5
   },
   {
-    "_id": 4,
+    "_id": "TP4",
     "name": "Classification",
     "price": 3
   }
