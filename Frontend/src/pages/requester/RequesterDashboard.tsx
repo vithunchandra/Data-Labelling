@@ -58,14 +58,14 @@ export default function RequesterDashboard() {
             <div className='col-4 d-flex align-items-center'>
               <AssignmentTurnedInIcon fontSize="large" color='success' />
               <div className='ms-3'>
-                <span className='fs-6 text-secondary'>Labeled Task</span>
+                <span className='fs-6 text-secondary'>Opened Task</span>
                 <div className='text-primary fs-4 fw-bold'>3</div>
               </div>
             </div>
             <div className='col-4 d-flex align-items-center'>
               <AssignmentLateIcon fontSize="large" color='error' />
               <div className='ms-3'>
-                <span className='fs-6 text-secondary'>Unlabeled Task</span>
+                <span className='fs-6 text-secondary'>Closed Task</span>
                 <div className='text-primary fs-4 fw-bold'>5</div>
               </div>
             </div>

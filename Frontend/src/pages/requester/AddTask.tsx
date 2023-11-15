@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { Chip, IconButton, Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function AddTask() {
     const {register, handleSubmit, reset} = useForm();
@@ -34,7 +35,8 @@ export default function AddTask() {
             }
             reset()
         })}>
-            <div className="d-flex justify-content-end">
+            <div className="d-flex justify-content-between">
+                <Button color='info' variant='contained' startIcon={<ArrowBackIosIcon />} onClick={() => navigate("..", {relative: "path"})}>Back</Button>
                 <Button color="success" variant="contained" size="large" type="submit" startIcon={<DoneAllIcon />}>
                     Done        
                 </Button>

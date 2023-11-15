@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
 import AddIcon from '@mui/icons-material/Add';
 import Data from '../../interface/DataInterface';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function EditTask() {
     const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
@@ -60,7 +61,8 @@ export default function EditTask() {
             reset()
             console.log(data);
         })}>
-            <div className='d-flex justify-content-end'>
+            <div className='d-flex justify-content-between'>
+            <Button color='info' variant='contained' startIcon={<ArrowBackIosIcon />} onClick={() => navigate("..", {relative: "path"})}>Back</Button>
                 <Button startIcon={<SaveIcon />} variant='contained' color='success' size='large' type='submit'>
                     Save
                 </Button>

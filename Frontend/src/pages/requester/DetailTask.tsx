@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import tasks from '../../dummy_data/task.json'
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import ListLabel from '../../components/requester/ListLabel';
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
@@ -8,10 +8,12 @@ import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import PublishIcon from '@mui/icons-material/Publish';
 import { Button, Chip, CircularProgress, CircularProgressProps, Typography, Box  } from '@mui/material';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function DetailTask(){
     const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
     const[task, setTask] = useState(Req_tasks[parseInt(useLoaderData() as string)]);
+    const navigate = useNavigate();
 
     function CircularProgressWithLabel(props: CircularProgressProps & { value: number },) {
         return (
@@ -56,7 +58,8 @@ export default function DetailTask(){
 
     return (
         <>
-            <div className="w-100 text-end mb-3">
+            <div className="w-100 d-flex justify-content-between mb-3">
+                <Button color='info' variant='contained' startIcon={<ArrowBackIosIcon />} onClick={() => navigate("..", {relative: "path"})}>Back</Button>
                 {task.status ? 
                     <Button variant="contained" startIcon={<UnpublishedIcon />} color="error" size='large'>Close</Button>
                     :
