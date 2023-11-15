@@ -7,11 +7,37 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import PublishIcon from '@mui/icons-material/Publish';
-import { Button, Chip } from '@mui/material';
+import { Button, Chip, CircularProgress, CircularProgressProps, Typography, Box  } from '@mui/material';
 
 export default function DetailTask(){
     const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
     const[task, setTask] = useState(Req_tasks[parseInt(useLoaderData() as string)]);
+
+    function CircularProgressWithLabel(props: CircularProgressProps & { value: number },) {
+        return (
+          <Box sx={{ position: 'relative', display: 'inline-flex' }}>
+            <CircularProgress variant="determinate" {...props} />
+            <Box
+              sx={{
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                position: 'absolute',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography
+                variant="caption"
+                component="div"
+                color="text.secondary"
+              >{`${Math.round(props.value)}%`}</Typography>
+            </Box>
+          </Box>
+        );
+    }
 
     const taskData = [
         {
@@ -64,6 +90,13 @@ export default function DetailTask(){
                         {task.instruction}
                     </p>
                 </div>
+                <div>
+                    <span className="fs-5 fw-bold">Overall Progress:</span><br/>
+                    <div className="progress my-2" role="progressbar" style={{height:"30px"}}>
+                        <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" style={{width: "25%"}}>25%</div>
+                        <div className="progress-bar bg-danger" style={{width: "75%"}}>75%</div>
+                    </div>
+                </div>
             </div>
 
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
@@ -75,7 +108,12 @@ export default function DetailTask(){
                                     <label className='w-100 fs-5 fw-bold' data-bs-toggle="collapse" data-bs-target={"#label_"+index} role='button'>Data:</label>
                                     <Chip label={item.status} variant="filled" />
                                 </div>
-                                <label className='w-100 fs-6 ps-4' data-bs-toggle="collapse" data-bs-target={"#label_"+index} role='button'>{item.data}</label>
+                                <div className='d-flex'>
+                                    <label className='fs-6 ps-4' data-bs-toggle="collapse" data-bs-target={"#label_"+index} role='button' style={{width:"90%", textAlign:"justify"}}>{item.data}</label>
+                                    <div className='d-flex align-items-end justify-content-end my-3' style={{width:"10%"}}>
+                                        <CircularProgressWithLabel value={index*10} />
+                                    </div>
+                                </div>
                                 <div id={"label_"+index} className='collapse'>
                                     <ListLabel label={item.labels} key={index} />
                                 </div>

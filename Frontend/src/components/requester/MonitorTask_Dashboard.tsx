@@ -4,8 +4,11 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Link } from "react-router-dom";
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import PublishIcon from '@mui/icons-material/Publish';
+import DataArrayIcon from '@mui/icons-material/DataArray';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 
-export default function TaskTable({task}: {task: Task[]}) {
+export default function MonitorTask_Dashboard({task}: {task: Task[]}) {
     return (
         <div>
             <table className="table">
@@ -15,22 +18,13 @@ export default function TaskTable({task}: {task: Task[]}) {
                             width: '5%'
                         }}>No</th>
                         <th className="align-middle" style={{
-                            width: 'auto'
+                            width: '24%'
                         }}>Nama</th>
                         <th className="align-middle text-center" style={{
-                            width: '10%'
+                            width: '8%'
                         }}>Type</th>
                         <th className="align-middle text-center" style={{
-                            width: '10%'
-                        }}>Price</th>
-                        <th className="align-middle text-center" style={{
-                            width: '10%'
-                        }}>Credibility</th>
-                        <th className="align-middle text-center" style={{
-                            width: '10%'
-                        }}>Total Data</th>
-                        <th className="align-middle text-center" style={{
-                            width: '10%'
+                            width: '8%'
                         }}>Status</th>
                         <th className="align-middle text-center"  style={{
                             width: '10%'
@@ -46,9 +40,6 @@ export default function TaskTable({task}: {task: Task[]}) {
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{index + 1}</td>
                                         <td className="align-middle text-capitalize text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.name}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.type}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.price}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.credibility}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.data.length}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.status? "Opened" : "Closed"}</td>
                                         <td className="align-middle text-center">
                                             {item.status ? 
@@ -59,12 +50,28 @@ export default function TaskTable({task}: {task: Task[]}) {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colSpan={8}>
+                                        <td colSpan={5}>
                                             <div id={"detail"+index} className="collapse" data-bs-parent="#detail_parent">
-                                                <span className='fw-bold fs-5'>Instruction: </span>
+                                            <div className="container-fluid p-3 bg-white rounded-2 mb-2 shadow-sm">
+                                                <div className="w-100 row flex-row justify-content-between g-0">
+                                                    <div className="col-3 d-flex align-items-center" key={index}>
+                                                        <DataArrayIcon fontSize="large" color="warning" className="me-2" />
+                                                        <span className="fs-5">{task[index].data.length}</span>
+                                                    </div>
+                                                    <div className="col-4 d-flex align-items-center" key={index}>
+                                                        <AttachMoneyIcon fontSize="large" color="success" className="me-2" />
+                                                        <span className="fs-5">{task[index].price}</span>
+                                                    </div>
+                                                    <div className="col-5 d-flex align-items-center" key={index}>
+                                                        <AddReactionOutlinedIcon fontSize="large" color="action" className="me-2" />
+                                                        <span className="fs-5">{task[index].credibility} Credibility Score</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <label className='fw-bold fs-5'>Instruction: </label>
                                                 <p className="ps-4">{item.instruction}</p>
                                                 <div className="w-100 text-center">
-                                                    <Link to={index.toString()}>
+                                                    <Link to={"monitor_task/"+index.toString()}>
                                                         <Button variant="contained" startIcon={<InfoOutlinedIcon />}>Detail</Button>
                                                     </Link>
                                                 </div>

@@ -10,6 +10,10 @@ import TopUp from "./pages/requester/TopUp";
 import MonitorTask from "./pages/requester/MonitorTask";
 import { Assignment, Dashboard, ListAlt, Wallet } from "@mui/icons-material";
 import MyWallet from "./pages/worker/MyWallet";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
+import ConstructionIcon from '@mui/icons-material/Construction';
+import PaidIcon from '@mui/icons-material/Paid';
 
 export const workerNavigation = [
   {
@@ -41,25 +45,25 @@ export const workerNavigation = [
 export const requesterNavigation = [
   {
     name: "Dashboard",
-    icon: <i className="bi bi-house"></i>,
+    icon: <DashboardIcon color="primary" sx={{fontSize: "30px"}} />,
     element: <RequesterDashboard />,
     path: "/requester",
   },
   {
     name: "Create Task",
-    icon: <i className="bi bi-createtask"></i>,
+    icon: <ConstructionIcon color="error" sx={{fontSize: "30px"}} />,
     element: <CreateTask />,
     path: "/requester/create_task",
   },
   {
     name: "Monitor Task",
-    icon: <i className="bi bi-monitortask"></i>,
+    icon: <ScreenSearchDesktopIcon color="secondary" sx={{fontSize: "30px"}} />,
     element: <MonitorTask />,
     path: "/requester/monitor_task",
   },
   {
     name: "Top Up",
-    icon: <i className="bi bi-topup"></i>,
+    icon: <PaidIcon sx={{fontSize: "30px", color:"orange"}} />,
     element: <TopUp />,
     path: "/requester/top_up",
   },

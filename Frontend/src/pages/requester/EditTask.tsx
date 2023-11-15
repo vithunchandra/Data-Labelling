@@ -140,7 +140,7 @@ export default function EditTask() {
                         tmp.push({
                             data: "",
                             status: "unlabeled",
-                            label: ""
+                            labels: []
                         })
                         setData(tmp)
                     }}></Chip>

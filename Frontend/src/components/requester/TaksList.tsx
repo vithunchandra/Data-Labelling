@@ -8,7 +8,7 @@ export default function TaskList ({task}: {task: Task[]}) {
         <table className="table">
             <thead>
                 <tr>
-                    <th className="align-middle" style={{
+                    <th className="align-middle text-center" style={{
                         width: '5%'
                     }}>No</th>
                     <th className="align-middle" style={{
@@ -27,7 +27,7 @@ export default function TaskList ({task}: {task: Task[]}) {
                     task.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td className="align-middle">{index + 1}</td>
+                                <td className="align-middle text-center">{index + 1}</td>
                                 <td className="align-middle text-capitalize text-truncate">{item.name}</td>
                                 <td className="align-middle text-center">{item.data.length}</td>
                                 <td className="align-middle text-center">
