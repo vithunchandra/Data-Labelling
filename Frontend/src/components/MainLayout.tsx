@@ -33,7 +33,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                         <div id="sidebar-nav" className="d-flex flex-column h-100">
                             <div className="w-100 d-flex align-items-center justify-content-between ps-3 py-2 fs-3 fw-bold">
                                 <div className="d-flex align-items-center fs-3 fw-bold">
-                                    <img src="../../../public/Logo.png" className="me-2" style={{width: "50px"}}></img>
+                                    <img src="../../public/Logo.png" className="me-2" style={{width: "50px"}}></img>
                                     <span>Datle</span>
                                 </div>
                                 <IconButton data-bs-toggle="collapse" data-bs-target="#sidebar" onClick={() => setIsDrawerOn(!isDrawerOn)}>

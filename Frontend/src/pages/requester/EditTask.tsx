@@ -11,7 +11,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Data from '../../interface/DataInterface';
 
 export default function EditTask() {
-    const[task, setTask] = useState(tasks[parseInt(useLoaderData() as string)]);
+    const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
+    const[task, setTask] = useState(Req_tasks[parseInt(useLoaderData() as string)]);
     const[datas, setData] = useState<Data[]>(task.data);
     const[editIndex, setEditIndex] = useState<{index:number, action:string}>({index: -1, action : ""});
     const[editName, setEditName] = useState<boolean>(false);

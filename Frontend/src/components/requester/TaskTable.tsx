@@ -1,8 +1,9 @@
 import Task from "../../interface/TaskInterface";
 import { Button } from "@mui/material";
-import EditIcon from '@mui/icons-material/Edit';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Link } from "react-router-dom";
+import UnpublishedIcon from '@mui/icons-material/Unpublished';
+import PublishIcon from '@mui/icons-material/Publish';
 
 export default function TaskTable({task}: {task: Task[]}) {
     return (
@@ -51,9 +52,9 @@ export default function TaskTable({task}: {task: Task[]}) {
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.status? "Opened" : "Closed"}</td>
                                         <td className="align-middle text-center">
                                             {item.status ? 
-                                                <Button variant="contained" startIcon={<EditIcon />} color="error">Close</Button>
+                                                <Button variant="contained" startIcon={<UnpublishedIcon />} color="error">Close</Button>
                                                 :
-                                                <Button variant="contained" startIcon={<EditIcon />} color="success">Open</Button>
+                                                <Button variant="contained" startIcon={<PublishIcon />} color="success">Open</Button>
                                             }
                                         </td>
                                     </tr>
@@ -61,7 +62,7 @@ export default function TaskTable({task}: {task: Task[]}) {
                                         <td colSpan={8}>
                                             <div id={"detail"+index} className="collapse" data-bs-parent="#detail_parent">
                                                 <span className='fw-bold fs-5'>Instruction: </span>
-                                                <p>{item.instruction}</p>
+                                                <p className="ps-4">{item.instruction}</p>
                                                 <div className="w-100 text-center">
                                                     <Link to={index.toString()}>
                                                         <Button variant="contained" startIcon={<InfoOutlinedIcon />}>Detail</Button>

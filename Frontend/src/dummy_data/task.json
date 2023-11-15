@@ -24,15 +24,18 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -42,15 +45,18 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "labeled",
                         "label": "Neutral"
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "labeled",
                         "label": "Very Bad"
                     }
                 ]
@@ -60,51 +66,60 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "labeled",
                         "label": "Very Good"
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
                         "label": "Very Bad"
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "labeled",
                         "label": "Neutral"
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -129,23 +144,28 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Rory Li",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Dean Neal",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -155,23 +175,28 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
                         "label": "ed quis molestie nibh"
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Rory Li",
+                        "status": "labeled",
                         "label": "ed quis molestie nibh"
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "labeled",
                         "label": "ed quis molestie nibh"
                     },
                     {
-                        "worker": "",
+                        "worker": "Dean Neal",
+                        "status": "labeled",
                         "label": "ed quis molestie nibh"
                     }
                 ]
@@ -181,75 +206,90 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "labeled",
                         "label": "ed quis molestie nibh"
                     },
                     {
-                        "worker": "",
+                        "worker": "Rory Li",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Dean Neal",
+                        "status": "labeled",
                         "label": "ed quis molestie nibh"
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Rory Li",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Dean Neal",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Rory Li",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Dean Neal",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -281,15 +321,13 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -299,16 +337,14 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Fiona Miller",
+                        "status": "labeled",
+                        "label": "Neutral"
                     }
                 ]
             },
@@ -317,51 +353,45 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Good"
+                    },
+                    {
+                        "worker": "Fiona Miller",
+                        "status": "labeled",
+                        "label": "Neutral"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Fiona Miller",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -393,15 +423,18 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -411,16 +444,19 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "labeled",
+                        "label": "Bad"
+                    },
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "Good"
                     }
                 ]
             },
@@ -429,51 +465,60 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "labeled",
+                        "label": "Very Good"
+                    },
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Very Good"
+                    },
+                    {
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "Good"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -505,15 +550,18 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -523,15 +571,18 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "Very Bad"
                     },
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Very Bad"
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -541,51 +592,60 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "Very Bad"
+                    },
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Neutral"
+                    },
+                    {
+                        "worker": "Jane Doe",
+                        "status": "labeled",
+                        "label": "Bad"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -617,15 +677,18 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Zain Parsons",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Aoife Hewitt",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -635,16 +698,19 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Zain Parsons",
+                        "status": "labeled",
+                        "label": "Neutral"
+                    },
+                    {
+                        "worker": "Aoife Hewitt",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Neutral"
                     }
                 ]
             },
@@ -653,51 +719,39 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Zain Parsons",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Aoife Hewitt",
+                        "status": "labeled",
+                        "label": "Very Bad"
                     },
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Very Good"
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Zain Parsons",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Aoife Hewitt",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -722,15 +776,18 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -740,15 +797,114 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "ed quis molestie nibh"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "labels": [
+                    {
+                        "worker": "George Wilson",
+                        "status": "labeled",
+                        "label": "ed quis molestie nibh"
+                    },
+                    {
+                        "worker": "Jane Doe",
+                        "status": "labeled",
+                        "label": "ed quis molestie nibh"
+                    },
+                    {
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "ed quis molestie nibh"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
+                        "label": ""
+                    },
+                    {
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
+                        "label": ""
+                    },
+                    {
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
+                        "label": ""
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
+                        "label": ""
+                    },
+                    {
+                        "worker": "Jane Doe",
+                        "status": "unlabeled",
+                        "label": ""
+                    },
+                    {
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
+                        "label": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "text classification",
+        "requester": "vithun chandra",
+        "profile_image": "https://picsum.photos/200",
+        "type": "classification",
+        "possible_classification": [
+            "Very Bad",
+            "Bad", 
+            "Neutral",
+            "Good",
+            "Very Good"
+        ],
+        "status": false,
+        "price": "1.5 Rp/char",
+        "start_date": "14 November 2023",
+        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+        "finish_date": "25 November 2023",
+        "credibility": 50,
+        "total_worker": 3,
+        "data": [
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -758,51 +914,41 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
-                        "label": ""
-                    },
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Good"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "labeled",
+                "labels": [
                     {
-                        "worker": "",
-                        "label": ""
-                    },
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Neutral"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -834,15 +980,18 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Bob Smith",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -852,15 +1001,18 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Bob Smith",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "Very Good"
                     },
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -870,51 +1022,60 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Bob Smith",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "labeled",
+                        "label": "Neutral"
+                    },
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Bad"
+                    }
+                ]
+            },
+            {
+                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "status": "unlabeled",
+                "labels": [
+                    {
+                        "worker": "Bob Smith",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
+                        "label": ""
+                    },
+                    {
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Bob Smith",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
+                        "worker": "Hannah Moore",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -946,15 +1107,13 @@
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -964,15 +1123,13 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Good"
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
@@ -982,163 +1139,45 @@
                 "status": "labeled",
                 "labels": [
                     {
-                        "worker": "",
-                        "label": ""
+                        "worker": "Alice Johnson",
+                        "status": "labeled",
+                        "label": "Bad"
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
+                        "worker": "George Wilson",
+                        "status": "labeled",
+                        "label": "Bad"
                     }
                 ]
             },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "name": "text classification",
-        "requester": "vithun chandra",
-        "profile_image": "https://picsum.photos/200",
-        "type": "classification",
-        "possible_classification": [
-            "Very Bad",
-            "Bad", 
-            "Neutral",
-            "Good",
-            "Very Good"
-        ],
-        "status": true,
-        "price": "1.5 Rp/char",
-        "start_date": "14 November 2023",
-        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-        "finish_date": "25 November 2023",
-        "credibility": 50,
-        "total_worker": 3,
-        "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
                 "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]
             },
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "labeled",
+                "status": "unlabeled",
                 "labels": [
                     {
-                        "worker": "",
+                        "worker": "Alice Johnson",
+                        "status": "unlabeled",
                         "label": ""
                     },
                     {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "labeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    }
-                ]
-            },
-            {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
-                "status": "Unlabeled",
-                "labels": [
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
-                        "label": ""
-                    },
-                    {
-                        "worker": "",
+                        "worker": "George Wilson",
+                        "status": "unlabeled",
                         "label": ""
                     }
                 ]

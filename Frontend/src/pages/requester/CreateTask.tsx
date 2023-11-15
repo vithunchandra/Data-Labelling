@@ -9,7 +9,7 @@ export default function CreateTask() {
         <div>
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
                 <div className="fw-bold fs-4 mb-2">Task</div>
-                <TaskList task={task.filter((item) => item.requester == "kazusa touma")} />
+                <TaskList task={task.filter((item) => item.requester == "vithun chandra")} />
             </div>
             <Link to={"add"}>
                 <IconButton className='position-fixed fixed-bottom' style={{width:"7.5%", height:"7.5", marginBottom:"0%", marginLeft:"90%"}}>
