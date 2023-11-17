@@ -2,14 +2,14 @@ import User from "../../interface/UserInterface";
 import { Button, FormControl, MenuItem } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 
 export default function UserList({ user }: { user: User[] }) {
-  const [role, setRole] = useState("both");
+  const [role, setRole] = useState("Both");
   const [taskName, setTaskName] = useState("");
-
+  const [currentFilter, setCurrentFilter] = useState(user);
   const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setRole(event.target.value as string);
   };
@@ -17,6 +17,27 @@ export default function UserList({ user }: { user: User[] }) {
   const handleTaskNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTaskName(event.target.value);
   };
+
+  const handleFilter = () => {
+    let filteredUsers = user;
+
+    if (role !== "Both") {
+      filteredUsers = filteredUsers.filter((u) => u.role === role);
+    }
+
+    if (taskName.trim() !== "") {
+      filteredUsers = filteredUsers.filter((u) =>
+        u.name.toLowerCase().includes(taskName.toLowerCase())
+      );
+    }
+
+    setCurrentFilter(filteredUsers);
+  };
+
+  useEffect(() => {
+    handleFilter();
+  }, [role, taskName]);
+
   return (
     <>
       <div className="fs-5">Filters</div>
@@ -36,9 +57,9 @@ export default function UserList({ user }: { user: User[] }) {
                 width: "100%",
               }}
             >
-              <MenuItem value="both">Requester & Worker</MenuItem>
-              <MenuItem value="requester">Requester</MenuItem>
-              <MenuItem value="worker">Worker</MenuItem>
+              <MenuItem value="Both">Requester & Worker</MenuItem>
+              <MenuItem value="Requester">Requester</MenuItem>
+              <MenuItem value="Worker">Worker</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -68,9 +89,9 @@ export default function UserList({ user }: { user: User[] }) {
           </tr>
         </thead>
         <tbody>
-          {user.map((user, index) => (
+          {currentFilter.map((user, index) => (
             <tr key={index}>
-              <td className="align-middle">{index+1}</td>
+              <td className="align-middle">{index + 1}</td>
               <td className="align-middle">{user.name}</td>
               <td className="align-middle">{user.role}</td>
               {user.credibility !== 0 ? (
