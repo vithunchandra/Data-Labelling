@@ -28,17 +28,19 @@ const register = async (req, res) => {
   if (
     !(create_param["role"] == "worker" || create_param["role"] == "requester")
   ) {
-    return res.status(400).json({ msg: "Role tidak valid" });
+    return res.status(400).json({ msg: "Role is invalid" });
   }
 
   const user_now = await User.findOne({ username: req.body.username }).exec();
   if (user_now) {
-    return res.status(400).json({ msg: "Username sudah terpakai" });
+    return res.status(400).json({ msg: "Username already used" });
   }
+
+  create_param["tasks"] = [];
 
   const create_user = await User.create(create_param);
   create_user["password"] = undefined;
-  return res.status(200).json({ msg: "Berhasil", user: create_user });
+  return res.status(200).json({ msg: "Suceed", user: create_user });
 };
 
 module.exports = {
