@@ -5,7 +5,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Signup from "./pages/Signup";
+import Signup from "./pages/authentication/Signup";
 import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
@@ -30,11 +30,13 @@ import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
 import Chat from "./pages/requester/Chat";
 import ChatBox, { workerIDLoader } from "./components/requester/ChatBox";
 import BanList from "./pages/requester/BanList";
+import Signin from "./pages/authentication/Signin";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements([
       <Route path="/signup" index={true} element={<Signup />}></Route>,
+      <Route path="/signin" element={<Signin />}></Route>,
       <Route path="/admin" element={<Admin />}>
         {adminNavigation.map((item, index) => {
           return (

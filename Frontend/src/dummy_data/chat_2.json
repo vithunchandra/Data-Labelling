@@ -1,42 +1,34 @@
 [
     {
         "user_id": "1",
-        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect et, sed diam nonumy eirmod tempor incididunt ut labore et dolore magna aliquy eu fugiat nulla pariatur et ullamcorper"
+        "message": "Halo! Saya memiliki dataset ulasan aplikasi games di Google Play yang perlu dilabeli. Bisakah Anda membantu saya dengan tugas labelling ini?"
     },
     {
         "user_id": "2",
-        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect et, sed diam nonumy "
+        "message": "Tentu, saya bisa membantu Anda. Apakah Anda dapat memberikan lebih banyak informasi mengenai dataset dan instruksi labelling yang diperlukan?"
     },
     {
         "user_id": "1",
-        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect et, sed diam nonumy eirmod tempor incididunt ut labore et dolore magna aliquy "
+        "message": "Terima kasih! Dataset berisi ulasan pengguna untuk aplikasi games di Google Play. Instruksi labellingnya sudah saya siapkan. Bagaimana cara terbaik untuk berbagi dataset ini dengan Anda?"
     },
     {
         "user_id": "1",
-        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect et, sed diam nonumy "
+        "message": "Anda dapat mengunggah dataset ke platform berbagi file seperti Google Drive atau Dropbox. Setelah itu, berikan saya akses dan instruksi labellingnya."
     },
     {
         "user_id": "2",
-        "message": "Lorem ipsum dolor sit "
+        "message": "Saya akan segera mengunggahnya ke Google Drive dan memberikan akses. Instruksi labellingnya sudah saya masukkan ke dalam format JSON. Apakah ada format tertentu yang Anda inginkan?"
     },
     {
         "user_id": "2",
-        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect et, sed diam nonumy eirmod tempor incididunt ut labore et dolore magna aliquy eu fugiat nulla pariatur et ullamcorper"
+        "message": "JSON sudah baik. Pastikan instruksinya cukup jelas dan lengkap. Saya akan menunggu akses ke dataset dan instruksi labellingnya."
     },
     {
         "user_id": "2",
-        "message": "Lorem ipsum "
+        "message": "Baik, saya akan memberikan akses dan mengirimkan instruksi segera setelah dataset terunggah. Terima kasih banyak atas bantuan Anda!"
     },
     {
         "user_id": "1",
-        "message": "Lorem ipsum dolor sit amet, consectetur adipiscing el aspect et, sed diam nonumy eirmod tempor incididunt ut labore et dolore magna aliquy eu fugiat nulla pariatur et ullamcorper"
-    },
-    {
-        "user_id": "2",
-        "message": "Lorem ipsum dolor sit amet, consectetur "
-    },
-    {
-        "user_id": "1",
-        "message": "Lorem ipsum dolor sit amet, "
+        "message": "Tidak masalah. Saya senang bisa membantu. Jangan ragu untuk bertanya jika ada hal lain yang perlu dijelaskan. Semoga tugas labelling berjalan lancar!"
     }
 ]

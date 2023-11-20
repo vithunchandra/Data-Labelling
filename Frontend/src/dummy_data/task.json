@@ -17,10 +17,10 @@
         "finish_date": "25 November 2023",
         "credibility": 50,
         "workers": ["Jane Doe", "Alice Johnson", "Fiona Miller"],
-        "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+        "instruction": "Sebelum Anda mulai, pastikan untuk memahami setiap klasifikasi dengan baik agar Anda dapat memberikan label yang akurat sesuai dengan konteks ulasan. Sangat Tidak Bagus: Ulasan yang sangat negatif, dengan banyak masalah dan kekecewaan. Tidak Bagus: Ulasan negatif, namun mungkin masih ada beberapa aspek yang dapat diterima. Netral: Ulasan yang tidak terlalu positif atau negatif, mungkin hanya memberikan tanggapan umum tanpa sentimen ekstrem. Bagus: Ulasan positif dengan beberapa kelebihan. Sangat Bagus: Ulasan sangat positif, mencerminkan pengalaman yang sangat memuaskan. Langkah 2: Evaluasi Konten Review",
         "data": [
             {
-                "data": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+                "data": "Game MOBA ini fantastis! Grafiknya sangat bagus, dan kontrolnya sangat responsif. Saya suka bermain dengan berbagai pahlawan yang berbeda. Matchmaking juga cukup adil, dan saya selalu menemui tantangan baru setiap kali bermain. Sangat direkomendasikan untuk penggemar MOBA!",
                 "status": "unlabeled",
                 "labels": [
                     {
@@ -41,7 +41,7 @@
                 ]
             },
             {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "data": "Sebagai pemain MOBA veteran, saya bisa mengatakan bahwa game ini memenuhi semua harapan saya. Pilihan pahlawan yang beragam, sistem item yang baik, dan komunitas yang ramah. Yang terbaik, game ini dapat dimainkan di hp tanpa mengorbankan kualitas gameplay. Hebat!",
                 "status": "labeled",
                 "labels": [
                     {
@@ -62,7 +62,7 @@
                 ]
             },
             {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "data": "Saya baru saja mulai memainkan MOBA ini, dan saya langsung terpikat. Animasinya luar biasa, dan tutorialnya sangat membantu untuk pemula. Saya menyukai fakta bahwa ada banyak mode permainan yang berbeda, sehingga tidak pernah terasa membosankan. Aplikasi ini pasti layak dicoba!",
                 "status": "labeled",
                 "labels": [
                     {
@@ -83,7 +83,7 @@
                 ]
             },
             {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "data": "Game MOBA ini berhasil menciptakan pengalaman seru di platform mobile. Karakternya menarik, dan sistem ranking memberikan motivasi ekstra untuk terus bermain. Yang terbaik, tidak ada masalah koneksi atau lag saat bermain, membuat pengalaman bermain sangat lancar.",
                 "status": "unlabeled",
                 "labels": [
                     {
@@ -104,7 +104,7 @@
                 ]
             },
             {
-                "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
+                "data": "Game MOBA terbaik yang pernah saya mainkan di hp! Sistem kontrolnya intuitif dan mudah diakses, bahkan untuk pemain baru. Komunitasnya sangat aktif, dan pengembangnya rajin menghadirkan pembaruan untuk menjaga keseimbangan permainan. Saya sudah menghabiskan berjam-jam di game ini, dan masih tidak bosan!",
                 "status": "unlabeled",
                 "labels": [
                     {

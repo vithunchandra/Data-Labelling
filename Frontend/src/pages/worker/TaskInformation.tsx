@@ -40,7 +40,7 @@ export default function TaskInformation(){
     }
 
     return(
-        <div className="h-100 d-flex flex-column p-3 rounded-2 shadow-sm bg-white">
+        <div className="h-100 d-flex flex-column p-4 rounded-2 shadow-sm bg-white">
             <div className="fw-bold fs-4 mb-2">Task Information:</div>
             <div className="row flex-column justify-content-between mb-4 g-0">
                 {
@@ -57,8 +57,8 @@ export default function TaskInformation(){
                 <p>{task.instruction}</p>
             </div>
             <div className='flex-fill'></div>
-            <div className="row align-items-end justify-content-end">
-                <div className="col-auto">
+            <div className="row align-items-end justify-content-end g-0">
+                <div className="col-auto me-4">
                     <Button variant="contained" startIcon={<ChevronLeft />} onClick={previous}>Previous</Button>
                 </div>
                 <div className="col-auto">
