@@ -9,6 +9,7 @@ const taskSchema = new mongoose.Schema(
     start_date: Date,
     end_date: Date,
     active: Boolean,
+    min_credibility: Number,
     requester: {
       type: Schema.Types.ObjectId,
       ref: "User",

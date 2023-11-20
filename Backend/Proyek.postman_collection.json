@@ -130,6 +130,31 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "budi",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "budi123",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Budi",
+									"type": "default"
+								},
+								{
+									"key": "role",
+									"value": "requester",
+									"type": "default"
+								}
+							]
+						},
 						"url": {
 							"raw": "http://localhost:3000/api/v1/auth/register",
 							"protocol": "http",
@@ -338,7 +363,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id_requester\": \"654c815962140c6e35390101\",\r\n    \"task_name\": \"Positive VS Negative\",\r\n    \"task_description\": \"sentiment analysis of positive vs negative\",\r\n    \"possible_label\": [\r\n        \"Positive\",\r\n        \"Negative\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"_id_requester\": \"6556d3a54aaf29a32b1f3db0\",\r\n    \"_id_task_type\": \"6556baabfc571d6489cffb11\",\r\n    \"task_name\": \"Positive VS Negative\",\r\n    \"task_description\": \"sentiment analysis of positive vs negative 2\",\r\n    \"possible_label\": [\r\n        \"Positive\",\r\n        \"Negative\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -346,7 +371,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/task/create_task",
+							"raw": "http://localhost:3000/api/v1/task/create",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -356,7 +381,7 @@
 								"api",
 								"v1",
 								"task",
-								"create_task"
+								"create"
 							]
 						}
 					},
@@ -442,7 +467,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/v1/task/",
+							"raw": "http://localhost:3000/api/v1/task/?expand=0&task_type_id=6556baabfc571d6489cffb11",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -457,13 +482,11 @@
 							"query": [
 								{
 									"key": "expand",
-									"value": "0",
-									"disabled": true
+									"value": "0"
 								},
 								{
 									"key": "task_type_id",
-									"value": "6556baabfc571d6489cffb11",
-									"disabled": true
+									"value": "6556baabfc571d6489cffb11"
 								}
 							]
 						}
@@ -549,7 +572,32 @@
 					"name": "Get User Task",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/task/user/6556d3a54aaf29a32b1f3db0?expand=1&task_type_id=6556baabfc571d6489cffb11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"task",
+								"user",
+								"6556d3a54aaf29a32b1f3db0"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "1"
+								},
+								{
+									"key": "task_type_id",
+									"value": "6556baabfc571d6489cffb11"
+								}
+							]
+						}
 					},
 					"response": [
 						{
@@ -644,12 +692,12 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Classification",
+									"value": "AI Summary Checking",
 									"type": "default"
 								},
 								{
 									"key": "price",
-									"value": "3",
+									"value": "0.5",
 									"type": "default"
 								}
 							]
@@ -840,7 +888,354 @@
 		},
 		{
 			"name": "Data",
-			"item": []
+			"item": [
+				{
+					"name": "create data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "requester_id",
+									"value": "6556d3a54aaf29a32b1f3db0",
+									"type": "default"
+								},
+								{
+									"key": "task_id",
+									"value": "6556d573bd31329e995c2359",
+									"type": "default"
+								},
+								{
+									"key": "text",
+									"value": "film ini sangat bagus!",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/data/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"data",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "requester_id",
+											"value": "6556d3a54aaf29a32b1f3db0",
+											"type": "default"
+										},
+										{
+											"key": "task_id",
+											"value": "6556d573bd31329e995c2359",
+											"type": "default"
+										},
+										{
+											"key": "text",
+											"value": "film ini sangat bagus!",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/data/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"data",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61-kK1o5m4/criiA4XNrm10bkaVkWI\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 20 Nov 2023 02:03:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"text\": \"film ini sangat bagus!\",\n    \"price\": 66,\n    \"labels\": [],\n    \"_id\": \"655abe6dd89a31c2a6818d44\",\n    \"__v\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "edit data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "data_id",
+									"value": "655abe43d89a31c2a6818d3f",
+									"type": "default"
+								},
+								{
+									"key": "text",
+									"value": "film ini sangat jelek!",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/data/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"data",
+								"edit"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "edit_data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "data_id",
+											"value": "655abe43d89a31c2a6818d3f",
+											"type": "default"
+										},
+										{
+											"key": "text",
+											"value": "film ini sangat jelek!",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/data/edit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"data",
+										"edit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61-CbIxX38tZkECq809gBuAJSTQ1mk\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 20 Nov 2023 03:11:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"655abe43d89a31c2a6818d3f\",\n    \"text\": \"film ini sangat bagus!\",\n    \"price\": 66,\n    \"labels\": [],\n    \"__v\": 0\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "get data",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user?role=requester",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user"
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "requester"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/user?role=requester",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"user"
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "requester"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "207"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"cf-7qPernL9g3sMaFthBUYsGek1Kr0\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 20 Nov 2023 02:04:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"6556d3a54aaf29a32b1f3db0\",\n        \"username\": \"budi\",\n        \"password\": \"budi123\",\n        \"name\": \"Budi\",\n        \"role\": \"requester\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"tasks\": [\n            \"6556d573bd31329e995c2359\",\n            \"6556dcbd3bfbbb0105e711a6\"\n        ],\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				}
+			]
 		}
 	]
 }
