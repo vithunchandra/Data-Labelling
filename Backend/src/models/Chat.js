@@ -3,6 +3,10 @@ const { Schema } = require("mongoose");
 
 const ChatSchema = new mongoose.Schema(
   {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     text_chat: String,
     timestamp: Date,
   },

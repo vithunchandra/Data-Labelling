@@ -35,6 +35,8 @@ const port = 3000;
 const authRouter = require("./src/routes/auth");
 const dataRouter = require("./src/routes/data");
 const taskRouter = require("./src/routes/task");
+const taskTypeRouter = require("./src/routes/task_type");
+const userRouter = require("./src/routes/user");
 
 const database = require("./src/databases/connection");
 const { User, Task, Task_Type, Data, Chat } = require("./src/models");
@@ -52,6 +54,8 @@ app.use(
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/data", dataRouter);
 app.use("/api/v1/task", taskRouter);
+app.use("/api/v1/task_type", taskTypeRouter);
+app.use("/api/v1/user", userRouter);
 
 // app.use("/api/v1", contohRouter);
 // app.use("/api/v1/buku", bukuRouter);

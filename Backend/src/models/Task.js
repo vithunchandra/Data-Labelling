@@ -8,6 +8,8 @@ const taskSchema = new mongoose.Schema(
     possible_label: [String],
     start_date: Date,
     end_date: Date,
+    active: Boolean,
+    min_credibility: Number,
     requester: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -24,10 +26,25 @@ const taskSchema = new mongoose.Schema(
       type: [Schema.Types.ObjectId],
       ref: "User",
     },
-    chat: {
-      type: [Schema.Types.ObjectId],
-      ref: "Chat",
-    },
+    worker: [
+      {
+        user_id: {
+          type: [Schema.Types.ObjectId],
+          ref: "User",
+        },
+        chat: [
+          {
+            user: {
+              type: [Schema.Types.ObjectId],
+              ref: "User",
+            },
+            text_chat: String,
+            timestamp: Date,
+            is_read: Boolean,
+          },
+        ],
+      },
+    ],
   },
   { collection: "Task" }
 );

@@ -4,6 +4,7 @@ const { Schema } = require("mongoose");
 const dataSchema = new mongoose.Schema(
   {
     text: String,
+    price: Number,
     labels: [
       {
         worker: {
@@ -11,7 +12,6 @@ const dataSchema = new mongoose.Schema(
           ref: "User",
         },
         answer: String,
-        price: Number,
       },
     ],
   },
