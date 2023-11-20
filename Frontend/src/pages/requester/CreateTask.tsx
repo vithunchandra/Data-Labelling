@@ -12,7 +12,7 @@ export default function CreateTask() {
                 <TaskList task={task.filter((item) => item.requester == "vithun chandra")} />
             </div>
             <Link to={"add"}>
-                <IconButton className='position-fixed fixed-bottom' style={{width:"7.5%", height:"7.5", marginBottom:"0%", marginLeft:"90%"}}>
+                <IconButton className='position-fixed fixed-bottom' style={{width:"7.5%", marginBottom:"0%", marginLeft:"90%"}}>
                     <AddCircleIcon sx={{fontSize: "100px"}}></AddCircleIcon>
                 </IconButton>
             </Link>

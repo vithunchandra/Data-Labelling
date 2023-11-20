@@ -7,13 +7,19 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import PublishIcon from '@mui/icons-material/Publish';
-import { Button, Chip, CircularProgress, CircularProgressProps, Typography, Box  } from '@mui/material';
+import { Button, Chip, CircularProgress, CircularProgressProps, Typography, Box } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Link } from 'react-router-dom';
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 
 export default function DetailTask(){
     const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
     const[task, setTask] = useState(Req_tasks[parseInt(useLoaderData() as string)]);
     const navigate = useNavigate();
+
+    const labeled = task.data.reduce((total, d) => d.labels.filter((l) => l.status == "labeled").length + total, 0)
+    const totalData = task.data.reduce((total, d) => d.labels.length + total, 0);
+    const progress = Math.floor(labeled/totalData*100);
 
     function CircularProgressWithLabel(props: CircularProgressProps & { value: number },) {
         return (
@@ -96,8 +102,8 @@ export default function DetailTask(){
                 <div>
                     <span className="fs-5 fw-bold">Overall Progress:</span><br/>
                     <div className="progress my-2" role="progressbar" style={{height:"30px"}}>
-                        <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" style={{width: "25%"}}>25%</div>
-                        <div className="progress-bar bg-danger" style={{width: "75%"}}>75%</div>
+                        <div className="progress-bar progress-bar-striped progress-bar-animated bg-success" style={{width:`${progress}%`}}>{progress}%</div>
+                        <div className="progress-bar bg-danger" style={{width: `${100-progress}%`}}>{100-progress}%</div>
                     </div>
                 </div>
             </div>
@@ -105,8 +111,9 @@ export default function DetailTask(){
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
                 {
                     task.data.map((item, index) => {
+                        const isLabeled = item.labels.filter((l) => l.status == "labeled");
                         return (
-                            <div className='w-100 mb-2 border p-3 rounded'>
+                            <div className='w-100 mb-2 border p-3 rounded' key={index}>
                                 <div className='w-100 d-flex justify-content-betweeen'>
                                     <label className='w-100 fs-5 fw-bold' data-bs-toggle="collapse" data-bs-target={"#label_"+index} role='button'>Data:</label>
                                     <Chip label={item.status} variant="filled" />
@@ -114,7 +121,7 @@ export default function DetailTask(){
                                 <div className='d-flex'>
                                     <label className='fs-6 ps-4' data-bs-toggle="collapse" data-bs-target={"#label_"+index} role='button' style={{width:"90%", textAlign:"justify"}}>{item.data}</label>
                                     <div className='d-flex align-items-end justify-content-end my-3' style={{width:"10%"}}>
-                                        <CircularProgressWithLabel value={index*10} />
+                                        <CircularProgressWithLabel value={Math.floor(isLabeled.length/item.labels.length*100)} />
                                     </div>
                                 </div>
                                 <div id={"label_"+index} className='collapse'>
@@ -125,6 +132,12 @@ export default function DetailTask(){
                     })
                 }
             </div>
+
+            <Link to={"chat"}>
+                <Button className='position-fixed fixed-bottom' color='success' variant='contained' style={{width:"5%", marginBottom:"1%", marginLeft:"92%"}}>
+                    <ForumOutlinedIcon sx={{fontSize: "50px", color:"black"}}></ForumOutlinedIcon>
+                </Button>
+            </Link>
         </>
     )
 }

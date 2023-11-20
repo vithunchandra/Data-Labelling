@@ -16,7 +16,7 @@
         "start_date": "14 November 2023",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Jane Doe", "Alice Johnson", "Fiona Miller"],
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "data": [
             {
@@ -137,7 +137,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "14 Desember 2023",
         "credibility": 50,
-        "total_worker": 5,
+        "workers": ["Hannah Moore", "Fiona Miller", "Rory Li", "Jane Doe", "Dean Neal"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -314,7 +314,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Alice Johnson", "Fiona Miller"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -416,7 +416,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["George Wilson", "Alice Johnson", "Hannah Moore"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -543,7 +543,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Hannah Moore", "Alice Johnson", "Jane Doe"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -670,7 +670,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Zain Parsons", "Aoife Hewitt", "Alice Johnson"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -769,7 +769,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "14 Desember 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["George Wilson", "Jane Doe", "Hannah Moore"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -896,7 +896,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Alice Johnson"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -973,7 +973,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Bob Smith", "Hannah Moore", "Alice Johnson"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
@@ -1100,7 +1100,7 @@
         "instruction": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",
         "finish_date": "25 November 2023",
         "credibility": 50,
-        "total_worker": 3,
+        "workers": ["Alice Johnson", "George Wilson"],
         "data": [
             {
                 "data": "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pellentesque justo vel dolor tincidunt, a ultrices urna mollis. Nullam nec libero vitae nunc mollis mattis",

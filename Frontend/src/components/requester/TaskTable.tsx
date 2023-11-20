@@ -4,6 +4,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Link } from "react-router-dom";
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import PublishIcon from '@mui/icons-material/Publish';
+import { Fragment } from "react";
 
 export default function TaskTable({task}: {task: Task[]}) {
     return (
@@ -41,8 +42,8 @@ export default function TaskTable({task}: {task: Task[]}) {
                     {
                         task.map((item, index) => {
                             return (
-                                <>
-                                    <tr key={index}>
+                                <Fragment key={index}>
+                                    <tr>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{index + 1}</td>
                                         <td className="align-middle text-capitalize text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.name}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.type}</td>
@@ -71,7 +72,7 @@ export default function TaskTable({task}: {task: Task[]}) {
                                             </div>
                                         </td>
                                     </tr>
-                                </>
+                                </Fragment>
                             )
                         })
                     }

@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export default function CreateTask_Dashboard({task}: {task: Task[]}) {
     return (
-        <>
+        <div key={"ctd"}>
             <table className="table">
                 <thead>
                     <tr>
@@ -27,7 +27,7 @@ export default function CreateTask_Dashboard({task}: {task: Task[]}) {
                     {
                         task.map((item, index) => {
                             return (
-                                <tr key={index}>
+                                <tr key={"ct"+index}>
                                     <td className="align-middle text-center">{index + 1}</td>
                                     <td className="align-middle text-capitalize text-truncate">{item.name}</td>
                                     <td className="align-middle text-center">{item.data.length}</td>
@@ -46,6 +46,6 @@ export default function CreateTask_Dashboard({task}: {task: Task[]}) {
                     }
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }

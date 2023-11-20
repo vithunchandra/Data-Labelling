@@ -27,6 +27,9 @@ import TaskInformation from "./pages/worker/TaskInformation";
 import Labelling, { labelllingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
 import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
+import Chat from "./pages/requester/Chat";
+import ChatBox, { workerIDLoader } from "./components/requester/ChatBox";
+import BanList from "./pages/requester/BanList";
 
 function App() {
   const router = createBrowserRouter(
@@ -62,6 +65,7 @@ function App() {
         </Route>
         <Route path='wallet' element={<MyWallet />}></Route>
       </Route>,
+
       <Route path="requester" element={<Requester />}>
         <Route index element={<RequesterDashboard />}></Route>
         <Route path="create_task" element={<CreateTask />}></Route>
@@ -69,6 +73,10 @@ function App() {
         <Route path="create_task/:task_id" element={<EditTask />} loader={taskEditLoader as any}></Route>
         <Route path="monitor_task" element={<MonitorTask />}></Route>
         <Route path="monitor_task/:task_id" element={<DetailTask /> } loader={taskMonitorLoader as any}></Route>
+        <Route path="monitor_task/:task_id/chat" element={<Chat />} loader={taskMonitorLoader as any}>
+          <Route path=":worker" element={<ChatBox />} loader={workerIDLoader as any}></Route>
+        </Route>
+        <Route path="ban_list" element={<BanList />}></Route>
         <Route path="top_up" element={<TopUp />}></Route>
       </Route>,
     ])

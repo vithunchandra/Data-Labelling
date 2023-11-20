@@ -7,10 +7,11 @@ import PublishIcon from '@mui/icons-material/Publish';
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
+import { Fragment } from "react";
 
 export default function MonitorTask_Dashboard({task}: {task: Task[]}) {
     return (
-        <div>
+        <div key={"mtd"}>
             <table className="table">
                 <thead>
                     <tr>
@@ -31,12 +32,12 @@ export default function MonitorTask_Dashboard({task}: {task: Task[]}) {
                         }}>Action</th>
                     </tr>
                 </thead>
-                <tbody id="detail_parent">
+                <tbody id="dash_detail_parent">
                     {
                         task.map((item, index) => {
                             return (
-                                <>
-                                    <tr key={index}>
+                                <Fragment key={"mt"+index}>
+                                    <tr>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{index + 1}</td>
                                         <td className="align-middle text-capitalize text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.name}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.type}</td>
@@ -51,23 +52,23 @@ export default function MonitorTask_Dashboard({task}: {task: Task[]}) {
                                     </tr>
                                     <tr>
                                         <td colSpan={5}>
-                                            <div id={"detail"+index} className="collapse" data-bs-parent="#detail_parent">
-                                            <div className="container-fluid p-3 bg-white rounded-2 mb-2 shadow-sm">
-                                                <div className="w-100 row flex-row justify-content-between g-0">
-                                                    <div className="col-3 d-flex align-items-center" key={index}>
-                                                        <DataArrayIcon fontSize="large" color="warning" className="me-2" />
-                                                        <span className="fs-5">{task[index].data.length}</span>
-                                                    </div>
-                                                    <div className="col-4 d-flex align-items-center" key={index}>
-                                                        <AttachMoneyIcon fontSize="large" color="success" className="me-2" />
-                                                        <span className="fs-5">{task[index].price}</span>
-                                                    </div>
-                                                    <div className="col-5 d-flex align-items-center" key={index}>
-                                                        <AddReactionOutlinedIcon fontSize="large" color="action" className="me-2" />
-                                                        <span className="fs-5">{task[index].credibility} Credibility Score</span>
+                                            <div id={"detail"+index} className="collapse" data-bs-parent="#dash_detail_parent">
+                                                <div className="container-fluid p-3 bg-white rounded-2 mb-2 shadow-sm">
+                                                    <div className="w-100 row flex-row justify-content-between g-0">
+                                                        <div className="col-3 d-flex align-items-center">
+                                                            <DataArrayIcon fontSize="large" color="warning" className="me-2" />
+                                                            <span className="fs-5">{task[index].data.length}</span>
+                                                        </div>
+                                                        <div className="col-4 d-flex align-items-center">
+                                                            <AttachMoneyIcon fontSize="large" color="success" className="me-2" />
+                                                            <span className="fs-5">{task[index].price}</span>
+                                                        </div>
+                                                        <div className="col-5 d-flex align-items-center">
+                                                            <AddReactionOutlinedIcon fontSize="large" color="action" className="me-2" />
+                                                            <span className="fs-5">{task[index].credibility} Credibility Score</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                                 <label className='fw-bold fs-5'>Instruction: </label>
                                                 <p className="ps-4">{item.instruction}</p>
                                                 <div className="w-100 text-center">
@@ -78,7 +79,7 @@ export default function MonitorTask_Dashboard({task}: {task: Task[]}) {
                                             </div>
                                         </td>
                                     </tr>
-                                </>
+                                </Fragment>
                             )
                         })
                     }

@@ -1,6 +1,6 @@
 import { Chip, Avatar, Typography, Popover, Button } from "@mui/material";
 import Label from "../../interface/LabelInterface";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ChatIcon from '@mui/icons-material/Chat';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ export default function ListLabel({label} : {label : Label[]}) {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    // const id = open ? 'simple-popover' : undefined;
 
     const navigate = useNavigate();
 
@@ -39,26 +39,28 @@ export default function ListLabel({label} : {label : Label[]}) {
             <tbody>
                 {
                     label.map((item, index) => {
+                        const id = open ? item.worker : undefined;
                         return <tr key={index}>
                             <td className="align-middle">
-                                <Button className="d-flex align-items-center text-dark" onClick={handleClick}>
+                                <Button className="d-flex align-items-center text-dark" value={item.worker} onClick={handleClick}>
                                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
                                     <label className="ms-2" role="button">{item.worker}</label>
                                 </Button>
                                 <Popover
-                                    id={id}
+                                    id={id+"_"+index+"_"+item.worker}
                                     open={open}
                                     anchorEl={anchorEl}
                                     onClose={handleClose}
                                     anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'left',
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
                                     }}
+                                    
                                 >
                                     <Typography sx={{ p: 2 }}>
                                         <div className="d-flex flex-column justify-content-between align-items-start" style={{width:"80px"}}>
                                             <Button className="d-flex text-dark" onClick={() => {
-                                                navigate('');
+                                                navigate('chat/'+anchorEl?.value);
                                             }}>
                                                 <ChatIcon color="success" />
                                                 <span className="ms-2">Chat</span>

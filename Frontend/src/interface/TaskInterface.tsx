@@ -10,6 +10,6 @@ export default interface Task{
     finish_date: string,
     credibility: number,
     instruction: string,
-    total_worker: number,
+    workers: string[],
     data: Data[]
 }

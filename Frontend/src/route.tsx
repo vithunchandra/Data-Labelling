@@ -14,6 +14,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ScreenSearchDesktopIcon from '@mui/icons-material/ScreenSearchDesktop';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import PaidIcon from '@mui/icons-material/Paid';
+import BlockIcon from '@mui/icons-material/Block';
+import BanList from "./pages/requester/BanList";
 
 export const workerNavigation = [
   {
@@ -60,6 +62,12 @@ export const requesterNavigation = [
     icon: <ScreenSearchDesktopIcon color="secondary" sx={{fontSize: "30px"}} />,
     element: <MonitorTask />,
     path: "/requester/monitor_task",
+  },
+  {
+    name: "Ban List",
+    icon: <BlockIcon color="error" sx={{fontSize: "30px"}} />,
+    element: <BanList />,
+    path: "/requester/ban_list",
   },
   {
     name: "Top Up",
