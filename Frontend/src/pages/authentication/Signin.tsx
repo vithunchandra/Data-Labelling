@@ -22,7 +22,7 @@ export default function Signin(){
                         error && <span className="text-danger">{error}</span>
                     }
                     
-                    <Button className="mt-4" fullWidth size="large" variant="contained">Sign up</Button>
+                    <Button className="mt-4" fullWidth size="large" variant="contained">Sign In</Button>
                     <div className="mt-3 text-end">
                         Don't Have account? <Link className="link-offset-2 link-underline link-underline-opacity-0 link-opacity-75-hover" to={'/signup'}>Sign up</Link>
                     </div>
