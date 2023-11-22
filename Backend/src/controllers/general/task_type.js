@@ -1,4 +1,4 @@
-const { Task_Type } = require("../models");
+const { Task_Type } = require("../../models");
 
 const get_all_task_type = async (req, res) => {
   const all_task_type = await Task_Type.find({}).exec();

@@ -1,4 +1,4 @@
-const { Data, Task, Task_Type } = require("../models");
+const { Data, Task, Task_Type } = require("../../models");
 
 const create_data = async (req, res) => {
   const { requester_id, task_id, text } = req.body;
@@ -51,6 +51,7 @@ const edit_data = async (req, res) => {
   ////////////////// CAREFUL!!! ////////////
   const price_char_now = data_now.price / data_now.text.length;
   const new_price = price_char_now * text.length;
+  //////////////////////////////////////////
 
   const updated_data = await Data.findByIdAndUpdate(data_id, {
     text: text,

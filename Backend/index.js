@@ -32,11 +32,11 @@ const port = 3000;
 // const contohValidasiRouter = require("./src/routes/contohValidasi");
 // const contohAxiosRouter = require("./src/routes/contohAxios");
 // const contohMiddlewareRouter = require("./src/routes/contohMiddleware");
-const authRouter = require("./src/routes/auth");
-const dataRouter = require("./src/routes/data");
-const taskRouter = require("./src/routes/task");
-const taskTypeRouter = require("./src/routes/task_type");
-const userRouter = require("./src/routes/user");
+const authRouter = require("./src/routes/general/auth");
+const dataRouter = require("./src/routes/general/data");
+const taskRouter = require("./src/routes/general/task");
+const taskTypeRouter = require("./src/routes/general/task_type");
+const userRouter = require("./src/routes/general/user");
 
 const database = require("./src/databases/connection");
 const { User, Task, Task_Type, Data, Chat } = require("./src/models");
@@ -51,11 +51,11 @@ app.use(
   })
 );
 
-app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/data", dataRouter);
-app.use("/api/v1/task", taskRouter);
-app.use("/api/v1/task_type", taskTypeRouter);
-app.use("/api/v1/user", userRouter);
+app.use("/api/v1/general/auth", authRouter);
+app.use("/api/v1/general/data", dataRouter);
+app.use("/api/v1/general/task", taskRouter);
+app.use("/api/v1/general/task_type", taskTypeRouter);
+app.use("/api/v1/general/user", userRouter);
 
 // app.use("/api/v1", contohRouter);
 // app.use("/api/v1/buku", bukuRouter);

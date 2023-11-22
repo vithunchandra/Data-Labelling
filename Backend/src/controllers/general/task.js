@@ -1,5 +1,5 @@
-const { Task, User, Task_Type } = require("../models");
-const { expand_task } = require("../utils/helper_function");
+const { Task, User, Task_Type } = require("../../models");
+const { expand_task } = require("../../utils/helper_function");
 
 const create_task = async (req, res) => {
   let {

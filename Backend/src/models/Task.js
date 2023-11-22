@@ -29,13 +29,13 @@ const taskSchema = new mongoose.Schema(
     worker: [
       {
         user_id: {
-          type: [Schema.Types.ObjectId],
+          type: Schema.Types.ObjectId,
           ref: "User",
         },
         chat: [
           {
             user: {
-              type: [Schema.Types.ObjectId],
+              type: Schema.Types.ObjectId,
               ref: "User",
             },
             text_chat: String,
@@ -43,6 +43,7 @@ const taskSchema = new mongoose.Schema(
             is_read: Boolean,
           },
         ],
+        isBanned: Boolean,
       },
     ],
   },

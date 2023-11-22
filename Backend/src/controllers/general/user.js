@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User } = require("../../models");
 
 const get_user = async (req, res) => {
   const { role, expand } = req.query;
