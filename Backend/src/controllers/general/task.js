@@ -1,5 +1,41 @@
+const { default: mongoose } = require("mongoose");
 const { Task, User, Task_Type } = require("../../models");
 const { expand_task } = require("../../utils/helper_function");
+
+const expand_task_aggregation_condition = [
+  {
+    $lookup: {
+      from: "Data",
+      localField: "data",
+      foreignField: "_id",
+      as: "data",
+    },
+  },
+  {
+    $lookup: {
+      from: "User",
+      localField: "requester",
+      foreignField: "_id",
+      as: "requester",
+    },
+  },
+  {
+    $lookup: {
+      from: "User",
+      localField: "task_type",
+      foreignField: "_id",
+      as: "task_type",
+    },
+  },
+  {
+    $lookup: {
+      from: "Task_Type",
+      localField: "ban_list",
+      foreignField: "_id",
+      as: "ban_list",
+    },
+  },
+];
 
 const create_task = async (req, res) => {
   let {
@@ -76,73 +112,97 @@ const create_task = async (req, res) => {
 
 const get_task = async (req, res) => {
   const { expand, task_type_id } = req.query;
+  let condition_now = [
+    { $addFields: { newField: 1 } },
+    { $project: { newField: 0 } },
+  ];
 
-  let use_search = false;
   if (task_type_id) {
-    use_search = true;
-    try {
-      all_task = await Task.find({ task_type: task_type_id }).exec();
-    } catch {
-      all_task = [];
-    }
-  }
-
-  if (!use_search) {
-    all_task = await Task.find().exec();
+    // add task_type filter to condition now
+    condition_now = [
+      ...condition_now,
+      { $match: { task_type: new mongoose.Types.ObjectId(task_type_id) } },
+    ];
   }
 
   if (expand) {
-    if (
-      String(expand).toLowerCase() == "true" ||
-      expand == "1" ||
-      expand == 1 ||
-      expand == true
-    )
-      all_task = await expand_task(all_task);
+    if (expand == "1" || expand == "true" || expand == 1) {
+      condition_now = [...condition_now, ...expand_task_aggregation_condition];
+    }
   }
 
-  return res.json(all_task);
+  const all_task = await Task.aggregate(condition_now).exec();
+
+  return res.status(200).json(all_task);
 };
 
 const get_user_task = async (req, res) => {
+  //using model way
   const { expand, task_type_id } = req.query;
   const { user_id } = req.params;
 
-  const user_now = await User.findById(user_id).exec();
-  if (!user_now) {
-    return res.status(404).json({
-      msg: "User Not Found",
-    });
-  }
-  let all_task = await Promise.all(
-    user_now.tasks.map(async (task_id) => {
-      const task_now = await Task.findById(task_id);
-      return task_now;
-    })
-  );
+  let condition_now = [
+    { $match: { _id: new mongoose.Types.ObjectId(user_id) } },
+    { $project: { password: 0 } },
+    {
+      $lookup: {
+        from: "Task",
+        localField: "tasks",
+        foreignField: "_id",
+        as: "tasks",
+      },
+    },
+  ];
 
   if (task_type_id) {
-    if (all_task.length > 0) {
-      all_task = all_task.filter((task) => {
-        if (task.task_type == task_type_id) {
-          return true;
-        }
-        return false;
-      });
+    condition_now = [
+      ...condition_now,
+      {
+        $project: {
+          username: 1,
+          name: 1,
+          role: 1,
+          credibility: 1,
+          wallet: 1,
+          tasks: {
+            $filter: {
+              input: "$tasks",
+              cond: {
+                $eq: [
+                  "$$tasks.task_type",
+                  new mongoose.Types.ObjectId(task_type_id),
+                ],
+              },
+              as: "tasks",
+            },
+          },
+        },
+      },
+    ];
+  }
+
+  condition_now = [
+    ...condition_now,
+    {
+      $project: { tasks: 1 },
+    },
+    {
+      $unwind: "$tasks",
+    },
+    {
+      $replaceRoot: { newRoot: "$tasks" },
+    },
+  ];
+
+  if (expand) {
+    if (expand == "1" || expand == "true" || expand == 1) {
+      condition_now = [...condition_now, ...expand_task_aggregation_condition];
     }
   }
 
-  if (expand) {
-    if (
-      String(expand).toLowerCase() == "true" ||
-      expand == "1" ||
-      expand == 1 ||
-      expand == true
-    )
-      all_task = await expand_task(all_task);
-  }
+  const all_task = await User.aggregate(condition_now).exec();
 
-  return res.json(all_task);
+  return res.status(200).json(all_task);
 };
 
 module.exports = {

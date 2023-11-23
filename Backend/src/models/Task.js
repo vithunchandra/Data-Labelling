@@ -34,13 +34,8 @@ const taskSchema = new mongoose.Schema(
         },
         chat: [
           {
-            user: {
-              type: Schema.Types.ObjectId,
-              ref: "User",
-            },
-            text_chat: String,
-            timestamp: Date,
-            is_read: Boolean,
+            type: [Schema.Types.ObjectId],
+            ref: "Chat",
           },
         ],
         isBanned: Boolean,

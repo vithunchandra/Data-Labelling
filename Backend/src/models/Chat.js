@@ -7,8 +7,13 @@ const ChatSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    task_id: {
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+    },
     text_chat: String,
     timestamp: Date,
+    is_read: Boolean,
   },
   { collection: "Chat" }
 );
