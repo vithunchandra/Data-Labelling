@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -24,14 +25,22 @@ export default function AddTaskType() {
         });
         const newData = {
           name: data.name,
-          price: data.price 
-        }
+          price: data.price,
+        };
         reset();
         dispatch(addTasktype(newData));
         navigate("/admin/task_type");
       })}
     >
-      <div className="d-flex justify-content-end">
+      <div className="d-flex justify-content-between">
+        <Button
+          color="info"
+          variant="contained"
+          startIcon={<ArrowBackIosIcon />}
+          onClick={() => navigate("..", { relative: "path" })}
+        >
+          Back
+        </Button>
         <Button
           color="success"
           variant="contained"

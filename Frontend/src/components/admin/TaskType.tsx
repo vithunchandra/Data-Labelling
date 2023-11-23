@@ -29,7 +29,7 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
   };
   return (
     <div>
-      <table className="table table-striped">
+      <table className="table">
         <thead>
           <tr>
             <th>No</th>
@@ -41,7 +41,7 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
         <tbody>
           {TaskType.map((type, index) => (
             <tr key={index}>
-              <td>{index+1}</td>
+              <td>{index + 1}</td>
               <td>{type.name}</td>
               <td>
                 {editIndex === index ? (

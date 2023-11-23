@@ -31,6 +31,14 @@ import Chat from "./pages/requester/Chat";
 import ChatBox, { workerIDLoader } from "./components/requester/ChatBox";
 import BanList from "./pages/requester/BanList";
 import Signin from "./pages/authentication/Signin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUser from "./pages/admin/AdminUser";
+import AdminTaskType from "./pages/admin/AdminTaskType";
+import AdminKeuangan from "./pages/admin/AdminKeuangan";
+import AdminTask from "./pages/admin/AdminTask";
+import AdminUserDetail from "./pages/admin/AdminUserDetail";
+import AdminTaskDetail from "./pages/admin/AdminTaskDetail";
+import AdminUserTaskDetail from "./pages/admin/AdminUserTaskDetail";
 
 function App() {
   const router = createBrowserRouter(
@@ -38,45 +46,81 @@ function App() {
       <Route path="/signup" index={true} element={<Signup />}></Route>,
       <Route path="/signin" element={<Signin />}></Route>,
       <Route path="/admin" element={<Admin />}>
-        {adminNavigation.map((item, index) => {
-          return (
-            <Route
-              key={index}
-              index={index === 0 && true}
-              path={item.path}
-              element={item.element}
-            ></Route>
-          );
-        })}
+        <Route index element={<AdminDashboard />}></Route>
+        <Route path="user" element={<AdminUser />}></Route>
+        <Route path="user/:user_id" element={<AdminUserDetail />}></Route>
+        <Route
+          path="user/:user_id/detail/:task_id"
+          element={<AdminUserTaskDetail />}
+        ></Route>
+        <Route path="task" element={<AdminTask />}></Route>
+        <Route path="task/:task_id" element={<AdminTaskDetail />}></Route>
+        <Route path="task_type" element={<AdminTaskType />}></Route>
         <Route
           path="/admin/task_type/add"
           element={<AddTaskType></AddTaskType>}
-        >
-        </Route>
+        ></Route>
+        <Route path="keuangan" element={<AdminKeuangan />}></Route>
       </Route>,
 
       <Route path="worker" element={<Worker />}>
         <Route index element={<WorkerDashboard />}></Route>
         <Route path="marketplace" element={<Marketplace />}></Route>
-        <Route path="marketplace/:task_id" element={<MarketTaskDetail />} loader={loader as any}></Route>
+        <Route
+          path="marketplace/:task_id"
+          element={<MarketTaskDetail />}
+          loader={loader as any}
+        ></Route>
         <Route path="task" element={<WorkerTask />}></Route>
-        <Route path="task/:task_id" element={<Task />} loader={taskDetailLoader as any}>
-          <Route index element={<TaskInformation />} loader={taskDetailLoader as any}></Route>
-          <Route path="viewdata" element={<TaskData />} loader={taskDataLoader as any}></Route>
-          <Route path="viewdata/:data_id" loader={labelllingLoader as any} element={<Labelling />}></Route> 
+        <Route
+          path="task/:task_id"
+          element={<Task />}
+          loader={taskDetailLoader as any}
+        >
+          <Route
+            index
+            element={<TaskInformation />}
+            loader={taskDetailLoader as any}
+          ></Route>
+          <Route
+            path="viewdata"
+            element={<TaskData />}
+            loader={taskDataLoader as any}
+          ></Route>
+          <Route
+            path="viewdata/:data_id"
+            loader={labelllingLoader as any}
+            element={<Labelling />}
+          ></Route>
         </Route>
-        <Route path='wallet' element={<MyWallet />}></Route>
+        <Route path="wallet" element={<MyWallet />}></Route>
       </Route>,
 
       <Route path="requester" element={<Requester />}>
         <Route index element={<RequesterDashboard />}></Route>
         <Route path="create_task" element={<CreateTask />}></Route>
         <Route path="create_task/add" element={<AddTask />}></Route>
-        <Route path="create_task/:task_id" element={<EditTask />} loader={taskEditLoader as any}></Route>
+        <Route
+          path="create_task/:task_id"
+          element={<EditTask />}
+          loader={taskEditLoader as any}
+        ></Route>
         <Route path="monitor_task" element={<MonitorTask />}></Route>
-        <Route path="monitor_task/:task_id" element={<DetailTask /> } loader={taskMonitorLoader as any}></Route>
-        <Route path="monitor_task/:task_id/chat" element={<Chat />} loader={taskMonitorLoader as any}>
-          <Route path=":worker" element={<ChatBox />} loader={workerIDLoader as any}></Route>
+        <Route
+          path="monitor_task/:task_id"
+          element={<DetailTask />}
+          loader={taskMonitorLoader as any}
+        ></Route>
+        <Route
+          path="monitor_task/:task_id/chat"
+          element={<Chat />}
+          loader={taskMonitorLoader as any}
+        >
+          <Route
+            path=":worker"
+            element={<ChatBox />}
+            loader={workerIDLoader as any}
+          ></Route>
         </Route>
         <Route path="ban_list" element={<BanList />}></Route>
         <Route path="top_up" element={<TopUp />}></Route>

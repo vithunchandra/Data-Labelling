@@ -5,6 +5,7 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
+import { Link } from "react-router-dom";
 
 export default function UserList({ user }: { user: User[] }) {
   const [role, setRole] = useState("Both");
@@ -77,7 +78,7 @@ export default function UserList({ user }: { user: User[] }) {
           ></TextField>
         </div>
       </div>
-      <table className="table table-striped">
+      <table className="table">
         <thead>
           <tr>
             <th className="align-middle">ID</th>
@@ -106,9 +107,11 @@ export default function UserList({ user }: { user: User[] }) {
               )}
               <td className="align-middle">
                 {" "}
-                <Button variant="contained" startIcon={<InfoOutlinedIcon />}>
-                  Detail
-                </Button>
+                <Link to={`/admin/user/${user._id}`}>
+                  <Button variant="contained" startIcon={<InfoOutlinedIcon />}>
+                    Detail
+                  </Button>
+                </Link>
               </td>
             </tr>
           ))}
