@@ -965,13 +965,13 @@
 										},
 										{
 											"key": "text",
-											"value": "film ini sangat bagus!",
+											"value": "film ini sangat jelek!",
 											"type": "default"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/data/create",
+									"raw": "http://localhost:3000/api/v1/general/data/create",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -980,6 +980,7 @@
 									"path": [
 										"api",
 										"v1",
+										"general",
 										"data",
 										"create"
 									]
@@ -1007,15 +1008,15 @@
 								},
 								{
 									"key": "Content-Length",
-									"value": "97"
+									"value": "131"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"61-kK1o5m4/criiA4XNrm10bkaVkWI\""
+									"value": "W/\"83-xUwAHcYOCf6h3twQSP8QoEzjpWg\""
 								},
 								{
 									"key": "Date",
-									"value": "Mon, 20 Nov 2023 02:03:25 GMT"
+									"value": "Fri, 24 Nov 2023 02:31:10 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1027,7 +1028,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"text\": \"film ini sangat bagus!\",\n    \"price\": 66,\n    \"labels\": [],\n    \"_id\": \"655abe6dd89a31c2a6818d44\",\n    \"__v\": 0\n}"
+							"body": "{\n    \"text\": \"film ini sangat jelek!\",\n    \"price\": 66,\n    \"task\": \"6556d573bd31329e995c2359\",\n    \"labels\": [],\n    \"_id\": \"65600aee5a2cca9b1432928a\",\n    \"__v\": 0\n}"
 						}
 					]
 				},
@@ -1148,6 +1149,140 @@
 							"body": "{\n    \"_id\": \"655abe43d89a31c2a6818d3f\",\n    \"text\": \"film ini sangat bagus!\",\n    \"price\": 66,\n    \"labels\": [],\n    \"__v\": 0\n}"
 						}
 					]
+				},
+				{
+					"name": "label data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "data_id",
+									"value": "65600ae65a2cca9b14329285",
+									"type": "default"
+								},
+								{
+									"key": "worker_id",
+									"value": "6556d3504aaf29a32b1f3dac",
+									"type": "default"
+								},
+								{
+									"key": "text",
+									"value": "Positive",
+									"type": "default"
+								},
+								{
+									"key": "task_id",
+									"value": "6556d573bd31329e995c2359",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/general/data/label",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"general",
+								"data",
+								"label"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "label data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "data_id",
+											"value": "65600aee5a2cca9b1432928a",
+											"type": "default"
+										},
+										{
+											"key": "worker_id",
+											"value": "6556d3504aaf29a32b1f3dac",
+											"type": "default"
+										},
+										{
+											"key": "text",
+											"value": "Negative",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/general/data/label",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"general",
+										"data",
+										"label"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "17"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11-XUu7ec7uB6ENuYrR+J5tY9GvlJU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Nov 2023 02:40:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Suceed!\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1155,7 +1290,7 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "get data",
+					"name": "get user info",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -1249,6 +1384,140 @@
 							],
 							"cookie": [],
 							"body": "[\n    {\n        \"_id\": \"6556d3a54aaf29a32b1f3db0\",\n        \"username\": \"budi\",\n        \"password\": \"budi123\",\n        \"name\": \"Budi\",\n        \"role\": \"requester\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"tasks\": [\n            \"6556d573bd31329e995c2359\",\n            \"6556dcbd3bfbbb0105e711a6\"\n        ],\n        \"__v\": 0\n    }\n]"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "create chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "task_id",
+									"value": "6556d573bd31329e995c2359",
+									"type": "default"
+								},
+								{
+									"key": "user_id",
+									"value": "6556d3504aaf29a32b1f3dac",
+									"type": "default"
+								},
+								{
+									"key": "text",
+									"value": "Halo",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/general/chat/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"general",
+								"chat",
+								"create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create chat",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "task_id",
+											"value": "6556d573bd31329e995c2359",
+											"type": "default"
+										},
+										{
+											"key": "user_id",
+											"value": "6556d3504aaf29a32b1f3dac",
+											"type": "default"
+										},
+										{
+											"key": "text",
+											"value": "Halo",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/general/chat/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"general",
+										"chat",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "17"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"11-GAUy7kauh1F8OYE1iGXHuKB8Bp4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 24 Nov 2023 03:39:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"suceed!\"\n}"
 						}
 					]
 				}

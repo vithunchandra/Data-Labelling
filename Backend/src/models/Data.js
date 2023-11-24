@@ -5,10 +5,14 @@ const dataSchema = new mongoose.Schema(
   {
     text: String,
     price: Number,
+    task: {
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+    },
     labels: [
       {
         worker: {
-          type: [Schema.Types.ObjectId],
+          type: Schema.Types.ObjectId,
           ref: "User",
         },
         answer: String,
