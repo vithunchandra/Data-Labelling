@@ -4,43 +4,60 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
 
 const login = async (req, res) => {
-  const user_now = await User.findOne({ username: req.body.username }).exec();
-
-  if (!user_now) {
-    return res.status(400).json({ msg: "Username tidak ditemukan" });
-  } else {
-    if (user_now["password"] == req.body.password) {
-      user_now["password"] = undefined;
-      return res.status(200).json({ msg: "Berhasil", user: user_now });
-    } else {
-      return res.status(400).json({ msg: "Password salah" });
-    }
+  const {email, password} = req.body
+  
+  if(!email || !password){
+    return res.status(400).json({message: 'Every field must be provided'})
   }
+  const user = await User.findOne({email: email})
+  if(!user){
+    return res.status(400).json({message: `User with email ${email} is not exist`})
+  }
+  if(user.password !== password){
+    return res.status(400).json({message: 'Password is incorrect'})
+  }
+
+  user.password = undefined
+
+  const accessToken = jwt.sign(
+    {user},
+    process.env.ACCESS_TOKEN_SECRET,
+    {expiresIn: '1d'}
+  )
+  return res.status(200).json({user: accessToken})
 };
 
 const register = async (req, res) => {
-  const create_param = req.body;
-  create_param["credibility"] = 0;
-  create_param["wallet"] = 0;
+  const {email, name, password, confirmPassword, role} = req.body;
+  console.log(role)
 
-  // check role is only worker and requester
-  create_param["role"] = String(create_param["role"]).toLowerCase();
-  if (
-    !(create_param["role"] == "worker" || create_param["role"] == "requester")
-  ) {
-    return res.status(400).json({ msg: "Role is invalid" });
+  if(!email || !name || !password || !confirmPassword || !role){
+    return res.status(400).json({message: 'Every field must be provided'})
+  }
+  
+  const isExist = await User.exists({email: email})
+  if(isExist){
+    return res.status(400).json({message: `User with email ${email} already exists`})
   }
 
-  const user_now = await User.findOne({ username: req.body.username }).exec();
-  if (user_now) {
-    return res.status(400).json({ msg: "Username already used" });
+  if(role.toLowerCase() !== 'worker' && role.toLowerCase() !== 'requester'){
+    return res.status(400).json({message: 'Role is invalid'})
   }
 
-  create_param["tasks"] = [];
+  const newUser = await User.create({
+    ...req.body,
+    role: role.toLowerCase(),
+    credibility: 100,
+    wallet: 0,
+    tasks: []
+  })
 
-  const create_user = await User.create(create_param);
-  create_user["password"] = undefined;
-  return res.status(200).json({ msg: "Suceed", user: create_user });
+  const accessToken = jwt.sign(
+    {user: {...newUser, password: undefined}},
+    process.env.ACCESS_TOKEN_SECRET,
+    {expiresIn: '1d'}
+  )
+  return res.status(201).json({ user: accessToken });
 };
 
 module.exports = {

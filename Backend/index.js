@@ -30,15 +30,16 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     optionsSuccessStatus: 200,
+    credentials: true
   })
 );
 
-app.use("/api/v1/general/auth", authRouter);
-app.use("/api/v1/general/data", dataRouter);
-app.use("/api/v1/general/task", taskRouter);
-app.use("/api/v1/general/task_type", taskTypeRouter);
-app.use("/api/v1/general/user", userRouter);
-app.use("/api/v1/general/chat", chatRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/data", dataRouter);
+app.use("/api/v1/task", taskRouter);
+app.use("/api/v1/task_type", taskTypeRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/chat", chatRouter);
 
 // app.use(
 //   "/api/v1/contohMiddleware",
