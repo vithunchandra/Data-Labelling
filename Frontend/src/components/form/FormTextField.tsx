@@ -7,10 +7,11 @@ interface FormTextField{
     label: string;
     defaultValue: string | number | boolean;
     type: string;
+    className: string | undefined;
 }
 
 export default function FormTextField(
-    {name, variant, label, defaultValue, type} : FormTextField
+    {name, variant, label, defaultValue, type, className} : FormTextField
 ){
     const { control } = useFormContext()
     return (
@@ -24,6 +25,7 @@ export default function FormTextField(
                     type={type}
                     label={label}
                     variant={variant}
+                    className={className}
                     fullWidth
                 />
             )}

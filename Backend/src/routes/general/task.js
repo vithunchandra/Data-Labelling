@@ -5,9 +5,10 @@ const {
   get_task,
   get_user_task,
 } = require("../../controllers/general/task");
+const { authentication } = require("../../middleware/authentication");
 
-router.post("/create", create_task);
-router.get("/", get_task);
-router.get("/user/:user_id", get_user_task);
+router.post("/create", [authentication], create_task);
+router.get("/", [authentication], get_task);
+router.get("/user/:user_id", [authentication], get_user_task);
 
 module.exports = router;

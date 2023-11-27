@@ -5,14 +5,18 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { IconButton, TextField } from '@mui/material';
 import DataTable from '../../components/worker/DataTable';
 import { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { redirect, useLoaderData, useNavigate } from 'react-router-dom';
 import tasks from '../../dummy_data/task.json';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import authenticate from '../../customHooks/authenticate';
+import { IUser } from '../../interface/IUser';
+import { decodeToken } from 'react-jwt';
 
 export default function TaskData(){
     const taskIndex = useLoaderData() as number;
     const task = tasks[taskIndex];
     const [selectValue, setSelectValue] = useState<boolean>();
+    const navigate = useNavigate()
 
     function selectChange(event: SelectChangeEvent){
         setSelectValue(event.target.value === 'true' ? true : false);
@@ -70,5 +74,16 @@ export default function TaskData(){
 }
 
 export function taskDataLoader({params} : {params: Map<string, any>}){
+    const token = localStorage.getItem('access-token')
+    const user = (decodeToken(token!) as any).user as IUser
+    console.log(user)
+    if(!user){
+        return redirect('/signin')
+    }
+    if(user.role !== 'worker'){
+        console.log(user.role)
+        return redirect(`/${user.role}`)
+    }
+
     return params['task_id'];
 }

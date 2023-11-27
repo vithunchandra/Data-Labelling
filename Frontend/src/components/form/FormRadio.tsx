@@ -11,14 +11,15 @@ interface FormRadio{
     name: string;
     label: string;
     defaultValue: string | number;
+    className: string;
 }
 
 export function FormRadio(
-    {options, name, label, defaultValue}: FormRadio
+    {options, name, label, defaultValue, className}: FormRadio
 ){
     const { control, } = useFormContext()
     return(
-        <FormControl>
+        <FormControl className={className}>
             <FormLabel>{label}</FormLabel>
             <Controller 
                 name={name}

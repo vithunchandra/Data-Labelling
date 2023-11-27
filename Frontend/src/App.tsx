@@ -8,7 +8,7 @@ import {
 import Signup from "./pages/authentication/Signup";
 import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
-import Worker from "./pages/worker/Worker";
+import Worker, { workerLoader } from "./pages/worker/Worker";
 import { adminNavigation, requesterNavigation } from "./route";
 import AddTaskType from "./pages/admin/AddTaskType";
 import WorkerDashboard from "./pages/worker/WorkerDashboard";
@@ -39,6 +39,7 @@ import AdminTask from "./pages/admin/AdminTask";
 import AdminUserDetail from "./pages/admin/AdminUserDetail";
 import AdminTaskDetail from "./pages/admin/AdminTaskDetail";
 import AdminUserTaskDetail from "./pages/admin/AdminUserTaskDetail";
+import Authenticate from "./pages/authentication/Authenticate";
 
 function App() {
   const router = createBrowserRouter(
@@ -63,18 +64,34 @@ function App() {
         <Route path="keuangan" element={<AdminKeuangan />}></Route>
       </Route>,
 
-      <Route path="worker" element={<Worker />}>
-        <Route index element={<WorkerDashboard />}></Route>
-        <Route path="marketplace" element={<Marketplace />}></Route>
+      <Route path="worker" element={<Worker />} >
+        <Route index element={
+          <Authenticate role="worker">
+            <WorkerDashboard />
+          </Authenticate>
+        }></Route>
+        <Route path="marketplace" element={
+          <Authenticate role="worker">
+            <Marketplace />
+          </Authenticate>
+        }></Route>
         <Route
           path="marketplace/:task_id"
           element={<MarketTaskDetail />}
           loader={loader as any}
         ></Route>
-        <Route path="task" element={<WorkerTask />}></Route>
+        <Route path="task" element={
+          <Authenticate role="worker">
+            <WorkerTask />
+          </Authenticate>
+        }></Route>
         <Route
           path="task/:task_id"
-          element={<Task />}
+          element={
+            <Authenticate role="worker">
+              <Task />  
+            </Authenticate>
+          }
           loader={taskDetailLoader as any}
         >
           <Route

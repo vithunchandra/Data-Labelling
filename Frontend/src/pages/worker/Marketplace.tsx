@@ -1,4 +1,5 @@
 import TaskTable from "../../components/worker/TaskTable";
+import useAuth from "../../customHooks/authenticate";
 import task from '../../dummy_data/task.json';
 
 export default function Marketplace(){

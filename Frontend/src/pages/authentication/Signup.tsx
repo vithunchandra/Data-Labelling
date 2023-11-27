@@ -9,6 +9,8 @@ import Cookies from "universal-cookie"
 import { decodeToken } from 'react-jwt'
 import { IUser } from "../../interface/IUser"
 import { AxiosError } from "axios"
+import { useCookies } from "react-cookie"
+import useAuth from "../../customHooks/authenticate"
 
 const radioOptions = [
     {
@@ -32,21 +34,21 @@ interface IFormInputs{
 export default function Signup(){
     const formProps = useForm<IFormInputs>()
     const [error, setError] = useState<string>()
-    const cookies = new Cookies(null, {path: '/'})
+    const [cookies, setCookie] = useCookies(['access-token'])
     const navigate = useNavigate()
 
     const signup: SubmitHandler<IFormInputs> = async (data) => {
         let user;
+        const { getUser, login } = useAuth()
         try{
             const response = await client.post('/auth/register', data)
-            cookies.set('access_token', response.data.user)
-            user = (decodeToken(response.data.user) as any).user as unknown as IUser
+            login(response.data.user)
+            user = getUser()
         }catch(err: unknown){
             if(err instanceof AxiosError){
                 return setError(err.response?.data.message)
             }
         }
-        console.log(user)
         if(user){
             if(user.role === 'admin'){
                 navigate('/admin')
@@ -69,11 +71,11 @@ export default function Signup(){
                 <FormProvider {...formProps}>
                     <form onSubmit={formProps.handleSubmit(signup)}>
                         <h1 className="mb-4 text-center">Sign Up</h1>
-                        <FormTextField variant={"outlined"} name="email" label="Email" type="email" defaultValue=""/>
-                        <FormTextField variant={"outlined"} name="name" label="Name" type="text" defaultValue=""/>
-                        <FormTextField variant={"outlined"} name="password" label="Password" type="password" defaultValue=""/>
-                        <FormTextField variant={"outlined"} name="confirmPassword" label="Confirm Password" type="password" defaultValue=""/>
-                        <FormRadio name="role" label="Role" options={radioOptions} defaultValue={1}/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="email" label="Email" type="email" defaultValue=""/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="name" label="Name" type="text" defaultValue=""/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="password" label="Password" type="password" defaultValue=""/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="confirmPassword" label="Confirm Password" type="password" defaultValue=""/>
+                        <FormRadio className={'my-2'} name="role" label="Role" options={radioOptions} defaultValue={1}/>
 
                         {
                             error && <span className="text-danger">{error}</span>

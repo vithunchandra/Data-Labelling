@@ -7,6 +7,8 @@ import { client } from "../../api/client";
 import { decodeToken } from "react-jwt";
 import { IUser } from "../../interface/IUser";
 import { AxiosError } from "axios";
+import { useCookies } from "react-cookie";
+import useAuth from "../../customHooks/authenticate";
 
 interface IFormInputs{
     email: string;
@@ -17,13 +19,15 @@ export default function Signin(){
     const formProps = useForm<IFormInputs>()
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
+    const [cookies, setCookie] = useCookies(['access-token'])
 
     const login: SubmitHandler<IFormInputs> = async (data: IFormInputs) => {
         let user;
+        const { getUser, login } = useAuth()
         try{
             const response = await client.post('/auth/login', data)
-            user = (decodeToken(response.data.user) as any).user as unknown as IUser
-            console.log(user)
+            login(response.data.user)
+            user = getUser()
         }catch(err: unknown){
             if(err instanceof AxiosError){
                 return setError(err.response?.data.message)
