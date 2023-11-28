@@ -1,0 +1,32 @@
+[{
+  "_id": {
+    "$oid": "65656667b75e602d2363d23d"
+  },
+  "name": "AI Summary Checking",
+  "price": 0.5,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "65656814b75e602d2363d241"
+  },
+  "name": "Classification",
+  "price": 0.5,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6565681db75e602d2363d244"
+  },
+  "name": "Translation",
+  "price": 1.5,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6565682cb75e602d2363d247"
+  },
+  "name": "Summary",
+  "price": 1,
+  "__v": 0
+}]

@@ -54,13 +54,13 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "username",
-											"value": "andi",
+											"key": "email",
+											"value": "budi",
 											"type": "default"
 										},
 										{
 											"key": "password",
-											"value": "andi123",
+											"value": "budi123",
 											"type": "default"
 										}
 									]
@@ -97,20 +97,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "154"
+									"value": "323"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"9a-4lwO5OLgV1uEa/8y6bPoeW6I5jo\""
+									"value": "W/\"143-ehzFpAdwapXC8ok2og028O4BaIw\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 02:44:00 GMT"
+									"value": "Tue, 28 Nov 2023 03:59:47 GMT"
 								},
 								{
 									"key": "Connection",
@@ -122,7 +126,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"msg\": \"Berhasil\",\n    \"user\": {\n        \"_id\": \"6556d3504aaf29a32b1f3dac\",\n        \"username\": \"andi\",\n        \"name\": \"Andi\",\n        \"role\": \"worker\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"tasks\": [],\n        \"__v\": 0\n    }\n}"
+							"body": "{\n    \"user\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDM5ODcsImV4cCI6MTcwMTIzMDM4N30.-F7amGJNvnAYsrkw7LPnxNdTsTCpcvcEutjm_eBiFMM\"\n}"
 						}
 					]
 				},
@@ -182,96 +186,7 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "username",
-											"value": "andi",
-											"type": "default"
-										},
-										{
-											"key": "password",
-											"value": "andi123",
-											"type": "default"
-										},
-										{
-											"key": "name",
-											"value": "Andi",
-											"type": "default"
-										},
-										{
-											"key": "role",
-											"value": "worker",
-											"type": "default"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://localhost:3000/api/v1/auth/register",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Access-Control-Allow-Origin",
-									"value": "http://localhost:5173"
-								},
-								{
-									"key": "Vary",
-									"value": "Origin"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "152"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"98-uGat87KXqkZLhLQiIItkqpfEJWQ\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 17 Nov 2023 02:43:28 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"msg\": \"Suceed\",\n    \"user\": {\n        \"username\": \"andi\",\n        \"name\": \"Andi\",\n        \"role\": \"worker\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"tasks\": [],\n        \"_id\": \"6556d3504aaf29a32b1f3dac\",\n        \"__v\": 0\n    }\n}"
-						},
-						{
-							"name": "Register",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "username",
+											"key": "email",
 											"value": "budi",
 											"type": "default"
 										},
@@ -289,6 +204,11 @@
 											"key": "role",
 											"value": "requester",
 											"type": "default"
+										},
+										{
+											"key": "confirmPassword",
+											"value": "budi123",
+											"type": "default"
 										}
 									]
 								},
@@ -307,8 +227,8 @@
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "Created",
+							"code": 201,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -324,20 +244,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "155"
+									"value": "1139"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"9b-EJRf5A3fLAplrWgrZhwuQozmnPA\""
+									"value": "W/\"473-r2BgHFrZM6FctGSRrGlX+3vaUCQ\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 02:44:53 GMT"
+									"value": "Tue, 28 Nov 2023 03:59:16 GMT"
 								},
 								{
 									"key": "Connection",
@@ -349,7 +273,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"msg\": \"Suceed\",\n    \"user\": {\n        \"username\": \"budi\",\n        \"name\": \"Budi\",\n        \"role\": \"requester\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"tasks\": [],\n        \"_id\": \"6556d3a54aaf29a32b1f3db0\",\n        \"__v\": 0\n    }\n}"
+							"body": "{\n    \"user\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7IiRfXyI6eyJhY3RpdmVQYXRocyI6eyJwYXRocyI6e30sInN0YXRlcyI6eyJkZWZhdWx0Ijp7fSwibW9kaWZ5Ijp7fX19LCJwYXRoc1RvU2NvcGVzIjp7InRhc2tzIjp7ImVtYWlsIjoiYnVkaSIsInBhc3N3b3JkIjoiYnVkaTEyMyIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfaWQiOiI2NTY1NjU5NDI3OTI2ZTI2ZWM1Yzk4ZTciLCJfX3YiOjB9fSwib3AiOm51bGwsInNhdmluZyI6bnVsbCwiJHZlcnNpb25FcnJvciI6bnVsbCwic2F2ZU9wdGlvbnMiOm51bGwsInZhbGlkYXRpbmciOm51bGwsImNhY2hlZFJlcXVpcmVkIjp7fSwiYmFja3VwIjp7ImFjdGl2ZVBhdGhzIjp7Im1vZGlmeSI6eyJlbWFpbCI6dHJ1ZSwicGFzc3dvcmQiOnRydWUsIm5hbWUiOnRydWUsInJvbGUiOnRydWUsImNyZWRpYmlsaXR5Ijp0cnVlLCJ3YWxsZXQiOnRydWUsInRhc2tzIjp0cnVlfSwiZGVmYXVsdCI6eyJfaWQiOnRydWV9fSwidmFsaWRhdGlvbkVycm9yIjpudWxsfSwiaW5zZXJ0aW5nIjp0cnVlLCJzYXZlZFN0YXRlIjp7fX0sIl9kb2MiOnsiZW1haWwiOiJidWRpIiwicGFzc3dvcmQiOiJidWRpMTIzIiwibmFtZSI6IkJ1ZGkiLCJyb2xlIjoicmVxdWVzdGVyIiwiY3JlZGliaWxpdHkiOjEwMCwid2FsbGV0IjowLCJ0YXNrcyI6W10sIl9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsIl9fdiI6MH0sIiRpc05ldyI6ZmFsc2V9LCJpYXQiOjE3MDExNDM5NTYsImV4cCI6MTcwMTIzMDM1Nn0.vPzJz-rFI1fX9QA5vHHXYp7bzRbLApkkEYArkJyU1BU\"\n}"
 						}
 					]
 				}
@@ -361,11 +285,21 @@
 				{
 					"name": "Add Task",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDc1NTMsImV4cCI6MTcwMTIzMzk1M30.CQvUVeL__2Nf-dDXD4KRiHCSRhVfCNlCOXxb3cpwAvs",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id_requester\": \"6556d3a54aaf29a32b1f3db0\",\r\n    \"_id_task_type\": \"6556baabfc571d6489cffb11\",\r\n    \"task_name\": \"Positive VS Negative 2\",\r\n    \"task_description\": \"sentiment analysis of positive vs negative 2\",\r\n    \"possible_label\": [\r\n        \"Positive\",\r\n        \"Negative\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"task_type_id\": \"65656814b75e602d2363d241\",\r\n    \"task_name\": \"Positive vs Negative 1\",\r\n    \"task_description\": \"Menentukan kalimat positive atau Negative\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-20\",\r\n    \"possible_label\":[\"Positive\",\"Negative\"],\r\n    \"min_credibility\":80\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -373,7 +307,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/general/task/create",
+							"raw": "http://localhost:3000/api/v1/task/create",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -382,7 +316,6 @@
 							"path": [
 								"api",
 								"v1",
-								"general",
 								"task",
 								"create"
 							]
@@ -390,13 +323,13 @@
 					},
 					"response": [
 						{
-							"name": "Add Task",
+							"name": "Simple Add Task",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"_id_requester\": \"655226fba0c15c4269409928\",\r\n    \"_id_task_type\": \"6556baabfc571d6489cffb11\",\r\n    \"task_name\": \"Positive VS Negative\",\r\n    \"task_description\": \"sentiment analysis of positive vs negative 2\",\r\n    \"possible_label\": [\r\n        \"Positive\",\r\n        \"Negative\"\r\n    ]\r\n}",
+									"raw": "{\r\n    \"task_type_id\": \"6565682cb75e602d2363d247\",\r\n    \"task_name\": \"Translate ke bahasa Indonesia 1\",\r\n    \"task_description\": \"Mengubah bahasa asing ke bahasa Indonesia\",\r\n    \"end_date\":\"2024-01-30\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -435,20 +368,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "374"
+									"value": "433"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"176-sfC2f7J8pJJS+RN8GmXRd088ucg\""
+									"value": "W/\"1b1-oTgkoviTFIgUsFrPdbkzdv3gj2M\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 01:32:26 GMT"
+									"value": "Tue, 28 Nov 2023 06:14:52 GMT"
 								},
 								{
 									"key": "Connection",
@@ -460,7 +397,161 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"msg\": \"Create Task Suceed\",\n    \"data\": {\n        \"task_name\": \"Positive VS Negative\",\n        \"task_description\": \"sentiment analysis of positive vs negative 2\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"start_date\": \"2023-11-17T01:32:26.941Z\",\n        \"requester\": \"655226fba0c15c4269409928\",\n        \"task_type\": \"6556baabfc571d6489cffb11\",\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"_id\": \"6556c2aa9d6277254d0d307b\",\n        \"__v\": 0\n    }\n}"
+							"body": "{\n    \"msg\": \"Create Task Suceed\",\n    \"data\": {\n        \"task_name\": \"Translate ke bahasa Indonesia 1\",\n        \"task_description\": \"Mengubah bahasa asing ke bahasa Indonesia\",\n        \"possible_label\": [],\n        \"start_date\": \"2023-11-28T06:14:52.614Z\",\n        \"end_date\": \"2024-01-30T00:00:00.000Z\",\n        \"active\": true,\n        \"min_credibility\": 0,\n        \"requester\": \"6565659427926e26ec5c98e7\",\n        \"task_type\": \"6565682cb75e602d2363d247\",\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"_id\": \"6565855cdd53a5e384f51550\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Error example classification",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"task_type_id\": \"65656814b75e602d2363d241\",\r\n    \"task_name\": \"Positive vs Negative 1\",\r\n    \"task_description\": \"Menentukan kalimat positive atau Negative\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-20\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/task/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"create"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-ny0mIsPSxW5RbbmFJgQN1xjsNdI\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 06:22:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Possible label must not be empty\"\n}"
+						},
+						{
+							"name": "More Complex Add Task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"task_type_id\": \"65656814b75e602d2363d241\",\r\n    \"task_name\": \"Positive vs Negative 1\",\r\n    \"task_description\": \"Menentukan kalimat positive atau Negative\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-20\",\r\n    \"possible_label\":[\"Positive\",\"Negative\"],\r\n    \"min_credibility\":80\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/task/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "446"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1be-cqahW2ckWvYqA+15Lc/oRSaqd9o\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 06:23:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Create Task Suceed\",\n    \"data\": {\n        \"task_name\": \"Positive vs Negative 1\",\n        \"task_description\": \"Menentukan kalimat positive atau Negative\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"start_date\": \"2024-01-01T00:00:00.000Z\",\n        \"end_date\": \"2024-02-20T00:00:00.000Z\",\n        \"active\": true,\n        \"min_credibility\": 80,\n        \"requester\": \"6565659427926e26ec5c98e7\",\n        \"task_type\": \"65656814b75e602d2363d241\",\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"_id\": \"6565876585fd0fd965ad4579\",\n        \"__v\": 0\n    }\n}"
 						}
 					]
 				},
@@ -501,8 +592,12 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/task/?expand=0&task_type_id=6556baabfc571d6489cffb11",
+									"raw": "http://localhost:3000/api/v1/task/?expand=1&task_type_id=65656814b75e602d2363d241",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -517,11 +612,11 @@
 									"query": [
 										{
 											"key": "expand",
-											"value": "0"
+											"value": "1"
 										},
 										{
 											"key": "task_type_id",
-											"value": "6556baabfc571d6489cffb11"
+											"value": "65656814b75e602d2363d241"
 										}
 									]
 								}
@@ -543,20 +638,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "340"
+									"value": "568"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"154-oe57RM8nwDijlU2UQiKGpT5ncSU\""
+									"value": "W/\"238-3T0iq9s+0J8MSLpr/M07qEqcdaU\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 02:30:28 GMT"
+									"value": "Tue, 28 Nov 2023 06:36:27 GMT"
 								},
 								{
 									"key": "Connection",
@@ -568,7 +667,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"_id\": \"6556c2aa9d6277254d0d307b\",\n        \"task_name\": \"Positive VS Negative\",\n        \"task_description\": \"sentiment analysis of positive vs negative 2\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"start_date\": \"2023-11-17T01:32:26.941Z\",\n        \"requester\": \"655226fba0c15c4269409928\",\n        \"task_type\": \"6556baabfc571d6489cffb11\",\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"__v\": 0\n    }\n]"
+							"body": "[\n    {\n        \"_id\": \"6565876585fd0fd965ad4579\",\n        \"task_name\": \"Positive vs Negative 1\",\n        \"task_description\": \"Menentukan kalimat positive atau Negative\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"start_date\": \"2024-01-01T00:00:00.000Z\",\n        \"end_date\": \"2024-02-20T00:00:00.000Z\",\n        \"active\": true,\n        \"min_credibility\": 80,\n        \"requester\": [\n            {\n                \"_id\": \"6565659427926e26ec5c98e7\",\n                \"email\": \"budi\",\n                \"password\": \"budi123\",\n                \"name\": \"Budi\",\n                \"role\": \"requester\",\n                \"credibility\": 100,\n                \"wallet\": 0,\n                \"tasks\": [\n                    \"6565855cdd53a5e384f51550\",\n                    \"6565876585fd0fd965ad4579\"\n                ],\n                \"__v\": 0\n            }\n        ],\n        \"task_type\": [],\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"__v\": 0\n    }\n]"
 						}
 					]
 				},
@@ -610,8 +709,12 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/task/user/6556d3a54aaf29a32b1f3db0?expand=1&task_type_id=6556baabfc571d6489cffb11",
+									"raw": "http://localhost:3000/api/v1/task/user?expand=1&task_type_id=65656814b75e602d2363d241",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -621,8 +724,7 @@
 										"api",
 										"v1",
 										"task",
-										"user",
-										"6556d3a54aaf29a32b1f3db0"
+										"user"
 									],
 									"query": [
 										{
@@ -631,7 +733,7 @@
 										},
 										{
 											"key": "task_type_id",
-											"value": "6556baabfc571d6489cffb11"
+											"value": "65656814b75e602d2363d241"
 										}
 									]
 								}
@@ -653,20 +755,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "542"
+									"value": "568"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"21e-/y22j5BGjccteOjirWjGZZLO5f8\""
+									"value": "W/\"238-3T0iq9s+0J8MSLpr/M07qEqcdaU\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 03:15:03 GMT"
+									"value": "Tue, 28 Nov 2023 06:37:12 GMT"
 								},
 								{
 									"key": "Connection",
@@ -678,7 +784,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"_id\": \"6556d573bd31329e995c2359\",\n        \"task_name\": \"Positive VS Negative\",\n        \"task_description\": \"sentiment analysis of positive vs negative 2\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"start_date\": \"2023-11-17T02:52:35.411Z\",\n        \"requester\": {\n            \"_id\": \"6556d3a54aaf29a32b1f3db0\",\n            \"username\": \"budi\",\n            \"password\": \"budi123\",\n            \"name\": \"Budi\",\n            \"role\": \"requester\",\n            \"credibility\": 0,\n            \"wallet\": 0,\n            \"tasks\": [\n                \"6556d573bd31329e995c2359\"\n            ],\n            \"__v\": 0\n        },\n        \"task_type\": {\n            \"_id\": \"6556baabfc571d6489cffb11\",\n            \"name\": \"Classification\",\n            \"price\": 3,\n            \"__v\": 0\n        },\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"__v\": 0\n    }\n]"
+							"body": "[\n    {\n        \"_id\": \"6565876585fd0fd965ad4579\",\n        \"task_name\": \"Positive vs Negative 1\",\n        \"task_description\": \"Menentukan kalimat positive atau Negative\",\n        \"possible_label\": [\n            \"Positive\",\n            \"Negative\"\n        ],\n        \"start_date\": \"2024-01-01T00:00:00.000Z\",\n        \"end_date\": \"2024-02-20T00:00:00.000Z\",\n        \"active\": true,\n        \"min_credibility\": 80,\n        \"requester\": [\n            {\n                \"_id\": \"6565659427926e26ec5c98e7\",\n                \"email\": \"budi\",\n                \"password\": \"budi123\",\n                \"name\": \"Budi\",\n                \"role\": \"requester\",\n                \"credibility\": 100,\n                \"wallet\": 0,\n                \"tasks\": [\n                    \"6565855cdd53a5e384f51550\",\n                    \"6565876585fd0fd965ad4579\"\n                ],\n                \"__v\": 0\n            }\n        ],\n        \"task_type\": [],\n        \"data\": [],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"__v\": 0\n    }\n]"
 						}
 					]
 				}
@@ -734,12 +840,12 @@
 									"urlencoded": [
 										{
 											"key": "name",
-											"value": "AI Summary Checking",
+											"value": "Summary",
 											"type": "default"
 										},
 										{
 											"key": "price",
-											"value": "0.5",
+											"value": "1",
 											"type": "default"
 										}
 									]
@@ -759,8 +865,8 @@
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "Bad Request",
+							"code": 400,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -776,20 +882,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "16"
+									"value": "25"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"10-c4yNEVE7qvi8WMpoi47rhb1a1N0\""
+									"value": "W/\"19-QEHedyMqjNTMDbgbhxYolNbjM2o\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 01:04:43 GMT"
+									"value": "Tue, 28 Nov 2023 04:10:51 GMT"
 								},
 								{
 									"key": "Connection",
@@ -801,7 +911,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"msg\": \"suceed\"\n}"
+							"body": "{\n    \"msg\": \"Task Type Exist\"\n}"
 						}
 					]
 				},
@@ -838,6 +948,10 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
 									"raw": "http://localhost:3000/api/v1/task_type",
 									"protocol": "http",
@@ -869,20 +983,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "78"
+									"value": "310"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"4e-ppSUdHIDv3i3K0PHuTHhvRuT0EE\""
+									"value": "W/\"136-Xjx0AJ9aCKzZNBUXY/NXhvDSEOE\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 17 Nov 2023 01:03:48 GMT"
+									"value": "Tue, 28 Nov 2023 04:11:01 GMT"
 								},
 								{
 									"key": "Connection",
@@ -894,7 +1012,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "[\n    {\n        \"_id\": \"6556baabfc571d6489cffb11\",\n        \"name\": \"Classification\",\n        \"price\": 3,\n        \"__v\": 0\n    }\n]"
+							"body": "[\n    {\n        \"_id\": \"65656667b75e602d2363d23d\",\n        \"name\": \"AI Summary Checking\",\n        \"price\": 0.5,\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"65656814b75e602d2363d241\",\n        \"name\": \"Classification\",\n        \"price\": 0.5,\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6565681db75e602d2363d244\",\n        \"name\": \"Translation\",\n        \"price\": 1.5,\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6565682cb75e602d2363d247\",\n        \"name\": \"Summary\",\n        \"price\": 1,\n        \"__v\": 0\n    }\n]"
 						}
 					]
 				}
@@ -906,6 +1024,16 @@
 				{
 					"name": "create data",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDM5ODcsImV4cCI6MTcwMTIzMDM4N30.-F7amGJNvnAYsrkw7LPnxNdTsTCpcvcEutjm_eBiFMM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -923,7 +1051,7 @@
 								},
 								{
 									"key": "text",
-									"value": "film ini sangat bagus!",
+									"value": "film ini sangat jelek!",
 									"type": "default"
 								}
 							]
@@ -954,24 +1082,19 @@
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
-											"key": "requester_id",
-											"value": "6556d3a54aaf29a32b1f3db0",
-											"type": "default"
-										},
-										{
 											"key": "task_id",
-											"value": "6556d573bd31329e995c2359",
+											"value": "6565855cdd53a5e384f51550",
 											"type": "default"
 										},
 										{
 											"key": "text",
-											"value": "film ini sangat jelek!",
+											"value": "I like appless",
 											"type": "default"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/general/data/create",
+									"raw": "http://localhost:3000/api/v1/data/create",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -980,7 +1103,6 @@
 									"path": [
 										"api",
 										"v1",
-										"general",
 										"data",
 										"create"
 									]
@@ -1003,20 +1125,24 @@
 									"value": "Origin"
 								},
 								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "131"
+									"value": "123"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"83-xUwAHcYOCf6h3twQSP8QoEzjpWg\""
+									"value": "W/\"7b-rpsh/M3oIDXSfSuDWAx3OqTarc0\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 24 Nov 2023 02:31:10 GMT"
+									"value": "Tue, 28 Nov 2023 07:15:37 GMT"
 								},
 								{
 									"key": "Connection",
@@ -1028,13 +1154,23 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"text\": \"film ini sangat jelek!\",\n    \"price\": 66,\n    \"task\": \"6556d573bd31329e995c2359\",\n    \"labels\": [],\n    \"_id\": \"65600aee5a2cca9b1432928a\",\n    \"__v\": 0\n}"
+							"body": "{\n    \"text\": \"I like appless\",\n    \"price\": 14,\n    \"task\": \"6565855cdd53a5e384f51550\",\n    \"labels\": [],\n    \"_id\": \"6565939998e099a754468a6c\",\n    \"__v\": 0\n}"
 						}
 					]
 				},
 				{
 					"name": "edit data",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDM5ODcsImV4cCI6MTcwMTIzMDM4N30.-F7amGJNvnAYsrkw7LPnxNdTsTCpcvcEutjm_eBiFMM",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1042,18 +1178,18 @@
 							"urlencoded": [
 								{
 									"key": "data_id",
-									"value": "655abe43d89a31c2a6818d3f",
+									"value": "6565939998e099a754468a6c",
 									"type": "default"
 								},
 								{
 									"key": "text",
-									"value": "film ini sangat jelek!",
+									"value": "This apple is very good!",
 									"type": "default"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/general/data/edit",
+							"raw": "http://localhost:3000/api/v1/data/edit",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1062,7 +1198,6 @@
 							"path": [
 								"api",
 								"v1",
-								"general",
 								"data",
 								"edit"
 							]
@@ -1153,6 +1288,16 @@
 				{
 					"name": "label data",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjVhOTE0NWQ5YmIzNDI3MDE4MWFlNyIsImVtYWlsIjoiYW5kaSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNjEyNjEsImV4cCI6MTcwMTI0NzY2MX0.gE6QyWgLBlf3TDcVIR6vNJvkJTux7OxVIYZ6p9L_8_g",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -1160,28 +1305,18 @@
 							"urlencoded": [
 								{
 									"key": "data_id",
-									"value": "65600ae65a2cca9b14329285",
-									"type": "default"
-								},
-								{
-									"key": "worker_id",
-									"value": "6556d3504aaf29a32b1f3dac",
+									"value": "6565939998e099a754468a6c",
 									"type": "default"
 								},
 								{
 									"key": "text",
-									"value": "Positive",
-									"type": "default"
-								},
-								{
-									"key": "task_id",
-									"value": "6556d573bd31329e995c2359",
+									"value": "Negative",
 									"type": "default"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/general/data/label",
+							"raw": "http://localhost:3000/api/v1/data/label",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1190,7 +1325,6 @@
 							"path": [
 								"api",
 								"v1",
-								"general",
 								"data",
 								"label"
 							]

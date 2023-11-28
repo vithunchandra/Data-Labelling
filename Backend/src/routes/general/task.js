@@ -9,6 +9,6 @@ const { authentication } = require("../../middleware/authentication");
 
 router.post("/create", [authentication], create_task);
 router.get("/", [authentication], get_task);
-router.get("/user/:user_id", [authentication], get_user_task);
+router.get("/user", [authentication], get_user_task);
 
 module.exports = router;

@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "6565939998e099a754468a6c"
+  },
+  "text": "This apple is very good!",
+  "price": 24,
+  "task": {
+    "$oid": "6565855cdd53a5e384f51550"
+  },
+  "labels": [],
+  "__v": 0
+}]

@@ -6,7 +6,7 @@ const get_all_task_type = async (req, res) => {
 };
 
 const create_task_type = async (req, res) => {
-  const { name, price } = req.body;
+  const { name } = req.body;
 
   const check_exist = await Task_Type.findOne({ name: name });
   if (check_exist) {

@@ -4,10 +4,11 @@ const {
   edit_data,
   label_data,
 } = require("../../controllers/general/data");
+const { authentication } = require("../../middleware/authentication");
 const router = express.Router();
 
-router.post("/create", create_data);
-router.post("/edit", edit_data);
-router.post("/label", label_data);
+router.post("/create", [authentication], create_data);
+router.post("/edit", [authentication], edit_data);
+router.post("/label", [authentication], label_data);
 
 module.exports = router;

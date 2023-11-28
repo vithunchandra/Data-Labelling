@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "6565855cdd53a5e384f51550"
+  },
+  "task_name": "Translate ke bahasa Indonesia 1",
+  "task_description": "Mengubah bahasa asing ke bahasa Indonesia",
+  "possible_label": [],
+  "start_date": {
+    "$date": "2023-11-28T06:14:52.614Z"
+  },
+  "end_date": {
+    "$date": "2024-01-30T00:00:00.000Z"
+  },
+  "active": true,
+  "min_credibility": 0,
+  "requester": {
+    "$oid": "6565659427926e26ec5c98e7"
+  },
+  "task_type": {
+    "$oid": "6565682cb75e602d2363d247"
+  },
+  "data": [
+    {
+      "$oid": "6565939998e099a754468a6c"
+    }
+  ],
+  "ban_list": [],
+  "worker": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6565876585fd0fd965ad4579"
+  },
+  "task_name": "Positive vs Negative 1",
+  "task_description": "Menentukan kalimat positive atau Negative",
+  "possible_label": [
+    "Positive",
+    "Negative"
+  ],
+  "start_date": {
+    "$date": "2024-01-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2024-02-20T00:00:00.000Z"
+  },
+  "active": true,
+  "min_credibility": 80,
+  "requester": {
+    "$oid": "6565659427926e26ec5c98e7"
+  },
+  "task_type": {
+    "$oid": "65656814b75e602d2363d241"
+  },
+  "data": [],
+  "ban_list": [],
+  "worker": [],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6565b234f07d51af20d70432"
+  },
+  "task_name": "Bagus atau tidak 1",
+  "task_description": "Menentukan kalimat positive atau Negative",
+  "possible_label": [
+    "bagus",
+    "jelek"
+  ],
+  "start_date": {
+    "$date": "2024-01-01T00:00:00.000Z"
+  },
+  "end_date": {
+    "$date": "2024-02-20T00:00:00.000Z"
+  },
+  "active": true,
+  "min_credibility": 80,
+  "requester": {
+    "$oid": "6565659427926e26ec5c98e7"
+  },
+  "task_type": {
+    "$oid": "65656814b75e602d2363d241"
+  },
+  "data": [],
+  "ban_list": [],
+  "worker": [],
+  "__v": 0
+}]

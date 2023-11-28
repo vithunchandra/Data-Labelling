@@ -1,7 +1,13 @@
 const { Data, Task, Task_Type, User } = require("../../models");
 
 const create_data = async (req, res) => {
-  const { requester_id, task_id, text } = req.body;
+  const { task_id, text } = req.body;
+  const requester_id = req.user._id;
+  if (String(req.user.role) != "requester") {
+    return res.status(403).json({
+      message: "Data must be created by requester",
+    });
+  }
 
   if (!requester_id || !task_id || !text) {
     return res.status(400).json({
@@ -15,6 +21,14 @@ const create_data = async (req, res) => {
       message: "Task Not Found",
     });
   }
+
+  // console.log(task_now.requester, requester_id);
+  if (String(task_now.requester) !== String(requester_id)) {
+    return res.status(403).json({
+      message: "Data must be created by the same requester who create the task",
+    });
+  }
+
   const task_type_now = await Task_Type.findById(task_now.task_type);
   const char_price = task_type_now.price;
   const price = char_price * text.length;
@@ -65,14 +79,15 @@ const edit_data = async (req, res) => {
 };
 
 const label_data = async (req, res) => {
-  const { data_id, worker_id, text } = req.body;
+  const { data_id, text } = req.body;
 
-  const user_now = await User.findById(worker_id);
+  const user_now = req.user;
   if (String(user_now.role).toLowerCase() != "worker") {
     return res.status(400).json({
       msg: "User Not Worker",
     });
   }
+  const worker_id = user_now._id;
 
   const data_now = await Data.findById(data_id).exec();
 
@@ -104,6 +119,14 @@ const label_data = async (req, res) => {
       worker: task_worker,
     });
   }
+
+  // insert task to user
+  // const worker_now = User.findById(worker_id)
+  // const task_exist_in_worker = worker_now.tasks.filter((item) => {
+  //   if(item._id == data_now.task) {
+
+  //   }
+  // })
 
   return res.status(200).json({
     msg: "Suceed!",
