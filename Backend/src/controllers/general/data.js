@@ -90,6 +90,20 @@ const label_data = async (req, res) => {
   const worker_id = user_now._id;
 
   const data_now = await Data.findById(data_id).exec();
+  const task_now = await Task.findById(data_now.task).exec();
+  const check_worker_exist = task_now.worker.filter((item) => {
+    if (String(item.user_id) == String(worker_id)) {
+      return true;
+    }
+    return false;
+  });
+
+  // console.log(task_now.worker);
+  if (check_worker_exist.length == 0) {
+    return res.status(403).json({
+      msg: "Worker must take the task first",
+    });
+  }
 
   data_now.labels.push({
     worker: worker_id,
@@ -98,27 +112,27 @@ const label_data = async (req, res) => {
   // update data
   await Data.findByIdAndUpdate(data_id, data_now);
 
-  const task_now = await Task.findById(data_now.task).exec();
+  // const task_now = await Task.findById(data_now.task).exec();
 
-  const check_worker_exist = task_now.worker.filter((item) => {
-    if (item.user_id == worker_id) {
-      return true;
-    }
-    return false;
-  });
+  // const check_worker_exist = task_now.worker.filter((item) => {
+  //   if (item.user_id == worker_id) {
+  //     return true;
+  //   }
+  //   return false;
+  // });
 
-  if (check_worker_exist.length == 0) {
-    const task_worker = [
-      ...task_now.worker,
-      {
-        user_id: worker_id,
-        chat: [],
-      },
-    ];
-    await Task.findByIdAndUpdate(data_now.task, {
-      worker: task_worker,
-    });
-  }
+  // if (check_worker_exist.length == 0) {
+  //   const task_worker = [
+  //     ...task_now.worker,
+  //     {
+  //       user_id: worker_id,
+  //       chat: [],
+  //     },
+  //   ];
+  //   await Task.findByIdAndUpdate(data_now.task, {
+  //     worker: task_worker,
+  //   });
+  // }
 
   // insert task to user
   // const worker_now = User.findById(worker_id)

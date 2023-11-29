@@ -233,14 +233,15 @@ const get_user_task = async (req, res) => {
 const take_task = async (req, res) => {
   const { task_id } = req.body;
   const user_id = req.user._id;
+  const user_now = req.user;
 
-  if (req.role != "worker") {
+  if (user_now.role != "worker") {
     return res.status(403).json({
       message: "role must be worker",
     });
   }
 
-  let user_task = req.user.tasks;
+  let user_task = user_now.tasks;
   const check_exist = user_task.filter((item) => {
     if (item == task_id) {
       return true;
@@ -256,11 +257,38 @@ const take_task = async (req, res) => {
 
   user_task = [...user_task, task_id];
 
-  await User.findByIdAndUpdate(user_id, { tasks: user_task });
+  const new_user = await User.findByIdAndUpdate(user_id, { tasks: user_task });
+
+  const task_now = await Task.findById(task_id).exec();
+
+  const check_worker_exist = task_now.worker.filter((item) => {
+    if (item.user_id == user_id) {
+      return true;
+    }
+    return false;
+  });
+
+  if (check_worker_exist.length == 0) {
+    const task_worker = [
+      ...task_now.worker,
+      {
+        user_id: user_id,
+        chat: [],
+      },
+    ];
+    await Task.findByIdAndUpdate(task_id, {
+      worker: task_worker,
+    });
+  }
+
+  return res.status(200).json({
+    msg: "Suceed",
+  });
 };
 
 module.exports = {
   create_task,
   get_task,
   get_user_task,
+  take_task,
 };
