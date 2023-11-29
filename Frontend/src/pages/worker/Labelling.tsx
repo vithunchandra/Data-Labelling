@@ -1,10 +1,10 @@
 import { useLoaderData, useNavigate } from "react-router-dom"
 import tasks from '../../dummy_data/task.json'
-import { Button, Chip, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Button, Chip, TextField } from "@mui/material"
 import SelectInput from "../../components/SelectInput"
 import { ChevronLeft, ChevronRight, Save } from "@mui/icons-material"
 import { useEffect, useState } from "react"
-import { set } from "react-hook-form"
+
 
 export default function Labelling(){
     let params = useLoaderData() as {

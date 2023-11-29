@@ -1,5 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import tasks from '../../dummy_data/task.json';
+import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
@@ -8,11 +7,23 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { client } from "../../api/client";
+import { AxiosError } from "axios";
+import ITask from "../../interface/ITask";
+import useAuth from "../../customHooks/authenticate";
+
+interface PassedData {
+    tasks: ITask[];
+    index: number;
+    skip: number;
+}
 
 export default function MarketTaskDetail(){
-    const [taskId, setTaskId] = useState(parseInt(useLoaderData() as string));
-    let task = tasks[taskId];
+    const data = useLocation().state as PassedData
+    let tasks = data.tasks
+    let skip = data.skip
+    let taskIndex = data.index;
+    const task = useLoaderData() as ITask
     const navigate = useNavigate()
     const taskData = [
         {
@@ -21,24 +32,80 @@ export default function MarketTaskDetail(){
         },
         {
             icon: <AttachMoneyIcon sx={{fontSize: "40px"}} color="success" className="me-2"></AttachMoneyIcon>,
-            data: task.price
+            data: task.task_type.price
         },
         {
             icon: <AddReactionOutlinedIcon sx={{fontSize: "40px"}} color="action" className="me-2"></AddReactionOutlinedIcon>,
-            data: `${task.credibility} Credibility Score`
+            data: `${task.min_credibility} Credibility Score`
         }
     ]
 
-    function previous(){
-        if(taskId > 0){
-            setTaskId(taskId - 1)
+    async function fetchTasks(){
+        let tempTasks: ITask[] = []
+        const {getToken} = useAuth()
+        try{
+            const response = await client.get(`worker/marketplace`, {
+                headers: {
+                    Authorization: "Bearer " + getToken()
+                },
+                params: {
+                    skip
+                }
+            })
+            tempTasks = response.data.data as ITask[]
+        }catch(err){
+            if(err instanceof AxiosError){
+                console.log(err.response?.data.message)
+            }
         }
+        return tempTasks
     }
 
-    function next(){
-        if(task.data.length - 1 > taskId){
-            setTaskId(taskId + 1)
+    async function previous(){
+        console.log(taskIndex)
+
+        if(taskIndex > 0){
+            taskIndex--;
+        }else{
+            if(skip === 0){
+                return
+            }
+
+            skip -= 10
+            tasks = await fetchTasks()
+            taskIndex = tasks.length - 1
         }
+
+        navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
+            tasks,
+            skip,
+            index: taskIndex
+        }})
+    }
+
+    async function next(){
+        console.log(tasks.length - 1, taskIndex)
+
+        if(tasks.length - 1 > taskIndex){
+            taskIndex++;
+        }else{
+            skip += 10
+            const newTasks = await fetchTasks()
+            if(newTasks.length <= 0){
+                skip -= 10;
+                return
+            }else{
+                tasks = newTasks;
+            }
+            taskIndex = 0
+        }
+        console.log(taskIndex)
+
+        navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
+            tasks,
+            skip,
+            index: taskIndex
+        }})
     }
 
     function cancel(){
@@ -47,29 +114,25 @@ export default function MarketTaskDetail(){
         })
     }
 
-    useEffect(() => {
-        task = tasks[taskId];
-    }, [taskId])
-
     return(
         <div className="w-100 h-100 d-flex flex-column text-capitalize shadow-sm p-3 rounded-2 bg-white">
             <div className="row justify-content-between">
                 <div className="col-auto">
-                    <div className="display-5 fw-bold">{task.name}</div>
+                    <div className="display-5 fw-bold">{task.task_name}</div>
                 </div>
                 <div className="col-auto d-flex align-items-center">
-                    <div className="fs-1 fw-light text-secondary">{task.type}</div>
+                    <div className="fs-1 fw-light text-secondary">{task.task_type.name}</div>
                 </div>
             </div>
-            <div className="text-secondary fs-4">{task.requester}</div>
-            <div className="fs-5 mt-1">{task.start_date} - {task.finish_date}</div>
+            <div className="text-secondary fs-4">{task.requester.name}</div>
+            <div className="fs-5 mt-1">{task.start_date} - {task.end_date}</div>
             <div className="fw-bold fs-3 mt-5 mb-2">Task Information</div>
             <div className="row flex-row justify-content-between mb-4 g-0">
                 {
                     taskData.map((item, index) => {
                         return <div className="col-auto d-flex align-items-center" key={index}>
                             {item.icon}
-                            <span className="fs-4">{item.data}</span>
+                            <span className="fs-4">{item.data as number}</span>
                         </div>
                     })
                 }
@@ -77,7 +140,7 @@ export default function MarketTaskDetail(){
             <div className="fs-5">
                 <span className="fw-bold">Instruction:</span><br/>
                 <p>
-                    {task.instruction}
+                    {task.task_description}
                 </p>
             </div>
             <div className="row flex-fill align-items-end">
@@ -96,6 +159,21 @@ export default function MarketTaskDetail(){
     )
 }
 
-export const loader = async ({ params } : {params: Map<string, any>}) => {
-    return params['task_id'];
+export const loader = async ({ params } : any) => {
+    const task_id: string = params['task_id'];
+    const {getToken} = useAuth()
+    let task: ITask | undefined;
+    try{
+        const response = await client.get(`/worker/marketplace/${task_id}`, {
+            headers: {
+                Authorization: "Bearer " + getToken()
+            },
+        })
+        task = response.data.data as ITask
+    }catch(err){
+        if(err instanceof AxiosError){
+            console.log(err.response?.data.message)
+        }
+    }
+    return task;
 }

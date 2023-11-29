@@ -1,9 +1,11 @@
 import { Avatar, Button } from "@mui/material";
-import Task from "../../interface/TaskInterface";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Link } from "react-router-dom";
+import ITask from "../../interface/ITask";
+import { useState } from "react";
 
-export default function TaskTable({ task }: { task: Task[] }) {
+export default function TaskTable({ task }: { task: ITask[] }) {
+  const [skip, setSkip] = useState(0);
   return (
     <table className="table">
       <thead>
@@ -60,26 +62,31 @@ export default function TaskTable({ task }: { task: Task[] }) {
       </thead>
       <tbody>
         {task.map((item, index) => {
+          const data = {
+            tasks: task,
+            index: index,
+            skip
+          }
           return (
             <tr key={index}>
               <td className="align-middle">{index + 1}</td>
               <td className="align-middle text-capitalize text-truncate">
-                {item.name}
+                {item.task_name}
               </td>
               <td className="align-middle row g-0 align-items-center">
                 <div className="col-auto">
-                  <Avatar src={item.profile_image}></Avatar>
+                  <Avatar src={'https://picsum.photos/200'}></Avatar>
                 </div>
                 <div className="col ms-3 text-capitalize">
-                  <div className="fw-bold">{item.requester}</div>
+                  <div className="fw-bold">{item.requester.name}</div>
                 </div>
               </td>
               <td className="align-middle text-center">{item.data.length}</td>
               <td className="align-middle">
-                <span className="text-secondary">{item.finish_date}</span>
+                <span className="text-secondary">{new Date(item.end_date).toDateString()}</span>
               </td>
               <td className="align-middle">
-                <Link to={index.toString()}>
+                <Link to={item._id} state={data}>
                   <Button variant="contained" startIcon={<InfoOutlinedIcon />}>
                     Detail
                   </Button>

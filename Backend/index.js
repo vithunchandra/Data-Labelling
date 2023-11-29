@@ -19,6 +19,7 @@ const taskRouter = require("./src/routes/general/task");
 const taskTypeRouter = require("./src/routes/general/task_type");
 const userRouter = require("./src/routes/general/user");
 const chatRouter = require("./src/routes/general/chat");
+const workerMarketplace = require('./src/routes/worker/marketplace')
 
 const database = require("./src/databases/connection");
 const { User, Task, Task_Type, Data, Chat } = require("./src/models");
@@ -30,7 +31,8 @@ app.use(
   cors({
     origin: "http://localhost:5173",
     optionsSuccessStatus: 200,
-    credentials: true
+    credentials: true,
+    exposedHeaders: "Authorization"
   })
 );
 
@@ -40,6 +42,7 @@ app.use("/api/v1/task", taskRouter);
 app.use("/api/v1/task_type", taskTypeRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/worker", workerMarketplace);
 
 // app.use(
 //   "/api/v1/contohMiddleware",

@@ -6,7 +6,6 @@ async function authentication(req, res, next) {
   if (!token) {
     return res.status(401).json({ message: "Authentication failed" });
   }
-  console.log(token);
   // Slight change because 'bearer' is 'Bearer' on postman
   // based on chatGPT.
   const jwtToken = token.slice(7);

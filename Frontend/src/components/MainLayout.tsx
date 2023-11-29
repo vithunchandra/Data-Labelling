@@ -4,15 +4,21 @@ import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/Inbox';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link, Outlet } from "react-router-dom";
-import { Avatar, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
+import IUser from "../interface/IUser";
+import useAuth from "../customHooks/authenticate";
+import { client } from "../api/client";
 
-export default function MainLayout({navigation, role}: {navigation: NavigationInterface[], role: string}){
+
+
+export default function MainLayout({navigation, user}: {navigation: NavigationInterface[], user: IUser}){
     const [isDrawerOn, setIsDrawerOn] = useState(true);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [pageName, setPageName] = useState(navigation[selectedIndex].name)
+    const { getToken } = useAuth()
+    client.defaults.headers.common['Authorization'] = "Bearer " + getToken()
 
     const handleListItemClick = (
         event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -66,7 +72,7 @@ export default function MainLayout({navigation, role}: {navigation: NavigationIn
                     </div>
                 </div>
                 <div className="col m-3 d-flex flex-column">
-                    <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName}></Navbar>
+                    <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName} user={user}></Navbar>
                     <div className="container-fluid h-100 mt-4 overflow-auto">
                         <Outlet></Outlet>
                     </div>

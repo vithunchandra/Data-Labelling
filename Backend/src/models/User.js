@@ -9,10 +9,7 @@ const userSchema = new mongoose.Schema(
     role: String,
     credibility: Number,
     wallet: Number,
-    tasks: {
-      type: [Schema.Types.ObjectId],
-      ref: "Task",
-    },
+    tasks: [{ type: Schema.Types.ObjectId, ref: "Task"}],
   },
   { collection: "User" }
 );

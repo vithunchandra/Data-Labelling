@@ -8,12 +8,11 @@ import {
 import Signup from "./pages/authentication/Signup";
 import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
-import Worker, { workerLoader } from "./pages/worker/Worker";
-import { adminNavigation, requesterNavigation } from "./route";
+import Worker from "./pages/worker/Worker";
 import AddTaskType from "./pages/admin/AddTaskType";
 import WorkerDashboard from "./pages/worker/WorkerDashboard";
 import WorkerTask from "./pages/worker/WorkerTask";
-import Marketplace from "./pages/worker/Marketplace";
+import Marketplace, { marketplaceLoader } from "./pages/worker/Marketplace";
 import MarketTaskDetail, { loader } from "./pages/worker/MarketTaskDetail";
 import Task, { taskDetailLoader } from "./pages/worker/Task";
 import TaskData, { taskDataLoader } from "./pages/worker/TaskData";
@@ -64,33 +63,31 @@ function App() {
         <Route path="keuangan" element={<AdminKeuangan />}></Route>
       </Route>,
 
-      <Route path="worker" element={<Worker />} >
-        <Route index element={
+      <Route path="worker" 
+        element={
           <Authenticate role="worker">
-            <WorkerDashboard />
+            <Worker />
           </Authenticate>
+        } 
+      >
+        <Route index element={
+            <WorkerDashboard />
         }></Route>
         <Route path="marketplace" element={
-          <Authenticate role="worker">
             <Marketplace />
-          </Authenticate>
-        }></Route>
+        } loader={marketplaceLoader}></Route>
         <Route
           path="marketplace/:task_id"
           element={<MarketTaskDetail />}
-          loader={loader as any}
+          loader={loader}
         ></Route>
         <Route path="task" element={
-          <Authenticate role="worker">
             <WorkerTask />
-          </Authenticate>
         }></Route>
         <Route
           path="task/:task_id"
           element={
-            <Authenticate role="worker">
               <Task />  
-            </Authenticate>
           }
           loader={taskDetailLoader as any}
         >

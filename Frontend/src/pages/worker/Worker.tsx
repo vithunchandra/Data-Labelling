@@ -1,14 +1,13 @@
-import { useEffect } from "react";
 import MainLayout from "../../components/MainLayout";
 import {workerNavigation} from "../../route";
-import { redirect, useNavigate, useResolvedPath } from "react-router-dom";
-import { decodeToken } from "react-jwt";
-import { IUser } from "../../interface/IUser";
+import useAuth from "../../customHooks/authenticate";
+import { client } from "../../api/client";
 
-export default function Worker (){
+export default function Worker(){
+    const {getUser} = useAuth()
     return(
         <>
-            <MainLayout navigation={workerNavigation} role="Worker"></MainLayout>
+            <MainLayout navigation={workerNavigation} user={getUser()}></MainLayout>
         </>
     )
 }

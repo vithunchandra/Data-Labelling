@@ -1,10 +1,12 @@
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar, Collapse, IconButton } from '@mui/material';
+import IUser from '../../interface/IUser';
 
-export default function Navbar({setIsDrawerOn, isDrawerOn, pageName} : {
+export default function Navbar({setIsDrawerOn, isDrawerOn, pageName, user} : {
     setIsDrawerOn: React.Dispatch<React.SetStateAction<boolean>>,
     isDrawerOn: boolean,
-    pageName: string
+    pageName: string,
+    user: IUser
 }){
     return(
         <nav className={`navbar navbar-expand-lg bg-primary bg-white rounded-2 shadow-sm`}>
@@ -24,7 +26,7 @@ export default function Navbar({setIsDrawerOn, isDrawerOn, pageName} : {
                         <div className='d-flex align-items-center'>
                             <Avatar src='https://th.bing.com/th/id/OIP.RczLHpGhBtKxRuaNCKv_KQAAAA?pid=ImgDet&rs=1'/>
                             <div className='ms-2'>
-                                Vithun Chandra
+                                {user.name}
                             </div>
                         </div>
                     </li>
