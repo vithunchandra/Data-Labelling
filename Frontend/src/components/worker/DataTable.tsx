@@ -1,9 +1,21 @@
 import { Button } from "@mui/material";
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
-import Data from "../../interface/DataInterface";
 import { Link } from "react-router-dom";
+import { IData } from "../../interface/IData";
+import { useTask } from "../../pages/worker/Task";
+import { useEffect, useState } from "react";
 
-export default function DataTable({data} : {data: Data[]}){
+export default function DataTable(){
+    // console.log(tracker.items)
+    const {dataTracker} = useTask()
+    const [data, setData] = useState<IData[] | undefined>([])
+
+    useEffect(() => {
+        if(dataTracker){
+            setData(dataTracker.items)
+        }
+    }, [dataTracker])
+
     return(
         <table className="table">
             <thead>
@@ -24,14 +36,14 @@ export default function DataTable({data} : {data: Data[]}){
             </thead>
             <tbody>
                 {
-                    data.map((item, index) => {
+                    data?.map((item, index) => {
                         return(
                             <tr key={index}>
                                 <td className="align-middle">{index + 1}</td>
-                                <td className="align-middle text-truncate">{item.data}</td>
-                                <td className="align-middle text-center" >{item.status}</td>
+                                <td className="align-middle text-truncate">{item.text}</td>
+                                <td className="align-middle text-center" >{item.label ? 'Labeled' : 'Unlabeled'}</td>
                                 <td className="align-middle text-center">
-                                    <Link to={`./${index}`}>
+                                    <Link to={`./${item._id}`}>
                                         <Button variant="outlined" startIcon={<CreateOutlinedIcon />}>Label</Button>
                                     </Link>
                                 </td>

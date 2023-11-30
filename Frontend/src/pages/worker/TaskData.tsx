@@ -1,25 +1,52 @@
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
 import { IconButton, TextField } from '@mui/material';
 import DataTable from '../../components/worker/DataTable';
-import { useState } from 'react';
-import { redirect, useLoaderData, useNavigate } from 'react-router-dom';
-import tasks from '../../dummy_data/task.json';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import authenticate from '../../customHooks/authenticate';
-import { IUser } from '../../interface/IUser';
-import { decodeToken } from 'react-jwt';
+import { useTask } from './Task';
+import { IData } from '../../interface/IData';
+import { client } from '../../api/client';
+import { AxiosError } from 'axios';
+import useAuth from '../../customHooks/authenticate';
+import useTracker from '../../customHooks/useTracker';
+import { useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function TaskData(){
-    const taskIndex = useLoaderData() as number;
-    const task = tasks[taskIndex];
-    const [selectValue, setSelectValue] = useState<boolean>();
-    const navigate = useNavigate()
+    const {task, setDataTracker} = useTask()
+    const data = useLoaderData() as IData[]
+    const tracker = useTracker<IData>({
+        itemsInput: data,
+        indexInput: 0,
+        skipInput: 0,
+        fetchItem: fetchData
+    })
 
-    function selectChange(event: SelectChangeEvent){
-        setSelectValue(event.target.value === 'true' ? true : false);
+    useEffect(() => {
+        setDataTracker(tracker)
+    }, [])
+
+    async function fetchData(skip: number){
+        let data: IData[] = []
+        const {getToken} = useAuth()
+        try{
+            const response = await client.get(`/task/${task._id}/data`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                },
+                params: {
+                    skip
+                }
+            })
+            data = response.data.data
+        }catch(err){
+            if(err instanceof AxiosError){
+                console.log(err.response?.data.message)
+            }
+        }
+        return data
     }
 
     return(
@@ -50,7 +77,7 @@ export default function TaskData(){
 
             <div className='w-100 p-2 shadow-sm rounded-2 bg-white'>
                 <div className='fs-4 fw-bold ms-1'>Data</div>
-                <DataTable data={task.data} />
+                <DataTable />
                 <div className='w-100 text-end'>
                     <span className='d-inline-block'>
                         <IconButton size='large'>
@@ -73,17 +100,26 @@ export default function TaskData(){
     )
 }
 
-export function taskDataLoader({params} : {params: Map<string, any>}){
-    const token = localStorage.getItem('access-token')
-    const user = (decodeToken(token!) as any).user as IUser
-    console.log(user)
-    if(!user){
-        return redirect('/signin')
-    }
-    if(user.role !== 'worker'){
-        console.log(user.role)
-        return redirect(`/${user.role}`)
+export async function dataLoader({params}: any){
+    const task_id = params['task_id']
+    let data: IData[] = []
+    const {getToken} = useAuth()
+    try{
+        const response = await client.get(`/worker/task/${task_id}/data`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            },
+            params: {
+                skip: 0
+            }
+        })
+        data = response.data.data
+        console.log(data)
+    }catch(err){
+        if(err instanceof AxiosError){
+            console.log(err.response?.data.message)
+        }
     }
 
-    return params['task_id'];
+    return data
 }

@@ -1,19 +1,38 @@
-import { useEffect, useState } from 'react'
-import tasks from '../../dummy_data/task.json'
-import { Outlet, useLoaderData } from 'react-router-dom';
-import { ChatOutlined, ChevronLeft, ChevronRight, InfoOutlined, List } from '@mui/icons-material';
-import { Button, Collapse, IconButton } from '@mui/material';
+import { Outlet, useLoaderData, useLocation, useOutletContext } from 'react-router-dom';
+import { ChatOutlined, InfoOutlined, List } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Chat from '../../components/worker/Chat';
 import users from '../../dummy_data/user.json';
 import chats from '../../dummy_data/chat_2.json';
+import useAuth from '../../customHooks/authenticate';
+import { AxiosError } from 'axios';
+import ITask from '../../interface/ITask';
+import { client } from '../../api/client';
+import { useState } from 'react';
+import { ITracker } from '../../customHooks/useTracker';
+import { IData } from '../../interface/IData';
+
+interface ContextType{
+    task: ITask;
+    setData: React.Dispatch<React.SetStateAction<PassedData>>;
+    dataTracker: ITracker<IData>
+    setDataTracker: React.Dispatch<React.SetStateAction<ITracker<IData> | undefined>>
+}
+
+interface PassedData {
+    tasks: ITask[];
+    index: number;
+    skip: number;
+}
 
 export default function TaskDetail(){
+    const [data, setData] = useState<PassedData>(useLocation().state as PassedData)
     const user = users[1];
-    const targetUser = users[0];
-    const taskIndex = parseInt(useLoaderData() as string);
-    const [isChatActive, setIsChatActive] = useState(true);
-    let task = tasks[taskIndex];
+    const targetUser = users[0]
+    const [isChatActive, setIsChatActive] = useState(true)
+    const [dataTracker, setDataTracker] = useState<ITracker<IData> | undefined>(undefined)
+    let task = useLoaderData() as ITask
 
     return(
         <div className='w-100 h-100'>
@@ -21,14 +40,14 @@ export default function TaskDetail(){
                 <div className='col w-100 h-100 d-flex flex-column text-capitalize'>
                     <div className='w-100 py-2 px-3 rounded-2 shadow-sm bg-white'>
                         <div className='row justify-content-between align-items-center g-0'>
-                            <div className='col-auto fs-2 fw-bold'>{task.name}</div>
+                            <div className='col-auto fs-2 fw-bold'>{task.task_name}</div>
                             <div className='col-auto'>
                                 <Link to={'./viewdata'}>
                                     <IconButton color='warning'>
                                         <List />
                                     </IconButton>
                                 </Link>
-                                <Link to={'./'}>
+                                <Link to={'./'} state={data}>
                                     <IconButton color='primary'>
                                         <InfoOutlined/>
                                     </IconButton>
@@ -39,28 +58,14 @@ export default function TaskDetail(){
                             </div>
                         </div>
                         <div className='row justify-content-between align-items-center g-0'>
-                            <div className='col-auto fs-5 text-secondary'>{task.requester}</div>
-                            <div className='col-auto fs-5 text-secondary'>{task.type}</div>
+                            <div className='col-auto fs-5 text-secondary'>{task.requester.name}</div>
+                            <div className='col-auto fs-5 text-secondary'>{task.task_type.name}</div>
                         </div>
                     </div>
                     
                     <div className='w-100 my-3 flex-fill overflow-y-auto'>
-                        <Outlet />
+                        <Outlet context={{task, setData, dataTracker, setDataTracker}} />
                     </div>
-
-                    {/* <div className="row align-items-end">
-                        <div className="col-auto">
-                            <Button variant="contained" startIcon={<ChevronLeft />} onClick={previous}>Previous</Button>
-                        </div>
-                        <div className="col d-flex justify-content-center">
-                            <Link to="viewdata">
-                                <Button variant='contained' endIcon={<List />}>View Data</Button>
-                            </Link>
-                        </div>
-                        <div className="col-auto">
-                            <Button variant="contained" endIcon={<ChevronRight />} onClick={next}>Next</Button>
-                        </div>
-                    </div> */}
                 </div>
 
                 <div className='col-auto h-100'>
@@ -80,6 +85,25 @@ export default function TaskDetail(){
     )
 }
 
-export function taskDetailLoader({params} : {params: Map<string, any>}){
-    return params['task_id']
+export function useTask(){
+    return useOutletContext<ContextType>()
+}
+
+export const taskDetailLoader = async ({params} : any) => {
+    const task_id = params['task_id']
+    const {getToken} = useAuth()
+    let task: ITask | undefined;
+    try{    
+        const response = await client.get(`worker/task/${task_id}`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
+        task = response.data.data
+    }catch(err){
+        if(err instanceof AxiosError){
+            console.log(err.response?.data.message)
+        }
+    }
+    return task
 }

@@ -7,7 +7,6 @@ import useAuth from "../../customHooks/authenticate";
 export default function Marketplace(){
     const tasks = useLoaderData() as ITask[]
     return(
-        
         <>
             <div className="w-100 bg-white p-5 rounded-4 shadow-sm">
                 <TaskTable task={tasks}></TaskTable>
@@ -30,7 +29,6 @@ export async function marketplaceLoader(){
         });
         tasks = response.data.data;
     }catch(err: unknown){
-        console.log(err)
         if(err instanceof AxiosError){
             console.log(err.response?.data.message)
         }

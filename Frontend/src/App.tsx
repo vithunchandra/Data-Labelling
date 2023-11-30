@@ -11,11 +11,11 @@ import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
 import AddTaskType from "./pages/admin/AddTaskType";
 import WorkerDashboard from "./pages/worker/WorkerDashboard";
-import WorkerTask from "./pages/worker/WorkerTask";
+import WorkerTask, { workerTaskLoader } from "./pages/worker/WorkerTask";
 import Marketplace, { marketplaceLoader } from "./pages/worker/Marketplace";
-import MarketTaskDetail, { loader } from "./pages/worker/MarketTaskDetail";
+import MarketTaskDetail, { marketTaskDetailLoader } from "./pages/worker/MarketTaskDetail";
 import Task, { taskDetailLoader } from "./pages/worker/Task";
-import TaskData, { taskDataLoader } from "./pages/worker/TaskData";
+import TaskData, { dataLoader } from "./pages/worker/TaskData";
 import RequesterDashboard from "./pages/requester/RequesterDashboard";
 import CreateTask from "./pages/requester/CreateTask";
 import AddTask from "./pages/requester/AddTask";
@@ -23,7 +23,7 @@ import EditTask, { taskEditLoader } from "./pages/requester/EditTask";
 import TopUp from "./pages/requester/TopUp";
 import MonitorTask from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
-import Labelling, { labelllingLoader } from "./pages/worker/Labelling";
+import Labelling, { labellingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
 import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
 import Chat from "./pages/requester/Chat";
@@ -79,31 +79,30 @@ function App() {
         <Route
           path="marketplace/:task_id"
           element={<MarketTaskDetail />}
-          loader={loader}
+          loader={marketTaskDetailLoader}
         ></Route>
-        <Route path="task" element={
-            <WorkerTask />
-        }></Route>
+        <Route 
+          path="task" 
+          element={<WorkerTask />}
+          loader={workerTaskLoader}
+        ></Route>
         <Route
           path="task/:task_id"
-          element={
-              <Task />  
-          }
-          loader={taskDetailLoader as any}
+          element={<Task />}
+          loader={taskDetailLoader}
         >
           <Route
             index
             element={<TaskInformation />}
-            loader={taskDetailLoader as any}
           ></Route>
           <Route
             path="viewdata"
             element={<TaskData />}
-            loader={taskDataLoader as any}
+            loader={dataLoader}
           ></Route>
           <Route
             path="viewdata/:data_id"
-            loader={labelllingLoader as any}
+            loader={labellingLoader}
             element={<Labelling />}
           ></Route>
         </Route>

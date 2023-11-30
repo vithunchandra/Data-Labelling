@@ -11,6 +11,8 @@ import { client } from "../../api/client";
 import { AxiosError } from "axios";
 import ITask from "../../interface/ITask";
 import useAuth from "../../customHooks/authenticate";
+import useTracker from "../../customHooks/useTracker";
+import { useEffect } from "react";
 
 interface PassedData {
     tasks: ITask[];
@@ -20,9 +22,12 @@ interface PassedData {
 
 export default function MarketTaskDetail(){
     const data = useLocation().state as PassedData
-    let tasks = data.tasks
-    let skip = data.skip
-    let taskIndex = data.index;
+    const {previous, next, index, skip, items, getItem} = useTracker({
+        indexInput: data.index,
+        skipInput: data.skip,
+        itemsInput: data.tasks,
+        fetchItem: fetchTasks
+    })
     const task = useLoaderData() as ITask
     const navigate = useNavigate()
     const taskData = [
@@ -40,7 +45,7 @@ export default function MarketTaskDetail(){
         }
     ]
 
-    async function fetchTasks(){
+    async function fetchTasks(skip: number){
         let tempTasks: ITask[] = []
         const {getToken} = useAuth()
         try{
@@ -61,58 +66,61 @@ export default function MarketTaskDetail(){
         return tempTasks
     }
 
-    async function previous(){
-        console.log(taskIndex)
+    // async function previous(){
+    //     if(taskIndex > 0){
+    //         taskIndex--;
+    //     }else{
+    //         if(skip === 0){
+    //             return
+    //         }
 
-        if(taskIndex > 0){
-            taskIndex--;
-        }else{
-            if(skip === 0){
-                return
-            }
+    //         skip -= 10
+    //         tasks = await fetchTasks()
+    //         taskIndex = tasks.length - 1
+    //     }
 
-            skip -= 10
-            tasks = await fetchTasks()
-            taskIndex = tasks.length - 1
-        }
+    //     navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
+    //         tasks,
+    //         skip,
+    //         index: taskIndex
+    //     }})
+    // }
 
-        navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
-            tasks,
-            skip,
-            index: taskIndex
-        }})
-    }
+    // async function next(){
+    //     if(tasks.length - 1 > taskIndex){
+    //         taskIndex++;
+    //     }else{
+    //         skip += 10
+    //         const newTasks = await fetchTasks()
+    //         if(newTasks.length <= 0){
+    //             skip -= 10;
+    //             return
+    //         }else{
+    //             tasks = newTasks;
+    //         }
+    //         taskIndex = 0
+    //     }
 
-    async function next(){
-        console.log(tasks.length - 1, taskIndex)
-
-        if(tasks.length - 1 > taskIndex){
-            taskIndex++;
-        }else{
-            skip += 10
-            const newTasks = await fetchTasks()
-            if(newTasks.length <= 0){
-                skip -= 10;
-                return
-            }else{
-                tasks = newTasks;
-            }
-            taskIndex = 0
-        }
-        console.log(taskIndex)
-
-        navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
-            tasks,
-            skip,
-            index: taskIndex
-        }})
-    }
+    //     navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
+    //         tasks,
+    //         skip,
+    //         index: taskIndex
+    //     }})
+    // }
 
     function cancel(){
         navigate('..', {
             relative: 'path'
         })
     }
+
+    useEffect(() => {
+        navigate(`../marketplace/${getItem()._id}`, {state: {
+            tasks: items,
+            skip,
+            index
+        }})
+    }, [index])
 
     return(
         <div className="w-100 h-100 d-flex flex-column text-capitalize shadow-sm p-3 rounded-2 bg-white">
@@ -159,7 +167,7 @@ export default function MarketTaskDetail(){
     )
 }
 
-export const loader = async ({ params } : any) => {
+export const marketTaskDetailLoader = async ({ params } : any) => {
     const task_id: string = params['task_id'];
     const {getToken} = useAuth()
     let task: ITask | undefined;

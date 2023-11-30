@@ -12,7 +12,10 @@ const ChatSchema = new mongoose.Schema(
       ref: "Task",
     },
     text_chat: String,
-    timestamp: Date,
+    timestamp: {
+      type: Date,
+      default: () => new Date()
+    },
     is_read: Boolean,
   },
   { collection: "Chat" }

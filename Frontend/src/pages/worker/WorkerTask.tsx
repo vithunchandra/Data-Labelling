@@ -1,13 +1,20 @@
-import DataTable from "../../components/worker/DataTable"
 import Filters from "../../components/worker/Filters"
 import { TaskType } from "../../enum/TaskType"
-import task from '../../dummy_data/task.json'
 import TaskTable from "../../components/worker/TaskTable"
+import { client } from "../../api/client"
+import useAuth from "../../customHooks/authenticate"
+import ITask from "../../interface/ITask"
+import { AxiosError } from "axios"
+import { useLoaderData } from "react-router-dom"
+import ITaskType from "../../interface/ITaskType"
+
+interface ILoaderData{
+    tasks: ITask[];
+    types: ITaskType[];
+}
 
 export default function WorkerTask(){
-    const taskType = [
-        TaskType.Classification, TaskType.Summarization, TaskType.Translation
-    ]
+    const { tasks, types } = useLoaderData() as ILoaderData 
 
     return(
         <div className="w-100">
@@ -22,12 +29,34 @@ export default function WorkerTask(){
             </div>
 
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
-                <Filters taskType={taskType}></Filters>
+                <Filters taskType={types}></Filters>
             </div>
 
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
-                <TaskTable task={task} />
+                <TaskTable task={tasks} />
             </div>  
         </div>
     )
+}
+
+export const workerTaskLoader = async () => {
+    const {getToken} = useAuth()
+    let tasks = []
+    let types = []
+    try{
+        let response = await client.get(`/worker/task`, {
+            headers: {
+                Authorization: `Bearer ${getToken()}`
+            }
+        })
+        tasks = response.data.data
+        
+        response = await client.get('/task_type')
+        types = response.data
+    }catch(err){
+        if(err instanceof AxiosError){
+            console.log(err.response?.data.message)
+        }
+    }
+    return {tasks, types} as {tasks: ITask[], types: TaskType[]}
 }

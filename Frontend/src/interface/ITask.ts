@@ -2,7 +2,7 @@ import { IData } from "./IData";
 import ITaskType from "./ITaskType";
 import IUser from "./IUser";
 
-export default interface ITask{
+export default interface ITaskBase{
     _id: string;
     task_name: string;
     task_description: string;

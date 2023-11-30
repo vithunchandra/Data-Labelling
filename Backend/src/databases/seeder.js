@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const {faker} = require('@faker-js/faker');
-const { User, Task_Type, Task, Data } = require("../models");
+const { User, Task_Type, Task, Data, Chat } = require("../models");
 
 const connection = mongoose.connect(
   "mongodb://127.0.0.1:27017/db_data_labeller",
@@ -12,6 +12,8 @@ const role = ['requester', 'worker']
 
 //User Seeder
 async function userSeeder(){
+    await User.deleteMany({})
+
     const user = [];
     for(let i=0; i<20; i++){
         const roleIndex = Math.floor(Math.random() * 2)
@@ -30,6 +32,8 @@ async function userSeeder(){
 }
 
 async function taskTypeSeeder(){
+    await Task_Type.deleteMany({})
+
     await Task_Type.create([
         {
             name: 'Classification',
@@ -51,6 +55,8 @@ async function taskTypeSeeder(){
 }
 
 async function taskSeeder(){
+    await Task.deleteMany({})
+
     const requester = await User.find({role: 'requester'})
     const worker = await User.find({role: 'worker'})
     const types = await Task_Type.find()
@@ -97,11 +103,13 @@ async function taskSeeder(){
 }
 
 async function dataSeeder(){
+    await Data.deleteMany({})
+
     const tasks = await Task.find().populate('task_type')
     console.log(tasks[0])
     for(let i=0; i<tasks.length; i++){
         const task = tasks[i]
-        for(let j=0; j<faker.number.int({min: 0, max: 10}); j++){
+        for(let j=0; j<faker.number.int({min: 0, max: 20}); j++){
             const text = faker.word.words({count: {min: 5, max: 20}})
             const data = await Data.create({
                 text,
@@ -123,7 +131,7 @@ async function labelSeeder(){
             const data = await Data.findById(datumRef)
             const workers = task.worker
             for(const worker of workers){
-                const isLabeled = Math.random() < 0.5
+                const isLabeled = Math.random() < 0.75
                 if(isLabeled){
                     let label;
                     if(task.task_type.name === 'Classification'){
@@ -142,12 +150,37 @@ async function labelSeeder(){
     }
 }
 
+async function chatSeeder(){
+    await Chat.deleteMany({})
+
+    const tasks = await Task.find()
+    for(const task of tasks){
+        const workers = task.worker
+        for(const worker of workers){
+            let chats = [];
+            for(let i=0; i<faker.number.int({min: 0, max: 20}); i++){
+                const user = Math.random() < 0.5 ? worker.user_id : task.requester
+                const chat = await Chat.create({
+                    user,
+                    task_id: task._id,
+                    text_chat: faker.word.words({count: {min: 1, max: 15}}),
+                    is_read: Math.random() < 0.5
+                })
+                chats.push(chat._id)
+            }
+            worker.chat.push(chats)
+        }
+        await task.save()
+    }
+}
+
 async function seedAll(){
     await userSeeder()
     await taskTypeSeeder()
     await taskSeeder()
     await dataSeeder()
     await labelSeeder()
+    await chatSeeder()
 
     console.log('Data seeded successfully')
 

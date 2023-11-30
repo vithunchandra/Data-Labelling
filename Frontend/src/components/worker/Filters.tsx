@@ -4,8 +4,9 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
 import { useState } from 'react';
+import ITaskType from '../../interface/ITaskType';
 
-export default function Filters({taskType} : {taskType: string[]}){
+export default function Filters({taskType} : {taskType: ITaskType[]}){
     const [type, setType] = useState('');
 
     return(
@@ -28,7 +29,7 @@ export default function Filters({taskType} : {taskType: string[]}){
                         >
                             {
                                 taskType.map((item, index) => {
-                                    return <MenuItem value={item} sx={{textTransform: 'capitalize'}} key={index}>{item}</MenuItem>
+                                    return <MenuItem value={item._id} sx={{textTransform: 'capitalize'}} key={index}>{item.name}</MenuItem>
                                 })
                             }
                         </Select>
