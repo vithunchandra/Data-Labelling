@@ -19,7 +19,7 @@ const taskRouter = require("./src/routes/general/task");
 const taskTypeRouter = require("./src/routes/general/task_type");
 const userRouter = require("./src/routes/general/user");
 const chatRouter = require("./src/routes/general/chat");
-const workerMarketplace = require('./src/routes/worker/marketplace')
+const workerMarketplace = require("./src/routes/worker/marketplace");
 
 const database = require("./src/databases/connection");
 const { User, Task, Task_Type, Data, Chat } = require("./src/models");
@@ -32,7 +32,7 @@ app.use(
     origin: "http://localhost:5173",
     optionsSuccessStatus: 200,
     credentials: true,
-    exposedHeaders: "Authorization"
+    exposedHeaders: "Authorization",
   })
 );
 

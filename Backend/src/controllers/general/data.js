@@ -90,7 +90,30 @@ const label_data = async (req, res) => {
   const worker_id = user_now._id;
 
   const data_now = await Data.findById(data_id).exec();
+  if (!data_now) {
+    return res.status(404).json({
+      msg: "Data Not Found",
+    });
+  }
+
   const task_now = await Task.findById(data_now.task).exec();
+  const task_type = await Task_Type.findById(task_now.task_type).exec();
+
+  if (String(task_type.name).toLowerCase() == "classification") {
+    const possible_label = task_now.possible_label;
+    const check_label_exist = possible_label.filter((item) => {
+      if (String(item) == String(text)) {
+        return true;
+      }
+      return false;
+    });
+    if (check_label_exist.length == 0) {
+      return res.status(400).json({
+        msg: "Label must be in possible label",
+      });
+    }
+  }
+
   const check_worker_exist = task_now.worker.filter((item) => {
     if (String(item.user_id) == String(worker_id)) {
       return true;
