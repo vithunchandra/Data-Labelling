@@ -5,7 +5,7 @@ interface FormTextField{
     name: string;
     variant: TextFieldVariants | undefined;
     label: string;
-    defaultValue: string | number | boolean;
+    defaultValue: string | number | boolean | undefined;
     type: string;
     className: string | undefined;
 }

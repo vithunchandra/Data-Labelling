@@ -11,7 +11,7 @@ interface IData{
     text: string;
     price: number;
     task: string | ITaskType;
-    label: ILabel
+    label: ILabel | undefined;
 }
 
 export type {

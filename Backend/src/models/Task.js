@@ -19,7 +19,7 @@ const taskSchema = new mongoose.Schema(
     requester: { type: Schema.Types.ObjectId, ref: "User" },
     task_type: { type: Schema.Types.ObjectId, ref: "Task_Type" },
     data: [{ type: Schema.Types.ObjectId, ref: "Data" }],
-    ban_list: [{ type: [Schema.Types.ObjectId], ref: "User" }],
+    ban_list: [{ type: Schema.Types.ObjectId, ref: "User" }],
     worker: [workerSchema],
   },
   { collection: "Task" }

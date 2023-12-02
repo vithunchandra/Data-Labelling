@@ -1,4 +1,4 @@
-import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import DataArrayIcon from '@mui/icons-material/DataArray';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import AddReactionOutlinedIcon from '@mui/icons-material/AddReactionOutlined';
@@ -11,24 +11,9 @@ import { client } from "../../api/client";
 import { AxiosError } from "axios";
 import ITask from "../../interface/ITask";
 import useAuth from "../../customHooks/authenticate";
-import useTracker from "../../customHooks/useTracker";
-import { useEffect } from "react";
-
-interface PassedData {
-    tasks: ITask[];
-    index: number;
-    skip: number;
-}
-
+import { Link } from "react-router-dom"; 
 export default function MarketTaskDetail(){
-    const data = useLocation().state as PassedData
-    const {previous, next, index, skip, items, getItem} = useTracker({
-        indexInput: data.index,
-        skipInput: data.skip,
-        itemsInput: data.tasks,
-        fetchItem: fetchTasks
-    })
-    const task = useLoaderData() as ITask
+    const {task, next, prev} = useLoaderData() as IFetchData
     const navigate = useNavigate()
     const taskData = [
         {
@@ -45,82 +30,11 @@ export default function MarketTaskDetail(){
         }
     ]
 
-    async function fetchTasks(skip: number){
-        let tempTasks: ITask[] = []
-        const {getToken} = useAuth()
-        try{
-            const response = await client.get(`worker/marketplace`, {
-                headers: {
-                    Authorization: "Bearer " + getToken()
-                },
-                params: {
-                    skip
-                }
-            })
-            tempTasks = response.data.data as ITask[]
-        }catch(err){
-            if(err instanceof AxiosError){
-                console.log(err.response?.data.message)
-            }
-        }
-        return tempTasks
-    }
-
-    // async function previous(){
-    //     if(taskIndex > 0){
-    //         taskIndex--;
-    //     }else{
-    //         if(skip === 0){
-    //             return
-    //         }
-
-    //         skip -= 10
-    //         tasks = await fetchTasks()
-    //         taskIndex = tasks.length - 1
-    //     }
-
-    //     navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
-    //         tasks,
-    //         skip,
-    //         index: taskIndex
-    //     }})
-    // }
-
-    // async function next(){
-    //     if(tasks.length - 1 > taskIndex){
-    //         taskIndex++;
-    //     }else{
-    //         skip += 10
-    //         const newTasks = await fetchTasks()
-    //         if(newTasks.length <= 0){
-    //             skip -= 10;
-    //             return
-    //         }else{
-    //             tasks = newTasks;
-    //         }
-    //         taskIndex = 0
-    //     }
-
-    //     navigate(`../marketplace/${tasks[taskIndex]._id}`, {state: {
-    //         tasks,
-    //         skip,
-    //         index: taskIndex
-    //     }})
-    // }
-
     function cancel(){
         navigate('..', {
             relative: 'path'
         })
     }
-
-    useEffect(() => {
-        navigate(`../marketplace/${getItem()._id}`, {state: {
-            tasks: items,
-            skip,
-            index
-        }})
-    }, [index])
 
     return(
         <div className="w-100 h-100 d-flex flex-column text-capitalize shadow-sm p-3 rounded-2 bg-white">
@@ -153,31 +67,42 @@ export default function MarketTaskDetail(){
             </div>
             <div className="row flex-fill align-items-end">
                 <div className="col-auto">
-                    <Button variant="contained" startIcon={<ChevronLeftIcon />} onClick={previous}>Previous</Button>
+                    <Link className={`${!prev ? 'invisible' : ''}`} to={`../marketplace/${prev?._id}`}>
+                        <Button variant="contained" startIcon={<ChevronLeftIcon />}>Previous</Button>
+                    </Link>
                 </div>
                 <div className="col d-flex justify-content-center">
                     <Button className="me-4" variant="contained" color="error" startIcon={<ClearOutlinedIcon />} onClick={cancel}>Cancel</Button>
                     <Button variant="contained" color="success" endIcon={<CheckIcon />}>Accept</Button>
                 </div>
                 <div className="col-auto">
-                    <Button variant="contained" endIcon={<ChevronRightIcon />} onClick={next}>Next</Button>
+                    <Link className={`${!next ? 'invisible' : ''}`} to={`../marketplace/${next?._id}`}>
+                        <Button variant="contained" endIcon={<ChevronRightIcon />}>Next</Button>
+                    </Link>
                 </div>
             </div>
         </div>
     )
 }
 
+interface IFetchData{
+    task: ITask;
+    next: ITask | undefined;
+    prev: ITask | undefined;
+}
+
 export const marketTaskDetailLoader = async ({ params } : any) => {
     const task_id: string = params['task_id'];
     const {getToken} = useAuth()
-    let task: ITask | undefined;
+    let task: IFetchData | undefined = undefined;
     try{
         const response = await client.get(`/worker/marketplace/${task_id}`, {
             headers: {
                 Authorization: "Bearer " + getToken()
             },
         })
-        task = response.data.data as ITask
+        task = response.data as IFetchData
+        console.log(task)
     }catch(err){
         if(err instanceof AxiosError){
             console.log(err.response?.data.message)

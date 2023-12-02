@@ -1,4 +1,4 @@
-const { getMarketTasks, getUserTasks, getTask, getData, getAllData } = require('../dao/worker');
+const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel } = require('../dao/worker');
 const { Data } = require('../models');
 
 async function market (req, res){
@@ -17,11 +17,14 @@ async function marketTask(req, res){
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
-    const task =  await getTask({task_id})
+
+    const task = await getMarketTask({user_id: user._id, task_id})
+    const prevTask = await getNearMarketTask({user_id: user._id, task_id, direction: 'prev'})
+    const nextTask = await getNearMarketTask({user_id: user._id, task_id, direction: 'next'})
     if(!task){
         return res.status(404).json({message: "Task not found"})
     }
-    return res.status(200).json({data: task})
+    return res.status(200).json({task, prev: prevTask, next: nextTask})
 }
 
 async function tasks(req, res){
@@ -40,12 +43,15 @@ async function task(req, res){
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
-    const task = await getTask({user_id: user._id, task_id})
+    const task = await getTask({task_id, user_id: user._id})
+    console.log('hallo')
+    const prevTask = await getNearTask({task_id, user_id: user._id, direction: 'prev'})
+    const nextTask = await getNearTask({task_id, user_id: user._id, direction: 'next'})
     if(!task){
         return res.status(404).json({message: 'Task not found'})
     }
 
-    return res.status(200).json({data: task});
+    return res.status(200).json({task, prev: prevTask, next: nextTask});
 }
 
 async function getTaskData(req, res){
@@ -69,26 +75,52 @@ async function getTaskData(req, res){
 
 async function data(req, res){
     const user = req.user
-    const {data_id} = req.params
+    const {task_id, data_id} = req.params
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
 
-    const result = await getData({data_id, user_id: user._id})
-    console.log(result)
-    if(!result){
+    const result = []
+    result.push(await getData({data_id, user_id: user._id}))
+    result.push(await getNearData({task_id, data_id, user_id: user._id, direction: 'prev'}))
+    result.push(await getNearData({task_id, data_id, user_id: user._id, direction: 'next'}))
+
+    if(!result[0]){
         return res.status(404).json({message: 'Data not found'})
     }
 
-    const data = {...result.toObject()}
-    let label
-    if(data.labels.length > 0){
-        label = data.labels[0]
+    const key = ['data', 'prev', 'next']
+    const object = {}
+    for(let i=0; i<result.length; i++){
+        const data = result[i] ? {...result[i].toObject()} : undefined
+        console.log(data)
+        if(data){
+            let label
+            if(data.labels.length > 0){
+                label = data.labels[0]
+            }
+            data['label'] = label
+            data.labels = undefined
+        }
+        object[key[i]] = data
     }
-    data['label'] = label
-    data.labels = undefined
+   
+    return res.status(200).json(object)
+}
 
-    return res.status(200).json({data})
+async function labelling(req, res){
+    const user = req.user
+    const {data_id, task_id} = req.params
+    if(user.role !== 'worker'){
+        return res.status(403).json({message: 'Forbidden request'})
+    }
+
+    const result = await storeLabel({data_id, label_id: req.body.label_id, label: {
+        worker: user._id,
+        answer: req.body.input
+    }})
+
+    return res.status(201).json(result)
 }
 
 module.exports = {
@@ -97,5 +129,6 @@ module.exports = {
     tasks, 
     task,
     getTaskData,
-    data
+    data,
+    labelling
 }

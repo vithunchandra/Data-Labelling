@@ -1,14 +1,11 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material"
+import { Button } from "@mui/material"
 import { useState } from "react"
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import FormTextField from "../../components/form/FormTextField";
 import { client } from "../../api/client";
-import { decodeToken } from "react-jwt";
-import { IUser } from "../../interface/IUser";
-import { AxiosError } from "axios";
-import { useCookies } from "react-cookie";
 import useAuth from "../../customHooks/authenticate";
+import { AxiosError } from "axios";
 
 interface IFormInputs{
     email: string;
@@ -19,7 +16,6 @@ export default function Signin(){
     const formProps = useForm<IFormInputs>()
     const [error, setError] = useState<string>()
     const navigate = useNavigate()
-    const [cookies, setCookie] = useCookies(['access-token'])
 
     const login: SubmitHandler<IFormInputs> = async (data: IFormInputs) => {
         let user;
@@ -57,8 +53,8 @@ export default function Signin(){
                 <FormProvider {...formProps}>
                     <form onSubmit={formProps.handleSubmit(login)}>
                         <h1 className="mb-4 text-center">Sign In</h1>
-                        <FormTextField name="email" label="Email" type="email" variant="outlined" defaultValue=""/>
-                        <FormTextField name="password" label="Password" type="password" variant="outlined" defaultValue=""/>
+                        <FormTextField className="" name="email" label="Email" type="email" variant="outlined" defaultValue=""/>
+                        <FormTextField className="" name="password" label="Password" type="password" variant="outlined" defaultValue=""/>
          
                         {
                             error && <span className="text-danger">{error}</span>

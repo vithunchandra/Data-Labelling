@@ -1,4 +1,4 @@
-import { Outlet, useLoaderData, useLocation, useOutletContext } from 'react-router-dom';
+import { Outlet, useLoaderData, useOutletContext } from 'react-router-dom';
 import { ChatOutlined, InfoOutlined, List } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -10,29 +10,18 @@ import { AxiosError } from 'axios';
 import ITask from '../../interface/ITask';
 import { client } from '../../api/client';
 import { useState } from 'react';
-import { ITracker } from '../../customHooks/useTracker';
-import { IData } from '../../interface/IData';
 
-interface ContextType{
+interface ILoader{
     task: ITask;
-    setData: React.Dispatch<React.SetStateAction<PassedData>>;
-    dataTracker: ITracker<IData>
-    setDataTracker: React.Dispatch<React.SetStateAction<ITracker<IData> | undefined>>
-}
-
-interface PassedData {
-    tasks: ITask[];
-    index: number;
-    skip: number;
+    prev: ITask | undefined;
+    next: ITask | undefined;
 }
 
 export default function TaskDetail(){
-    const [data, setData] = useState<PassedData>(useLocation().state as PassedData)
+    const {task, prev, next} = useLoaderData() as ILoader
     const user = users[1];
     const targetUser = users[0]
     const [isChatActive, setIsChatActive] = useState(true)
-    const [dataTracker, setDataTracker] = useState<ITracker<IData> | undefined>(undefined)
-    let task = useLoaderData() as ITask
 
     return(
         <div className='w-100 h-100'>
@@ -47,7 +36,7 @@ export default function TaskDetail(){
                                         <List />
                                     </IconButton>
                                 </Link>
-                                <Link to={'./'} state={data}>
+                                <Link to={'./'}>
                                     <IconButton color='primary'>
                                         <InfoOutlined/>
                                     </IconButton>
@@ -64,16 +53,11 @@ export default function TaskDetail(){
                     </div>
                     
                     <div className='w-100 my-3 flex-fill overflow-y-auto'>
-                        <Outlet context={{task, setData, dataTracker, setDataTracker}} />
+                        <Outlet context={{task, prev, next}} />
                     </div>
                 </div>
 
                 <div className='col-auto h-100'>
-                    {/* <Collapse orientation='horizontal' in={isChatActive}>
-                        <div id='chat-wrapper'>
-                            <div className='chat'></div>
-                        </div>
-                    </Collapse> */}
                     <div id='chat-wrapper' className='collapse collapse-horizontal h-100 show'>
                         <div id='chat' className='h-100 ms-4'>
                             <Chat user={user} targetUser={targetUser} chats={chats}/>
@@ -86,24 +70,23 @@ export default function TaskDetail(){
 }
 
 export function useTask(){
-    return useOutletContext<ContextType>()
+    return useOutletContext<ILoader>()
 }
 
-export const taskDetailLoader = async ({params} : any) => {
+export async function taskDetailLoader({params}: any){
     const task_id = params['task_id']
     const {getToken} = useAuth()
-    let task: ITask | undefined;
-    try{    
+    try{
         const response = await client.get(`worker/task/${task_id}`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             }
         })
-        task = response.data.data
+        return response.data as ILoader
     }catch(err){
         if(err instanceof AxiosError){
-            console.log(err.response?.data.message)
+            return console.log(err.response?.data.message)
         }
+        return console.log(err)
     }
-    return task
 }

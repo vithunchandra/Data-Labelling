@@ -6,6 +6,7 @@ import { useState } from "react";
 
 export default function TaskTable({ task }: { task: ITask[] }) {
   const [skip, setSkip] = useState(0);
+  
   return (
     <table className="table">
       <thead>
@@ -62,11 +63,6 @@ export default function TaskTable({ task }: { task: ITask[] }) {
       </thead>
       <tbody>
         {task.map((item, index) => {
-          const data = {
-            tasks: task,
-            index: index,
-            skip
-          }
           return (
             <tr key={index}>
               <td className="align-middle">{index + 1}</td>
@@ -86,7 +82,7 @@ export default function TaskTable({ task }: { task: ITask[] }) {
                 <span className="text-secondary">{new Date(item.end_date).toDateString()}</span>
               </td>
               <td className="align-middle">
-                <Link to={item._id} state={data}>
+                <Link to={item._id}>
                   <Button variant="contained" startIcon={<InfoOutlinedIcon />}>
                     Detail
                   </Button>

@@ -2,20 +2,8 @@ import { Button } from "@mui/material";
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { Link } from "react-router-dom";
 import { IData } from "../../interface/IData";
-import { useTask } from "../../pages/worker/Task";
-import { useEffect, useState } from "react";
 
-export default function DataTable(){
-    // console.log(tracker.items)
-    const {dataTracker} = useTask()
-    const [data, setData] = useState<IData[] | undefined>([])
-
-    useEffect(() => {
-        if(dataTracker){
-            setData(dataTracker.items)
-        }
-    }, [dataTracker])
-
+export default function DataTable({data}: {data: IData[]}){
     return(
         <table className="table">
             <thead>

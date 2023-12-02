@@ -5,11 +5,7 @@ import { Link, useNavigate } from "react-router-dom"
 import FormTextField from "../../components/form/FormTextField"
 import { FormRadio } from "../../components/form/FormRadio"
 import { client } from "../../api/client"
-import Cookies from "universal-cookie"
-import { decodeToken } from 'react-jwt'
-import { IUser } from "../../interface/IUser"
 import { AxiosError } from "axios"
-import { useCookies } from "react-cookie"
 import useAuth from "../../customHooks/authenticate"
 
 const radioOptions = [
@@ -34,7 +30,6 @@ interface IFormInputs{
 export default function Signup(){
     const formProps = useForm<IFormInputs>()
     const [error, setError] = useState<string>()
-    const [cookies, setCookie] = useCookies(['access-token'])
     const navigate = useNavigate()
 
     const signup: SubmitHandler<IFormInputs> = async (data) => {

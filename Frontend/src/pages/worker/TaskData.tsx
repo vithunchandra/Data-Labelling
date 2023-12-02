@@ -5,49 +5,14 @@ import Select from '@mui/material/Select';
 import { IconButton, TextField } from '@mui/material';
 import DataTable from '../../components/worker/DataTable';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { useTask } from './Task';
 import { IData } from '../../interface/IData';
 import { client } from '../../api/client';
 import { AxiosError } from 'axios';
 import useAuth from '../../customHooks/authenticate';
-import useTracker from '../../customHooks/useTracker';
 import { useLoaderData } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function TaskData(){
-    const {task, setDataTracker} = useTask()
     const data = useLoaderData() as IData[]
-    const tracker = useTracker<IData>({
-        itemsInput: data,
-        indexInput: 0,
-        skipInput: 0,
-        fetchItem: fetchData
-    })
-
-    useEffect(() => {
-        setDataTracker(tracker)
-    }, [])
-
-    async function fetchData(skip: number){
-        let data: IData[] = []
-        const {getToken} = useAuth()
-        try{
-            const response = await client.get(`/task/${task._id}/data`, {
-                headers: {
-                    Authorization: `Bearer ${getToken()}`
-                },
-                params: {
-                    skip
-                }
-            })
-            data = response.data.data
-        }catch(err){
-            if(err instanceof AxiosError){
-                console.log(err.response?.data.message)
-            }
-        }
-        return data
-    }
 
     return(
         <div className='w-100 text-capitalize'>
@@ -77,7 +42,7 @@ export default function TaskData(){
 
             <div className='w-100 p-2 shadow-sm rounded-2 bg-white'>
                 <div className='fs-4 fw-bold ms-1'>Data</div>
-                <DataTable />
+                <DataTable data={data} />
                 <div className='w-100 text-end'>
                     <span className='d-inline-block'>
                         <IconButton size='large'>
