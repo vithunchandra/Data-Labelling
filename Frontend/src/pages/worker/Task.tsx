@@ -24,44 +24,42 @@ export default function TaskDetail(){
     const [isChatActive, setIsChatActive] = useState(true)
 
     return(
-        <div className='w-100 h-100'>
-            <div className='row h-100 g-0'>
-                <div className='col w-100 h-100 d-flex flex-column text-capitalize'>
-                    <div className='w-100 py-2 px-3 rounded-2 shadow-sm bg-white'>
-                        <div className='row justify-content-between align-items-center g-0'>
-                            <div className='col-auto fs-2 fw-bold'>{task.task_name}</div>
-                            <div className='col-auto'>
-                                <Link to={'./viewdata'}>
-                                    <IconButton color='warning'>
-                                        <List />
-                                    </IconButton>
-                                </Link>
-                                <Link to={'./'}>
-                                    <IconButton color='primary'>
-                                        <InfoOutlined/>
-                                    </IconButton>
-                                </Link>
-                                <IconButton color='success' onClick={() => setIsChatActive(!isChatActive)} data-bs-toggle="collapse" data-bs-target="#chat-wrapper">
-                                    <ChatOutlined />
+        <div className='row h-100 g-0'>
+            <div className='col w-100 h-100 d-flex flex-column text-capitalize'>
+                <div className='w-100 py-2 px-3 rounded-2 shadow-sm bg-white'>
+                    <div className='row justify-content-between align-items-center g-0'>
+                        <div className='col-auto fs-2 fw-bold'>{task.task_name}</div>
+                        <div className='col-auto'>
+                            <Link to={'./viewdata'}>
+                                <IconButton color='warning'>
+                                    <List />
                                 </IconButton>
-                            </div>
-                        </div>
-                        <div className='row justify-content-between align-items-center g-0'>
-                            <div className='col-auto fs-5 text-secondary'>{task.requester.name}</div>
-                            <div className='col-auto fs-5 text-secondary'>{task.task_type.name}</div>
+                            </Link>
+                            <Link to={'./'}>
+                                <IconButton color='primary'>
+                                    <InfoOutlined/>
+                                </IconButton>
+                            </Link>
+                            <IconButton color='success' onClick={() => setIsChatActive(!isChatActive)} data-bs-toggle="collapse" data-bs-target="#chat-wrapper">
+                                <ChatOutlined />
+                            </IconButton>
                         </div>
                     </div>
-                    
-                    <div className='w-100 my-3 flex-fill overflow-y-auto'>
-                        <Outlet context={{task, prev, next}} />
+                    <div className='row justify-content-between align-items-center g-0'>
+                        <div className='col-auto fs-5 text-secondary'>{task.requester.name}</div>
+                        <div className='col-auto fs-5 text-secondary'>{task.task_type.name}</div>
                     </div>
                 </div>
+                
+                <div className='w-100 my-3 flex-fill' style={{minHeight: '0'}}>
+                    <Outlet context={{task, prev, next}} />
+                </div>
+            </div>
 
-                <div className='col-auto h-100'>
-                    <div id='chat-wrapper' className='collapse collapse-horizontal h-100 show'>
-                        <div id='chat' className='h-100 ms-4'>
-                            <Chat user={user} targetUser={targetUser} chats={chats}/>
-                        </div>
+            <div className='col-auto h-100'>
+                <div id='chat-wrapper' className='collapse collapse-horizontal h-100 show'>
+                    <div id='chat' className='h-100 ms-4'>
+                        <Chat user={user} targetUser={targetUser} chats={chats}/>
                     </div>
                 </div>
             </div>

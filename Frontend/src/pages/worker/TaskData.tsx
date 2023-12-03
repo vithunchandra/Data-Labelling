@@ -9,10 +9,18 @@ import { IData } from '../../interface/IData';
 import { client } from '../../api/client';
 import { AxiosError } from 'axios';
 import useAuth from '../../customHooks/authenticate';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+
+interface ILoader{
+    data: IData[];
+    page: number;
+    totalPages: number;
+}
 
 export default function TaskData(){
-    const data = useLoaderData() as IData[]
+    const {data, page, totalPages} = useLoaderData() as ILoader
+    const navigate = useNavigate()
+    console.log(page, totalPages)
 
     return(
         <div className='w-100 text-capitalize'>
@@ -45,13 +53,19 @@ export default function TaskData(){
                 <DataTable data={data} />
                 <div className='w-100 text-end'>
                     <span className='d-inline-block'>
-                        <IconButton size='large'>
+                        <IconButton className={`${page - 1 > 0 ? '' : 'invisible'}`} 
+                            size='large'
+                            onClick={() => navigate(`../viewdata?page=${page - 1}`)}
+                        >
                             <ChevronLeft fontSize='inherit' />
                         </IconButton>
                     </span>
-                    <span className='d-inline-block mx-2 fs-5'>2</span>
+                    <span className='d-inline-block mx-2 fs-5'>{page}</span>
                     <span className='d-inline-block'>
-                        <IconButton size='large'>
+                        <IconButton className={`${(page + 1) <= totalPages ? '' : 'invisible'}`} 
+                            size='large'
+                            onClick={() => navigate(`../viewdata?page=${page + 1}`)}
+                        >
                             <ChevronRight fontSize='inherit' />
                         </IconButton>
                     </span>
@@ -65,26 +79,24 @@ export default function TaskData(){
     )
 }
 
-export async function dataLoader({params}: any){
+export async function dataLoader({params, request}: any){
     const task_id = params['task_id']
-    let data: IData[] = []
+    const url = new URL(request.url)
+    const page = url.searchParams.get('page') !== null ? parseInt(url.searchParams.get('page')!) : 1
     const {getToken} = useAuth()
     try{
         const response = await client.get(`/worker/task/${task_id}/data`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
             },
-            params: {
-                skip: 0
-            }
+            params: { page }
         })
-        data = response.data.data
-        console.log(data)
+        console.log(response.data)
+        return {...response.data, page} as ILoader
     }catch(err){
         if(err instanceof AxiosError){
-            console.log(err.response?.data.message)
+            return console.log(err.response?.data.message)
         }
+        return console.log(err)
     }
-
-    return data
 }

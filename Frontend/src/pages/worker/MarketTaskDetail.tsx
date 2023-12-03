@@ -36,6 +36,15 @@ export default function MarketTaskDetail(){
         })
     }
 
+    async function accept(){
+        const { getToken } = useAuth()
+        const response = await client.post(`worker/marketplace/${task._id}`, {}, {
+            headers: {Authorization: `Bearer ${getToken()}`}
+        })
+
+        navigate('../marketplace')
+    }
+
     return(
         <div className="w-100 h-100 d-flex flex-column text-capitalize shadow-sm p-3 rounded-2 bg-white">
             <div className="row justify-content-between">
@@ -73,7 +82,7 @@ export default function MarketTaskDetail(){
                 </div>
                 <div className="col d-flex justify-content-center">
                     <Button className="me-4" variant="contained" color="error" startIcon={<ClearOutlinedIcon />} onClick={cancel}>Cancel</Button>
-                    <Button variant="contained" color="success" endIcon={<CheckIcon />}>Accept</Button>
+                    <Button variant="contained" color="success" endIcon={<CheckIcon />} onClick={accept}>Accept</Button>
                 </div>
                 <div className="col-auto">
                     <Link className={`${!next ? 'invisible' : ''}`} to={`../marketplace/${next?._id}`}>

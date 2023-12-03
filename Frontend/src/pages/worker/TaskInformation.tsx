@@ -23,7 +23,7 @@ export default function TaskInformation(){
     ]
 
     return(
-        <div className="h-100 d-flex flex-column p-4 rounded-2 shadow-sm bg-white">
+        <div className="h-100 d-flex flex-column p-4 rounded-2 shadow bg-white">
             <div className="fw-bold fs-4 mb-2">Task Information:</div>
             <div className="row flex-column justify-content-between mb-4 g-0">
                 {
@@ -35,9 +35,9 @@ export default function TaskInformation(){
                     })
                 }
             </div>
-            <div className="w-100" style={{maxHeight: '400px'}}>
+            <div className="w-100 overflow-auto" style={{maxHeight: '200px'}}>
                 <span className='fw-bold fs-5'>Instruction: </span>
-                <p>{task.task_description}</p>
+                <p>{task.task_description}{task.task_description}</p>
             </div>
             <div className='flex-fill'></div>
             <div className="row align-items-end justify-content-end g-0">

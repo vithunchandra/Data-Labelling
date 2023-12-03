@@ -1,14 +1,18 @@
-const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel } = require('../dao/worker');
-const { Data } = require('../models');
+const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount } = require('../dao/worker');
+const { Data, Task } = require('../models');
 
 async function market (req, res){
     const user = req.user
-    const skip = req.query.skip
+    const page = req.query.page
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
 
-    return res.status(200).json({data: await getMarketTasks({user_id: user._id, skip})})
+    const marketTask = await getMarketTasks({user_id: user._id, skip: (page - 1) * 10})
+    const totalMarketTask = await getMarketTasksCount({user_id: user._id})
+    let totalPages = (totalMarketTask / 10) + (totalMarketTask % 10 > 0 ? 1 : 0)
+
+    return res.status(200).json({tasks: marketTask, totalPages: Math.ceil(totalPages)})
 }
 
 async function marketTask(req, res){
@@ -27,14 +31,39 @@ async function marketTask(req, res){
     return res.status(200).json({task, prev: prevTask, next: nextTask})
 }
 
-async function tasks(req, res){
+async function acceptTask(req, res){
     const user = req.user
-    const skip = req.query.skip
+    const {task_id} = req.params
+
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
+    const task = await getMarketTask({user_id: user._id, task_id})
+    if(!task){
+        return res.status(404).json({message: "Task not found"})
+    }
+    task.worker.push({
+        chat: [],
+        isBanned: false,
+        user_id: user._id
+    })
+    task.save()
 
-    return res.status(200).json({data: await getUserTasks({user_id: user._id, skip})})
+    return res.status(201).json({message: 'Task accepted successfully'})
+}
+
+async function tasks(req, res){
+    const user = req.user
+    const page = req.query.page
+    if(user.role !== 'worker'){
+        return res.status(403).json({message: 'Forbidden request'})
+    }
+    
+    const userTasks = await getUserTasks({user_id: user._id, skip: (page - 1) * 10})
+    const totalUserTasks = await getUserTasksCount({user_id: user._id})
+    const totalPages = totalUserTasks / 10
+
+    return res.status(200).json({tasks: userTasks, totalPages: Math.ceil(totalPages)})
 }
 
 async function task(req, res){
@@ -44,7 +73,6 @@ async function task(req, res){
         return res.status(403).json({message: 'Forbidden request'})
     }
     const task = await getTask({task_id, user_id: user._id})
-    console.log('hallo')
     const prevTask = await getNearTask({task_id, user_id: user._id, direction: 'prev'})
     const nextTask = await getNearTask({task_id, user_id: user._id, direction: 'next'})
     if(!task){
@@ -57,20 +85,22 @@ async function task(req, res){
 async function getTaskData(req, res){
     const user = req.user
     const {task_id} = req.params
-    const {skip} = req.query
-
+    const page = req.query.page
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
 
-    const result = await getAllData({task_id, user_id: user._id, skip})
+    const result = await getAllData({task_id, user_id: user._id, skip: (page - 1) * 5})
     const data = result.map(item => item.toObject())
     for(const item of data){
         let label = item.labels.length > 0 ? item.labels[0] : undefined;
         item['label'] = label
         item.labels = undefined
     }
-    return res.status(200).json({data})
+    const totalData = await getAllDataCount({task_id})
+    const totalPages = totalData / 5
+
+    return res.status(200).json({data, totalPages: Math.ceil(totalPages)})
 }
 
 async function data(req, res){
@@ -93,7 +123,6 @@ async function data(req, res){
     const object = {}
     for(let i=0; i<result.length; i++){
         const data = result[i] ? {...result[i].toObject()} : undefined
-        console.log(data)
         if(data){
             let label
             if(data.labels.length > 0){
@@ -126,6 +155,7 @@ async function labelling(req, res){
 module.exports = {
     market,
     marketTask,
+    acceptTask,
     tasks, 
     task,
     getTaskData,

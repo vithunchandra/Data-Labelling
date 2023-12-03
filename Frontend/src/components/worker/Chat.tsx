@@ -15,7 +15,7 @@ export default function Chat({user, targetUser, chats}: {
                 <Avatar className='me-2' src={targetUser.profile_image}/>
                 <span className='fw-bold'>{targetUser.name}</span>
             </div>
-            <div className='flex-fill overflow-y-auto p-2 shadow' style={{scrollbarWidth: 'none'}}>
+            <div className='flex-fill overflow-auto p-2 shadow' style={{minHeight: '0'}}>
                 {
                     chats.map((chat, index) => {
                         return <Message 

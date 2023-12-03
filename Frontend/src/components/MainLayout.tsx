@@ -71,9 +71,9 @@ export default function MainLayout({navigation, user}: {navigation: NavigationIn
                         </div>
                     </div>
                 </div>
-                <div className="col m-3 d-flex flex-column">
+                <div className="col px-3 pt-3 h-100 d-flex flex-column overflow-auto">
                     <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName} user={user}></Navbar>
-                    <div className="container-fluid h-100 mt-4 overflow-auto">
+                    <div className="flex-fill pt-4" style={{minHeight: '0'}}>
                         <Outlet></Outlet>
                     </div>
                 </div>

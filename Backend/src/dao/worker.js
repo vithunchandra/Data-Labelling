@@ -31,6 +31,25 @@ const getMarketTasks = async ({user_id, skip}) => {
     return tasks
 }
 
+const getMarketTasksCount = async ({user_id}) => {
+    const tasks = await db.Task.find(
+        {
+            worker: {
+                $not: {
+                    $elemMatch: {
+                        user_id
+                    }
+                }
+            },
+            ban_list: {
+                $nin: [user_id]
+            }
+        },
+    ).count()
+
+    return tasks
+}
+
 const getMarketTask = async ({task_id, user_id}) => {
     const task = await db.Task.findOne(
         {
@@ -47,7 +66,6 @@ const getMarketTask = async ({task_id, user_id}) => {
             }
         },
         {
-            worker: 0,
             ban_list: 0
         },
         {
@@ -122,6 +140,23 @@ const getUserTasks = async ({user_id, skip}) => {
     return tasks;
 }
 
+const getUserTasksCount = async ({user_id}) => {
+    const tasks = await db.Task.find(
+        {
+            worker: {
+                $elemMatch: {
+                    user_id
+                }
+            },
+            ban_list: {
+                $nin: [user_id]
+            }
+        }
+    ).count()
+
+    return tasks
+}
+
 const getTask = async ({task_id, user_id}) => {
     const task = await db.Task.findOne(
         {
@@ -191,8 +226,15 @@ const getAllData = async ({task_id, user_id, skip}) => {
                 }
             }
         },
-        {skip, limit: 10, sort: {_id: 1}}
+        {skip, limit: 5, sort: {_id: 1}}
     )
+
+    return data
+}
+
+const getAllDataCount = async ({task_id}) => {
+    console.log(task_id)
+    const data = await db.Data.find({task: task_id}).countDocuments()
 
     return data
 }
@@ -259,12 +301,15 @@ const storeLabel = async ({data_id, label_id, label}) => {
 
 module.exports = {
     getMarketTasks,
+    getMarketTasksCount,
     getMarketTask,
     getNearMarketTask,
     getTask,
     getNearTask,
     getUserTasks,
+    getUserTasksCount,
     getAllData,
+    getAllDataCount,
     getData,
     getNearData,
     storeLabel
