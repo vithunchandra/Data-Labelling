@@ -1,4 +1,5 @@
 const { User, Task_Type, Data } = require("../models");
+const axios = require("axios");
 
 const expand_task = async (all_task) => {
   if (all_task.length > 0) {
@@ -30,4 +31,31 @@ const expand_task = async (all_task) => {
   }
 };
 
-module.exports = { expand_task };
+const queryHuggingFaceSummary = async (textToBeSummarized) => {
+  const opts = {
+    headers: {
+      Authorization: `Bearer ${process.env.HUGGINGFACE_ACCESS_TOKEN}`,
+    },
+  };
+
+  let text_now = "Summarize in few word :" + "\n";
+  text_now += textToBeSummarized;
+  text_now += "\n" + "Tl;dr:";
+
+  const params = {
+    inputs: text_now,
+    temperature: 0.4,
+    max_new_tokens: 128,
+    do_sample: true,
+  };
+
+  const perintah = await axios.post(
+    "https://api-inference.huggingface.co/models/google/flan-t5-xxl",
+    params,
+    opts
+  );
+
+  return perintah.data;
+};
+
+module.exports = { expand_task, queryHuggingFaceSummary };

@@ -1,7 +1,8 @@
 const { Data, Task, Task_Type, User } = require("../../models");
+const { queryHuggingFaceSummary } = require("../../utils/helper_function");
 
 const create_data = async (req, res) => {
-  const { task_id, text } = req.body;
+  let { task_id, text } = req.body;
   const requester_id = req.user._id;
   if (String(req.user.role) != "requester") {
     return res.status(403).json({
@@ -31,6 +32,12 @@ const create_data = async (req, res) => {
 
   const task_type_now = await Task_Type.findById(task_now.task_type);
   const char_price = task_type_now.price;
+
+  if (String(task_type_now.name).toLowerCase() == "ai summary checking") {
+    const summary_now = await queryHuggingFaceSummary(text);
+    text = text + "\n\nSummary:" + summary_now[0]["generated_text"];
+  }
+
   const price = char_price * text.length;
 
   const new_data = await Data.create({
