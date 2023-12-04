@@ -1,4 +1,7 @@
 export interface IChat{
-    user_id: string;
-    message: string;
+    _id: string;
+    user: string;
+    text_chat: string;
+    timestamp: string;
+    is_read: boolean;
 }

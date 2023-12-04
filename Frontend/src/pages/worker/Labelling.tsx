@@ -56,7 +56,7 @@ export default function Labelling(){
         formProps.reset({
             input: data.label? data.label.answer : '',
         })
-    }, [data.label])
+    }, [data])
 
     return(
         <div className="p-3 rounded-2 shadow-sm bg-white overflow-y-auto">

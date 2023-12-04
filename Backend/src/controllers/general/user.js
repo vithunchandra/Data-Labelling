@@ -21,6 +21,17 @@ const get_user = async (req, res) => {
   return res.status(200).json(user);
 };
 
+const getUser = async (req, res) => {
+  const {user_id} = req.params
+  const user = await User.findById(user_id)
+  if(user === null){
+    return res.status(404).json({message: 'User not found'})
+  }
+
+  return res.status(200).json(user)
+}
+
 module.exports = {
   get_user,
+  getUser
 };

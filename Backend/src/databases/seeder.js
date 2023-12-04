@@ -166,20 +166,19 @@ async function chatSeeder(){
                     text_chat: faker.word.words({count: {min: 1, max: 15}}),
                     is_read: Math.random() < 0.5
                 })
-                chats.push(chat._id)
+                worker.chat.push(chat._id)
             }
-            worker.chat.push(chats)
         }
         await task.save()
     }
 }
 
 async function seedAll(){
-    await userSeeder()
-    await taskTypeSeeder()
-    await taskSeeder()
-    await dataSeeder()
-    await labelSeeder()
+    // await userSeeder()
+    // await taskTypeSeeder()
+    // await taskSeeder()
+    // await dataSeeder()
+    // await labelSeeder()
     await chatSeeder()
 
     console.log('Data seeded successfully')

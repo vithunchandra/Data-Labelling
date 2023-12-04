@@ -233,7 +233,6 @@ const getAllData = async ({task_id, user_id, skip}) => {
 }
 
 const getAllDataCount = async ({task_id}) => {
-    console.log(task_id)
     const data = await db.Data.find({task: task_id}).countDocuments()
 
     return data
@@ -299,6 +298,39 @@ const storeLabel = async ({data_id, label_id, label}) => {
     return data
 }
 
+const getAllChat = async ({user_id, task_id}) => {
+    const task = await db.Task.findOne(
+        {
+            _id: task_id,
+            worker: {
+                $elemMatch: {
+                    user_id
+                }
+            }
+        },
+        {
+            worker: {
+                $elemMatch: {
+                    user_id
+                }
+            }
+        },
+        {
+            sort: {
+                _id: 1
+            }
+        }
+    ).populate('requester')
+    .populate('task_type')
+    .populate({
+        path: 'worker.chat',
+        model: 'Chat',
+
+    })
+
+    return task
+}
+
 module.exports = {
     getMarketTasks,
     getMarketTasksCount,
@@ -312,5 +344,6 @@ module.exports = {
     getAllDataCount,
     getData,
     getNearData,
-    storeLabel
+    storeLabel,
+    getAllChat
 }

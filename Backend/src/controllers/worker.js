@@ -1,5 +1,5 @@
-const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount } = require('../dao/worker');
-const { Data, Task } = require('../models');
+const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount, getAllChat } = require('../dao/worker');
+const { Data, Task, Chat } = require('../models');
 
 async function market (req, res){
     const user = req.user
@@ -152,6 +152,40 @@ async function labelling(req, res){
     return res.status(201).json(result)
 }
 
+async function getChats(req, res){
+    const user = req.user
+    const {task_id} = req.params
+
+    if(user.role !== 'worker'){
+        return res.status(403).json({message: 'Forbidden request'})
+    }
+    const task = await getAllChat({user_id: user._id, task_id})
+    const chats = task.worker[0].chat
+
+    return res.status(200).json(chats)
+}
+
+async function storeChat(req, res){
+    const user = req.user
+    const {task_id} = req.params
+    const {message} = req.body
+    
+    const task = await getAllChat({user_id: user._id, task_id})
+    if(task === null){
+        return res.status(404).json({message: 'Task not found'})
+    }
+    const chat = await Chat.create({
+        user: user._id,
+        text_chat: message,
+        task_id: task_id,
+        is_read: false,
+    })
+    task.worker[0].chat.push(chat._id)
+    task.save()
+
+    return res.status(201).json({message: 'Message sent successfully'})
+}
+
 module.exports = {
     market,
     marketTask,
@@ -160,5 +194,7 @@ module.exports = {
     task,
     getTaskData,
     data,
-    labelling
+    labelling,
+    getChats,
+    storeChat
 }

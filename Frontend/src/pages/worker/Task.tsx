@@ -19,8 +19,7 @@ interface ILoader{
 
 export default function TaskDetail(){
     const {task, prev, next} = useLoaderData() as ILoader
-    const user = users[1];
-    const targetUser = users[0]
+    const { getUser } = useAuth()
     const [isChatActive, setIsChatActive] = useState(true)
 
     return(
@@ -59,7 +58,7 @@ export default function TaskDetail(){
             <div className='col-auto h-100'>
                 <div id='chat-wrapper' className='collapse collapse-horizontal h-100 show'>
                     <div id='chat' className='h-100 ms-4'>
-                        <Chat user={user} targetUser={targetUser} chats={chats}/>
+                        <Chat task_id={task._id} requester_id={task.requester._id} user_id={getUser()._id}/>
                     </div>
                 </div>
             </div>
