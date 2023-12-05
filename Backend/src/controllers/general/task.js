@@ -21,7 +21,7 @@ const expand_task_aggregation_condition = [
   },
   {
     $lookup: {
-      from: "User",
+      from: "Task_Type",
       localField: "task_type",
       foreignField: "_id",
       as: "task_type",
@@ -29,7 +29,7 @@ const expand_task_aggregation_condition = [
   },
   {
     $lookup: {
-      from: "Task_Type",
+      from: "User",
       localField: "ban_list",
       foreignField: "_id",
       as: "ban_list",
