@@ -161,6 +161,30 @@ const get_task = async (req, res) => {
   return res.status(200).json(all_task);
 };
 
+const get_task_by_id = async (req, res) => {
+  const { task_id } = req.params;
+  const { expand } = req.query;
+  let condition_now = [
+    { $addFields: { newField: 1 } },
+    { $project: { newField: 0 } },
+  ];
+
+  condition_now = [
+    ...condition_now,
+    { $match: { _id: new mongoose.Types.ObjectId(task_id) } },
+  ];
+
+  if (expand) {
+    if (expand == "1" || expand == "true" || expand == 1) {
+      condition_now = [...condition_now, ...expand_task_aggregation_condition];
+    }
+  }
+
+  const all_task = await Task.aggregate(condition_now).exec();
+
+  return res.status(200).json(all_task);
+};
+
 const get_user_task = async (req, res) => {
   //using model way
   const { expand, task_type_id } = req.query;
@@ -291,4 +315,5 @@ module.exports = {
   get_task,
   get_user_task,
   take_task,
+  get_task_by_id,
 };
