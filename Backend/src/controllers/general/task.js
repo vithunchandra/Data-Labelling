@@ -37,6 +37,44 @@ const expand_task_aggregation_condition = [
   },
 ];
 
+const toggle_task = async (req, res) => {
+  let { task_id } = req.body;
+
+  if (!task_id || task_id == "") {
+    return res.status(400).json({
+      msg: "Task id must not be empty",
+    });
+  }
+
+  const user_now = req.user;
+  const requester_id = new mongoose.Types.ObjectId(user_now._id);
+  if (String(user_now.role).toLowerCase() != "requester") {
+    return res.status(400).json({
+      msg: "User Not Requester",
+    });
+  }
+
+  let task = await Task.findById(task_id).exec();
+  if (!task) {
+    return res.status(404).json({
+      msg: "Task Not Found",
+    });
+  }
+
+  // update status
+  let new_task = await Task.findByIdAndUpdate(
+    task_id,
+    {
+      active: !task.active,
+    },
+    {
+      new: true,
+    }
+  );
+
+  return res.status(200).json(new_task);
+};
+
 const create_task = async (req, res) => {
   let {
     task_name,
@@ -316,4 +354,5 @@ module.exports = {
   get_user_task,
   take_task,
   get_task_by_id,
+  toggle_task,
 };

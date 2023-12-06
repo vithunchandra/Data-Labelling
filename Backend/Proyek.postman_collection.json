@@ -290,7 +290,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDc1NTMsImV4cCI6MTcwMTIzMzk1M30.CQvUVeL__2Nf-dDXD4KRiHCSRhVfCNlCOXxb3cpwAvs",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDE2NzM1NjAsImV4cCI6MTcwMTc1OTk2MH0.r6QHB1A2i5aRvlDyHp4x1KSK9lTUm-wsqSkEEc3M_bE",
 									"type": "string"
 								}
 							]
@@ -299,7 +299,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"task_type_id\": \"65656814b75e602d2363d241\",\r\n    \"task_name\": \"Positive vs Negative 1\",\r\n    \"task_description\": \"Menentukan kalimat positive atau Negative\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-20\",\r\n    \"possible_label\":[\"Positive\",\"Negative\"],\r\n    \"min_credibility\":80\r\n}",
+							"raw": "{\r\n    \"task_type_id\": \"65693c1146c4d47bb6e5b299\",\r\n    \"task_name\": \"Summary checking about anime\",\r\n    \"task_description\": \"Buatlah Rangkuman dari sinopsis ini dalam beberapa kalimat\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-23\",\r\n    \"possible_label\":[\"bagus\",\"jelek\"],\r\n    \"min_credibility\":80\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -578,7 +578,7 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/task/?expand=1&task_type_id=65656814b75e602d2363d241",
+							"raw": "http://localhost:3000/api/v1/task/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -593,11 +593,13 @@
 							"query": [
 								{
 									"key": "expand",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "task_type_id",
-									"value": "65656814b75e602d2363d241"
+									"value": "65656814b75e602d2363d241",
+									"disabled": true
 								}
 							]
 						}
@@ -698,7 +700,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDM5ODcsImV4cCI6MTcwMTIzMDM4N30.-F7amGJNvnAYsrkw7LPnxNdTsTCpcvcEutjm_eBiFMM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTc2ODUzMywiZXhwIjoxNzAxODU0OTMzfQ.rC6Fk74_Q5ES6L0ABNETbPHdElGM30G7NG82jvIaA_Y",
 									"type": "string"
 								}
 							]
@@ -939,6 +941,68 @@
 							"body": "{\n    \"msg\": \"Suceed\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Get Task By Id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "Get Task By Id",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Toggle Active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0Njc3MCwiZXhwIjoxNzAxOTMzMTcwfQ.5JswIaGX4bBLQl8NImEbpu1wJU3ebMG9ntOK66IuRDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "task_id",
+									"value": "asdasd",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/task/toggle_active",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"task",
+								"toggle_active"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1181,7 +1245,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDM5ODcsImV4cCI6MTcwMTIzMDM4N30.-F7amGJNvnAYsrkw7LPnxNdTsTCpcvcEutjm_eBiFMM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0NDk3MywiZXhwIjoxNzAxOTMxMzczfQ.m_7gv7O9OG0fkK49X2XQ_I0P2ePS4SV0GVcWPfhCrbI",
 									"type": "string"
 								}
 							]
@@ -1192,24 +1256,19 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "requester_id",
-									"value": "6556d3a54aaf29a32b1f3db0",
-									"type": "default"
-								},
-								{
 									"key": "task_id",
-									"value": "6556d573bd31329e995c2359",
+									"value": "656d7a6163306491542fa07d",
 									"type": "default"
 								},
 								{
 									"key": "text",
-									"value": "film ini sangat jelek!",
+									"value": "Maomao, an apothecary's daughter, has been plucked from her peaceful life and sold to the lowest echelons of the imperial court. Now merely a maid, Maomao settles into her new mundane life and hides her extensive knowledge of medicine in order to avoid any unwanted attention. Not long after Maomao's arrival, the emperor's infant children inexplicably begin to experience grave symptoms—almost as if a curse has been cast. The curious Maomao easily solves the mystery and, to remain out of the limelight, attempts to leave an anonymous tip. Unfortunately, the dashing and perceptive eunuch Jinshi sees through it and manages to single her out. In recognition of her talent, Maomao is promoted to lady-in-waiting for the emperor's favorite concubine, Gyokuyou. As Maomao continues to remedy the numerous ailments afflicting the imperial court, her pharmaceutical expertise quickly proves indispensable.",
 									"type": "default"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/v1/general/data/create",
+							"raw": "http://localhost:3000/api/v1/data/create",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1218,7 +1277,6 @@
 							"path": [
 								"api",
 								"v1",
-								"general",
 								"data",
 								"create"
 							]
@@ -1307,6 +1365,93 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"text\": \"I like appless\",\n    \"price\": 14,\n    \"task\": \"6565855cdd53a5e384f51550\",\n    \"labels\": [],\n    \"_id\": \"6565939998e099a754468a6c\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "create data AI",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "task_id",
+											"value": "656d7a6163306491542fa07d",
+											"type": "default"
+										},
+										{
+											"key": "text",
+											"value": "During their decade-long quest to defeat the Demon King, the members of the hero's party—Himmel himself, the priest Heiter, the dwarf warrior Eisen, and the elven mage Frieren—forge bonds through adventures and battles, creating unforgettable precious memories for most of them. \\n However, the time that Frieren spends with her comrades is equivalent to merely a fraction of her life, which has lasted over a thousand years. When the party disbands after their victory, Frieren casually returns to her usual routine of collecting spells across the continent. Due to her different sense of time, she seemingly holds no strong feelings toward the experiences she went through. \\n As the years pass, Frieren gradually realizes how her days in the hero's party truly impacted her. Witnessing the deaths of two of her former companions, Frieren begins to regret having taken their presence for granted; she vows to better understand humans and create real personal connections. Although the story of that once memorable journey has long ended, a new tale is about to begin.",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/data/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"data",
+										"create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1303"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"517-c81Cc8gjn75qU41rtm3biS4oEC8\""
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Dec 2023 07:36:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"text\": \"During their decade-long quest to defeat the Demon King, the members of the hero's party—Himmel himself, the priest Heiter, the dwarf warrior Eisen, and the elven mage Frieren—forge bonds through adventures and battles, creating unforgettable precious memories for most of them. \\\\n However, the time that Frieren spends with her comrades is equivalent to merely a fraction of her life, which has lasted over a thousand years. When the party disbands after their victory, Frieren casually returns to her usual routine of collecting spells across the continent. Due to her different sense of time, she seemingly holds no strong feelings toward the experiences she went through. \\\\n As the years pass, Frieren gradually realizes how her days in the hero's party truly impacted her. Witnessing the deaths of two of her former companions, Frieren begins to regret having taken their presence for granted; she vows to better understand humans and create real personal connections. Although the story of that once memorable journey has long ended, a new tale is about to begin.\\n\\nSummary:The story of the hero's party, a decade-long quest to defeat the Demon King, and the elven mage Frieren.\",\n    \"price\": 591.5,\n    \"task\": \"656d7a6163306491542fa07d\",\n    \"labels\": [],\n    \"_id\": \"656d81987dd7bde730ea6c1a\",\n    \"__v\": 0\n}"
 						}
 					]
 				},
@@ -1318,7 +1463,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjU2NTk0Mjc5MjZlMjZlYzVjOThlNyIsImVtYWlsIjoiYnVkaSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNDM5ODcsImV4cCI6MTcwMTIzMDM4N30.-F7amGJNvnAYsrkw7LPnxNdTsTCpcvcEutjm_eBiFMM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0Njc3MCwiZXhwIjoxNzAxOTMzMTcwfQ.5JswIaGX4bBLQl8NImEbpu1wJU3ebMG9ntOK66IuRDM",
 									"type": "string"
 								}
 							]
@@ -1330,7 +1475,7 @@
 							"urlencoded": [
 								{
 									"key": "data_id",
-									"value": "6565939998e099a754468a6c",
+									"value": "65701f0b424d09971ec47a9b",
 									"type": "default"
 								},
 								{
@@ -1445,7 +1590,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjVhOTE0NWQ5YmIzNDI3MDE4MWFlNyIsImVtYWlsIjoiYW5kaSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDExNjEyNjEsImV4cCI6MTcwMTI0NzY2MX0.gE6QyWgLBlf3TDcVIR6vNJvkJTux7OxVIYZ6p9L_8_g",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjVhOTE0NWQ5YmIzNDI3MDE4MWFlNyIsImVtYWlsIjoiYW5kaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2NTg1NWNkZDUzYTVlMzg0ZjUxNTUwIl0sIl9fdiI6MH0sImlhdCI6MTcwMTIzMjQzNCwiZXhwIjoxNzAxMzE4ODM0fQ.ehbkl1VJ1Ej8pTcmyJ0us0y83IhTeU15NcvTNRz2Cp4",
 									"type": "string"
 								}
 							]
@@ -1457,7 +1602,7 @@
 							"urlencoded": [
 								{
 									"key": "data_id",
-									"value": "6565939998e099a754468a6c",
+									"value": "6565876585fd0fd965ad4579",
 									"type": "default"
 								},
 								{
@@ -1569,6 +1714,129 @@
 							"body": "{\n    \"msg\": \"Suceed!\"\n}"
 						}
 					]
+				},
+				{
+					"name": "Bulk Create Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0Njc3MCwiZXhwIjoxNzAxOTMzMTcwfQ.5JswIaGX4bBLQl8NImEbpu1wJU3ebMG9ntOK66IuRDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task_id\":\"65701efa424d09971ec47a95\",\r\n    \"data\": [\r\n        \"Summary 1\",\r\n        \"Summary 2\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/data/bulk_create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"data",
+								"bulk_create"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bulk Create Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"task_id\":\"65701efa424d09971ec47a95\",\r\n    \"data\": [\r\n        \"Summary 1\",\r\n        \"Summary 2\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/data/bulk_create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"data",
+										"bulk_create"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "38"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"26-p9FsDNphtvV/elgwbzl6Y92EGIU\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 07:39:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"All data created sucesfully!\"\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1672,6 +1940,48 @@
 							"body": "[\n    {\n        \"_id\": \"6556d3a54aaf29a32b1f3db0\",\n        \"username\": \"budi\",\n        \"password\": \"budi123\",\n        \"name\": \"Budi\",\n        \"role\": \"requester\",\n        \"credibility\": 0,\n        \"wallet\": 0,\n        \"tasks\": [\n            \"6556d573bd31329e995c2359\",\n            \"6556dcbd3bfbbb0105e711a6\"\n        ],\n        \"__v\": 0\n    }\n]"
 						}
 					]
+				},
+				{
+					"name": "Fill Wallet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0Njc3MCwiZXhwIjoxNzAxOTMzMTcwfQ.5JswIaGX4bBLQl8NImEbpu1wJU3ebMG9ntOK66IuRDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "amount",
+									"value": "10000",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/fill_wallet",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"fill_wallet"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
