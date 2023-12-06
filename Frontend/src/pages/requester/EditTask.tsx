@@ -10,10 +10,19 @@ import SaveIcon from '@mui/icons-material/Save';
 import AddIcon from '@mui/icons-material/Add';
 import Data from '../../interface/DataInterface';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import useAuth from '../../customHooks/authenticate';
+import { client } from '../../api/client';
+import { AxiosError } from 'axios';
 
 export default function EditTask() {
-    const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
-    const[task, setTask] = useState(Req_tasks[parseInt(useLoaderData() as string)]);
+    // const tmp = useLoaderData()[0];
+    // console.log(tmp);
+    
+    // const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
+    // const[task, setTask] = useState(Req_tasks[parseInt(useLoaderData() as string)]);
+    const[task, setTask] = useState(useLoaderData()[0]);
+    console.log(task);
+    
     const[datas, setData] = useState<Data[]>(task.data);
     const[editIndex, setEditIndex] = useState<{index:number, action:string}>({index: -1, action : ""});
     const[editName, setEditName] = useState<boolean>(false);
@@ -70,14 +79,14 @@ export default function EditTask() {
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
                 {editName ?
                     <div className='d-flex align-items-center'>
-                        <input type='text' defaultValue={task.name} {...register("name")} />
+                        <input type='text' defaultValue={task.task_name} {...register("name")} />
                         <Button type='submit'>
                             <DoneIcon fontSize='medium'></DoneIcon>
                         </Button>
                     </div>
                     :
                     <div className='d-flex align-items-center'>
-                        <div className="fw-bold fs-4 mb-2">{task.name}</div>
+                        <div className="fw-bold fs-4 mb-2">{task.task_name}</div>
                         <IconButton type="reset" onClick={() => {
                             setEditName(true)
                         }}>
@@ -85,18 +94,18 @@ export default function EditTask() {
                         </IconButton>
                     </div>
                 }
-                <div className="fs-6 mb-2">Task Type : {task.type}</div>
+                <div className="fs-6 mb-2">Task Type : {task.task_type[0].name}</div>
                 {editCredibility ?
                     <div className='d-flex align-items-center'>
                         <div className="fs-6 mb-2">Credibility : &nbsp;</div>
-                        <input type='number' max={100} min={0} defaultValue={task.credibility} {...register("credibility")} />
+                        <input type='number' max={100} min={0} defaultValue={task.min_credibility} {...register("credibility")} />
                         <Button type='submit'>
                             <DoneIcon fontSize='medium'></DoneIcon>
                         </Button>
                     </div>
                     :
                     <div className='d-flex align-items-center'>
-                        <div className="fs-6 mb-2">Credibility : {task.credibility}</div>
+                        <div className="fs-6 mb-2">Credibility : {task.min_credibility}</div>
                         <IconButton type='button' onClick={() => {
                             setEditCredibility(true)
                         }}>
@@ -109,7 +118,7 @@ export default function EditTask() {
                         <div className='col-11 d-flex align-items-start'>
                             <div className="col-1 fs-6 mb-2">Instruction : </div>
                             <div className="col-11 fs-6 mb-2">
-                                <textarea defaultValue={task.instruction} {...register("instruction")} style={{width:"100%", height:"100px", resize:"none"}}></textarea>
+                                <textarea defaultValue={task.task_description} {...register("instruction")} style={{width:"100%", height:"100px", resize:"none"}}></textarea>
                             </div>
                         </div>
                         <div className='col-1 d-flex align-items-center'>
@@ -122,7 +131,7 @@ export default function EditTask() {
                     <div className='row'>
                         <div className='col-11 d-flex align-items-start'>
                             <div className="col-1 fs-6 mb-2">Instruction :</div>
-                            <div className="col-11 fs-6 mb-2">{task.instruction}</div>
+                            <div className="col-11 fs-6 mb-2">{task.task_description}</div>
                         </div>
                         <div className='col-1 d-flex align-items-center'>
                             <IconButton type="button" onClick={() => {
@@ -153,6 +162,27 @@ export default function EditTask() {
     )
 }
 
-export function taskEditLoader({params} : {params: Map<string, any>}){
-    return params['task_id']
+export async function taskEditLoader({params} : {params: Map<string, any>}){
+    const {getToken} = useAuth();
+    
+    try{
+        const response = await client.get(
+            "/task/id/"+params["task_id"],
+            {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                },
+                params: {
+                    expand: 1
+                }
+            }
+        )
+        
+        return response.data
+    }catch(err){
+        if(err instanceof AxiosError){
+            return console.log(err.response?.data.message)
+        }
+        return console.log(err)
+    }
 }

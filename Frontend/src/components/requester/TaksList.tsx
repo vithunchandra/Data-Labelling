@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import Task from "../../interface/TaskInterface";
+// import Task from "../../interface/TaskInterface";
 import { Button } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import ITask from "../../interface/ITask";
 
-export default function TaskList ({task}: {task: Task[]}) {
+export default function TaskList ({task}: {task: ITask[]}) {
     return (
         <table className="table">
             <thead>
@@ -28,13 +29,13 @@ export default function TaskList ({task}: {task: Task[]}) {
                         return (
                             <tr key={index}>
                                 <td className="align-middle text-center">{index + 1}</td>
-                                <td className="align-middle text-capitalize text-truncate">{item.name}</td>
+                                <td className="align-middle text-capitalize text-truncate">{item.task_name}</td>
                                 <td className="align-middle text-center">{item.data.length}</td>
                                 <td className="align-middle text-center">
-                                    {item.status ? 
+                                    {item.active ? 
                                         <Button variant="contained" startIcon={<EditIcon />} disabled>Edit</Button>
                                         :
-                                        <Link to={index.toString()}>
+                                        <Link to={item._id}>
                                             <Button variant="contained" startIcon={<EditIcon />}>Edit</Button>
                                         </Link>
                                     }

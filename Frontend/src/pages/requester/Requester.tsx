@@ -1,8 +1,10 @@
 import MainLayout from "../../components/MainLayout";
+import useAuth from "../../customHooks/authenticate";
 import { requesterNavigation } from "../../route";
 
 export default function Requester() {
+  const {getUser} = useAuth()
   return (
-    <MainLayout navigation={requesterNavigation} role="Requester"></MainLayout>
+    <MainLayout navigation={requesterNavigation} user={getUser()}></MainLayout>
   );
 }
