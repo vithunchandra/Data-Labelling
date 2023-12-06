@@ -26,7 +26,7 @@ const create_data_helper = async (task_now, text) => {
   return new_data;
 };
 
-const update_data_helper = async (data_now, text, possible_label = []) => {
+const update_data_helper = async (data_now, text) => {
   const price_char_now = data_now.price / data_now.text.length;
   const new_price = price_char_now * text.length;
   //////////////////////////////////////////
@@ -37,9 +37,6 @@ const update_data_helper = async (data_now, text, possible_label = []) => {
   if (String(task_type_now.name).toLowerCase() == "ai summary checking") {
     const summary_now = await queryHuggingFaceSummary(text);
     text = text + "\n\nSummary:" + summary_now[0]["generated_text"];
-  }
-
-  if (String(task_type_now.name).toLowerCase() == "classification") {
   }
 
   const updated_data = await Data.findByIdAndUpdate(
@@ -157,6 +154,30 @@ const edit_data = async (req, res) => {
   });
 };
 
+const bulk_edit_data = async (req, res) => {
+  const { new_data } = req.body;
+  if (!new_data) {
+    return res.status(400).json({
+      message: "Please provide all required fields",
+    });
+  }
+
+  for (let i = 0; i < new_data.length; i++) {
+    const data_now = await Data.findById(new_data[i].data_id);
+    if (!data_now) {
+      return res.status(404).json({
+        message: "Data Not Found",
+      });
+    }
+    // use helper to update data
+    const updated_data = await update_data_helper(data_now, new_data[i].text);
+  }
+
+  return res.status(200).json({
+    msg: "All data edited Suceesfully!",
+  });
+};
+
 const label_data = async (req, res) => {
   const { data_id, text } = req.body;
 
@@ -254,4 +275,5 @@ module.exports = {
   edit_data,
   label_data,
   create_bulk_data,
+  bulk_edit_data,
 };

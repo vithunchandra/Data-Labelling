@@ -173,6 +173,99 @@ const create_task = async (req, res) => {
   });
 };
 
+const edit_task = async (req, res) => {
+  let {
+    task_id,
+    task_name,
+    task_description,
+    possible_label,
+    start_date,
+    end_date,
+    min_credibility,
+  } = req.body;
+
+  if (!task_id || task_id == "") {
+    return res.status(400).json({
+      msg: "Task id must not be empty",
+    });
+  }
+
+  const user_now = req.user;
+  const requester_id = new mongoose.Types.ObjectId(user_now._id);
+  if (String(user_now.role).toLowerCase() != "requester") {
+    return res.status(400).json({
+      msg: "User Not Requester",
+    });
+  }
+
+  let task = await Task.findById(task_id).exec();
+  if (!task) {
+    return res.status(404).json({
+      msg: "Task Not Found",
+    });
+  }
+
+  if (!task_name || task_name == "") {
+    return res.status(400).json({
+      msg: "Task name must not be empty",
+    });
+  }
+
+  // task type checking
+  const task_type = await Task_Type.findById(task.task_type).exec();
+  if (String(task_type.name).toLowerCase() != "classification") {
+    possible_label = [];
+  } else {
+    if (!possible_label) {
+      return res.status(400).json({
+        msg: "Possible label must not be empty",
+      });
+    } else {
+      if (possible_label.length == 0) {
+        return res.status(400).json({
+          msg: "Possible label must not be empty",
+        });
+      }
+    }
+  }
+
+  // date format is YYYY-MM-DD
+  if (!start_date) {
+    start_date = Date.now();
+  } else {
+    start_date = new Date(start_date).getTime();
+  }
+  if (!end_date || end_date == "") {
+    return res.status(400).json({
+      msg: "End date must not be empty",
+    });
+  }
+  end_date = new Date(end_date).getTime();
+  if (start_date > end_date) {
+    return res.status(400).json({
+      msg: "Start date must be before end date",
+    });
+  }
+
+  const param_now = {
+    task_name: task_name,
+    task_description: task_description,
+    possible_label: possible_label,
+    start_date: start_date,
+    end_date: end_date,
+    min_credibility: min_credibility,
+  };
+
+  const new_task = await Task.findByIdAndUpdate(task_id, param_now, {
+    new: true,
+  });
+
+  return res.status(200).json({
+    msg: "Edit Suceed!",
+    new_task,
+  });
+};
+
 const get_task = async (req, res) => {
   const { expand, task_type_id } = req.query;
   let condition_now = [
@@ -355,4 +448,5 @@ module.exports = {
   take_task,
   get_task_by_id,
   toggle_task,
+  edit_task,
 };
