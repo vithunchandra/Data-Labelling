@@ -38,9 +38,9 @@ const queryHuggingFaceSummary = async (textToBeSummarized) => {
     },
   };
 
-  let text_now = "Summarize in few word :" + "\n";
+  let text_now = "Summarize the paragraph bellow to a few word!" + "\n\n";
   text_now += textToBeSummarized;
-  text_now += "\n" + "Tl;dr:";
+  text_now += "\n\n" + "Summary:";
 
   const params = {
     inputs: text_now,

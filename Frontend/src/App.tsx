@@ -14,7 +14,9 @@ import AddTaskType from "./pages/admin/AddTaskType";
 import WorkerDashboard from "./pages/worker/WorkerDashboard";
 import WorkerTask, { workerTaskLoader } from "./pages/worker/WorkerTask";
 import Marketplace, { marketplaceLoader } from "./pages/worker/Marketplace";
-import MarketTaskDetail, { marketTaskDetailLoader } from "./pages/worker/MarketTaskDetail";
+import MarketTaskDetail, {
+  marketTaskDetailLoader,
+} from "./pages/worker/MarketTaskDetail";
 import Task, { taskDetailLoader } from "./pages/worker/Task";
 import TaskData, { dataLoader } from "./pages/worker/TaskData";
 import RequesterDashboard from "./pages/requester/RequesterDashboard";
@@ -47,7 +49,14 @@ function App() {
       <Route index={true} element={<Navigate to={"signin"} />}></Route>,
       <Route path="/signup" element={<Signup />}></Route>,
       <Route path="/signin" element={<Signin />}></Route>,
-      <Route path="/admin" element={<Admin />}>
+      <Route
+        path="/admin"
+        element={
+          <Authenticate role="admin">
+            <Admin />
+          </Authenticate>
+        }
+      >
         <Route index element={<AdminDashboard />}></Route>
         <Route path="user" element={<AdminUser />}></Route>
         <Route path="user/:user_id" element={<AdminUserDetail />}></Route>
@@ -65,26 +74,27 @@ function App() {
         <Route path="keuangan" element={<AdminKeuangan />}></Route>
       </Route>,
 
-      <Route path="worker" 
+      <Route
+        path="worker"
         element={
           <Authenticate role="worker">
             <Worker />
           </Authenticate>
-        } 
+        }
       >
-        <Route index element={
-            <WorkerDashboard />
-        }></Route>
-        <Route path="marketplace" element={
-            <Marketplace />
-        } loader={marketplaceLoader}></Route>
+        <Route index element={<WorkerDashboard />}></Route>
+        <Route
+          path="marketplace"
+          element={<Marketplace />}
+          loader={marketplaceLoader}
+        ></Route>
         <Route
           path="marketplace/:task_id"
           element={<MarketTaskDetail />}
           loader={marketTaskDetailLoader}
         ></Route>
-        <Route 
-          path="task" 
+        <Route
+          path="task"
           element={<WorkerTask />}
           loader={workerTaskLoader}
         ></Route>
@@ -93,10 +103,7 @@ function App() {
           element={<Task />}
           loader={taskDetailLoader}
         >
-          <Route
-            index
-            element={<TaskInformation />}
-          ></Route>
+          <Route index element={<TaskInformation />}></Route>
           <Route
             path="viewdata"
             element={<TaskData />}
