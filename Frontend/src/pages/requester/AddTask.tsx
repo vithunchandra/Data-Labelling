@@ -1,26 +1,34 @@
-import task_type from "./../../dummy_data/task_type.json"
+// import task_type from "./../../dummy_data/task_type.json"
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { Chip, IconButton, Button } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+import { useFetcher, useLoaderData, useNavigate } from "react-router-dom";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { client } from "../../api/client";
+import useAuth from "../../customHooks/authenticate";
+import { AxiosError } from "axios";
 
 export default function AddTask() {
     const {register, handleSubmit, reset} = useForm();
-    const[taskHeader, setTaskHeader] = useState<{name: string, type: string, instruction: string}>();
+    const[taskHeader, setTaskHeader] = useState<{name: string, type: string, instruction: string, credibility: number}>();
     const[data, setData] = useState<Array<string>>([""]);
     const[hapus, setHapus] = useState<number>(-1);
     const navigate = useNavigate()
+    const fetcher = useFetcher()
+    const task_type = useLoaderData();
+    console.log(task_type);
+    
 
     return (
         <form onSubmit={handleSubmit(data => {
             setTaskHeader({
                 name: data.name,
                 type: data.type,
-                instruction: data.instruction
+                instruction: data.instruction,
+                credibility: data.credibility
             })
             if(hapus != -1){
                 const tmp = data.data.slice()
@@ -28,7 +36,11 @@ export default function AddTask() {
                 setData(tmp)
                 setHapus(-1)
             }else{
-                console.log(data);
+                fetcher.submit({...data, data: JSON.stringify(data.data)}, {
+                    method: "post",
+                    encType: "application/x-www-form-urlencoded",
+                    action: "/requester/create_task/add"
+                })
                 navigate("..",{
                     relative: "path"
                 })
@@ -46,17 +58,23 @@ export default function AddTask() {
                     <label className="mb-1 fs-4">Name: </label>
                     <input type="text" defaultValue={taskHeader?.name} className="form-control" required {...register("name")} placeholder="Name" />
                 </div>
-                <div className="form-group mb-3">
-                    <label className="mb-1 fs-4">Type: </label>
-                    <select className="form-control" {...register("type")} defaultValue={taskHeader?.type}>
-                        {
-                            task_type.map((item, index) => {
-                                return <option key={index} value={item.name}>
-                                    {item.name}
-                                </option>
-                            })
-                        }
-                    </select>
+                <div className="form-group mb-3 d-flex">
+                    <div className="w-75 me-5">
+                        <label className="mb-1 fs-4">Type: </label>
+                        <select className="form-control" {...register("type")} defaultValue={task_type[0]._id}>
+                            {
+                                task_type.map((item, index) => {
+                                    return <option key={index} value={item._id}>
+                                        {item.name}
+                                    </option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div className="d-flex flex-column w-25">
+                        <label className="mb-1 fs-4">Credibility: </label>
+                        <input type="number" className="form-control" defaultValue={50} min={0} max={100} required {...register("credibility")} />
+                    </div>
                 </div>
                 <div className="form-group mb-3">
                     <label className="mb-1 fs-4">Instruction: </label>
@@ -94,4 +112,59 @@ export default function AddTask() {
             </div>
         </form>
     )
+}
+
+export async function AddTaskAction ({request, params} : {request: any, params: any}) {
+    const formData = await request.formData();
+    const {getToken} = useAuth();
+
+    const task_name = formData.get("name")
+    const task_type = formData.get("type")
+    const task_data = JSON.parse(formData.get("data"))
+    const task_credibility = formData.get("credibility")
+    const task_instruction = formData.get("instruction")
+    const task_end_date = new Date(Date.now()+604800000).toISOString();
+    // console.log(task_end_date);
+
+    try{
+        const task = await client.post(
+            "/task/create",
+            {task_name, task_type_id: task_type, task_credibility, task_description: task_instruction, end_date: task_end_date},
+            {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                },
+            }
+        )       
+        
+        const data = await client.post(
+            "/data/bulk_create",
+            {task_id: task.data._id, data: task_data},
+            {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                },
+            }
+        )
+        return {task: task.data, data: data.data}
+    }catch(err){
+        if(err instanceof AxiosError){
+            return console.log(err.response?.data.message)
+        }
+        return console.log(err)
+    }
+}
+
+export async function getAllTaskType ({params}) {
+    try{
+        const response = await client.get(
+            "/task_type"
+        )
+        return response.data
+    }catch(err){
+        if(err instanceof AxiosError){
+            return console.log(err.response?.data.message)
+        }
+        return console.log(err)
+    }
 }

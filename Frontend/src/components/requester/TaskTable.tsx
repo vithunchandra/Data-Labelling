@@ -1,12 +1,23 @@
-import Task from "../../interface/TaskInterface";
+// import Task from "../../interface/TaskInterface";
 import { Button } from "@mui/material";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { Link } from "react-router-dom";
+import { Link, useFetcher } from "react-router-dom";
 import UnpublishedIcon from '@mui/icons-material/Unpublished';
 import PublishIcon from '@mui/icons-material/Publish';
 import { Fragment } from "react";
+import ITask from "../../interface/ITask";
 
-export default function TaskTable({task}: {task: Task[]}) {
+export default function TaskTable({task}: {task: ITask[]}) {
+    const fetcher = useFetcher();
+
+    const action = (_id : string) => {
+        fetcher.submit({_id}, {
+            method: "put",
+            encType: "application/x-www-form-urlencoded",
+            action: "/requester/monitor_task"
+        })
+    }
+
     return (
         <div>
             <table className="table">
@@ -45,17 +56,17 @@ export default function TaskTable({task}: {task: Task[]}) {
                                 <Fragment key={index}>
                                     <tr>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{index + 1}</td>
-                                        <td className="align-middle text-capitalize text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.name}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.type}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.price}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.credibility}</td>
+                                        <td className="align-middle text-capitalize text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_name}</td>
+                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_type[0].name}</td>
+                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_type[0].price}</td>
+                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.min_credibility}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.data.length}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.status? "Opened" : "Closed"}</td>
+                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.active? "Opened" : "Closed"}</td>
                                         <td className="align-middle text-center">
-                                            {item.status ? 
-                                                <Button variant="contained" startIcon={<UnpublishedIcon />} color="error">Close</Button>
+                                            {item.active ? 
+                                                <Button variant="contained" startIcon={<UnpublishedIcon />} color="error" onClick={() => action(item._id)}>Close</Button>
                                                 :
-                                                <Button variant="contained" startIcon={<PublishIcon />} color="success">Open</Button>
+                                                <Button variant="contained" startIcon={<PublishIcon />} color="success" onClick={() => action(item._id)}>Open</Button>
                                             }
                                         </td>
                                     </tr>
@@ -63,7 +74,7 @@ export default function TaskTable({task}: {task: Task[]}) {
                                         <td colSpan={8}>
                                             <div id={"detail"+index} className="collapse" data-bs-parent="#detail_parent">
                                                 <span className='fw-bold fs-5'>Instruction: </span>
-                                                <p className="ps-4">{item.instruction}</p>
+                                                <p className="ps-4">{item.task_description}</p>
                                                 <div className="w-100 text-center">
                                                     <Link to={index.toString()}>
                                                         <Button variant="contained" startIcon={<InfoOutlinedIcon />}>Detail</Button>

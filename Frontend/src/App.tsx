@@ -2,6 +2,7 @@ import "./App.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -17,11 +18,11 @@ import MarketTaskDetail, { marketTaskDetailLoader } from "./pages/worker/MarketT
 import Task, { taskDetailLoader } from "./pages/worker/Task";
 import TaskData, { dataLoader } from "./pages/worker/TaskData";
 import RequesterDashboard from "./pages/requester/RequesterDashboard";
-import CreateTask from "./pages/requester/CreateTask";
-import AddTask from "./pages/requester/AddTask";
+import CreateTask, { getUserTasks } from "./pages/requester/CreateTask";
+import AddTask, { AddTaskAction, getAllTaskType } from "./pages/requester/AddTask";
 import EditTask, { taskEditLoader } from "./pages/requester/EditTask";
 import TopUp from "./pages/requester/TopUp";
-import MonitorTask from "./pages/requester/MonitorTask";
+import MonitorTask, { MonitorTaskAction } from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
 import Labelling, { labellingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
@@ -43,7 +44,8 @@ import Authenticate from "./pages/authentication/Authenticate";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements([
-      <Route path="/signup" index={true} element={<Signup />}></Route>,
+      <Route index={true} element={<Navigate to={"signin"} />}></Route>,
+      <Route path="/signup" element={<Signup />}></Route>,
       <Route path="/signin" element={<Signin />}></Route>,
       <Route path="/admin" element={<Admin />}>
         <Route index element={<AdminDashboard />}></Route>
@@ -109,16 +111,20 @@ function App() {
         <Route path="wallet" element={<MyWallet />}></Route>
       </Route>,
 
-      <Route path="requester" element={<Requester />}>
+      <Route path="requester" element={
+        <Authenticate role="requester">
+            <Requester />
+        </Authenticate>
+      }>
         <Route index element={<RequesterDashboard />}></Route>
-        <Route path="create_task" element={<CreateTask />}></Route>
-        <Route path="create_task/add" element={<AddTask />}></Route>
+        <Route path="create_task" element={<CreateTask />} loader={getUserTasks as any}></Route>
+        <Route path="create_task/add" element={<AddTask />} loader={getAllTaskType} action={AddTaskAction}></Route>
         <Route
           path="create_task/:task_id"
           element={<EditTask />}
           loader={taskEditLoader as any}
         ></Route>
-        <Route path="monitor_task" element={<MonitorTask />}></Route>
+        <Route path="monitor_task" element={<MonitorTask />} loader={getUserTasks as any} action={MonitorTaskAction}></Route>
         <Route
           path="monitor_task/:task_id"
           element={<DetailTask />}
