@@ -1,12 +1,21 @@
 import { Avatar, Button } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import ITask from "../../interface/ITask";
-import { useState } from "react";
 
-export default function TaskTable({ task }: { task: ITask[] }) {
-  const [skip, setSkip] = useState(0);
-  
+interface ITaskTable{
+  task: ITask[];
+}
+
+export default function TaskTable({ task }: ITaskTable) {
+  let query = ''
+  const [searchParams, setSearchParams] = useSearchParams()
+  searchParams.forEach((value, key) => {
+    if(value){
+        query += '&' + key + '=' + value
+    }
+  })
+
   return (
     <table className="table">
       <thead>
@@ -22,7 +31,7 @@ export default function TaskTable({ task }: { task: ITask[] }) {
           <th
             className="align-middle"
             style={{
-              width: "25%",
+              width: "15%",
             }}
           >
             Nama
@@ -30,10 +39,18 @@ export default function TaskTable({ task }: { task: ITask[] }) {
           <th
             className="align-middle"
             style={{
-              width: "30%",
+              width: "20%",
             }}
           >
             Requester
+          </th>
+          <th
+            className="align-middle text-center"
+            style={{
+              width: "15%",
+            }}
+          >
+            Type
           </th>
           <th
             className="align-middle text-center"
@@ -44,7 +61,7 @@ export default function TaskTable({ task }: { task: ITask[] }) {
             Total Data
           </th>
           <th
-            className="align-middle"
+            className="align-middle text-center"
             style={{
               width: "20%",
             }}
@@ -52,7 +69,7 @@ export default function TaskTable({ task }: { task: ITask[] }) {
             Closed Date
           </th>
           <th
-            className="align-middle"
+            className="align-middle text-end"
             style={{
               width: "10%",
             }}
@@ -77,12 +94,13 @@ export default function TaskTable({ task }: { task: ITask[] }) {
                   <div className="fw-bold">{item.requester.name}</div>
                 </div>
               </td>
+              <td className="align-middle text-center">{item.task_type.name}</td>
               <td className="align-middle text-center">{item.data.length}</td>
-              <td className="align-middle">
+              <td className="align-middle text-center">
                 <span className="text-secondary">{new Date(item.end_date).toDateString()}</span>
               </td>
-              <td className="align-middle">
-                <Link to={item._id}>
+              <td className="align-middle text-end">
+                <Link to={`${item._id}?${query}`}>
                   <Button variant="contained" startIcon={<InfoOutlinedIcon />}>
                     Detail
                   </Button>

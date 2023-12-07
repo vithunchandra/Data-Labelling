@@ -15,7 +15,7 @@ async function userSeeder(){
     await User.deleteMany({})
 
     const user = [];
-    for(let i=0; i<20; i++){
+    for(let i=0; i<50; i++){
         const roleIndex = Math.floor(Math.random() * 2)
         user.push({
             email: faker.internet.email(),
@@ -28,13 +28,13 @@ async function userSeeder(){
         })
     }
 
-    await User.create(user)
+    await User.insertMany(user)
 }
 
 async function taskTypeSeeder(){
     await Task_Type.deleteMany({})
 
-    await Task_Type.create([
+    await Task_Type.insertMany([
         {
             name: 'Classification',
             price: 0.5
@@ -62,19 +62,19 @@ async function taskSeeder(){
     const types = await Task_Type.find()
     const tasks = []
     for(let i=0; i<requester.length; i++){
-        const totalTask = faker.number.int({min: 0, max: 5})
+        const totalTask = faker.number.int({min: 0, max: 50})
         for(let j=0; j<totalTask; j++){
             const type = types[faker.number.int({min: 0, max: 3})]
             let possible_label = []
             if(type.name === 'Classification'){
-                for(let k=0; k<faker.number.int({min: 1, max: 10}); k++){
+                for(let k=0; k<faker.number.int({min: 2, max: 10}); k++){
                     possible_label.push(
                         faker.word.adjective()
                     )
                 }
             }
             let workerObject = [];
-            for(let k=0; k<faker.number.int({min: 0, max: 5}); k++){
+            for(let k=0; k<faker.number.int({min: 0, max: 20}); k++){
                 const workerIndex = faker.number.int({min: 0, max: worker.length - 1})
                 workerObject.push({
                     user_id: worker[workerIndex]._id,
@@ -99,7 +99,7 @@ async function taskSeeder(){
         }
     }
 
-    await Task.create(tasks)
+    await Task.insertMany(tasks)
 }
 
 async function dataSeeder(){
@@ -109,15 +109,19 @@ async function dataSeeder(){
     console.log(tasks[0])
     for(let i=0; i<tasks.length; i++){
         const task = tasks[i]
-        for(let j=0; j<faker.number.int({min: 0, max: 20}); j++){
-            const text = faker.word.words({count: {min: 5, max: 20}})
-            const data = await Data.create({
+        const data = []
+        for(let j=0; j<faker.number.int({min: 10, max: 100}); j++){
+            const text = faker.word.words({count: {min: 5, max: 50}})
+            data.push({
                 text,
                 price: text.length * task.task_type.price,
                 task: task._id,
                 labels: [] 
             })
-            task.data.push(data._id)
+        }
+        const results = await Data.insertMany(data)
+        for(const result of results){
+            task.data.push(result._id)
         }
         await task.save()
     }
@@ -131,7 +135,7 @@ async function labelSeeder(){
             const data = await Data.findById(datumRef)
             const workers = task.worker
             for(const worker of workers){
-                const isLabeled = Math.random() < 0.75
+                const isLabeled = Math.random() < 0.9
                 if(isLabeled){
                     let label;
                     if(task.task_type.name === 'Classification'){
@@ -141,7 +145,7 @@ async function labelSeeder(){
                     }
                     data.labels.push({
                         answer: label,
-                        worker: worker._id
+                        worker: worker.user_id
                     })
                 }
             }
@@ -158,15 +162,19 @@ async function chatSeeder(){
         const workers = task.worker
         for(const worker of workers){
             let chats = [];
-            for(let i=0; i<faker.number.int({min: 0, max: 20}); i++){
-                const user = Math.random() < 0.5 ? worker.user_id : task.requester
-                const chat = await Chat.create({
+            for(let i=0; i<faker.number.int({min: 5, max: 50}); i++){
+                const {user, targetUser} = Math.random() < 0.5 ? {user: worker.user_id, targetUser: task.requester} : {user: task.requester, targetUser: worker.user_id}
+                chats.push({
                     user,
+                    targetUser,
                     task_id: task._id,
                     text_chat: faker.word.words({count: {min: 1, max: 15}}),
                     is_read: Math.random() < 0.5
                 })
-                worker.chat.push(chat._id)
+            }
+            const results = await Chat.insertMany(chats)
+            for(const result of results) {
+                worker.chat.push(result._id)
             }
         }
         await task.save()
@@ -174,11 +182,11 @@ async function chatSeeder(){
 }
 
 async function seedAll(){
-    // await userSeeder()
-    // await taskTypeSeeder()
-    // await taskSeeder()
-    // await dataSeeder()
-    // await labelSeeder()
+    await userSeeder()
+    await taskTypeSeeder()
+    await taskSeeder()
+    await dataSeeder()
+    await labelSeeder()
     await chatSeeder()
 
     console.log('Data seeded successfully')

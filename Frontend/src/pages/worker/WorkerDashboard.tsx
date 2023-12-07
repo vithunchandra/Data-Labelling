@@ -7,6 +7,9 @@ import task from '../../dummy_data/task.json';
 import LastTask from '../../components/worker/LastTask';
 import chat from '../../dummy_data/chat.json';
 import LastChat from '../../components/worker/LastChat';
+import { client } from '../../api/client';
+import useAuth from '../../customHooks/authenticate';
+import { AxiosError } from 'axios';
 
 export default function WorkerDashboard(){
     const progressInfo = [
@@ -59,4 +62,33 @@ export default function WorkerDashboard(){
             </div>
         </>
     )
+}
+
+export async function workerDashboardLoader(){
+    const {getToken} = useAuth()
+    try{
+        let loaderObject = {}
+        let response = await client.get('worker/task/stats', {
+            headers: {Authorization: `Bearer ${getToken()}`}
+        })
+        loaderObject = {...loaderObject, ...response.data}
+        
+        response = await client.get('worker/task/last', {
+            headers: {Authorization: `Bearer ${getToken()}`}
+        })
+        loaderObject = {...loaderObject, ...response.data}
+
+        response = await client.get('worker/lastchats', {
+            headers: {Authorization: `Bearer ${getToken()}`}
+        })
+        loaderObject = {...loaderObject, ...response.data}
+
+        return loaderObject
+    }catch(err){
+        if(err instanceof AxiosError){
+            console.log(err.response?.data.message)
+        }else{
+            console.log(err)
+        }
+    }
 }

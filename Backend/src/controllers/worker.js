@@ -1,5 +1,30 @@
-const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount, getAllChat } = require('../dao/worker');
+const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount, getAllChat, getFinishedTask, taskStats, getLastChats } = require('../dao/worker');
 const { Data, Task, Chat } = require('../models');
+
+async function taskStatistics(req, res){
+    const user = req.user;
+    const results = await taskStats({user_id: user._id})
+
+    return res.status(200).json({...results})
+}
+
+async function lastTask(req, res){
+    const user = req.user
+    const task_id = req.user.tasks[0]
+    if(!task_id){
+        return res.status(200).json({})
+    }
+    const task = await getTask({task_id: task_id, user_id: user._id})
+    const data = await getAllData({task_id: task_id, user_id: user._id, skip: 0})
+    return res.status(200).json({task, data})
+}
+
+async function lastChats(req, res){
+    const user = req.user
+    const chats = await getLastChats({user_id: user._id})
+
+    return res.status(200).json({})
+}
 
 async function market (req, res){
     const user = req.user
@@ -8,9 +33,9 @@ async function market (req, res){
         return res.status(403).json({message: 'Forbidden request'})
     }
 
-    const marketTask = await getMarketTasks({user_id: user._id, skip: (page - 1) * 10})
-    const totalMarketTask = await getMarketTasksCount({user_id: user._id})
-    let totalPages = (totalMarketTask / 10) + (totalMarketTask % 10 > 0 ? 1 : 0)
+    const marketTask = await getMarketTasks({user_id: user._id, skip: (page - 1) * 10, ...req.query})
+    const totalMarketTask = await getMarketTasksCount({user_id: user._id, ...req.query})
+    let totalPages = (totalMarketTask / 10)
 
     return res.status(200).json({tasks: marketTask, totalPages: Math.ceil(totalPages)})
 }
@@ -59,8 +84,15 @@ async function tasks(req, res){
         return res.status(403).json({message: 'Forbidden request'})
     }
     
-    const userTasks = await getUserTasks({user_id: user._id, skip: (page - 1) * 10})
-    const totalUserTasks = await getUserTasksCount({user_id: user._id})
+    const userTasks = await getUserTasks({
+        user_id: user._id, 
+        skip: (page - 1) * 10,
+        ...req.query
+    })
+    const totalUserTasks = await getUserTasksCount({
+        user_id: user._id,
+        ...req.query
+    })
     const totalPages = totalUserTasks / 10
 
     return res.status(200).json({tasks: userTasks, totalPages: Math.ceil(totalPages)})
@@ -69,6 +101,7 @@ async function tasks(req, res){
 async function task(req, res){
     const user = await req.user
     const {task_id} = req.params
+    const {type, startDate, name} = req.query
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
@@ -78,6 +111,8 @@ async function task(req, res){
     if(!task){
         return res.status(404).json({message: 'Task not found'})
     }
+    user.tasks[0] = task._id
+    await user.save()
 
     return res.status(200).json({task, prev: prevTask, next: nextTask});
 }
@@ -85,19 +120,20 @@ async function task(req, res){
 async function getTaskData(req, res){
     const user = req.user
     const {task_id} = req.params
-    const page = req.query.page
+    const {status, question, page} = req.query
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
 
-    const result = await getAllData({task_id, user_id: user._id, skip: (page - 1) * 5})
+    const result = await getAllData({task_id, user_id: user._id, skip: (page - 1) * 5, status, question})
     const data = result.map(item => item.toObject())
     for(const item of data){
         let label = item.labels.length > 0 ? item.labels[0] : undefined;
         item['label'] = label
         item.labels = undefined
     }
-    const totalData = await getAllDataCount({task_id})
+    const totalData = await getAllDataCount({task_id, user_id: user._id, status, question})
+    console.log(totalData)
     const totalPages = totalData / 5
 
     return res.status(200).json({data, totalPages: Math.ceil(totalPages)})
@@ -187,6 +223,9 @@ async function storeChat(req, res){
 }
 
 module.exports = {
+    taskStatistics,
+    lastTask,
+    lastChats,
     market,
     marketTask,
     acceptTask,

@@ -1,13 +1,13 @@
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
-interface Options {
+interface IOptions {
     label: string;
     value: string | number;
 }
 
-interface FormRadio{
-    options: Options[];
+interface IFormRadio{
+    options: IOptions[];
     name: string;
     label: string;
     defaultValue: string | number;
@@ -15,7 +15,7 @@ interface FormRadio{
 }
 
 export function FormRadio(
-    {options, name, label, defaultValue, className}: FormRadio
+    {options, name, label, defaultValue, className}: IFormRadio
 ){
     const { control, } = useFormContext()
     return(

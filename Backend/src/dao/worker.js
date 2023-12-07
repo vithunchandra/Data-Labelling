@@ -1,18 +1,89 @@
 const db = require("../models")
 
-const getMarketTasks = async ({user_id, skip}) => {
+const taskStats = async ({user_id}) => {
+    let tasks = await db.Task.find(
+        {
+            worker: {
+                $elemMatch: {
+                    user_id
+                }
+            }
+        }
+    ).populate('data')
+
+    const finishedTask = tasks.filter(task => {
+        if(task.data.length <= 0){ return false }
+        for(const data of task.data){
+            let isExist = false
+            for(const label of data.labels){
+                if(user_id.equals(label.worker) && label.answer){
+                    isExist = true
+                }
+            }
+            if(!isExist){
+                return false
+            }
+        }
+
+        return true
+    }).length
+
+    const unfinishedTask = tasks.length - finishedTask
+
+    return {tasks: tasks.length, finishedTask, unfinishedTask}
+}
+
+const getLastChats = async ({user_id}) => {
     const tasks = await db.Task.find(
         {
             worker: {
+                $elemMatch: {
+                    user_id
+                }
+            }
+        },{_id: 1}
+    )
+    const tasksId = tasks.map(item => item._id)
+
+    const chats = await db.Chat.find(
+        {
+            task_id: {
+                $in: tasksId
+            },
+            is_read: false,
+            user: {
+                $ne: user_id
+            }
+        },
+        {},
+        {
+            sort: {
+                timestamp: -1
+            }, limit: 5
+        }
+    )
+}
+
+const getMarketTasks = async ({user_id, skip, type, startDate, name}) => {
+    const filter = {}
+    if(startDate){
+        filter.start_date = {
+            $gte: new Date(startDate)
+        }
+    }
+    if(name){
+        filter.task_name = { $regex: name, $options: 'i'}
+    }
+
+    let tasks = await db.Task.find(
+        {
+            worker: {
                 $not: {
-                    $elemMatch: {
-                        user_id
-                    }
+                    $elemMatch: {user_id}
                 }
             },
-            ban_list: {
-                $nin: [user_id]
-            }
+            ban_list: {$nin: [user_id]},
+            ...filter
         },
         {
             worker: 0,
@@ -20,19 +91,35 @@ const getMarketTasks = async ({user_id, skip}) => {
         },
         {
             skip,
-            limit: 10,
             sort: {
-                _id: 1
+                _id: 1,
             }
         }
     ).populate('requester')
     .populate('task_type')
 
-    return tasks
+
+    if(type){
+        tasks = tasks.filter(task => task.task_type.name === type)
+    }
+
+    tasks = tasks.splice(0, 10)
+    
+    return tasks;
 }
 
-const getMarketTasksCount = async ({user_id}) => {
-    const tasks = await db.Task.find(
+const getMarketTasksCount = async ({user_id, type, startDate, name}) => {
+    const filter = {}
+    if(startDate){
+        filter.start_date = {
+            $gte: new Date(startDate)
+        }
+    }
+    if(name){
+        filter.task_name = { $regex: name, $options: 'i'}
+    }
+
+    let tasks = await db.Task.find(
         {
             worker: {
                 $not: {
@@ -43,11 +130,16 @@ const getMarketTasksCount = async ({user_id}) => {
             },
             ban_list: {
                 $nin: [user_id]
-            }
+            },
+            ...filter
         },
-    ).count()
+    ).populate('task_type')
 
-    return tasks
+    if(type){
+        tasks = tasks.filter(task => task.task_type.name === type)
+    }
+    
+    return tasks.length;
 }
 
 const getMarketTask = async ({task_id, user_id}) => {
@@ -113,8 +205,18 @@ const getNearMarketTask = async ({task_id, user_id, direction}) => {
     return task
 }
 
-const getUserTasks = async ({user_id, skip}) => {
-    const tasks = await db.Task.find(
+const getUserTasks = async ({user_id, skip, type, startDate, name}) => {
+    const filter = {}
+    if(startDate){
+        filter.start_date = {
+            $gte: new Date(startDate)
+        }
+    }
+    if(name){
+        filter.task_name = { $regex: name, $options: 'i'}
+    }
+
+    let tasks = await db.Task.find(
         {
             worker: {
                 $elemMatch: {
@@ -123,7 +225,8 @@ const getUserTasks = async ({user_id, skip}) => {
             },
             ban_list: {
                 $nin: [user_id]
-            }
+            },
+            ...filter
         },
         {
             worker: 0,
@@ -131,17 +234,33 @@ const getUserTasks = async ({user_id, skip}) => {
         },
         {
             skip,
-            limit: 10,
             sort: {_id: 1}
         }
     ).populate('requester')
     .populate('task_type')
+
+
+    if(type){
+        tasks = tasks.filter(task => task.task_type.name === type)
+    }
+
+    tasks = tasks.splice(0, 10)
     
     return tasks;
 }
 
-const getUserTasksCount = async ({user_id}) => {
-    const tasks = await db.Task.find(
+const getUserTasksCount = async ({user_id, type, startDate, name}) => {
+    const filter = {}
+    if(startDate){
+        filter.start_date = {
+            $gte: new Date(startDate)
+        }
+    }
+    if(name){
+        filter.task_name = { $regex: name, $options: 'i'}
+    }
+
+    let tasks = await db.Task.find(
         {
             worker: {
                 $elemMatch: {
@@ -150,11 +269,16 @@ const getUserTasksCount = async ({user_id}) => {
             },
             ban_list: {
                 $nin: [user_id]
-            }
+            },
+            ...filter
         }
-    ).count()
+    ).populate('task_type')
 
-    return tasks
+    if(type){
+        tasks = tasks.filter(task => task.task_type.name === type)
+    }
+
+    return tasks.length
 }
 
 const getTask = async ({task_id, user_id}) => {
@@ -183,6 +307,17 @@ const getTask = async ({task_id, user_id}) => {
 }
 
 const getNearTask = async ({task_id, user_id, direction}) => {
+    // console.log(type, startDate, name)
+    // const filter = {}
+    // if(startDate){
+    //     filter.start_date = {
+    //         $gte: new Date(startDate)
+    //     }
+    // }
+    // if(name){
+    //     filter.task_name = { $regex: name, $options: 'i'}
+    // }
+
     let comparator = '$lt'
     let sort = -1
 
@@ -197,25 +332,33 @@ const getNearTask = async ({task_id, user_id, direction}) => {
                 $elemMatch: {
                     user_id
                 }
-            }
+            },
+            // ...filter
         },
         {
             worker: 0,
             ban_list: 0,
         },
         {
-            sort: {_id: sort},
-            limit: 1
+            sort: {_id: sort}
         }
     ).populate('requester')
     .populate('task_type')
 
     return task
+    // if(type){
+    //     const task = results.filter(item => item.task_type.name === type)[0];
+    //     return task
+    // }else{
+    //     return results[0]
+    // }
 }
 
-const getAllData = async ({task_id, user_id, skip}) => {
-    const data = await db.Data.find(
-        {task: task_id},
+const getAllData = async ({task_id, user_id, skip, status, question}) => {
+    let data = await db.Data.find(
+        {
+            task: task_id
+        },
         {
             text: 1,
             price: 1,
@@ -226,16 +369,49 @@ const getAllData = async ({task_id, user_id, skip}) => {
                 }
             }
         },
-        {skip, limit: 5, sort: {_id: 1}}
+        {skip, sort: {_id: 1}}
     )
+    data = data.filter(item => {
+        let isValid = true;
+        if(item.labels[0]?.answer && status === 'false'){
+            isValid = false
+        }else if(!item.labels[0]?.answer && status === 'true'){
+            isValid = false
+        }
 
-    return data
+        if(question && !String(item.text).includes(String(question).toLowerCase())){
+            isValid = false
+        }
+        return isValid
+    })
+
+    return data.splice(0, 5)
 }
 
-const getAllDataCount = async ({task_id}) => {
-    const data = await db.Data.find({task: task_id}).countDocuments()
-
-    return data
+const getAllDataCount = async ({task_id, user_id, status, question}) => {
+    let data = await db.Data.find({task: task_id}, {
+        text: 1,
+        price: 1,
+        task: 1,
+        labels: {
+            $elemMatch: {
+                worker: user_id
+            }
+        }
+    })
+    data = data.filter(item => {
+        let isValid = true;
+        if(item.labels[0]?.answer && status === 'false'){
+            isValid = false
+        }else if(!item.labels[0]?.answer && status === 'true'){
+            isValid = false
+        }
+        if(!String(item.text).includes(String(question).toLowerCase())){
+            isValid = false
+        }
+        return isValid
+    })
+    return data.length
 }
 
 const getData = async ({data_id, user_id}) => {
@@ -325,13 +501,14 @@ const getAllChat = async ({user_id, task_id}) => {
     .populate({
         path: 'worker.chat',
         model: 'Chat',
-
     })
 
     return task
 }
 
 module.exports = {
+    taskStats,
+    getLastChats,
     getMarketTasks,
     getMarketTasksCount,
     getMarketTask,

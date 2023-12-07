@@ -72,8 +72,8 @@ export default function Labelling(){
                 <form className="mt-3" onSubmit={formProps.handleSubmit(labelling)}>
                     {
                         task.task_type.name === 'Classification' && task.possible_label ? 
-                            <FormSelect className="" name="input" label="Label"  defaultValue={data.label ? data.label.answer : ''} options={possible_label}/> : 
-                            <FormTextField className="" name="input" label="Label" type="text" variant="outlined" defaultValue={data.label ? data.label.answer : ''}/>
+                            <FormSelect className="" name="input" label="Label"  defaultValue={data.label ? data.label.answer : ''} options={possible_label} size="medium"/> : 
+                            <FormTextField className="" name="input" label="Label" type="text" variant="outlined" defaultValue={data.label ? data.label.answer : ''} size="medium"/>
                     }
                     <div className="row justify-content-between mt-5">
                         <div className="col-auto">

@@ -7,6 +7,10 @@ const ChatSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    targetUser: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
     task_id: {
       type: Schema.Types.ObjectId,
       ref: "Task",

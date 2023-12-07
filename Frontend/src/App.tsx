@@ -11,7 +11,7 @@ import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
 import AddTaskType from "./pages/admin/AddTaskType";
-import WorkerDashboard from "./pages/worker/WorkerDashboard";
+import WorkerDashboard, { workerDashboardLoader } from "./pages/worker/WorkerDashboard";
 import WorkerTask, { workerTaskLoader } from "./pages/worker/WorkerTask";
 import Marketplace, { marketplaceLoader } from "./pages/worker/Marketplace";
 import MarketTaskDetail, {
@@ -82,7 +82,7 @@ function App() {
           </Authenticate>
         }
       >
-        <Route index element={<WorkerDashboard />}></Route>
+        <Route index element={<WorkerDashboard />} loader={workerDashboardLoader}></Route>
         <Route
           path="marketplace"
           element={<Marketplace />}

@@ -1,26 +1,28 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, FormControlPropsSizeOverrides, InputLabel, MenuItem, Select } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
+import { OverridableStringUnion } from '@mui/types';
 
-interface Options{
+interface IOptions{
     label: string;
     value: string | number;
 }
 
-interface FormControl{
-    options: Options[]
+interface IFormControl{
+    options: IOptions[]
     name: string;
     label: string;
+    size: OverridableStringUnion<"small" | "medium", FormControlPropsSizeOverrides> | undefined;
     defaultValue: string | number | undefined;
     className: string;
 }
 
 export default function FormSelect(
-    {options, name, label, defaultValue, className} : FormControl
+    {options, name, label, size, defaultValue, className} : IFormControl
 ){
     const {control} = useFormContext()
 
     return(
-        <FormControl fullWidth className={className}>
+        <FormControl fullWidth className={className} size={size}>
             <InputLabel id="select">{label}</InputLabel>
             <Controller 
                 name={name}
