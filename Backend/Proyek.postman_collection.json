@@ -1003,6 +1003,23 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Edit Task",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"task_id\": \"65701efa424d09971ec47a95\",\r\n    \"task_name\": \"Summary checking about anime\",\r\n    \"task_description\": \"Buatlah Rangkuman dari sinopsis ini dalam beberapa kalimat\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-23\",\r\n    \"possible_label\":[\"bagus\",\"jelek\"],\r\n    \"min_credibility\":80\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1723,7 +1740,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0Njc3MCwiZXhwIjoxNzAxOTMzMTcwfQ.5JswIaGX4bBLQl8NImEbpu1wJU3ebMG9ntOK66IuRDM",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6NDAwMDAsInRhc2tzIjpbIjY1NmQ3YTYxNjMzMDY0OTE1NDJmYTA3ZCIsIjY1NzAxZWZhNDI0ZDA5OTcxZWM0N2E5NSJdLCJfX3YiOjB9LCJpYXQiOjE3MDE5MzY3NDUsImV4cCI6MTcwMjAyMzE0NX0.6YwLUe1udFNuwzm4yXOHOEyKt0LUXkIkYXyeDqOIjoU",
 									"type": "string"
 								}
 							]
@@ -1732,7 +1749,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"task_id\":\"65701efa424d09971ec47a95\",\r\n    \"data\": [\r\n        \"Summary 1\",\r\n        \"Summary 2\"\r\n    ]\r\n}",
+							"raw": "{\r\n    \"task_id\":\"65701efa424d09971ec47a95\",\r\n    \"data\": [\r\n        \"Summary 1\",\r\n        \"Summary 2\",\r\n        \"Summary 3\",\r\n        \"Summary 4\",\r\n        \"Summary 5\",\r\n        \"Summary 6\"\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1835,6 +1852,189 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"msg\": \"All data created sucesfully!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Bulk Edit Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2ZDdhNjE2MzMwNjQ5MTU0MmZhMDdkIl0sIl9fdiI6MH0sImlhdCI6MTcwMTg0Njc3MCwiZXhwIjoxNzAxOTMzMTcwfQ.5JswIaGX4bBLQl8NImEbpu1wJU3ebMG9ntOK66IuRDM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"new_data\" : [\r\n        {\r\n            \"data_id\":\"657181154c74f7d557e264bc\",\r\n            \"text\":\"Summary 3 Updated!\"\r\n        },\r\n        {\r\n            \"data_id\":\"657181154c74f7d557e264b8\",\r\n            \"text\":\"Summary 2 Updated!\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/data/bulk_edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"data",
+								"bulk_edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6NDAwMDAsInRhc2tzIjpbIjY1NmQ3YTYxNjMzMDY0OTE1NDJmYTA3ZCIsIjY1NzAxZWZhNDI0ZDA5OTcxZWM0N2E5NSJdLCJfX3YiOjB9LCJpYXQiOjE3MDE5MzY3NDUsImV4cCI6MTcwMjAyMzE0NX0.6YwLUe1udFNuwzm4yXOHOEyKt0LUXkIkYXyeDqOIjoU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/data/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"data",
+								"delete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete data",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/data/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"data",
+										"delete"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Bulk Delete Data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6NDAwMDAsInRhc2tzIjpbIjY1NmQ3YTYxNjMzMDY0OTE1NDJmYTA3ZCIsIjY1NzAxZWZhNDI0ZDA5OTcxZWM0N2E5NSJdLCJfX3YiOjB9LCJpYXQiOjE3MDE5MzY3NDUsImV4cCI6MTcwMjAyMzE0NX0.6YwLUe1udFNuwzm4yXOHOEyKt0LUXkIkYXyeDqOIjoU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deleted_data_id\" : [\r\n        \"657181154c74f7d557e264c4\",\r\n        \"657181154c74f7d557e264c0\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/data/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"data",
+								"delete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bulk Delete Data",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"deleted_data_id\" : [\r\n        \"657181154c74f7d557e264c4\",\r\n        \"657181154c74f7d557e264c0\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/data/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"data",
+										"delete"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				}
