@@ -1,6 +1,6 @@
 // import task_type from "./../../dummy_data/task_type.json"
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { Chip, IconButton, Button } from '@mui/material';
@@ -19,8 +19,17 @@ export default function AddTask() {
     const navigate = useNavigate()
     const fetcher = useFetcher()
     const task_type = useLoaderData();
+    const[loading, setLoading] = useState(false);
     console.log(task_type);
     
+    useEffect(() => {
+        if(fetcher.state === "idle" && loading){
+            setLoading(false);
+            navigate("..",{
+                relative: "path"
+            })
+        }   
+    }, [fetcher.state])
 
     return (
         <form onSubmit={handleSubmit(data => {
@@ -36,14 +45,16 @@ export default function AddTask() {
                 setData(tmp)
                 setHapus(-1)
             }else{
-                fetcher.submit({...data, data: JSON.stringify(data.data)}, {
-                    method: "post",
-                    encType: "application/x-www-form-urlencoded",
-                    action: "/requester/create_task/add"
-                })
-                navigate("..",{
-                    relative: "path"
-                })
+                if(data.data && data.data.length != 0){
+                    fetcher.submit({...data, data: JSON.stringify(data.data)}, {
+                        method: "post",
+                        encType: "application/x-www-form-urlencoded",
+                        action: "/requester/create_task/add"
+                    })
+                    setLoading(true);
+                }else{
+                    alert("min data 1")
+                }
             }
             reset()
         })}>
@@ -96,7 +107,7 @@ export default function AddTask() {
                             <div className="form-group row d-flex align-items-center" key={index}>
                                 <span className="col-1 text-center fs-5">{index+1} :</span>
                                 <div className="col-10">
-                                    <input defaultValue={item} className="form-control" {...register("data."+index)} />
+                                    <input defaultValue={item} required className="form-control" {...register("data."+index)} />
                                 </div>
                                 <div className="col-1">
                                     <IconButton type="submit" formNoValidate onClick={() => {
@@ -124,22 +135,20 @@ export async function AddTaskAction ({request, params} : {request: any, params: 
     const task_credibility = formData.get("credibility")
     const task_instruction = formData.get("instruction")
     const task_end_date = new Date(Date.now()+604800000).toISOString();
-    // console.log(task_end_date);
 
     try{
         const task = await client.post(
             "/task/create",
-            {task_name, task_type_id: task_type, task_credibility, task_description: task_instruction, end_date: task_end_date},
+            {task_name, task_type_id: task_type, min_credibility: task_credibility, task_description: task_instruction, end_date: task_end_date},
             {
                 headers: {
                     Authorization: `Bearer ${getToken()}`
                 },
             }
-        )       
-        
+        )
         const data = await client.post(
             "/data/bulk_create",
-            {task_id: task.data._id, data: task_data},
+            {task_id: task.data.data._id, data: task_data},
             {
                 headers: {
                     Authorization: `Bearer ${getToken()}`

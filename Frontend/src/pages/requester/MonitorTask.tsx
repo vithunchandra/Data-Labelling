@@ -1,5 +1,8 @@
 import { useLoaderData } from 'react-router-dom';
 import TaskTable from '../../components/requester/TaskTable'
+import useAuth from '../../customHooks/authenticate';
+import { client } from '../../api/client';
+import { AxiosError } from 'axios';
 // import task from '../../dummy_data/task.json'
 
 export default function MonitorTask() {
@@ -15,11 +18,27 @@ export default function MonitorTask() {
     )
 }
 
-export async function MonitorTaskAction ({request, params} : {request: any, params: any}) {    
+export async function ToggleTaskAction ({request, params} : {request: any, params: any}) {    
     const formData = await request.formData();
     const _id = formData.get("_id");
-    
-    alert(_id);
-    
-    return _id
+    const {getToken} = useAuth();
+
+    try{
+        const response = await client.post(
+            "/task/toggle_active/",
+            {task_id: _id},
+            {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                }
+            }
+        )
+        
+        return response.data
+    }catch(err){
+        if(err instanceof AxiosError){
+            return console.log(err.response?.data.message)
+        }
+        return console.log(err)
+    }
 }

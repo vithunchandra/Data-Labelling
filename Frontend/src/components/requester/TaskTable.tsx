@@ -76,7 +76,7 @@ export default function TaskTable({task}: {task: ITask[]}) {
                                                 <span className='fw-bold fs-5'>Instruction: </span>
                                                 <p className="ps-4">{item.task_description}</p>
                                                 <div className="w-100 text-center">
-                                                    <Link to={index.toString()}>
+                                                    <Link to={item._id}>
                                                         <Button variant="contained" startIcon={<InfoOutlinedIcon />}>Detail</Button>
                                                     </Link>
                                                 </div>

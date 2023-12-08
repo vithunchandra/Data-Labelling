@@ -44,26 +44,20 @@ export default function DataList({data, editIndex, setEditIndex, register} : {da
                                         :
                                         index == editIndex.index ?
                                             <div className="d-flex">
-                                                <IconButton type="submit" onMouseEnter={() => {
+                                                <IconButton type="submit" onClick={() => {
                                                     const tmp = editIndex
                                                     tmp.action = "save"
-                                                    setEditIndex({...tmp})
-                                                }} onMouseLeave={() => {
-                                                    const tmp = editIndex
-                                                    tmp.action = ""
-                                                    setEditIndex({...tmp})
-                                                }}>
+                                                    setEditIndex(tmp)
+                                                }}
+                                                >
                                                     <CheckCircleOutlineIcon></CheckCircleOutlineIcon>
                                                 </IconButton>
-                                                <IconButton type="submit" onMouseEnter={() => {
+                                                <IconButton type="submit" onClick={() => {
                                                     const tmp = editIndex
                                                     tmp.action = "delete"
-                                                    setEditIndex({...tmp})
-                                                }} onMouseLeave={() => {
-                                                    const tmp = editIndex
-                                                    tmp.action = ""
-                                                    setEditIndex({...tmp})
-                                                }}>
+                                                    setEditIndex(tmp)
+                                                }}
+                                                >
                                                     <DeleteForeverOutlinedIcon></DeleteForeverOutlinedIcon>
                                                 </IconButton>
                                             </div>
@@ -71,6 +65,7 @@ export default function DataList({data, editIndex, setEditIndex, register} : {da
                                             <Button type="button" variant="outlined" startIcon={<EditIcon />} onClick={() => {
                                                 const tmp = editIndex
                                                 tmp.index = index
+                                                tmp.action = "save"
                                                 setEditIndex({...tmp})
                                             }}>Edit</Button>
                                     }

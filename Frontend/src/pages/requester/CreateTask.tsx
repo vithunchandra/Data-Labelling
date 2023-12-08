@@ -32,7 +32,7 @@ export async function getUserTasks({params}: any){
     
     try{
         const response = await client.get(
-            "/task",
+            "/task/user",
             {
                 headers: {
                     Authorization: `Bearer ${getToken()}`

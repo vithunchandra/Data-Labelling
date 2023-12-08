@@ -24,7 +24,7 @@ import CreateTask, { getUserTasks } from "./pages/requester/CreateTask";
 import AddTask, { AddTaskAction, getAllTaskType } from "./pages/requester/AddTask";
 import EditTask, { taskEditLoader } from "./pages/requester/EditTask";
 import TopUp from "./pages/requester/TopUp";
-import MonitorTask, { MonitorTaskAction } from "./pages/requester/MonitorTask";
+import MonitorTask, { ToggleTaskAction } from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
 import Labelling, { labellingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
@@ -131,11 +131,12 @@ function App() {
           element={<EditTask />}
           loader={taskEditLoader as any}
         ></Route>
-        <Route path="monitor_task" element={<MonitorTask />} loader={getUserTasks as any} action={MonitorTaskAction}></Route>
+        <Route path="monitor_task" element={<MonitorTask />} loader={getUserTasks as any} action={ToggleTaskAction}></Route>
         <Route
           path="monitor_task/:task_id"
           element={<DetailTask />}
           loader={taskMonitorLoader as any}
+          action={ToggleTaskAction}
         ></Route>
         <Route
           path="monitor_task/:task_id/chat"
