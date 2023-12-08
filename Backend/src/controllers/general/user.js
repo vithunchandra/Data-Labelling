@@ -32,8 +32,8 @@ const getUserById = async (req, res) => {
 };
 
 const getWallet = async (req, res) => {
-  return res.status(200).json({wallet: req.user.wallet})
-}
+  return res.status(200).json({ wallet: req.user.wallet });
+};
 
 const fill_wallet = async (req, res) => {
   const user = req.user;
@@ -67,17 +67,17 @@ const fill_wallet = async (req, res) => {
   });
 };
 
-async function drawWallet(req, res){
-  const user = req.user
-  const amount = req.body.amount
+async function drawWallet(req, res) {
+  const user = req.user;
+  const amount = req.body.amount;
 
-  if(amount > user.wallet){
-    return res.status(400).json({message: 'Wallet is not sufficient'})
+  if (amount > user.wallet) {
+    return res.status(400).json({ message: "Wallet is not sufficient" });
   }
-  user.wallet = parseInt(user.wallet) - parseInt(amount)
-  user.save()
+  user.wallet = parseInt(user.wallet) - parseInt(amount);
+  user.save();
 
-  return res.status(200).json({wallet: user.wallet})
+  return res.status(200).json({ wallet: user.wallet });
 }
 
 module.exports = {
@@ -85,5 +85,5 @@ module.exports = {
   getUserById,
   getWallet,
   fill_wallet,
-  drawWallet
+  drawWallet,
 };

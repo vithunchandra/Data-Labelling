@@ -328,7 +328,7 @@ const get_user_task = async (req, res) => {
   //using model way
   const { expand, task_type_id } = req.query;
   const user_id = req.user._id;
-
+  console.log(user_id);
   let condition_now = [
     { $match: { _id: new mongoose.Types.ObjectId(user_id) } },
     { $project: { password: 0 } },

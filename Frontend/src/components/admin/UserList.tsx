@@ -23,7 +23,9 @@ export default function UserList({ user }: { user: User[] }) {
     let filteredUsers = user;
 
     if (role !== "Both") {
-      filteredUsers = filteredUsers.filter((u) => u.role === role);
+      filteredUsers = filteredUsers.filter(
+        (u) => u.role === role.toLowerCase()
+      );
     }
 
     if (taskName.trim() !== "") {
@@ -94,7 +96,7 @@ export default function UserList({ user }: { user: User[] }) {
             <tr key={index}>
               <td className="align-middle">{index + 1}</td>
               <td className="align-middle">{user.name}</td>
-              <td className="align-middle">{user.role}</td>
+              <td className="align-middle text-capitalize">{user.role}</td>
               {user.credibility !== 0 ? (
                 <td className="align-middle text-center">{user.credibility}</td>
               ) : (

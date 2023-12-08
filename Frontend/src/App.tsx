@@ -11,7 +11,9 @@ import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
 import AddTaskType from "./pages/admin/AddTaskType";
-import WorkerDashboard, { workerDashboardLoader } from "./pages/worker/WorkerDashboard";
+import WorkerDashboard, {
+  workerDashboardLoader,
+} from "./pages/worker/WorkerDashboard";
 import WorkerTask, { workerTaskLoader } from "./pages/worker/WorkerTask";
 import Marketplace, { marketplaceLoader } from "./pages/worker/Marketplace";
 import MarketTaskDetail, {
@@ -21,7 +23,10 @@ import Task, { taskDetailLoader } from "./pages/worker/Task";
 import TaskData, { dataLoader } from "./pages/worker/TaskData";
 import RequesterDashboard from "./pages/requester/RequesterDashboard";
 import CreateTask, { getUserTasks } from "./pages/requester/CreateTask";
-import AddTask, { AddTaskAction, getAllTaskType } from "./pages/requester/AddTask";
+import AddTask, {
+  AddTaskAction,
+  getAllTaskType,
+} from "./pages/requester/AddTask";
 import EditTask, { taskEditLoader } from "./pages/requester/EditTask";
 import TopUp from "./pages/requester/TopUp";
 import MonitorTask, { ToggleTaskAction } from "./pages/requester/MonitorTask";
@@ -34,11 +39,11 @@ import ChatBox, { workerIDLoader } from "./components/requester/ChatBox";
 import BanList from "./pages/requester/BanList";
 import Signin from "./pages/authentication/Signin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminUser from "./pages/admin/AdminUser";
+import AdminUser, { getUsers } from "./pages/admin/AdminUser";
 import AdminTaskType from "./pages/admin/AdminTaskType";
 import AdminKeuangan from "./pages/admin/AdminKeuangan";
 import AdminTask from "./pages/admin/AdminTask";
-import AdminUserDetail from "./pages/admin/AdminUserDetail";
+import AdminUserDetail, { getUserDetail } from "./pages/admin/AdminUserDetail";
 import AdminTaskDetail from "./pages/admin/AdminTaskDetail";
 import AdminUserTaskDetail from "./pages/admin/AdminUserTaskDetail";
 import Authenticate from "./pages/authentication/Authenticate";
@@ -58,8 +63,12 @@ function App() {
         }
       >
         <Route index element={<AdminDashboard />}></Route>
-        <Route path="user" element={<AdminUser />}></Route>
-        <Route path="user/:user_id" element={<AdminUserDetail />}></Route>
+        <Route path="user" element={<AdminUser />} loader={getUsers}></Route>
+        <Route
+          path="user/:user_id"
+          element={<AdminUserDetail />}
+          loader={getUserDetail}
+        ></Route>
         <Route
           path="user/:user_id/detail/:task_id"
           element={<AdminUserTaskDetail />}
@@ -82,7 +91,11 @@ function App() {
           </Authenticate>
         }
       >
-        <Route index element={<WorkerDashboard />} loader={workerDashboardLoader}></Route>
+        <Route
+          index
+          element={<WorkerDashboard />}
+          loader={workerDashboardLoader}
+        ></Route>
         <Route
           path="marketplace"
           element={<Marketplace />}
@@ -118,20 +131,37 @@ function App() {
         <Route path="wallet" element={<MyWallet />}></Route>
       </Route>,
 
-      <Route path="requester" element={
-        <Authenticate role="requester">
+      <Route
+        path="requester"
+        element={
+          <Authenticate role="requester">
             <Requester />
-        </Authenticate>
-      }>
+          </Authenticate>
+        }
+      >
         <Route index element={<RequesterDashboard />}></Route>
-        <Route path="create_task" element={<CreateTask />} loader={getUserTasks as any}></Route>
-        <Route path="create_task/add" element={<AddTask />} loader={getAllTaskType} action={AddTaskAction}></Route>
+        <Route
+          path="create_task"
+          element={<CreateTask />}
+          loader={getUserTasks as any}
+        ></Route>
+        <Route
+          path="create_task/add"
+          element={<AddTask />}
+          loader={getAllTaskType}
+          action={AddTaskAction}
+        ></Route>
         <Route
           path="create_task/:task_id"
           element={<EditTask />}
           loader={taskEditLoader as any}
         ></Route>
-        <Route path="monitor_task" element={<MonitorTask />} loader={getUserTasks as any} action={ToggleTaskAction}></Route>
+        <Route
+          path="monitor_task"
+          element={<MonitorTask />}
+          loader={getUserTasks as any}
+          action={ToggleTaskAction}
+        ></Route>
         <Route
           path="monitor_task/:task_id"
           element={<DetailTask />}

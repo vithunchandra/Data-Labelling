@@ -1,27 +1,32 @@
-import { useParams, useNavigate } from "react-router-dom";
-import users from "../../dummy_data/user.json";
-import tasks from "../../dummy_data/task.json";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import DataArrayIcon from "@mui/icons-material/DataArray";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import { client } from "../../api/client";
 import { Wallet } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import UsersTask from "../../components/admin/UsersTask";
+import useAuth from "../../customHooks/authenticate";
+import { AxiosError } from "axios";
 
 export default function AdminUserDetail() {
-  const { user_id } = useParams();
-  const user = users.find((user) => user._id == user_id);
+  const data = useLoaderData();
+  const user = data.user;
+  const tempTask = data.userTasks;
+  let usersTask = [];
   const navigate = useNavigate();
-
-  let usersTask;
-  if (user.role == "Requester") {
-    usersTask = tasks.filter(
-      (task) => task.requester.toLowerCase() == user.name.toLowerCase()
-    );
-  } else if (user.role == "Worker") {
-    usersTask = tasks.filter((task) => task.workers.includes(user.name));
+  for (let i = 0; i < data.totalTask; i++) {
+    usersTask.push(tempTask[i]);
   }
+
+  // if (user.role == "Requester") {
+  //   usersTask = tasks.filter(
+  //     (task) => task.requester.toLowerCase() == user.name.toLowerCase()
+  //     );
+  //   } else if (user.role == "Worker") {
+  //     usersTask = tasks.filter((task) => task.workers.includes(user.name));
+  //   }
 
   const taskData = [
     {
@@ -32,7 +37,7 @@ export default function AdminUserDetail() {
           className="me-2"
         ></DataArrayIcon>
       ),
-      data: `${usersTask.length} Task`,
+      data: `${data.totalTask} Task`,
     },
     {
       icon: (
@@ -101,4 +106,41 @@ export default function AdminUserDetail() {
       </>
     </>
   );
+}
+
+export async function getUserDetail({ params }: any) {
+  const { getToken } = useAuth();
+
+  try {
+    let loaderObject = {};
+    let response = await client.get("/user/id/" + params["user_id"], {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      params: {
+        expand: 1,
+      },
+    });
+    loaderObject = { ...loaderObject, user: { ...response.data } };
+    response = await client.get("admin/user_detail/" + params["user_id"], {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      params: {
+        expand: 1,
+      },
+    });
+    loaderObject = {
+      ...loaderObject,
+      userTasks: { ...response.data },
+      totalTask: response.data.length,
+    };
+
+    return loaderObject;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      return console.log(err.response?.data.message);
+    }
+    return console.log(err);
+  }
 }

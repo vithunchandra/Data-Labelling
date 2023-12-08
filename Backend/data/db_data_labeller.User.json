@@ -1,36 +1,51 @@
-[{
-  "_id": {
-    "$oid": "6565659427926e26ec5c98e7"
-  },
-  "email": "budi@example.com",
-  "password": "budi123",
-  "name": "Budi",
-  "role": "requester",
-  "credibility": 100,
-  "wallet": 0,
-  "tasks": [
-    {
-      "$oid": "6565855cdd53a5e384f51550"
+[
+  {
+    "_id": {
+      "$oid": "657382f6807299257209c095"
     },
-    {
-      "$oid": "6565876585fd0fd965ad4579"
-    },
-    {
-      "$oid": "6565b234f07d51af20d70432"
-    }
-  ],
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6565a9145d9bb34270181ae7"
+    "email": "admindalte@example.com",
+    "password": "admin",
+    "name": "Admin",
+    "role": "admin",
+    "credibility": 0,
+    "wallet": 0,
+    "tasks": [],
+    "__v": 0
   },
-  "email": "andi@example.com",
-  "password": "andi123",
-  "name": "Andi",
-  "role": "worker",
-  "credibility": 100,
-  "wallet": 0,
-  "tasks": [],
-  "__v": 0
-}]
+  {
+    "_id": {
+      "$oid": "6565659427926e26ec5c98e7"
+    },
+    "email": "budi@example.com",
+    "password": "budi123",
+    "name": "Budi",
+    "role": "requester",
+    "credibility": 100,
+    "wallet": 0,
+    "tasks": [
+      {
+        "$oid": "6565855cdd53a5e384f51550"
+      },
+      {
+        "$oid": "6565876585fd0fd965ad4579"
+      },
+      {
+        "$oid": "6565b234f07d51af20d70432"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6565a9145d9bb34270181ae7"
+    },
+    "email": "andi@example.com",
+    "password": "andi123",
+    "name": "Andi",
+    "role": "worker",
+    "credibility": 100,
+    "wallet": 0,
+    "tasks": [],
+    "__v": 0
+  }
+]
