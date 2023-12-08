@@ -66,10 +66,10 @@ export default function Signup(){
                 <FormProvider {...formProps}>
                     <form onSubmit={formProps.handleSubmit(signup)}>
                         <h1 className="mb-4 text-center">Sign Up</h1>
-                        <FormTextField className={'my-2'} variant={"outlined"} name="email" label="Email" type="email" defaultValue=""/>
-                        <FormTextField className={'my-2'} variant={"outlined"} name="name" label="Name" type="text" defaultValue=""/>
-                        <FormTextField className={'my-2'} variant={"outlined"} name="password" label="Password" type="password" defaultValue=""/>
-                        <FormTextField className={'my-2'} variant={"outlined"} name="confirmPassword" label="Confirm Password" type="password" defaultValue=""/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="email" label="Email" type="email" defaultValue="" size="medium"/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="name" label="Name" type="text" defaultValue="" size="medium"/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="password" label="Password" type="password" defaultValue="" size="medium"/>
+                        <FormTextField className={'my-2'} variant={"outlined"} name="confirmPassword" label="Confirm Password" type="password" defaultValue="" size="medium"/>
                         <FormRadio className={'my-2'} name="role" label="Role" options={radioOptions} defaultValue={1}/>
 
                         {

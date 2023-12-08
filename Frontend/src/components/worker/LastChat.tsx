@@ -1,9 +1,9 @@
 import ChatIcon from '@mui/icons-material/Chat';
-import Chat from '../../interface/ChatInterface';
 import { Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { IChat } from '../../interface/IChat';
 
-export default function LastChat({chat}: {chat: Chat[]}){
+export default function LastChat({chat}: {chat: IChat[]}){
     const navigate = useNavigate()
 
     return(
@@ -15,16 +15,16 @@ export default function LastChat({chat}: {chat: Chat[]}){
             {
                 chat.map((item, index) => {
                     return <div className='row align-items-center p-2 g-0 my-2 card-hover' key={index} onClick={() => {
-                        navigate('task/1')
+                        navigate(`./task/${item.task_id}`)
                     }}>
                         <div className='col-auto'>
-                            <Avatar src={item.profile_image}></Avatar>
+                            <Avatar src={"https://picsum.photos/200"}></Avatar>
                         </div>
                         <div className='col mx-3'>
-                            <div className='fw-bold'>{item.requester}</div>
-                            <div className='fw-light text-truncate' style={{maxWidth: '200px'}}>{item.chat}</div>
+                            <div className='fw-bold'>{item.user.name}</div>
+                            <div className='fw-light text-truncate' style={{maxWidth: '200px'}}>{item.text_chat}</div>
                         </div>
-                        <div className='col-auto text-secondary text-end'>{item.date}</div>
+                        <div className='col-auto text-secondary text-end'>{new Date(item.timestamp).toDateString()}</div>
                     </div>
                 })
             }

@@ -53,8 +53,8 @@ export default function Signin(){
                 <FormProvider {...formProps}>
                     <form onSubmit={formProps.handleSubmit(login)}>
                         <h1 className="mb-4 text-center">Sign In</h1>
-                        <FormTextField className="" name="email" label="Email" type="email" variant="outlined" defaultValue=""/>
-                        <FormTextField className="" name="password" label="Password" type="password" variant="outlined" defaultValue=""/>
+                        <FormTextField className="" name="email" label="Email" type="email" variant="outlined" defaultValue="" size="medium"/>
+                        <FormTextField className="" name="password" label="Password" type="password" variant="outlined" defaultValue="" size="medium"/>
          
                         {
                             error && <span className="text-danger">{error}</span>

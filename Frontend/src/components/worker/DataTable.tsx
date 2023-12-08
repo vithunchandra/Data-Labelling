@@ -3,7 +3,7 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { Link } from "react-router-dom";
 import { IData } from "../../interface/IData";
 
-export default function DataTable({data}: {data: IData[]}){
+export default function DataTable({data, baseUrl}: {data: IData[], baseUrl: string}){
     return(
         <table className="table">
             <thead>
@@ -29,9 +29,9 @@ export default function DataTable({data}: {data: IData[]}){
                             <tr key={index}>
                                 <td className="align-middle">{index + 1}</td>
                                 <td className="align-middle text-truncate">{item.text}</td>
-                                <td className="align-middle text-center" >{item.label ? 'Labeled' : 'Unlabeled'}</td>
+                                <td className="align-middle text-center" >{item.label?.answer ? 'Labeled' : 'Unlabeled'}</td>
                                 <td className="align-middle text-center">
-                                    <Link to={`./${item._id}`}>
+                                    <Link to={`${baseUrl}/${item._id}`}>
                                         <Button variant="outlined" startIcon={<CreateOutlinedIcon />}>Label</Button>
                                     </Link>
                                 </td>

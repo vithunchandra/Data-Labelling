@@ -4,12 +4,12 @@
 }
 
 body{
-    min-height: 100vh;
+    min-height: 100%;
+    background-color: var(--bg-primary) !important;
 }
 
 #root{
     height: 100vh;
-    background-color: var(--bg-primary);
 }
 
 #sidebar-nav{
@@ -52,4 +52,10 @@ table{
 
 textarea::-webkit-scrollbar{
     display: none;
+}
+
+.transcluent{
+    background: rgba(245,245,245,0.5);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }

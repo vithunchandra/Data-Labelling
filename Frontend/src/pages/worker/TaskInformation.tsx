@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import { useTask } from './Task';
 
 export default function TaskInformation(){
-    const {task, prev, next} = useTask()
+    const {task, prev, next, query} = useTask()
     const navigate = useNavigate()
     const taskData = [
         {
@@ -44,13 +44,13 @@ export default function TaskInformation(){
                 <div className="col-auto me-4">
                     <Button className={`${!prev ? 'invisible' : ''}`} variant="contained" 
                         startIcon={<ChevronLeft />} 
-                        onClick={() => navigate(`../task/${prev?._id}`)}
+                        onClick={() => navigate(`../task/${prev?._id}?${query}`, {replace: true})}
                     >Previous</Button>
                 </div>
                 <div className="col-auto">
                     <Button className={`${!next ? 'invisible' : ''}`} variant="contained" 
                         endIcon={<ChevronRight />} 
-                        onClick={() => navigate(`../task/${next?._id}`)}
+                        onClick={() => navigate(`../task/${next?._id}?${query}`, {replace: true})}
                     >Next</Button>
                 </div>
             </div>

@@ -26,7 +26,7 @@ const create_data_helper = async (task_now, text) => {
   return new_data;
 };
 
-const update_data_helper = async (data_now, text, possible_label = []) => {
+const update_data_helper = async (data_now, text) => {
   const price_char_now = data_now.price / data_now.text.length;
   const new_price = price_char_now * text.length;
   //////////////////////////////////////////
@@ -39,9 +39,6 @@ const update_data_helper = async (data_now, text, possible_label = []) => {
     text = text + "\n\nSummary:" + summary_now[0]["generated_text"];
   }
 
-  if (String(task_type_now.name).toLowerCase() == "classification") {
-  }
-
   const updated_data = await Data.findByIdAndUpdate(
     data_now._id,
     {
@@ -52,6 +49,100 @@ const update_data_helper = async (data_now, text, possible_label = []) => {
   );
 
   return updated_data;
+};
+
+const delete_data_helper = async (data_now) => {
+  // delete one data
+  const task_now = await Task.findById(data_now.task);
+  const new_task_data = task_now.data.filter((item) => {
+    if (String(item) === String(data_now._id)) {
+      return false;
+    }
+    return true;
+  });
+
+  const updated_task = await Task.findByIdAndUpdate(
+    data_now.task,
+    {
+      data: new_task_data,
+    },
+    { new: true }
+  );
+
+  const deleted_data = await Data.findByIdAndDelete(data_now._id);
+
+  return deleted_data;
+};
+
+const delete_data = async (req, res) => {
+  let { data_id } = req.body;
+  const requester_id = req.user._id;
+  if (String(req.user.role) != "requester") {
+    return res.status(403).json({
+      message: "Data must be created by requester",
+    });
+  }
+
+  // console.log(task_now.requester, requester_id);
+  const data_now = await Data.findById(data_id);
+  if (!data_now) {
+    return res.status(404).json({
+      message: "Data Not Found",
+    });
+  }
+
+  const task_now = await Task.findById(data_now.task);
+  if (String(task_now.requester) !== String(requester_id)) {
+    return res.status(403).json({
+      message: "Data must be created by the same requester who create the task",
+    });
+  }
+
+  const deleted_data = await delete_data_helper(data_now);
+  return res.status(200).json({
+    msg: "Data deleted!",
+    deleted_data,
+  });
+};
+
+const bulk_delete_data = async (req, res) => {
+  let { deleted_data_id } = req.body;
+  if (deleted_data_id.length == 0) {
+    return res.status(400).json({
+      message: "Data must not be empty",
+    });
+  }
+
+  const requester_id = req.user._id;
+  if (String(req.user.role) != "requester") {
+    return res.status(403).json({
+      message: "Data must be created by requester",
+    });
+  }
+
+  for (let i = 0; i < deleted_data_id.length; i++) {
+    const data_now = await Data.findById(deleted_data_id[i]);
+    if (!data_now) {
+      return res.status(404).json({
+        message: "Data Not Found",
+      });
+    }
+
+    const task_now = await Task.findById(data_now.task);
+    if (String(task_now.requester) !== String(requester_id)) {
+      return res.status(403).json({
+        message:
+          "Data must be created by the same requester who create the task",
+      });
+    }
+
+    // delete data_now
+    await delete_data_helper(data_now);
+  }
+
+  return res.status(200).json({
+    msg: "All data deleted!",
+  });
 };
 
 const create_data = async (req, res) => {
@@ -157,6 +248,30 @@ const edit_data = async (req, res) => {
   });
 };
 
+const bulk_edit_data = async (req, res) => {
+  const { new_data } = req.body;
+  if (!new_data) {
+    return res.status(400).json({
+      message: "Please provide all required fields",
+    });
+  }
+
+  for (let i = 0; i < new_data.length; i++) {
+    const data_now = await Data.findById(new_data[i].data_id);
+    if (!data_now) {
+      return res.status(404).json({
+        message: "Data Not Found",
+      });
+    }
+    // use helper to update data
+    const updated_data = await update_data_helper(data_now, new_data[i].text);
+  }
+
+  return res.status(200).json({
+    msg: "All data edited Suceesfully!",
+  });
+};
+
 const label_data = async (req, res) => {
   const { data_id, text } = req.body;
 
@@ -254,4 +369,7 @@ module.exports = {
   edit_data,
   label_data,
   create_bulk_data,
+  bulk_edit_data,
+  delete_data,
+  bulk_delete_data,
 };

@@ -1,17 +1,19 @@
-import { TextField, TextFieldVariants } from "@mui/material";
+import { TextField, TextFieldPropsSizeOverrides, TextFieldVariants } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
+import { OverridableStringUnion } from '@mui/types';
 
-interface FormTextField{
+interface IFormTextField{
     name: string;
     variant: TextFieldVariants | undefined;
     label: string;
     defaultValue: string | number | boolean | undefined;
     type: string;
+    size: OverridableStringUnion<"small" | "medium", TextFieldPropsSizeOverrides>;
     className: string | undefined;
 }
 
 export default function FormTextField(
-    {name, variant, label, defaultValue, type, className} : FormTextField
+    {name, variant, label, defaultValue, type, size, className} : IFormTextField
 ){
     const { control } = useFormContext()
     return (
@@ -25,6 +27,7 @@ export default function FormTextField(
                     type={type}
                     label={label}
                     variant={variant}
+                    size={size}
                     className={className}
                     fullWidth
                 />

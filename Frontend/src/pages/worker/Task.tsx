@@ -3,8 +3,6 @@ import { ChatOutlined, InfoOutlined, List } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Chat from '../../components/worker/Chat';
-import users from '../../dummy_data/user.json';
-import chats from '../../dummy_data/chat_2.json';
 import useAuth from '../../customHooks/authenticate';
 import { AxiosError } from 'axios';
 import ITask from '../../interface/ITask';
@@ -15,10 +13,12 @@ interface ILoader{
     task: ITask;
     prev: ITask | undefined;
     next: ITask | undefined;
+    query: string;
 }
 
 export default function TaskDetail(){
-    const {task, prev, next} = useLoaderData() as ILoader
+    const {task, prev, next, query} = useLoaderData() as ILoader
+    
     const { getUser } = useAuth()
     const [isChatActive, setIsChatActive] = useState(true)
 
@@ -34,7 +34,7 @@ export default function TaskDetail(){
                                     <List />
                                 </IconButton>
                             </Link>
-                            <Link to={'./'}>
+                            <Link to={`./${query}`}>
                                 <IconButton color='primary'>
                                     <InfoOutlined/>
                                 </IconButton>
@@ -51,7 +51,7 @@ export default function TaskDetail(){
                 </div>
                 
                 <div className='w-100 my-3 flex-fill' style={{minHeight: '0'}}>
-                    <Outlet context={{task, prev, next}} />
+                    <Outlet context={{task, prev, next, query}} />
                 </div>
             </div>
 
@@ -70,16 +70,36 @@ export function useTask(){
     return useOutletContext<ILoader>()
 }
 
-export async function taskDetailLoader({params}: any){
+export async function taskDetailLoader({params, request}: any){
     const task_id = params['task_id']
+    const url = new URL(request.url)
+
+    const typeParam = url.searchParams.get('type')
+    const startDateParam = url.searchParams.get('startDate')
+    const nameParam = url.searchParams.get('name')
+
+    let filters = {}
+    filters['type'] = typeParam !== null ? typeParam : ''
+    filters['startDate'] = startDateParam !== null ? startDateParam : undefined
+    filters['name'] = nameParam !== null ? nameParam : ''
+
+    let query = ''
+    for(const key in filters){
+        if(filters[key]){
+            query += '&' + key + '=' + filters[key]
+        }
+    }
+    
     const {getToken} = useAuth()
     try{
         const response = await client.get(`worker/task/${task_id}`, {
             headers: {
                 Authorization: `Bearer ${getToken()}`
-            }
+            },
+            params: {...filters}
         })
-        return response.data as ILoader
+        console.log(response.data)
+        return {...response.data, query} as ILoader
     }catch(err){
         if(err instanceof AxiosError){
             return console.log(err.response?.data.message)

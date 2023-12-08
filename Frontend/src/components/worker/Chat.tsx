@@ -36,14 +36,15 @@ export default function Chat({task_id, requester_id, user_id}: {task_id: string,
         let isFetching = true
 
         async function refetch(){
-            const responseUser = await client.get(`user/${requester_id}`)
+            const responseUser = await client.get(`user/id/${requester_id}`)
             const responseChat = await client.get(`worker/task/${task_id}/chat`, {
                 headers: {Authorization: `Bearer ${getToken()}`}
             })
-
+            
             console.log(responseChat)
             
             if(isFetching){
+                console.log(responseChat)
                 setRequester(responseUser.data)
                 setChats(responseChat.data)
                 setIsRefetch(false)
@@ -79,8 +80,8 @@ export default function Chat({task_id, requester_id, user_id}: {task_id: string,
                     chats?.map((chat, index) => {
                         return <Message 
                             message={chat.text_chat} 
-                            color={chat.user === user_id ? 'primary' : 'secondary'} 
-                            position={chat.user === user_id ? 'end' : 'start'} 
+                            color={chat.user._id === user_id ? 'primary' : 'secondary'} 
+                            position={chat.user._id === user_id ? 'end' : 'start'} 
                             key={index}
                         />
                     })

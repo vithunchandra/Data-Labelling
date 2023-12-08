@@ -1,6 +1,6 @@
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 interface IPageNavigationButton{
     page: number;
@@ -8,15 +8,21 @@ interface IPageNavigationButton{
     baseUrl: string;
 }
 
-export default function PageNavigationButton({page, totalPages, baseUrl}: IPageNavigationButton){
-    const navigate = useNavigate()
-    
+export default function PageNavigationButton({page, totalPages}: IPageNavigationButton){
+    const [searchParams, setSearchParams] = useSearchParams()
+
     function prevPage(){
-        navigate(`${baseUrl}?page=${page - 1}`)
+        setSearchParams(searchParams => {
+            searchParams.set('page', (page - 1).toString())
+            return searchParams
+        })
     }
 
     function nextPage(){
-        navigate(`${baseUrl}?page=${page + 1}`)
+        setSearchParams(searchParams => {
+            searchParams.set('page', (page + 1).toString())
+            return searchParams
+        })
     }
 
     return(
