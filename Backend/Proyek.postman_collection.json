@@ -829,7 +829,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjVhOTE0NWQ5YmIzNDI3MDE4MWFlNyIsImVtYWlsIjoiYW5kaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2NTg1NWNkZDUzYTVlMzg0ZjUxNTUwIl0sIl9fdiI6MH0sImlhdCI6MTcwMTIyOTM5NCwiZXhwIjoxNzAxMzE1Nzk0fQ.9wQBRUhAiVWBMb_2uwI-QEEi9oTzY8-JpGuLTgkcK1M",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjlkZTUyYzEyMDg3ZjA0NjlmYSIsImVtYWlsIjoiYW5kaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDIwMzkyMTYsImV4cCI6MTcwMjEyNTYxNn0.1eWYjkKZtv9fL6Z8IdgCdw9sLR5ioFWbO8HebtdlLqU",
 									"type": "string"
 								}
 							]
@@ -841,7 +841,7 @@
 							"urlencoded": [
 								{
 									"key": "task_id",
-									"value": "6565855cdd53a5e384f51550",
+									"value": "6565876585fd0fd965ad4579",
 									"type": "default"
 								}
 							]
@@ -1002,7 +1002,90 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Toggle Active",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "task_id",
+											"value": "65701efa424d09971ec47a95",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/task/toggle_active",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"toggle_active"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "494"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ee-JCItEfcKDYP0wTx/MMAAf2fNMpc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:43:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"65701efa424d09971ec47a95\",\n    \"task_name\": \"Summary checking about anime 3\",\n    \"task_description\": \"Buatlah Rangkuman dari sinopsis ini dalam beberapa kalimat\",\n    \"possible_label\": [],\n    \"start_date\": \"2024-01-01T00:00:00.000Z\",\n    \"end_date\": \"2024-02-23T00:00:00.000Z\",\n    \"active\": true,\n    \"min_credibility\": 80,\n    \"requester\": \"65695283e52c12087f0469f7\",\n    \"task_type\": \"65693c1146c4d47bb6e5b299\",\n    \"data\": [\n        \"657181154c74f7d557e264b4\",\n        \"657181154c74f7d557e264b8\",\n        \"657181154c74f7d557e264bc\"\n    ],\n    \"ban_list\": [],\n    \"worker\": [],\n    \"__v\": 0\n}"
+						}
+					]
 				},
 				{
 					"name": "Edit Task",
@@ -1019,7 +1102,199 @@
 							}
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Edit Task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"task_id\": \"65701efa424d09971ec47a95\",\r\n    \"task_name\": \"Summary checking about anime 3\",\r\n    \"task_description\": \"Buatlah Rangkuman dari sinopsis ini dalam beberapa kalimat\",\r\n    \"start_date\":\"2024-01-01\",\r\n    \"end_date\":\"2024-02-23\",\r\n    \"possible_label\":[\"bagus\",\"jelek\"],\r\n    \"min_credibility\":80\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/task/edit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"edit"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "528"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"210-yueMq6AGGcDIyggv1LJlzvxZy/U\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:43:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Edit Suceed!\",\n    \"new_task\": {\n        \"_id\": \"65701efa424d09971ec47a95\",\n        \"task_name\": \"Summary checking about anime 3\",\n        \"task_description\": \"Buatlah Rangkuman dari sinopsis ini dalam beberapa kalimat\",\n        \"possible_label\": [],\n        \"start_date\": \"2024-01-01T00:00:00.000Z\",\n        \"end_date\": \"2024-02-23T00:00:00.000Z\",\n        \"active\": true,\n        \"min_credibility\": 80,\n        \"requester\": \"65695283e52c12087f0469f7\",\n        \"task_type\": \"65693c1146c4d47bb6e5b299\",\n        \"data\": [\n            \"657181154c74f7d557e264b4\",\n            \"657181154c74f7d557e264b8\",\n            \"657181154c74f7d557e264bc\"\n        ],\n        \"ban_list\": [],\n        \"worker\": [],\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Toggle Ban User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjgzZTUyYzEyMDg3ZjA0NjlmNyIsImVtYWlsIjoiYnVkaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJCdWRpIiwicm9sZSI6InJlcXVlc3RlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6NDAwMDAsInRhc2tzIjpbIjY1NmQ3YTYxNjMzMDY0OTE1NDJmYTA3ZCIsIjY1NzAxZWZhNDI0ZDA5OTcxZWM0N2E5NSJdLCJfX3YiOjB9LCJpYXQiOjE3MDIwNDI0MTIsImV4cCI6MTcwMjEyODgxMn0.rH6zRiTO3Wf2swFJwYazh6sk9TRMTHZXOn9LFodLjE4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						}
+					},
+					"response": [
+						{
+							"name": "Ban User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "task_id",
+											"value": "656d7a6163306491542fa07d",
+											"type": "default"
+										},
+										{
+											"key": "banned_worker_id",
+											"value": "6569529de52c12087f0469fa",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/task/toggle_ban",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"task",
+										"toggle_ban"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "664"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"298-jiHo6pbdSCH2VuN3sA6jILJaYL4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 08 Dec 2023 13:39:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Suceed\",\n    \"updated_task\": {\n        \"_id\": \"656d7a6163306491542fa07d\",\n        \"task_name\": \"AI Summary checking about anime\",\n        \"task_description\": \"Cek apakah sinopsis yang dibuat AI mengenai anime ini benar!\",\n        \"possible_label\": [],\n        \"start_date\": \"2024-01-01T00:00:00.000Z\",\n        \"end_date\": \"2024-02-23T00:00:00.000Z\",\n        \"active\": true,\n        \"min_credibility\": 80,\n        \"requester\": \"65695283e52c12087f0469f7\",\n        \"task_type\": \"65693c1146c4d47bb6e5b297\",\n        \"data\": [\n            \"656d82087dd7bde730ea6c20\",\n            \"656d822d7dd7bde730ea6c26\",\n            \"656d82487dd7bde730ea6c2c\",\n            \"657018cd9f42f46978545810\",\n            \"657019ac9ff343f8a0646ac1\"\n        ],\n        \"ban_list\": [],\n        \"worker\": [\n            {\n                \"user_id\": \"6569529de52c12087f0469fa\",\n                \"chat\": [],\n                \"_id\": \"65730ecfb1c4a8935b6de0a1\"\n            }\n        ],\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1607,7 +1882,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1NjVhOTE0NWQ5YmIzNDI3MDE4MWFlNyIsImVtYWlsIjoiYW5kaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOlsiNjU2NTg1NWNkZDUzYTVlMzg0ZjUxNTUwIl0sIl9fdiI6MH0sImlhdCI6MTcwMTIzMjQzNCwiZXhwIjoxNzAxMzE4ODM0fQ.ehbkl1VJ1Ej8pTcmyJ0us0y83IhTeU15NcvTNRz2Cp4",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1Njk1MjlkZTUyYzEyMDg3ZjA0NjlmYSIsImVtYWlsIjoiYW5kaUBleGFtcGxlLmNvbSIsIm5hbWUiOiJBbmRpIiwicm9sZSI6IndvcmtlciIsImNyZWRpYmlsaXR5IjoxMDAsIndhbGxldCI6MCwidGFza3MiOltdLCJfX3YiOjB9LCJpYXQiOjE3MDIwMzkyMTYsImV4cCI6MTcwMjEyNTYxNn0.1eWYjkKZtv9fL6Z8IdgCdw9sLR5ioFWbO8HebtdlLqU",
 									"type": "string"
 								}
 							]
@@ -1619,12 +1894,12 @@
 							"urlencoded": [
 								{
 									"key": "data_id",
-									"value": "6565876585fd0fd965ad4579",
+									"value": "6566bfc78cf0f7fc641696f9",
 									"type": "default"
 								},
 								{
 									"key": "text",
-									"value": "Negative",
+									"value": "Positive",
 									"type": "default"
 								}
 							]
