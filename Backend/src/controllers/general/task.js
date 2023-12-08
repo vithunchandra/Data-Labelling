@@ -35,6 +35,14 @@ const expand_task_aggregation_condition = [
       as: "ban_list",
     },
   },
+  {
+    $lookup: {
+      from: "User",
+      localField: "worker.user_id",
+      foreignField: "_id",
+      as: "worker.user",
+    },
+  },
 ];
 
 const toggle_task = async (req, res) => {
@@ -441,6 +449,70 @@ const take_task = async (req, res) => {
   });
 };
 
+const toggle_ban_user = async (req, res) => {
+  const { task_id, banned_worker_id } = req.body;
+  const user_now = req.user;
+
+  const task_now = await Task.findById(task_id).exec();
+  if (!task_now) {
+    return res.status(404).json({
+      message: "Task not found",
+    });
+  }
+
+  if (String(task_now.requester) != user_now._id) {
+    return res.status(403).json({
+      message: "You are not the requester of this task",
+    });
+  }
+
+  const user_in_task_list = task_now.worker;
+  user_in_task_list.filter((item) => {
+    if (String(item.user_id) == String(banned_worker_id)) {
+      return true;
+    }
+    return false;
+  });
+  if (user_in_task_list.length == 0) {
+    return res.status(404).json({
+      message: "Worker not found in this task",
+    });
+  }
+
+  let updated_task;
+  const user_in_banned_list = task_now.ban_list;
+  user_in_banned_list.filter((item) => {
+    if (String(item.user_id) == String(banned_worker_id)) {
+      return true;
+    }
+    return false;
+  });
+  if (user_in_banned_list.length > 0) {
+    updated_task = await Task.findByIdAndUpdate(
+      task_id,
+      {
+        // remove banned user id from task ban_list
+        $pull: { ban_list: banned_worker_id },
+      },
+      { new: true }
+    );
+  } else {
+    updated_task = await Task.findByIdAndUpdate(
+      task_id,
+      {
+        // add banned user id to task ban_list
+        $push: { ban_list: banned_worker_id },
+      },
+      { new: true }
+    );
+  }
+
+  return res.status(200).json({
+    msg: "Suceed",
+    updated_task,
+  });
+};
+
 module.exports = {
   create_task,
   get_task,
@@ -449,4 +521,5 @@ module.exports = {
   get_task_by_id,
   toggle_task,
   edit_task,
+  toggle_ban_user,
 };
