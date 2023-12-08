@@ -80,8 +80,8 @@ export default function Chat({task_id, requester_id, user_id}: {task_id: string,
                     chats?.map((chat, index) => {
                         return <Message 
                             message={chat.text_chat} 
-                            color={chat.user === user_id ? 'primary' : 'secondary'} 
-                            position={chat.user === user_id ? 'end' : 'start'} 
+                            color={chat.user._id === user_id ? 'primary' : 'secondary'} 
+                            position={chat.user._id === user_id ? 'end' : 'start'} 
                             key={index}
                         />
                     })

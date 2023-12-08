@@ -56,7 +56,7 @@ export default function MarketTaskDetail(){
                 </div>
             </div>
             <div className="text-secondary fs-4">{task.requester.name}</div>
-            <div className="fs-5 mt-1">{task.start_date} - {task.end_date}</div>
+            <div className="fs-5 mt-1">{new Date(task.start_date).toDateString()} - {new Date(task.end_date).toDateString()}</div>
             <div className="fw-bold fs-3 mt-5 mb-2">Task Information</div>
             <div className="row flex-row justify-content-between mb-4 g-0">
                 {

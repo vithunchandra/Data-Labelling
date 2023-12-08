@@ -35,7 +35,7 @@ export default function MainLayout({navigation, user}: {navigation: NavigationIn
         <div className="w-100 h-100">
             <div className="row flex-nowrap h-100 g-0">
                 <div className="col-auto">
-                    <div id="sidebar" className="collapse collapse-horizontal bg-white show h-100 rounded-2 shadow-sm">
+                    <div id="sidebar" className="collapse collapse-horizontal bg-white show h-100 rounded-2 shadow">
                         <div id="sidebar-nav" className="d-flex flex-column h-100">
                             <div className="w-100 d-flex align-items-center justify-content-between ps-3 py-2 fs-3 fw-bold">
                                 <div className="d-flex align-items-center fs-3 fw-bold">
@@ -71,10 +71,13 @@ export default function MainLayout({navigation, user}: {navigation: NavigationIn
                         </div>
                     </div>
                 </div>
-                <div className="col px-3 pt-3 h-100 d-flex flex-column overflow-auto">
-                    <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName} user={user}></Navbar>
-                    <div className="flex-fill pt-4" style={{minHeight: '0'}}>
+                <div className="col px-3 h-100 d-flex flex-column overflow-auto">
+                    <div className="pt-3 transcluent position-sticky top-0" style={{zIndex: 100}}>
+                        <Navbar isDrawerOn={isDrawerOn} setIsDrawerOn={setIsDrawerOn} pageName={pageName} user={user}></Navbar>
+                    </div>
+                    <div className="flex-fill py-4" style={{minHeight: '0'}}>
                         <Outlet></Outlet>
+                        <div style={{minHeight: '1.5rem', width: '100%'}}></div>
                     </div>
                 </div>
             </div>

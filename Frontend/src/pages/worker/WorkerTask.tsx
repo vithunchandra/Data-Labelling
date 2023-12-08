@@ -1,10 +1,9 @@
-import Filters from "../../components/worker/Filters"
 import TaskTable from "../../components/worker/TaskTable"
 import { client } from "../../api/client"
 import useAuth from "../../customHooks/authenticate"
 import ITask from "../../interface/ITask"
 import { AxiosError } from "axios"
-import { useLoaderData, useNavigate, useSearchParams } from "react-router-dom"
+import { useLoaderData, useSearchParams } from "react-router-dom"
 import ITaskType from "../../interface/ITaskType"
 import PageNavigationButton from "../../components/worker/pageNavigation"
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
@@ -12,13 +11,19 @@ import FormSelect from "../../components/form/FormSelect"
 import FormDate from "../../components/form/FormDate"
 import FormTextField from "../../components/form/FormTextField"
 import { Button } from "@mui/material"
-import { URLSearchParams } from "url"
+
+interface ITaskStats{
+    totalTasks: number;
+    totalFinishedTasks: number;
+    totalUnfinishedTasks: number;
+}
 
 interface ILoader{
     tasks: ITask[];
     page: number;
     totalPages: number;
     types: ITaskType[];
+    stats: ITaskStats;
 }
 
 interface IFilters{
@@ -28,7 +33,7 @@ interface IFilters{
 }
 
 export default function WorkerTask(){
-    const { tasks, page, totalPages, types } = useLoaderData() as ILoader
+    const { tasks, page, totalPages, types, stats } = useLoaderData() as ILoader
     const formProps = useForm<IFilters>()
     const typeOptions = [{label: 'None', value: ''}, ...types?.map((item) => {
         return {
@@ -58,8 +63,7 @@ export default function WorkerTask(){
                     Your Progress
                 </div>
                 <div className="col-auto d-flex align-items-center">
-                    <span className="text-primary fw-bold me-2">12/50</span>
-                    <span>Task</span>
+                    <span className="text-primary fw-bold me-2">{`${stats.totalFinishedTasks}/${stats.totalTasks}`}</span>
                 </div>
             </div>
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
@@ -83,7 +87,7 @@ export default function WorkerTask(){
                     </form>
                 </FormProvider>
             </div>
-            <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
+            <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow">
                 <TaskTable task={tasks}/>
                 <div className="text-end">
                     <PageNavigationButton page={page} totalPages={totalPages} baseUrl="../task"/>
@@ -126,6 +130,10 @@ export const workerTaskLoader = async ({request}: any) => {
         loaderObject['types'] = response.data
         loaderObject['page'] = page
 
+        response = await client.get('worker/task/stats', {
+            headers: {Authorization: `Bearer ${getToken()}`}
+        })
+        loaderObject['stats'] = {...response.data}
         return loaderObject as ILoader
     }catch(err){
         if(err instanceof AxiosError){

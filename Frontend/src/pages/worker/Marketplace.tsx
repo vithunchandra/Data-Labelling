@@ -53,7 +53,7 @@ export default function Marketplace(){
 
     return(
         <>
-            <div className="w-100 bg-white px-5 py-4 rounded-2 shadow">
+            <div className="container-fluid p-3 bg-white rounded-2 shadow-sm">
                 <FormProvider {...formProps}>
                     <form onSubmit={formProps.handleSubmit(filterHandler)} className="row align-items-center g-0">
                         <div className="row aling-items-center g-0 col-12 mb-3">
@@ -73,11 +73,14 @@ export default function Marketplace(){
                         </div>
                     </form>
                 </FormProvider>
+            </div>
+            <div className="w-100 bg-white px-5 py-4 mt-4 rounded-2 shadow">
                 <TaskTable task={tasks}></TaskTable>
-                <div className="text-end mt-5">
+                <div className="text-end mt-4">
                     <PageNavigationButton page={page} totalPages={totalPages} baseUrl="../marketplace"/>
                 </div>
             </div>
+            
         </>    
     )
 }

@@ -47,7 +47,7 @@ export default function TaskTable({ task }: ITaskTable) {
           <th
             className="align-middle text-center"
             style={{
-              width: "15%",
+              width: "20%",
             }}
           >
             Type

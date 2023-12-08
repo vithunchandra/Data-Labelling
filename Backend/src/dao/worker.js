@@ -11,7 +11,7 @@ const taskStats = async ({user_id}) => {
         }
     ).populate('data')
 
-    const finishedTask = tasks.filter(task => {
+    const finishedTasks = tasks.filter(task => {
         if(task.data.length <= 0){ return false }
         for(const data of task.data){
             let isExist = false
@@ -28,9 +28,9 @@ const taskStats = async ({user_id}) => {
         return true
     }).length
 
-    const unfinishedTask = tasks.length - finishedTask
+    const unfinishedTasks = tasks.length - finishedTasks
 
-    return {tasks: tasks.length, finishedTask, unfinishedTask}
+    return {totalTasks: tasks.length, totalFinishedTasks: finishedTasks, totalUnfinishedTasks: unfinishedTasks}
 }
 
 const getLastChats = async ({user_id}) => {
@@ -53,7 +53,8 @@ const getLastChats = async ({user_id}) => {
             is_read: false,
             user: {
                 $ne: user_id
-            }
+            },
+            targetUser: user_id
         },
         {},
         {
@@ -61,7 +62,9 @@ const getLastChats = async ({user_id}) => {
                 timestamp: -1
             }, limit: 5
         }
-    )
+    ).populate('user')
+    
+    return chats
 }
 
 const getMarketTasks = async ({user_id, skip, type, startDate, name}) => {
@@ -501,6 +504,10 @@ const getAllChat = async ({user_id, task_id}) => {
     .populate({
         path: 'worker.chat',
         model: 'Chat',
+        populate: {
+            path: 'user',
+            model: 'User'
+        }
     })
 
     return task

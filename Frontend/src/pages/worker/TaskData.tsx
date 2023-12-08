@@ -1,8 +1,4 @@
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import DataTable from '../../components/worker/DataTable';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { IData } from '../../interface/IData';
@@ -66,7 +62,7 @@ export default function TaskData(){
 
             <div className='w-100 p-2 shadow-sm rounded-2 bg-white'>
                 <div className='fs-4 fw-bold ms-1'>Data</div>
-                <DataTable data={data} />
+                <DataTable data={data} baseUrl={`.`}/>
                 <div className='w-100 text-end'>
                     <span className='d-inline-block'>
                         <IconButton className={`${page - 1 > 0 ? '' : 'invisible'}`} 

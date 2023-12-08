@@ -1,5 +1,6 @@
 const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount, getAllChat, getFinishedTask, taskStats, getLastChats } = require('../dao/worker');
 const { Data, Task, Chat } = require('../models');
+const db = require('../models/index');
 
 async function taskStatistics(req, res){
     const user = req.user;
@@ -12,10 +13,16 @@ async function lastTask(req, res){
     const user = req.user
     const task_id = req.user.tasks[0]
     if(!task_id){
-        return res.status(200).json({})
+        return res.status(200).json({message: 'Last task is empty'})
     }
     const task = await getTask({task_id: task_id, user_id: user._id})
-    const data = await getAllData({task_id: task_id, user_id: user._id, skip: 0})
+    const results = await getAllData({task_id: task_id, user_id: user._id, skip: 0})
+    const data = results.map(item => item.toObject())
+    for(const item of data){
+        let label = item.labels.length > 0 ? item.labels[0] : undefined;
+        item['label'] = label
+        item.labels = undefined
+    }
     return res.status(200).json({task, data})
 }
 
@@ -23,7 +30,7 @@ async function lastChats(req, res){
     const user = req.user
     const chats = await getLastChats({user_id: user._id})
 
-    return res.status(200).json({})
+    return res.status(200).json({chats})
 }
 
 async function market (req, res){
@@ -133,7 +140,6 @@ async function getTaskData(req, res){
         item.labels = undefined
     }
     const totalData = await getAllDataCount({task_id, user_id: user._id, status, question})
-    console.log(totalData)
     const totalPages = totalData / 5
 
     return res.status(200).json({data, totalPages: Math.ceil(totalPages)})
@@ -197,6 +203,14 @@ async function getChats(req, res){
     }
     const task = await getAllChat({user_id: user._id, task_id})
     const chats = task.worker[0].chat
+    const chatId = []
+    for(const chat of chats){
+        chatId.push(chat._id)
+    }
+    await db.Chat.updateMany(
+        { _id: {$in: chatId} },
+        { is_read: true },
+    )
 
     return res.status(200).json(chats)
 }
