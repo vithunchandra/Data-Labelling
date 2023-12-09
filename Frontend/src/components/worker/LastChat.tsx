@@ -6,7 +6,6 @@ import ChatEmpty from './ChatEmpty';
 
 export default function LastChat({chat}: {chat: IChat[]}){
     const navigate = useNavigate()
-
     return(
         <>
             <div className="d-flex align-items-center">
