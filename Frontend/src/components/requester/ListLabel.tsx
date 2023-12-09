@@ -26,13 +26,10 @@ export default function ListLabel({label} : {label : Label[]}) {
             <thead>
                 <tr>
                     <th className="align-middle" style={{
-                            width: '20%'
+                            width: '25%'
                     }}>Worker</th>
-                    <th className="align-middle text-center" style={{
-                            width: '15%'
-                    }}>Status</th>
                     <th className="align-middle" style={{
-                            width: '65%'
+                            width: '75%'
                     }}>Label</th>
                 </tr>
             </thead>
@@ -41,13 +38,13 @@ export default function ListLabel({label} : {label : Label[]}) {
                     label.map((item, index) => {
                         const id = open ? item.worker : undefined;
                         return <tr key={index}>
-                            <td className="align-middle">
-                                <Button className="d-flex align-items-center text-dark" value={item.worker} onClick={handleClick}>
-                                    <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                                    <label className="ms-2" role="button">{item.worker}</label>
+                            <td className="align-middle text-truncate">
+                                <Button className="d-flex align-items-center text-dark" value={item.worker._id} onClick={handleClick}>
+                                    <Avatar alt={item.worker.name} src="/static/images/avatar/3.jpg" />
+                                    <label className="ms-2" role="button">{item.worker.name}</label>
                                 </Button>
                                 <Popover
-                                    id={id+"_"+index+"_"+item.worker}
+                                    id={id+"_"+index+"_"+item.worker._id}
                                     open={open}
                                     anchorEl={anchorEl}
                                     onClose={handleClose}
@@ -75,14 +72,7 @@ export default function ListLabel({label} : {label : Label[]}) {
                                     </Typography>
                                 </Popover>
                             </td>
-                            <td className="align-middle text-center">
-                                {item.status == "labeled" ? 
-                                    <Chip label={item.status} variant="outlined" color="success" />
-                                    :
-                                    <Chip label={item.status} variant="outlined" color="error" />
-                                }
-                            </td>
-                            <td className="align-middle">{item.label}</td>
+                            <td className="align-middle text-truncate">{item.answer}</td>
                         </tr>
                     })
                 }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import tasks from '../../dummy_data/task.json'
+// import tasks from '../../dummy_data/task.json'
 import { useFetcher, useLoaderData, useNavigate } from 'react-router-dom';
 import ListLabel from '../../components/requester/ListLabel';
 import DataArrayIcon from '@mui/icons-material/DataArray';
@@ -16,15 +16,16 @@ import { client } from '../../api/client';
 import { AxiosError } from 'axios';
 
 export default function DetailTask(){
-    const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
+    // const Req_tasks = tasks.filter((item) => item.requester == "vithun chandra");
     const[task, setTask] = useState(useLoaderData()[0]);
     const navigate = useNavigate();
     const fetcher = useFetcher();
     console.log(task);
 
-    const labeled = task.data.reduce((total, d) => d.labels.filter((l) => l.status == "labeled").length + total, 0)
-    const totalData = task.data.reduce((total, d) => d.labels.length + total, 0);
+    const labeled = task.data.reduce((total, d) => d.labels.length + total, 0)
+    const totalData = task.data.length * (task.worker.length == 0 ? 1 : task.worker.length)
     const progress = Math.floor(labeled/totalData*100);
+    console.log({labeled, totalData, progress});
 
     function CircularProgressWithLabel(props: CircularProgressProps & { value: number },) {
         return (
@@ -135,7 +136,7 @@ export default function DetailTask(){
                                 <div className='d-flex'>
                                     <label className='fs-6 ps-4' data-bs-toggle="collapse" data-bs-target={"#label_"+index} role='button' style={{width:"90%", textAlign:"justify"}}>{item.text}</label>
                                     <div className='d-flex align-items-end justify-content-end my-3' style={{width:"10%"}}>
-                                        <CircularProgressWithLabel value={task.worker.length != 0 ? Math.floor(isLabeled.length/task.worker.length*100) : 0} />
+                                        <CircularProgressWithLabel value={task.worker.length != 0 ? Math.floor(isLabeled/task.worker.length*100) : 0} />
                                     </div>
                                 </div>
                                 <div id={"label_"+index} className='collapse'>

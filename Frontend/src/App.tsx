@@ -35,7 +35,7 @@ import Labelling, { labellingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
 import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
 import Chat from "./pages/requester/Chat";
-import ChatBox, { workerIDLoader } from "./components/requester/ChatBox";
+import ChatBox, { sendChat, workerIDLoader } from "./components/requester/ChatBox";
 import BanList from "./pages/requester/BanList";
 import Signin from "./pages/authentication/Signin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -164,7 +164,7 @@ function App() {
           path="create_task/:task_id"
           element={<EditTask />}
           loader={taskEditLoader as any}
-          // action={editTaskAction as any}
+          action={editTaskAction as any}
         ></Route>
         <Route
           path="monitor_task"
@@ -185,12 +185,13 @@ function App() {
         >
           <Route
             index
-            element={<div className="w-100 h-100 d-flex justify-content-center align-items-center"><img src="../../../Logo_2.png" className="w-50" /></div>}
+            element={<div className="w-100 h-100 d-flex justify-content-center align-items-center"><img src="../public/Logo_2.png" className="w-50" /></div>}
           ></Route>
           <Route
             path=":worker"
             element={<ChatBox />}
-            loader={workerIDLoader as any}
+            loader={workerIDLoader as any} 
+            action={sendChat}
           ></Route>
         </Route>
         <Route path="ban_list" element={<BanList />}></Route>

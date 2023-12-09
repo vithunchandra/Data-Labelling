@@ -4,7 +4,7 @@ import DataList from '../../components/requester/DataList';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DoneIcon from '@mui/icons-material/Done';
 import { IconButton, Button, Chip } from '@mui/material';
-import { useState } from 'react';
+import { useDebugValue, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
 import AddIcon from '@mui/icons-material/Add';
@@ -17,36 +17,54 @@ import { IData } from '../../interface/IData';
 
 export default function EditTask() {
     const[task, setTask] = useState(useLoaderData()[0]);
-    console.log(task);
     const[dataShow, setDataShow] = useState<IData[]>(task.data);
     const[dataDelete, setDataDelete] = useState<string[]>([]);
     const[dataCreate, setDataCreate] = useState<string[]>([]);
-    const[dataEdit, setDataEdit] = useState<{_id:string, text:string}[]>(dataShow.map((data) => {return {_id: data._id, text: data.text}}));
-    console.log({dataShow, dataDelete, dataCreate, dataEdit});
+    const[dataEdit, setDataEdit] = useState<{data_id:string, text:string}[]>(dataShow.map((data) => {return {data_id: data._id, text: data.text}}));
     const[editIndex, setEditIndex] = useState<{index:number, action:string}>({index: -1, action : ""});
     const[editName, setEditName] = useState<boolean>(false);
     const[editCredibility, setEditCredibility] = useState<boolean>(false);
     const[editIntruction, setEditIntruction] = useState<boolean>(false);
+    const[loading, setLoading] = useState<boolean>(false);
     
     const {register, handleSubmit, reset} = useForm();
     const navigate = useNavigate()
     const fetcher = useFetcher()
 
+    useEffect(() => {
+        if(fetcher.state === "idle" && loading){
+            setLoading(false);
+            navigate("..",{
+                relative: "path"
+            })
+        }
+    }, [fetcher.state])
+
     return (
         <form onSubmit={handleSubmit(data => {
-            if(data.name && !editName){
+            console.log(data);
+            // console.log(task);
+            if(data.name){
                 const temp = task;
-                temp.name = data.name;
+                temp.task_name = data.name;
                 setTask(temp);
             }
-            if(data.credibility && !editCredibility){
+            if(data.credibility){
                 const temp = task;
-                temp.credibility = data.credibility;
+                temp.min_credibility = data.credibility;
+                setTask(temp);
+                setEditCredibility(false)
+            }
+            if(data.instruction){
+                const temp = task;
+                temp.task_description = data.instruction;
                 setTask(temp);
             }
-            if(data.instruction && !editIntruction){
+            if(data.posslab){
                 const temp = task;
-                temp.instruction = data.instruction;
+                const tmp = task.possible_label.slice()
+                tmp.push(data.posslab)
+                temp.possible_label = tmp
                 setTask(temp);
             }
             if(data.data){
@@ -66,8 +84,6 @@ export default function EditTask() {
                     setEditIndex({index: -1, action : ""})
                 }else if(editIndex.action == "delete"){
                     const temp = dataShow.slice()
-                    temp.splice(editIndex.index, 1)
-                    setDataShow(temp)
                     if(editIndex.index > dataEdit.length-1){
                         const tmp = dataCreate.slice()
                         tmp.splice(editIndex.index - dataEdit.length, 1);
@@ -80,27 +96,30 @@ export default function EditTask() {
                         tmp2.splice(editIndex.index, 1)
                         setDataEdit(tmp2)
                     }
+                    temp.splice(editIndex.index, 1)
+                    setDataShow(temp)
                     setEditIndex({index: -1, action : ""})
                 }
             }
-            if(!data.name && !data.credibility && !data.instruction && !data.data){
-                fetcher.submit({...data, data: JSON.stringify(data.data)}, {
+            if(!data.name && !data.credibility && !data.instruction && !data.data && !data.posslab){
+                fetcher.submit({edit: JSON.stringify(dataEdit), create: JSON.stringify(dataCreate), delete: JSON.stringify(dataDelete), ...task, possible_label: JSON.stringify(task.possible_label)}, {
                     method: "post",
                     encType: "application/x-www-form-urlencoded",
-                    action: "/requester/create_task/add"
+                    action: "/requester/create_task/"+task._id
                 })
-                navigate("..",{
-                    relative: "path"
-                })
+                setLoading(true)
             }
             reset()
-            console.log(data);
         })}>
             <div className='d-flex justify-content-between'>
             <Button color='info' variant='contained' startIcon={<ArrowBackIosIcon />} onClick={() => navigate("..", {relative: "path"})}>Back</Button>
                 {(editName || editCredibility || editIntruction || editIndex.index != -1) ?
-                    <Button startIcon={<SaveIcon />} variant='contained' color='success' size='large' type='submit'>
-                        Finish
+                    <Button startIcon={<SaveIcon />} variant='contained' color='success' size='large' type='submit' onClick={() => {
+                        setEditName(false);
+                        setEditCredibility(false);
+                        setEditIntruction(false);
+                    }}>
+                        Finish All
                     </Button>
                     :
                     <Button startIcon={<SaveIcon />} variant='contained' color='success' size='large' type='submit'>
@@ -112,16 +131,16 @@ export default function EditTask() {
                 {editName ?
                     <div className='d-flex align-items-center'>
                         <input type='text' className='w-50 form-control' defaultValue={task.task_name} {...register("name")} />
-                        <Button type='submit' onClick={() => {
+                        <IconButton type={"button"} className='ms-1' onClick={() => {
                             setEditName(false)
                         }}>
                             <DoneIcon fontSize='medium'></DoneIcon>
-                        </Button>
+                        </IconButton>
                     </div>
                     :
                     <div className='d-flex align-items-center'>
                         <div className="fw-bold fs-4 mb-2">{task.task_name}</div>
-                        <IconButton type="reset" onClick={() => {
+                        <IconButton type={"submit"} className='ms-1' onClick={() => {
                             setEditName(true)
                         }}>
                             <EditNoteIcon fontSize='medium'></EditNoteIcon>
@@ -129,20 +148,43 @@ export default function EditTask() {
                     </div>
                 }
                 <div className="fs-6 mb-2">Task Type : {task.task_type[0].name}</div>
+                {task.task_type[0].name == "Classification" &&
+                    <div className='d-flex'>
+                        <div className='d-flex col-6'>
+                            <div className="fs-6 mb-2">Possible Label :</div>
+                            <div>
+                                <ul>
+                                    {
+                                        task.possible_label.map((item, index) => {
+                                            return <li key={index}>
+                                                {item}
+                                            </li>
+                                        })
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="fs-6 mb-2">Tambah Label</div>
+                            <div className='d-flex'>
+                                <input className='form-control' {...register("posslab")} />
+                                <Button type='submit' variant='contained' className='ms-3'>Add</Button>
+                            </div>
+                        </div>
+                    </div>
+                }
                 {editCredibility ?
                     <div className='d-flex align-items-center'>
                         <div className="fs-6 mb-2">Credibility : &nbsp;</div>
                         <input type='number' max={100} min={0} className='w-25 form-control' defaultValue={task.min_credibility} {...register("credibility")} />
-                        <Button type='submit' onClick={() => {
-                            setEditCredibility(false)
-                        }}>
+                        <IconButton type={"submit"} className='ms-1' >
                             <DoneIcon fontSize='medium'></DoneIcon>
-                        </Button>
+                        </IconButton>
                     </div>
                     :
                     <div className='d-flex align-items-center'>
                         <div className="fs-6 mb-2">Credibility : {task.min_credibility}</div>
-                        <IconButton type='button' onClick={() => {
+                        <IconButton type={"button"} className='ms-1' onClick={() => {
                             setEditCredibility(true)
                         }}>
                             <EditNoteIcon fontSize='medium'></EditNoteIcon>
@@ -158,11 +200,11 @@ export default function EditTask() {
                             </div>
                         </div>
                         <div className='col-1 d-flex align-items-center'>
-                            <Button type='submit' onClick={() => {
+                            <IconButton type={"button"} onClick={() => {
                                 setEditIntruction(false)
                             }}>
                                 <DoneIcon fontSize='medium'></DoneIcon>
-                            </Button>
+                            </IconButton>
                         </div>
                     </div>
                     :
@@ -172,7 +214,7 @@ export default function EditTask() {
                             <div className="col-11 fs-6 mb-2">{task.task_description}</div>
                         </div>
                         <div className='col-1 d-flex align-items-center'>
-                            <IconButton type="button" onClick={() => {
+                            <IconButton type={"submit"} onClick={() => {
                                 setEditIntruction(true)
                             }}>
                                 <EditNoteIcon fontSize='medium'></EditNoteIcon>
@@ -228,5 +270,77 @@ export async function taskEditLoader({params} : {params: Map<string, any>}){
 }
 
 export async function editTaskAction({request, params} : {request: any, params: any}){
+    const formData = await request.formData();
+    const {getToken} = useAuth();
 
+    const name = formData.get("task_name")
+    const desc = formData.get("task_description")
+    const sd = formData.get("start_date")
+    const ed = formData.get("end_date")
+    const cred = formData.get("min_credibility")
+    const pl = JSON.parse(formData.get("possible_label"))
+
+    const editData = JSON.parse(formData.get("edit"))
+    const createData = JSON.parse(formData.get("create"))
+    const deleteData = JSON.parse(formData.get("delete"))
+
+    try{
+        let editing = null, deleting = null, creating = null, res = null
+
+        const response = await client.post(
+            "/task/edit",
+            {task_id: params.task_id, task_name: name, task_description: desc, start_date: sd, end_date: ed, min_credibility: cred, possible_label: pl},
+            {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`
+                },
+            }
+        )
+        res = response.data
+
+        if(createData.length > 0){
+            const response = await client.post(
+                "/data/bulk_create",
+                {task_id: params.task_id, data: createData},
+                {
+                    headers: {
+                        Authorization: `Bearer ${getToken()}`
+                    },
+                }
+            )
+            creating = response.data
+        }
+        if(editData.length > 0){
+            const response = await client.post(
+                "/data/bulk_edit",
+                {new_data: editData},
+                {
+                    headers: {
+                        Authorization: `Bearer ${getToken()}`
+                    },
+                }
+            )
+            editing = response.data
+        }
+        if(deleteData.length > 0){
+            const response = await client.delete(
+                "/data/bulk_delete",
+                {
+                    headers: {
+                        Authorization: `Bearer ${getToken()}`
+                    },
+                    data: {
+                        deleted_data_id: deleteData
+                    }
+                }
+            )
+            deleting = response.data
+        }
+        return {creating, editing, deleting, res}
+    }catch(err){
+        if(err instanceof AxiosError){
+            return console.log(err.response?.data.message)
+        }
+        return console.log(err)
+    }
 }

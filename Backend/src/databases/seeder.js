@@ -60,8 +60,8 @@ async function taskSeeder(){
     const requester = await User.find({role: 'requester'})
     const worker = await User.find({role: 'worker'})
     const types = await Task_Type.find()
-    const tasks = []
     for(let i=0; i<requester.length; i++){
+        const tasks = []
         const totalTask = faker.number.int({min: 0, max: 50})
         for(let j=0; j<totalTask; j++){
             const type = types[faker.number.int({min: 0, max: 3})]
@@ -97,9 +97,13 @@ async function taskSeeder(){
                 data: []
             })
         }
+        const results = await Task.insertMany(tasks)
+        for(const result of results){
+            requester[i].tasks.push(result._id)
+        }
+        await requester[i].save()
     }
 
-    await Task.insertMany(tasks)
 }
 
 async function dataSeeder(){
