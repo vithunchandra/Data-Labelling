@@ -28,7 +28,7 @@ import AddTask, {
   getAllTaskType,
 } from "./pages/requester/AddTask";
 import EditTask, { editTaskAction, taskEditLoader } from "./pages/requester/EditTask";
-import TopUp from "./pages/requester/TopUp";
+import TopUp, { TopUpAction, TopUpLoader } from "./pages/requester/TopUp";
 import MonitorTask, { ToggleTaskAction } from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
 import Labelling, { labellingLoader } from "./pages/worker/Labelling";
@@ -195,7 +195,7 @@ function App() {
           ></Route>
         </Route>
         <Route path="ban_list" element={<BanList />}></Route>
-        <Route path="top_up" element={<TopUp />}></Route>
+        <Route path="top_up" element={<TopUp />} loader={TopUpLoader} action={TopUpAction}></Route>
       </Route>,
     ])
   );
