@@ -3,9 +3,11 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useFetcher, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addTasktype } from "../../redux/tasktypeSlice";
+import useAuth from "../../customHooks/authenticate";
+import { AxiosError } from "axios";
+import { client } from "../../api/client";
 
 export default function AddTaskType() {
   const dispatch = useDispatch();
@@ -16,19 +18,17 @@ export default function AddTaskType() {
     price: number;
   }>();
   const navigate = useNavigate();
+  const fetcher = useFetcher();
+
   return (
     <form
       onSubmit={handleSubmit((data) => {
-        setTaskHeader({
-          name: data.name,
-          price: data.price,
+        fetcher.submit(data, {
+          method: "post",
+          encType: "application/x-www-form-urlencoded",
+          action: "/admin/task_type/add",
         });
-        const newData = {
-          name: data.name,
-          price: data.price,
-        };
         reset();
-        dispatch(addTasktype(newData));
         navigate("/admin/task_type");
       })}
     >
@@ -77,4 +77,36 @@ export default function AddTaskType() {
       </div>
     </form>
   );
+}
+
+export async function addTasktype({
+  request,
+  params,
+}: {
+  request: any;
+  params: any;
+}) {
+  const { getToken } = useAuth();
+  const formData = await request.formData();
+  const name = formData.get("name");
+  const price = formData.get("price");
+
+  try {
+    const task_type = await client.post(
+      "task_type/create",
+      { name, price },
+      {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    );
+
+    return task_type.data;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      return console.log(err.response?.data.message);
+    }
+    return console.log(err);
+  }
 }

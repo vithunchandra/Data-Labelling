@@ -56,6 +56,17 @@ const allUser = async (req, res) => {
   return res.status(200).json(user);
 };
 
+const allTask = async (req, res) => {
+  const currentUser = req.user;
+  if (currentUser.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden request" });
+  }
+  let task = [];
+  task = await Task.find().populate("requester task_type data");
+
+  return res.status(200).json(task);
+};
+
 const getUserDetail = async (req, res) => {
   const currentUser = req.user;
   if (currentUser.role !== "admin") {
@@ -130,4 +141,5 @@ const getUserDetail = async (req, res) => {
 module.exports = {
   allUser,
   getUserDetail,
+  allTask,
 };

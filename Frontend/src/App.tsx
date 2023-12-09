@@ -10,7 +10,7 @@ import Signup from "./pages/authentication/Signup";
 import Admin from "./pages/admin/Admin";
 import Requester from "./pages/requester/Requester";
 import Worker from "./pages/worker/Worker";
-import AddTaskType from "./pages/admin/AddTaskType";
+import AddTaskType, { addTasktype } from "./pages/admin/AddTaskType";
 import WorkerDashboard, {
   workerDashboardLoader,
 } from "./pages/worker/WorkerDashboard";
@@ -40,9 +40,12 @@ import BanList from "./pages/requester/BanList";
 import Signin from "./pages/authentication/Signin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUser, { getUsers } from "./pages/admin/AdminUser";
-import AdminTaskType from "./pages/admin/AdminTaskType";
+import AdminTaskType, {
+  getTaskTypes,
+  editTasktype,
+} from "./pages/admin/AdminTaskType";
 import AdminKeuangan from "./pages/admin/AdminKeuangan";
-import AdminTask from "./pages/admin/AdminTask";
+import AdminTask, { getTasks } from "./pages/admin/AdminTask";
 import AdminUserDetail, { getUserDetail } from "./pages/admin/AdminUserDetail";
 import AdminTaskDetail from "./pages/admin/AdminTaskDetail";
 import AdminUserTaskDetail from "./pages/admin/AdminUserTaskDetail";
@@ -73,12 +76,18 @@ function App() {
           path="user/:user_id/detail/:task_id"
           element={<AdminUserTaskDetail />}
         ></Route>
-        <Route path="task" element={<AdminTask />}></Route>
+        <Route path="task" element={<AdminTask />} loader={getTasks}></Route>
         <Route path="task/:task_id" element={<AdminTaskDetail />}></Route>
-        <Route path="task_type" element={<AdminTaskType />}></Route>
+        <Route
+          path="/admin/task_type"
+          element={<AdminTaskType />}
+          loader={getTaskTypes}
+          action={editTasktype}
+        ></Route>
         <Route
           path="/admin/task_type/add"
           element={<AddTaskType></AddTaskType>}
+          action={addTasktype}
         ></Route>
         <Route path="keuangan" element={<AdminKeuangan />}></Route>
       </Route>,

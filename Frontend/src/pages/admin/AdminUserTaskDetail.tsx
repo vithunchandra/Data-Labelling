@@ -20,7 +20,8 @@ export default function AdminUserTaskDetail() {
   const { task_id } = useParams();
   const navigate = useNavigate();
   const task = tasks[task_id];
-
+  console.log(task);
+  
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
   ) {

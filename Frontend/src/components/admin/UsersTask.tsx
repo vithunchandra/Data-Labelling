@@ -33,6 +33,8 @@ export default function Users({ task }: { task: Task[] }) {
               </tr>
             ) : (
               task.map((item, index) => {
+                console.log(item);
+                
                 return (
                   <tr key={index}>
                     <td className="align-middle">{index + 1}</td>
