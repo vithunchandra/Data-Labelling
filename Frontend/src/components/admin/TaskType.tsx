@@ -5,26 +5,32 @@ import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
-import { setPrice } from "../../redux/tasktypeSlice";
+import { Link, useFetcher } from "react-router-dom";
+import { client } from "../../api/client";
 import { useSelector, useDispatch } from "react-redux";
+import useAuth from "../../customHooks/authenticate";
+import { AxiosError } from "axios";
 
 export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
-  const data = useSelector((state) => state.task_type.listTasktype);
-
   const [editIndex, setEditIndex] = useState(null);
-  const [tempID, setTempID] = useState(0);
+  const [tempName, setTempName] = useState("");
   const [tempPrice, setTempPrice] = useState(0);
   const dispatch = useDispatch();
+  const fetcher = useFetcher();
 
   const handleEdit = (index) => {
     setEditIndex(index);
-    setTempID(data[index]._id);
-    setTempPrice(data[index].price);
+    setTempName(TaskType[index].name);
+    setTempPrice(TaskType[index].price);
   };
 
   const handleSave = () => {
-    dispatch(setPrice({ tempID, tempPrice }));
+    const data = { name: tempName, price: tempPrice };
+    fetcher.submit(data, {
+      method: "put",
+      encType: "application/x-www-form-urlencoded",
+      action: "/admin/task_type",
+    });
     setEditIndex(null);
   };
   return (
@@ -93,3 +99,4 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
     </div>
   );
 }
+

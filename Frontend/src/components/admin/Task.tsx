@@ -28,15 +28,17 @@ export default function Task({ task }: { task: Task[] }) {
 
   const handleFilter = () => {
     const filteredTasks = task.filter((item) => {
+      console.log(item);
+
       const filterByType =
-        type === "all" || item.type.toLowerCase().includes(type.toLowerCase());
-      const filterByTaskName = item.name
+        type === "all" ||
+        item.task_type.name.toLowerCase().includes(type.toLowerCase());
+      const filterByTaskName = item.task_name
         .toLowerCase()
         .includes(taskName.toLowerCase());
-      const filterByRequesterName = item.requester
+      const filterByRequesterName = item.requester.name
         .toLowerCase()
         .includes(requesterName.toLowerCase());
-
       return filterByType && filterByTaskName && filterByRequesterName;
     });
     setCurrentTask(filteredTasks);
@@ -105,11 +107,11 @@ export default function Task({ task }: { task: Task[] }) {
         <thead>
           <tr>
             <th className="align-middle col-1">No</th>
-            <th className="align-middle col-2">Nama</th>
-            <th className="align-middle col-3">Requester</th>
+            <th className="align-middle col-4">Nama</th>
+            <th className="align-middle col-1">Requester</th>
             <th className="align-middle text-center col-1">Total Data</th>
-            <th className="align-middle col-3">Closed Date</th>
-            <th className="align-middle col-2">Action</th>
+            <th className="align-middle col-2">Closed Date</th>
+            <th className="align-middle col-1">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -125,21 +127,23 @@ export default function Task({ task }: { task: Task[] }) {
                 <tr key={index}>
                   <td className="align-middle">{index + 1}</td>
                   <td className="align-middle text-capitalize text-truncate">
-                    {item.name}
+                    {item.task_name}
                   </td>
                   <td className="align-middle row g-0 align-items-center">
                     <div className="col-auto">
-                      <Avatar src={item.profile_image}></Avatar>
+                      <Avatar src={"https://picsum.photos/200"}></Avatar>
                     </div>
                     <div className="col ms-3 text-capitalize">
-                      <div className="fw-bold">{item.requester}</div>
+                      <div className="fw-bold">{item.requester.name}</div>
                     </div>
                   </td>
                   <td className="align-middle text-center">
                     {item.data.length}
                   </td>
                   <td className="align-middle">
-                    <span className="text-secondary">{item.finish_date}</span>
+                    <span className="text-secondary">
+                      {new Date(item.end_date).toDateString()}
+                    </span>
                   </td>
                   <td className="align-middle">
                     <Link to={index.toString()}>
