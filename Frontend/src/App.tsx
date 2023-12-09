@@ -148,7 +148,7 @@ function App() {
           </Authenticate>
         }
       >
-        <Route index element={<RequesterDashboard />}></Route>
+        <Route index element={<RequesterDashboard />} loader={getUserTasks as any}></Route>
         <Route
           path="create_task"
           element={<CreateTask />}

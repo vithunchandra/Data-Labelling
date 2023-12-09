@@ -10,8 +10,6 @@ import { AxiosError } from 'axios';
 export default function CreateTask() {
     const task = useLoaderData();
 
-    console.log(task);
-
     return (
         <div className='mb-5'>
             <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">

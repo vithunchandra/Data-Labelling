@@ -57,7 +57,7 @@ export default function TaskTable({task}: {task: ITask[]}) {
                                     <tr>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{index + 1}</td>
                                         <td className="align-middle text-capitalize text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_name}</td>
-                                        <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_type[0].name}</td>
+                                        <td className="align-middle text-center text-truncate" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_type[0].name}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.task_type[0].price}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.min_credibility}</td>
                                         <td className="align-middle text-center" data-bs-toggle="collapse" data-bs-target={"#detail"+index} role="button">{item.data.length}</td>
