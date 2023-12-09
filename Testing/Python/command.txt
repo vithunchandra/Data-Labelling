@@ -1,0 +1,1 @@
+pytest try_register_requester_worker.py --html=report.html

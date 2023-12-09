@@ -9,11 +9,11 @@ export default function Navbar({setIsDrawerOn, isDrawerOn, pageName, user} : {
     user: IUser
 }){
     return(
-        <nav className={`navbar navbar-expand-lg bg-primary bg-white rounded-2 shadow-sm`}>
+        <nav className={`navbar navbar-expand-lg bg-white rounded-2 shadow-sm`}>
             <div className="container-fluid">
                 <div className='d-flex align-items-center'>
                     <Collapse orientation='horizontal' in={!isDrawerOn}>
-                        <IconButton type="button" data-bs-toggle="collapse" className='' data-bs-target="#sidebar" onClick={() => setIsDrawerOn(!isDrawerOn)} sx={{
+                        <IconButton color='primary' type="button" data-bs-toggle="collapse" className='' data-bs-target="#sidebar" onClick={() => setIsDrawerOn(!isDrawerOn)} sx={{
                             visibility: isDrawerOn ? 'hidden' : 'visible',
                         }}>
                             <MenuIcon/>
