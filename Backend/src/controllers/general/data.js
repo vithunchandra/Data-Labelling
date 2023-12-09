@@ -322,11 +322,6 @@ const label_data = async (req, res) => {
     });
   }
 
-  data_now.labels.push({
-    worker: worker_id,
-    answer: text,
-  });
-
   // check if user already label this data
   const check_user_already_label = data_now.labels.filter((item) => {
     if (String(item.worker) == String(worker_id)) {
@@ -354,6 +349,11 @@ const label_data = async (req, res) => {
   }
 
   // update data
+  data_now.labels.push({
+    worker: worker_id,
+    answer: text,
+  });
+
   const new_data = await Data.findByIdAndUpdate(data_id, data_now, {
     new: true,
   });

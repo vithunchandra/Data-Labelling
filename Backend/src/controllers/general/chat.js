@@ -7,6 +7,11 @@ const chat = async (req, res) => {
   const user_id = user_now._id;
 
   const task_now = await Task.findById(task_id).exec();
+  if (!task_now) {
+    return res.status(404).json({
+      msg: "task not found!",
+    });
+  }
   const requester_id = task_now.requester;
 
   let check_worker_now_exist = null;

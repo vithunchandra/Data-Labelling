@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const { Task, User, Task_Type } = require("../../models");
+const { Task, User, Task_Type, Chat } = require("../../models");
 const { expand_task } = require("../../utils/helper_function");
 
 const expand_task_aggregation_condition = [
@@ -33,14 +33,6 @@ const expand_task_aggregation_condition = [
       localField: "ban_list",
       foreignField: "_id",
       as: "ban_list",
-    },
-  },
-  {
-    $lookup: {
-      from: "User",
-      localField: "worker.user_id",
-      foreignField: "_id",
-      as: "worker.user",
     },
   },
 ];
@@ -319,7 +311,43 @@ const get_task_by_id = async (req, res) => {
     }
   }
 
-  const all_task = await Task.aggregate(condition_now).exec();
+  let all_task = await Task.aggregate(condition_now).exec();
+
+  all_task = await Promise.all(
+    all_task.map(async (item) => {
+      item.data = await Promise.all(
+        item.data.map(async (data_temp) => {
+          const new_labels = await Promise.all(
+            data_temp.labels.map(async (label_temp) => {
+              label_temp.worker = await User.findById(label_temp.worker);
+              return label_temp;
+            })
+          );
+          data_temp.labels = new_labels;
+          return data_temp;
+        })
+      );
+
+      item.worker = await Promise.all(
+        item.worker.map(async (worker_temp) => {
+          const temp_worker = await User.findById(worker_temp.user_id);
+          const chat_now = await Promise.all(
+            worker_temp.chat.map(async (chat_id) => {
+              return await Chat.findById(chat_id);
+            })
+          );
+
+          return {
+            user: temp_worker,
+            chat: chat_now,
+          };
+        })
+      );
+
+      return item;
+    })
+  );
+  console.log(all_task);
 
   return res.status(200).json(all_task);
 };
