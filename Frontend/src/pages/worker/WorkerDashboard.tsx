@@ -12,12 +12,13 @@ import ITask from '../../interface/ITask';
 import { IChat } from '../../interface/IChat';
 import { IData } from '../../interface/IData';
 import { useLoaderData } from 'react-router-dom';
+import TaskEmpty from '../../components/worker/TaskEmpty';
 
 interface ILoader{
     totalTasks: number;
     totalUnfinishedTasks: number;
     totalFinishedTasks: number;
-    task: ITask;
+    task: ITask | undefined;
     data: IData[];
     chats: IChat[];
 }
@@ -68,10 +69,13 @@ export default function WorkerDashboard(){
                 
                 <div className='row justify-content-between align-items-stretch mt-4 g-0'>
                     <div className='col-7 bg-white rounded-2 shadow-sm p-3'>
-                        <LastTask task={task} data={data}></LastTask>
+                        {
+                            task ? <LastTask task={task} data={data} /> :
+                            <TaskEmpty />
+                        }
                     </div>
                     <div className='col ms-4 bg-white rounded-2 shadow-sm p-3'>
-                        <LastChat chat={chats}></LastChat>
+                        <LastChat chat={chats} />
                     </div>
                 </div>
             </div>

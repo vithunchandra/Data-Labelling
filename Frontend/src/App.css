@@ -59,3 +59,7 @@ textarea::-webkit-scrollbar{
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
+
+.navigation-color{
+    background-color: #1976d2;
+}

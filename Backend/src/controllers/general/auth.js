@@ -1,5 +1,3 @@
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
 
@@ -53,9 +51,11 @@ const register = async (req, res) => {
     wallet: 0,
     tasks: [],
   });
+  
+  newUser.password = undefined
 
   const accessToken = jwt.sign(
-    { user: { ...newUser, password: undefined } },
+    { user: newUser },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "1d" }
   );

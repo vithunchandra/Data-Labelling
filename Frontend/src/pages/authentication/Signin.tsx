@@ -22,7 +22,6 @@ export default function Signin(){
         const { getUser, login } = useAuth()
         try{
             const response = await client.post('/auth/login', data)
-            login(response.data.user)
             user = getUser()
         }catch(err: unknown){
             if(err instanceof AxiosError){
