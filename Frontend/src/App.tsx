@@ -36,7 +36,7 @@ import MyWallet from "./pages/worker/MyWallet";
 import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
 import Chat from "./pages/requester/Chat";
 import ChatBox, { sendChat, workerIDLoader } from "./components/requester/ChatBox";
-import BanList from "./pages/requester/BanList";
+import BanList, { BanListLoader, toggleBan } from "./pages/requester/BanList";
 import Signin from "./pages/authentication/Signin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUser, { getUsers } from "./pages/admin/AdminUser";
@@ -176,7 +176,6 @@ function App() {
           path="monitor_task/:task_id"
           element={<DetailTask />}
           loader={taskMonitorLoader as any}
-          action={ToggleTaskAction}
         ></Route>
         <Route
           path="monitor_task/:task_id/chat"
@@ -194,7 +193,7 @@ function App() {
             action={sendChat}
           ></Route>
         </Route>
-        <Route path="ban_list" element={<BanList />}></Route>
+        <Route path="ban_list" element={<BanList />} loader={BanListLoader} action={toggleBan}></Route>
         <Route path="top_up" element={<TopUp />} loader={TopUpLoader} action={TopUpAction}></Route>
       </Route>,
     ])

@@ -20,12 +20,12 @@ export default function DetailTask(){
     const[task, setTask] = useState(useLoaderData()[0]);
     const navigate = useNavigate();
     const fetcher = useFetcher();
-    console.log(task);
+    // console.log(task);
 
     const labeled = task.data.reduce((total, d) => d.labels.length + total, 0)
     const totalData = task.data.length * (task.worker.length == 0 ? 1 : task.worker.length)
     const progress = Math.floor(labeled/totalData*100);
-    console.log({labeled, totalData, progress});
+    // console.log({labeled, totalData, progress});
 
     function CircularProgressWithLabel(props: CircularProgressProps & { value: number },) {
         return (
@@ -140,7 +140,7 @@ export default function DetailTask(){
                                     </div>
                                 </div>
                                 <div id={"label_"+index} className='collapse'>
-                                    <ListLabel label={item.labels} key={index} />
+                                    <ListLabel label={item.labels} task_id={task._id} ban_list={task.ban_list} key={index} />
                                 </div>
                             </div>
                         )

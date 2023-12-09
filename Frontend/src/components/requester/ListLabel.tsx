@@ -3,9 +3,10 @@ import Label from "../../interface/LabelInterface";
 import React, { useState } from 'react';
 import ChatIcon from '@mui/icons-material/Chat';
 import NoAccountsIcon from '@mui/icons-material/NoAccounts';
-import { useNavigate } from "react-router-dom";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useFetcher, useNavigate } from "react-router-dom";
 
-export default function ListLabel({label} : {label : Label[]}) {
+export default function ListLabel({label, task_id, ban_list} : {label : Label[], task_id: string}) {
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -20,6 +21,8 @@ export default function ListLabel({label} : {label : Label[]}) {
     // const id = open ? 'simple-popover' : undefined;
 
     const navigate = useNavigate();
+    const fetcher = useFetcher();
+    console.log(ban_list);
 
     return (
         <table className="table mt-3">
@@ -36,7 +39,6 @@ export default function ListLabel({label} : {label : Label[]}) {
             <tbody>
                 {
                     label.map((item, index) => {
-                        const id = open ? item.worker : undefined;
                         return <tr key={index}>
                             <td className="align-middle text-truncate">
                                 <Button className="d-flex align-items-center text-dark" value={item.worker._id} onClick={handleClick}>
@@ -44,7 +46,7 @@ export default function ListLabel({label} : {label : Label[]}) {
                                     <label className="ms-2" role="button">{item.worker.name}</label>
                                 </Button>
                                 <Popover
-                                    id={id+"_"+index+"_"+item.worker._id}
+                                    id={item.worker._id}
                                     open={open}
                                     anchorEl={anchorEl}
                                     onClose={handleClose}
@@ -54,8 +56,8 @@ export default function ListLabel({label} : {label : Label[]}) {
                                     }}
                                     
                                 >
-                                    <Typography sx={{ p: 2 }}>
-                                        <div className="d-flex flex-column justify-content-between align-items-start" style={{width:"80px"}}>
+                                    <div className="p-2">
+                                        <div className="d-flex flex-column justify-content-between align-items-start" style={{width:"100px"}}>
                                             <Button className="d-flex text-dark" onClick={() => {
                                                 navigate('chat/'+anchorEl?.value);
                                             }}>
@@ -63,13 +65,28 @@ export default function ListLabel({label} : {label : Label[]}) {
                                                 <span className="ms-2">Chat</span>
                                             </Button>
                                             <Button className="d-flex text-dark" onClick={() => {
-                                                navigate('');
+                                                fetcher.submit({task_id: task_id, banned_worker_id: item.worker._id}, {
+                                                    method: "post",
+                                                    encType: "application/x-www-form-urlencoded",
+                                                    action: "/requester/ban_list"
+                                                })
+                                                ban_list = ban_list.filter((b) => b._id != item.worker._id)
+                                                setAnchorEl(null)
                                             }}>
-                                                <NoAccountsIcon color="error" />
-                                                <span className="ms-2">Ban</span>
+                                                {ban_list.find((b) => b._id == anchorEl?.value) ?
+                                                    <>
+                                                        <AccountCircleIcon color="success" />
+                                                        <span className="ms-2">UnBan</span>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <NoAccountsIcon color="error" />
+                                                        <span className="ms-2">Ban</span>
+                                                    </>
+                                                }
                                             </Button>
                                         </div>
-                                    </Typography>
+                                    </div>
                                 </Popover>
                             </td>
                             <td className="align-middle text-truncate">{item.answer}</td>
