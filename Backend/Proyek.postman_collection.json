@@ -2661,6 +2661,101 @@
 							"body": "{\n    \"_id\": \"6569529de52c12087f0469fa\",\n    \"email\": \"andi@example.com\",\n    \"password\": \"andi123\",\n    \"name\": \"Andi\",\n    \"role\": \"worker\",\n    \"credibility\": 100,\n    \"wallet\": 0,\n    \"tasks\": [\n        \"656d7a6163306491542fa07d\"\n    ],\n    \"__v\": 0\n}"
 						}
 					]
+				},
+				{
+					"name": "Get All Banned User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/user/get_all_banned_user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"get_all_banned_user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Banned User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/v1/user/get_all_banned_user",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"get_all_banned_user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Access-Control-Expose-Headers",
+									"value": "Authorization"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "663"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"297-yVvq0zax7vZJ96NOh6t51Ae8HAQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 09 Dec 2023 16:21:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"_id\": \"656d7a6163306491542fa07d\",\n        \"task_name\": \"AI Summary checking about anime\",\n        \"ban_list\": \"6569529de52c12087f0469fa\",\n        \"baned_user\": [\n            {\n                \"_id\": \"6569529de52c12087f0469fa\",\n                \"email\": \"andi@example.com\",\n                \"password\": \"andi123\",\n                \"name\": \"Andi\",\n                \"role\": \"worker\",\n                \"credibility\": 100,\n                \"wallet\": 0,\n                \"tasks\": [\n                    \"656d7a6163306491542fa07d\"\n                ],\n                \"__v\": 0\n            }\n        ]\n    },\n    {\n        \"_id\": \"656d7a6163306491542fa07d\",\n        \"task_name\": \"AI Summary checking about anime\",\n        \"ban_list\": \"65693c1146c4d47bb6e5b25b\",\n        \"baned_user\": [\n            {\n                \"_id\": \"65693c1146c4d47bb6e5b25b\",\n                \"email\": \"Erik.Fisher@yahoo.com\",\n                \"password\": \"Fu1d6QvnY\",\n                \"name\": \"Elaine Moore\",\n                \"role\": \"worker\",\n                \"credibility\": 49,\n                \"wallet\": 8454289,\n                \"tasks\": [\n                    \"656d7a6163306491542fa07d\"\n                ],\n                \"__v\": 0\n            }\n        ]\n    }\n]"
+						}
+					]
 				}
 			]
 		},

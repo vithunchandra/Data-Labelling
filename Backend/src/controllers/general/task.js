@@ -313,41 +313,42 @@ const get_task_by_id = async (req, res) => {
 
   let all_task = await Task.aggregate(condition_now).exec();
 
-  all_task = await Promise.all(
-    all_task.map(async (item) => {
-      item.data = await Promise.all(
-        item.data.map(async (data_temp) => {
-          const new_labels = await Promise.all(
-            data_temp.labels.map(async (label_temp) => {
-              label_temp.worker = await User.findById(label_temp.worker);
-              return label_temp;
-            })
-          );
-          data_temp.labels = new_labels;
-          return data_temp;
-        })
-      );
+  if (expand) {
+    all_task = await Promise.all(
+      all_task.map(async (item) => {
+        item.data = await Promise.all(
+          item.data.map(async (data_temp) => {
+            const new_labels = await Promise.all(
+              data_temp.labels.map(async (label_temp) => {
+                label_temp.worker = await User.findById(label_temp.worker);
+                return label_temp;
+              })
+            );
+            data_temp.labels = new_labels;
+            return data_temp;
+          })
+        );
 
-      item.worker = await Promise.all(
-        item.worker.map(async (worker_temp) => {
-          const temp_worker = await User.findById(worker_temp.user_id);
-          const chat_now = await Promise.all(
-            worker_temp.chat.map(async (chat_id) => {
-              return await Chat.findById(chat_id);
-            })
-          );
+        item.worker = await Promise.all(
+          item.worker.map(async (worker_temp) => {
+            const temp_worker = await User.findById(worker_temp.user_id);
+            const chat_now = await Promise.all(
+              worker_temp.chat.map(async (chat_id) => {
+                return await Chat.findById(chat_id);
+              })
+            );
 
-          return {
-            user: temp_worker,
-            chat: chat_now,
-          };
-        })
-      );
+            return {
+              user: temp_worker,
+              chat: chat_now,
+            };
+          })
+        );
 
-      return item;
-    })
-  );
-  console.log(all_task);
+        return item;
+      })
+    );
+  }
 
   return res.status(200).json(all_task);
 };
@@ -356,7 +357,7 @@ const get_user_task = async (req, res) => {
   //using model way
   const { expand, task_type_id } = req.query;
   const user_id = req.user._id;
-  console.log(user_id);
+
   let condition_now = [
     { $match: { _id: new mongoose.Types.ObjectId(user_id) } },
     { $project: { password: 0 } },
@@ -508,13 +509,21 @@ const toggle_ban_user = async (req, res) => {
   }
 
   let updated_task;
-  const user_in_banned_list = task_now.ban_list;
-  user_in_banned_list.filter((item) => {
-    if (String(item.user_id) == String(banned_worker_id)) {
+  let user_in_banned_list = task_now.ban_list;
+  user_in_banned_list = user_in_banned_list.filter((item) => {
+    console.log(
+      String(item),
+      String(banned_worker_id),
+      String(item) == String(banned_worker_id)
+    );
+
+    if (String(item) === String(banned_worker_id)) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   });
+
   if (user_in_banned_list.length > 0) {
     updated_task = await Task.findByIdAndUpdate(
       task_id,

@@ -1,4 +1,5 @@
-const { User } = require("../../models");
+const { default: mongoose } = require("mongoose");
+const { User, Task } = require("../../models");
 
 const get_user = async (req, res) => {
   const { role, expand } = req.query;
@@ -80,10 +81,45 @@ async function drawWallet(req, res) {
   return res.status(200).json({ wallet: user.wallet });
 }
 
+const get_all_banned_user = async (req, res) => {
+  const user = req.user;
+  const user_id = user._id;
+  if (String(user.role).toLowerCase() != "requester") {
+    return res.status(403).json({
+      msg: "Only requester can acess this!",
+    });
+  }
+
+  let condition_now = [
+    { $match: { requester: new mongoose.Types.ObjectId(user_id) } },
+    { $unwind: "$ban_list" },
+    {
+      $project: {
+        _id: 1,
+        task_name: 1,
+        ban_list: 1,
+      },
+    },
+    {
+      $lookup: {
+        from: "User",
+        localField: "ban_list",
+        foreignField: "_id",
+        as: "baned_user",
+      },
+    },
+  ];
+
+  const all_banned_user = await Task.aggregate(condition_now).exec();
+
+  return res.status(200).json(all_banned_user);
+};
+
 module.exports = {
   get_user,
   getUserById,
   getWallet,
   fill_wallet,
   drawWallet,
+  get_all_banned_user,
 };
