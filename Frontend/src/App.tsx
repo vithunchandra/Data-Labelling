@@ -22,7 +22,7 @@ import TaskData, { dataLoader } from "./pages/worker/TaskData";
 import RequesterDashboard from "./pages/requester/RequesterDashboard";
 import CreateTask, { getUserTasks } from "./pages/requester/CreateTask";
 import AddTask, { AddTaskAction, getAllTaskType } from "./pages/requester/AddTask";
-import EditTask, { taskEditLoader } from "./pages/requester/EditTask";
+import EditTask, { editTaskAction, taskEditLoader } from "./pages/requester/EditTask";
 import TopUp from "./pages/requester/TopUp";
 import MonitorTask, { ToggleTaskAction } from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
@@ -130,6 +130,7 @@ function App() {
           path="create_task/:task_id"
           element={<EditTask />}
           loader={taskEditLoader as any}
+          action={editTaskAction as any}
         ></Route>
         <Route path="monitor_task" element={<MonitorTask />} loader={getUserTasks as any} action={ToggleTaskAction}></Route>
         <Route
@@ -143,6 +144,10 @@ function App() {
           element={<Chat />}
           loader={taskMonitorLoader as any}
         >
+          <Route
+            index
+            element={<div className="w-100 h-100 d-flex justify-content-center align-items-center"><img src="../../../Logo_2.png" className="w-50" /></div>}
+          ></Route>
           <Route
             path=":worker"
             element={<ChatBox />}
