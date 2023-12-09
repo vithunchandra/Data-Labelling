@@ -1,9 +1,14 @@
 import { Avatar, Button, FormControl, MenuItem } from "@mui/material";
+import { client } from "../../api/client";
 import Task from "../../interface/TaskInterface";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Link } from "react-router-dom";
+import useAuth from "../../customHooks/authenticate";
+import { AxiosError } from "axios";
 
 export default function Users({ task }: { task: Task[] }) {
+  console.log(task);
+
   return (
     <>
       <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
@@ -32,21 +37,23 @@ export default function Users({ task }: { task: Task[] }) {
                   <tr key={index}>
                     <td className="align-middle">{index + 1}</td>
                     <td className="align-middle text-capitalize text-truncate">
-                      {item.name}
+                      {item.task_name}
                     </td>
                     <td className="align-middle row g-0 align-items-center">
                       <div className="col-auto">
-                        <Avatar src={item.profile_image}></Avatar>
+                        <Avatar src={"https://picsum.photos/200"}></Avatar>
                       </div>
                       <div className="col ms-3 text-capitalize">
-                        <div className="fw-bold">{item.requester}</div>
+                        <div className="fw-bold">{item.requester[0].name}</div>
                       </div>
                     </td>
                     <td className="align-middle text-center">
                       {item.data.length}
                     </td>
                     <td className="align-middle">
-                      <span className="text-secondary">{item.finish_date}</span>
+                      <span className="text-secondary">
+                        {new Date(item.end_date).toDateString()}
+                      </span>
                     </td>
                     <td className="align-middle">
                       <Link to={`detail/${index.toString()}`}>

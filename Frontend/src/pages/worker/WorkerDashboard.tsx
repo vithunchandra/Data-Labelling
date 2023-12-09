@@ -97,7 +97,7 @@ export async function workerDashboardLoader(){
             headers: {Authorization: `Bearer ${getToken()}`}
         })
         loaderObject = {...loaderObject, ...response.data}
-
+        console.log(loaderObject);
         return loaderObject
     }catch(err){
         if(err instanceof AxiosError){

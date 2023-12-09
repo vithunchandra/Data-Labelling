@@ -11,8 +11,8 @@ const { authentication } = require("../../middleware/authentication");
 
 router.get("/", get_user);
 router.get("/id/:user_id", getUserById);
-router.get("/wallet", [authentication], getWallet)
-router.put("/wallet/draw", [authentication], drawWallet)
+router.get("/wallet", [authentication], getWallet);
+router.put("/wallet/draw", [authentication], drawWallet);
 router.post("/fill_wallet", [authentication], fill_wallet);
 
 module.exports = router;
