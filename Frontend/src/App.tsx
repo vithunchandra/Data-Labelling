@@ -27,7 +27,10 @@ import AddTask, {
   AddTaskAction,
   getAllTaskType,
 } from "./pages/requester/AddTask";
-import EditTask, { editTaskAction, taskEditLoader } from "./pages/requester/EditTask";
+import EditTask, {
+  editTaskAction,
+  taskEditLoader,
+} from "./pages/requester/EditTask";
 import TopUp, { TopUpAction, TopUpLoader } from "./pages/requester/TopUp";
 import MonitorTask, { ToggleTaskAction } from "./pages/requester/MonitorTask";
 import TaskInformation from "./pages/worker/TaskInformation";
@@ -35,10 +38,15 @@ import Labelling, { labellingLoader } from "./pages/worker/Labelling";
 import MyWallet from "./pages/worker/MyWallet";
 import DetailTask, { taskMonitorLoader } from "./pages/requester/DetailTask";
 import Chat from "./pages/requester/Chat";
-import ChatBox, { sendChat, workerIDLoader } from "./components/requester/ChatBox";
+import ChatBox, {
+  sendChat,
+  workerIDLoader,
+} from "./components/requester/ChatBox";
 import BanList, { BanListLoader, toggleBan } from "./pages/requester/BanList";
 import Signin from "./pages/authentication/Signin";
-import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminDashboard, {
+  adminDashboardLoader,
+} from "./pages/admin/AdminDashboard";
 import AdminUser, { getUsers } from "./pages/admin/AdminUser";
 import AdminTaskType, {
   getTaskTypes,
@@ -48,7 +56,9 @@ import AdminKeuangan from "./pages/admin/AdminKeuangan";
 import AdminTask, { getTasks } from "./pages/admin/AdminTask";
 import AdminUserDetail, { getUserDetail } from "./pages/admin/AdminUserDetail";
 import AdminTaskDetail from "./pages/admin/AdminTaskDetail";
-import AdminUserTaskDetail from "./pages/admin/AdminUserTaskDetail";
+import AdminUserTaskDetail, {
+  userTaskDetail,
+} from "./pages/admin/AdminUserTaskDetail";
 import Authenticate from "./pages/authentication/Authenticate";
 
 function App() {
@@ -65,7 +75,11 @@ function App() {
           </Authenticate>
         }
       >
-        <Route index element={<AdminDashboard />}></Route>
+        <Route
+          index
+          element={<AdminDashboard />}
+          loader={adminDashboardLoader}
+        ></Route>
         <Route path="user" element={<AdminUser />} loader={getUsers}></Route>
         <Route
           path="user/:user_id"
@@ -75,9 +89,14 @@ function App() {
         <Route
           path="user/:user_id/detail/:task_id"
           element={<AdminUserTaskDetail />}
+          loader={userTaskDetail as any}
         ></Route>
         <Route path="task" element={<AdminTask />} loader={getTasks}></Route>
-        <Route path="task/:task_id" element={<AdminTaskDetail />}></Route>
+        <Route
+          path="task/:task_id"
+          element={<AdminTaskDetail />}
+          loader={userTaskDetail as any}
+        ></Route>
         <Route
           path="/admin/task_type"
           element={<AdminTaskType />}
@@ -148,7 +167,11 @@ function App() {
           </Authenticate>
         }
       >
-        <Route index element={<RequesterDashboard />} loader={getUserTasks as any}></Route>
+        <Route
+          index
+          element={<RequesterDashboard />}
+          loader={getUserTasks as any}
+        ></Route>
         <Route
           path="create_task"
           element={<CreateTask />}
@@ -184,17 +207,31 @@ function App() {
         >
           <Route
             index
-            element={<div className="w-100 h-100 d-flex justify-content-center align-items-center"><img src="../public/Logo_2.png" className="w-50" /></div>}
+            element={
+              <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+                <img src="../public/Logo_2.png" className="w-50" />
+              </div>
+            }
           ></Route>
           <Route
             path=":worker"
             element={<ChatBox />}
-            loader={workerIDLoader as any} 
+            loader={workerIDLoader as any}
             action={sendChat}
           ></Route>
         </Route>
-        <Route path="ban_list" element={<BanList />} loader={BanListLoader} action={toggleBan}></Route>
-        <Route path="top_up" element={<TopUp />} loader={TopUpLoader} action={TopUpAction}></Route>
+        <Route
+          path="ban_list"
+          element={<BanList />}
+          loader={BanListLoader}
+          action={toggleBan}
+        ></Route>
+        <Route
+          path="top_up"
+          element={<TopUp />}
+          loader={TopUpLoader}
+          action={TopUpAction}
+        ></Route>
       </Route>,
     ])
   );

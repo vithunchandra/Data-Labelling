@@ -18,7 +18,6 @@ export default function AdminTaskType() {
         console.error(error);
       }
     }
-
     fetchData();
   }, []);
 

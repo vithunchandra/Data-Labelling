@@ -295,6 +295,7 @@ const get_task = async (req, res) => {
 const get_task_by_id = async (req, res) => {
   const { task_id } = req.params;
   const { expand } = req.query;
+  
   let condition_now = [
     { $addFields: { newField: 1 } },
     { $project: { newField: 0 } },

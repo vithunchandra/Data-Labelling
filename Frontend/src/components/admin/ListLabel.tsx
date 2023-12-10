@@ -15,14 +15,6 @@ export default function ListLabel({ label }: { label: Label[] }) {
             Worker
           </th>
           <th
-            className="align-middle text-center"
-            style={{
-              width: "15%",
-            }}
-          >
-            Status
-          </th>
-          <th
             className="align-middle"
             style={{
               width: "65%",
@@ -39,21 +31,10 @@ export default function ListLabel({ label }: { label: Label[] }) {
               <td className="align-middle">
                 <div className="d-flex align-items-center text-dark">
                   <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-                  <label className="ms-2">{item.worker}</label>
+                  <label className="ms-2">{item.worker.name}</label>
                 </div>
               </td>
-              <td className="align-middle text-center">
-                {item.status == "labeled" ? (
-                  <Chip
-                    label={item.status}
-                    variant="outlined"
-                    color="success"
-                  />
-                ) : (
-                  <Chip label={item.status} variant="outlined" color="error" />
-                )}
-              </td>
-              <td className="align-middle">{item.label}</td>
+              <td className="align-middle">{item.answer}</td>
             </tr>
           );
         })}

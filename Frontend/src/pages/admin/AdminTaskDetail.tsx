@@ -7,19 +7,21 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import tasks from "../../dummy_data/task.json";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import DataArrayIcon from "@mui/icons-material/DataArray";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
-import ListLabel from "../../components/requester/ListLabel";
+import ListLabel from "../../components/admin/ListLabel";
 
 export default function AdminTaskDetail() {
-  const { task_id } = useParams();
+  const task = useLoaderData()[0];
   const navigate = useNavigate();
-  const task = tasks[task_id];
+  let worker = "";
+  task.worker.map((item, index) => {
+    worker += item.user.name + " ";
+  });
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
@@ -46,7 +48,7 @@ export default function AdminTaskDetail() {
       </Box>
     );
   }
-  
+
   const taskData = [
     {
       icon: (
@@ -66,7 +68,7 @@ export default function AdminTaskDetail() {
           className="me-2"
         ></AttachMoneyIcon>
       ),
-      data: task.price,
+      data: task.task_type[0].price,
     },
     {
       icon: (
@@ -76,7 +78,7 @@ export default function AdminTaskDetail() {
           className="me-2"
         ></AddReactionOutlinedIcon>
       ),
-      data: `${task.credibility} Credibility Score`,
+      data: `${task.min_credibility} Credibility Score`,
     },
     {
       icon: (
@@ -86,7 +88,7 @@ export default function AdminTaskDetail() {
           className="me-2"
         ></PersonIcon>
       ),
-      data: `${task.requester}`,
+      data: `${task.requester[0].name}`,
     },
     {
       icon: (
@@ -96,7 +98,7 @@ export default function AdminTaskDetail() {
           className="me-2"
         ></PeopleIcon>
       ),
-      data: `${task.workers.join(", ")}`,
+      data: `${worker}`,
     },
   ];
 
@@ -114,9 +116,11 @@ export default function AdminTaskDetail() {
       </div>
       <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm text-capitalize">
         <div className="d-flex align-items-center justify-content-between">
-          <div className="display-6 fw-bold">{task.name}</div>
+          <div className="display-6 fw-bold">{task.task_name}</div>
           <div className="col-auto d-flex align-items-center">
-            <div className="fs-2 fw-light text-secondary">{task.type}</div>
+            <div className="fs-2 fw-light text-secondary">
+              {task.task_type[0].name}
+            </div>
           </div>
           {/* {task.status ? (
             <div className="fs-2 fw-light text-success">Finished</div>
@@ -125,7 +129,8 @@ export default function AdminTaskDetail() {
           )} */}
         </div>
         <div className="fs-5 mt-1">
-          {task.start_date} - {task.finish_date}
+          {new Date(task.start_date).toDateString()} -{" "}
+          {new Date(task.end_date).toDateString()}
         </div>
         <div className="w-75 row flex-row justify-content-between mb-4 g-0">
           <div className="fw-bold fs-4 mt-4">Task Information</div>
@@ -147,54 +152,66 @@ export default function AdminTaskDetail() {
           <div className="fs-5">
             <span className="fw-bold">Instruction:</span>
             <br />
-            <p className="fs-6 ps-4">{task.instruction}</p>
+            <p className="fs-6 ps-4">{task.task_description}</p>
           </div>
         </div>
       </div>
-      <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
-        {task.data.map((item, index) => {
-          const isLabeled = item.labels.filter((l) => l.status == "labeled");
-          return (
-            <div className="w-100 mb-2 border p-3 rounded" key={index}>
-              <div className="w-100 d-flex justify-content-betweeen">
-                <label
-                  className="w-100 fs-5 fw-bold"
-                  data-bs-toggle="collapse"
-                  data-bs-target={"#label_" + index}
-                  role="button"
-                >
-                  Data:
-                </label>
-                <Chip label={item.status} variant="filled" />
-              </div>
-              <div className="d-flex">
-                <label
-                  className="fs-6 ps-4"
-                  data-bs-toggle="collapse"
-                  data-bs-target={"#label_" + index}
-                  role="button"
-                  style={{ width: "90%", textAlign: "justify" }}
-                >
-                  {item.data}
-                </label>
-                <div
-                  className="d-flex align-items-end justify-content-end my-3"
-                  style={{ width: "10%" }}
-                >
-                  <CircularProgressWithLabel
-                    value={Math.floor(
-                      (isLabeled.length / item.labels.length) * 100
-                    )}
+      {task.data.length > 0 && (
+        <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
+          {task.data.map((item, index) => {
+            const isLabeled = item.labels.length;
+            return (
+              <div className="w-100 mb-2 border p-3 rounded" key={index}>
+                <div className="w-100 d-flex justify-content-betweeen">
+                  <label
+                    className="w-100 fs-5 fw-bold"
+                    data-bs-toggle="collapse"
+                    data-bs-target={"#label_" + index}
+                    role="button"
+                  >
+                    Data:
+                  </label>
+                  <Chip
+                    label={isLabeled > 0 ? "labeled" : "unlabeled"}
+                    variant="filled"
                   />
                 </div>
+                <div className="d-flex">
+                  <label
+                    className="fs-6 ps-4"
+                    data-bs-toggle="collapse"
+                    data-bs-target={"#label_" + index}
+                    role="button"
+                    style={{ width: "90%", textAlign: "justify" }}
+                  >
+                    {item.text}
+                  </label>
+                  <div
+                    className="d-flex align-items-end justify-content-end my-3"
+                    style={{ width: "10%" }}
+                  >
+                    <CircularProgressWithLabel
+                      value={
+                        task.worker.length != 0
+                          ? Math.floor((isLabeled / task.worker.length) * 100)
+                          : 0
+                      }
+                    />
+                  </div>
+                </div>
+                <div id={"label_" + index} className="collapse">
+                  <ListLabel label={item.labels} key={index} />
+                </div>
               </div>
-              <div id={"label_" + index} className="collapse">
-                <ListLabel label={item.labels} key={index} />
-              </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
+      {task.data == 0 && (
+        <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm fw-bold fs-5">
+          No data
+        </div>
+      )}
     </>
   );
 }

@@ -34,7 +34,7 @@ export default function Users({ task }: { task: Task[] }) {
             ) : (
               task.map((item, index) => {
                 console.log(item);
-                
+
                 return (
                   <tr key={index}>
                     <td className="align-middle">{index + 1}</td>
@@ -58,7 +58,7 @@ export default function Users({ task }: { task: Task[] }) {
                       </span>
                     </td>
                     <td className="align-middle">
-                      <Link to={`detail/${index.toString()}`}>
+                      <Link to={`detail/${item._id}`}>
                         <Button
                           variant="contained"
                           startIcon={<InfoOutlinedIcon />}

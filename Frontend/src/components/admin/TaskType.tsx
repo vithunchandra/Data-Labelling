@@ -6,16 +6,11 @@ import SaveIcon from "@mui/icons-material/Save";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { IconButton } from "@mui/material";
 import { Link, useFetcher } from "react-router-dom";
-import { client } from "../../api/client";
-import { useSelector, useDispatch } from "react-redux";
-import useAuth from "../../customHooks/authenticate";
-import { AxiosError } from "axios";
 
 export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
   const [editIndex, setEditIndex] = useState(null);
   const [tempName, setTempName] = useState("");
   const [tempPrice, setTempPrice] = useState(0);
-  const dispatch = useDispatch();
   const fetcher = useFetcher();
 
   const handleEdit = (index) => {
@@ -99,4 +94,3 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
     </div>
   );
 }
-

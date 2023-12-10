@@ -146,7 +146,7 @@ export default function Task({ task }: { task: Task[] }) {
                     </span>
                   </td>
                   <td className="align-middle">
-                    <Link to={index.toString()}>
+                    <Link to={item._id}>
                       <Button
                         variant="contained"
                         startIcon={<InfoOutlinedIcon />}

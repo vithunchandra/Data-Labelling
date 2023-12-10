@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 
 export default function AdminTask() {
   const task = useLoaderData();
-  
+
   return (
     <>
       <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">

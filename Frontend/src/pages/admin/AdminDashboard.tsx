@@ -2,32 +2,39 @@ import WavingHandIcon from "@mui/icons-material/WavingHand";
 import Assignment from "@mui/icons-material/Assignment";
 import PeopleIcon from "@mui/icons-material/People";
 import ProgressInfo from "../../components/admin/ProgressInfo";
-import { useSelector } from "react-redux";
 import DashboardUser from "../../components/admin/DashboardUser";
 import DashboardTaskType from "../../components/admin/DashboardTaskType";
 import DashboardTask from "../../components/admin/DashboardTask";
-import task from "../../dummy_data/task.json";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import useAuth from "../../customHooks/authenticate";
+import { client } from "../../api/client";
+import { AxiosError } from "axios";
 
 export default function AdminDashboard() {
-  const user = useSelector((state) => state.user.listUser);
+  const data = useLoaderData();
+  console.log(data);
+
+  const user = data.users;
   let lastUser = [];
-  if (user.length > 5) {
-    for (let i = user.length - 1; i > user.length - 6; i--) {
+  if (data.totalUser > 5) {
+    for (let i = data.totalUser - 1; i > data.totalUser - 6; i--) {
       lastUser.push(user[i]);
     }
   } else lastUser = user;
-  const taskType = useSelector((state) => state.task_type.listTasktype);
+  console.log(lastUser);
+
+  const taskType = data.task_type;
   let lastTasktype = [];
-  if (taskType.length > 5) {
-    for (let i = taskType.length - 1; i > taskType.length - 6; i--) {
+  if (data.totalTasktype > 5) {
+    for (let i = data.totalTasktype - 1; i > data.totalTasktype - 6; i--) {
       lastTasktype.push(taskType[i]);
     }
   } else lastTasktype = taskType;
 
+  const task = data.task;
   let tasks = [];
-  if (task.length > 5) {
-    for (let i = task.length - 1; i > task.length - 6; i--) {
+  if (data.totalTask > 5) {
+    for (let i = data.totalTask - 1; i > data.totalTask - 6; i--) {
       tasks.push(task[i]);
     }
   } else tasks = task;
@@ -36,17 +43,17 @@ export default function AdminDashboard() {
     {
       icon: <PeopleIcon sx={{ fontSize: "40px" }} color="info"></PeopleIcon>,
       titleText: "Total User",
-      text: user.length,
+      text: data.totalUser,
     },
     {
       icon: <Assignment sx={{ fontSize: "40px" }} color="info"></Assignment>,
       titleText: "Total Task Type",
-      text: taskType.length,
+      text: data.totalTasktype,
     },
     {
       icon: <Assignment sx={{ fontSize: "40px" }} color="info"></Assignment>,
       titleText: "Task",
-      text: task.length,
+      text: data.totalTask,
     },
   ];
   return (
@@ -104,4 +111,50 @@ export default function AdminDashboard() {
       </div>
     </div>
   );
+}
+
+export async function adminDashboardLoader({ params }: any) {
+  const { getToken } = useAuth();
+  try {
+    let loaderObject = {};
+    let response = await client.get("admin/all_users", {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      params: {
+        expand: 1,
+      },
+    });
+    loaderObject = {
+      ...loaderObject,
+      users: response.data,
+      totalUser: response.data.length,
+    };
+    response = await client.get("task_type", {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    loaderObject = {
+      ...loaderObject,
+      task_type: response.data,
+      totalTasktype: response.data.length,
+    };
+    response = await client.get("admin/all_tasks", {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    loaderObject = {
+      ...loaderObject,
+      task: response.data,
+      totalTask: response.data.length,
+    };
+    return loaderObject;
+  } catch (err) {
+    if (err instanceof AxiosError) {
+      return console.log(err.response?.data.message);
+    }
+    return console.log(err);
+  }
 }
