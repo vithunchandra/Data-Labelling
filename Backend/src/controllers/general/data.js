@@ -174,7 +174,23 @@ const create_data = async (req, res) => {
     });
   }
 
+  const task_type_now = await Task_Type.findById(task_now.task_type);
+  const char_price = task_type_now.price;
+  let total_price = text.length * char_price;
+  if (total_price > req.user.wallet) {
+    return res.status(400).json({
+      message: "Insufficient balance",
+    });
+  }
+
   const new_data = await create_data_helper(task_now, text);
+  const new_user = await User.findByIdAndUpdate(
+    requester_id,
+    {
+      $inc: { wallet: -Math.round(total_price) },
+    },
+    { new: true } // return updated use
+  );
 
   return res.json(new_data);
 };
@@ -215,10 +231,33 @@ const create_bulk_data = async (req, res) => {
     });
   }
 
+  const task_type_now = await Task_Type.findById(task_now.task_type);
+  const char_price = task_type_now.price;
+  let total_price = 0;
+  for (let i = 0; i < data.length; i++) {
+    // count total price
+    total_price += data[i].length * char_price;
+    // task_now.price
+  }
+  console.log(total_price, req.user.wallet);
+  if (total_price > req.user.wallet) {
+    return res.status(400).json({
+      message: "Insufficient balance",
+    });
+  }
+
   for (let i = 0; i < data.length; i++) {
     // use helper to create data
     const new_data = await create_data_helper(task_now, data[i]);
   }
+
+  const new_user = await User.findByIdAndUpdate(
+    requester_id,
+    {
+      $inc: { wallet: -Math.round(total_price) },
+    },
+    { new: true } // return updated use
+  );
 
   return res.status(200).json({
     msg: "All data created sucesfully!",
