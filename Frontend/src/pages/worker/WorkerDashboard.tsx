@@ -108,5 +108,6 @@ export async function workerDashboardLoader(){
         }else{
             console.log(err)
         }
+        return null
     }
 }

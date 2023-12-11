@@ -8,7 +8,7 @@ export default function useAuth(){
 
   function getUser(){
     const token = localStorage.getItem('access_token')
-    const user = (decodeToken(token!) as any).user as IUser
+    const user = (decodeToken(token!) as any)?.user as IUser
     return user
   }
 

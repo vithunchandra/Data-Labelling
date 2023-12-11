@@ -111,11 +111,13 @@ export const marketTaskDetailLoader = async ({ params } : any) => {
             },
         })
         task = response.data as IFetchData
-        console.log(task)
     }catch(err){
         if(err instanceof AxiosError){
             console.log(err.response?.data.message)
+        }else{
+            console.log(err)
         }
+        return null
     }
     return task;
 }

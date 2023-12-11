@@ -9,7 +9,7 @@ export default function Navbar({setIsDrawerOn, isDrawerOn, pageName, user} : {
     user: IUser
 }){
     return(
-        <nav className={`navbar navbar-expand-lg bg-white rounded-2 shadow-sm`}>
+        <nav className={`navbar navbar-expand-lg bg-white rounded-2 shadow`}>
             <div className="container-fluid">
                 <div className='d-flex align-items-center'>
                     <Collapse orientation='horizontal' in={!isDrawerOn}>

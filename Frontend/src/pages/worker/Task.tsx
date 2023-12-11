@@ -34,7 +34,7 @@ export default function TaskDetail(){
                                     <List />
                                 </IconButton>
                             </Link>
-                            <Link to={`./${query}`}>
+                            <Link to={`./`}>
                                 <IconButton color='primary'>
                                     <InfoOutlined/>
                                 </IconButton>
@@ -102,8 +102,10 @@ export async function taskDetailLoader({params, request}: any){
         return {...response.data, query} as ILoader
     }catch(err){
         if(err instanceof AxiosError){
-            return console.log(err.response?.data.message)
+            console.log(err.response?.data.message)
+        }else{
+            console.log(err)
         }
-        return console.log(err)
+        return null
     }
 }

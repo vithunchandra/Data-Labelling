@@ -63,3 +63,10 @@ textarea::-webkit-scrollbar{
 .navigation-color{
     background-color: #1976d2;
 }
+
+.blue-gradient{
+    background: linear-gradient(
+        rgba(123, 102, 255, 0.1),
+        rgba(123, 102, 255, 0.1)
+    );
+}

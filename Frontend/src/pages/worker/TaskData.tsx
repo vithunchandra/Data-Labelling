@@ -110,8 +110,10 @@ export async function dataLoader({params, request}: any){
         return {...response.data, page} as ILoader
     }catch(err){
         if(err instanceof AxiosError){
-            return console.log(err.response?.data.message)
+            console.log(err.response?.data.message)
+        }else{
+            console.log(err)
         }
-        return console.log(err)
+        return null
     }
 }

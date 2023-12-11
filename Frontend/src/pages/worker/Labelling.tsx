@@ -113,8 +113,10 @@ export async function labellingLoader({params}: any){
         return response.data as ILoader
     }catch(err){
         if(err instanceof AxiosError){
-            return console.log(err.response?.data.message)
+            console.log(err.response?.data.message)
+        }else{
+            console.log(err)
         }
-        return console.log(err)
+        return null
     }
 }
