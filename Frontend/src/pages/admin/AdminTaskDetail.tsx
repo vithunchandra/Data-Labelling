@@ -20,7 +20,8 @@ export default function AdminTaskDetail() {
   const navigate = useNavigate();
   let worker = "";
   task.worker.map((item, index) => {
-    worker += item.user.name + " ";
+    if (task.worker.length - 1 != index) worker += item.user.name + ", ";
+    else worker += item.user.name;
   });
 
   function CircularProgressWithLabel(

@@ -107,10 +107,10 @@ export const adminNavigation = [
     element: <AdminTaskType />,
     path: "/admin/task_type",
   },
-  // {
-  //   // name: "Laporan Keuangan",
-  //   // icon: <i className="bi bi-house"></i>,
-  //   element: <AdminKeuangan />,
-  //   path: "/admin/keuangan",
-  // },
+  {
+    name: "Financial",
+    icon: <i className="bi bi-house"></i>,
+    element: <AdminKeuangan />,
+    path: "/admin/keuangan",
+  },
 ];

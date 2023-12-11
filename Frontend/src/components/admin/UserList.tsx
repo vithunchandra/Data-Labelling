@@ -83,9 +83,9 @@ export default function UserList({ user }: { user: User[] }) {
       <table className="table">
         <thead>
           <tr>
-            <th className="align-middle">ID</th>
+            <th className="align-middle">No</th>
             <th className="align-middle">Name</th>
-            <th className="align-middle">Role</th>
+            <th className="align-middle ">Role</th>
             <th className="align-middle text-center">Credibility</th>
             <th className="align-middle">Wallet</th>
             <th className="align-middle">Action</th>

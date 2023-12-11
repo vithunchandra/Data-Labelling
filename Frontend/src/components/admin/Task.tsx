@@ -107,8 +107,9 @@ export default function Task({ task }: { task: Task[] }) {
         <thead>
           <tr>
             <th className="align-middle col-1">No</th>
-            <th className="align-middle col-4">Nama</th>
-            <th className="align-middle col-1">Requester</th>
+            <th className="align-middle col-3">Nama</th>
+            <th className="align-middle col-3">Requester</th>
+            <th className="align-middle col-2">Type</th>
             <th className="align-middle text-center col-1">Total Data</th>
             <th className="align-middle col-2">Closed Date</th>
             <th className="align-middle col-1">Action</th>
@@ -137,6 +138,7 @@ export default function Task({ task }: { task: Task[] }) {
                       <div className="fw-bold">{item.requester.name}</div>
                     </div>
                   </td>
+                  <td className="align-middle">{item.task_type.name}</td>
                   <td className="align-middle text-center">
                     {item.data.length}
                   </td>

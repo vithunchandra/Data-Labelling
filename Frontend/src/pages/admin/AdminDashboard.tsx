@@ -12,32 +12,10 @@ import { AxiosError } from "axios";
 
 export default function AdminDashboard() {
   const data = useLoaderData();
-  console.log(data);
 
   const user = data.users;
-  let lastUser = [];
-  if (data.totalUser > 5) {
-    for (let i = data.totalUser - 1; i > data.totalUser - 6; i--) {
-      lastUser.push(user[i]);
-    }
-  } else lastUser = user;
-  console.log(lastUser);
-
   const taskType = data.task_type;
-  let lastTasktype = [];
-  if (data.totalTasktype > 5) {
-    for (let i = data.totalTasktype - 1; i > data.totalTasktype - 6; i--) {
-      lastTasktype.push(taskType[i]);
-    }
-  } else lastTasktype = taskType;
-
   const task = data.task;
-  let tasks = [];
-  if (data.totalTask > 5) {
-    for (let i = data.totalTask - 1; i > data.totalTask - 6; i--) {
-      tasks.push(task[i]);
-    }
-  } else tasks = task;
 
   const currentInfo = [
     {
@@ -88,7 +66,7 @@ export default function AdminDashboard() {
           style={{ textDecoration: "none" }}
         >
           <label className="fs-2 fw-bold text-black">User</label>
-          <DashboardUser user={lastUser}></DashboardUser>
+          <DashboardUser user={user}></DashboardUser>
         </Link>
         <Link
           className="col ms-4 bg-white rounded-2 shadow-sm p-3"
@@ -96,7 +74,7 @@ export default function AdminDashboard() {
           style={{ textDecoration: "none" }}
         >
           <label className="fs-2 fw-bold text-black">Task Type</label>
-          <DashboardTaskType taskType={lastTasktype}></DashboardTaskType>
+          <DashboardTaskType taskType={taskType}></DashboardTaskType>
         </Link>
       </div>
       <div className="row justify-content-between align-items-stretch mt-4 g-0">
@@ -106,7 +84,7 @@ export default function AdminDashboard() {
           style={{ textDecoration: "none" }}
         >
           <label className="fs-2 fw-bold text-black">Task</label>
-          <DashboardTask task={tasks}></DashboardTask>
+          <DashboardTask task={task}></DashboardTask>
         </Link>
       </div>
     </div>
@@ -117,38 +95,37 @@ export async function adminDashboardLoader({ params }: any) {
   const { getToken } = useAuth();
   try {
     let loaderObject = {};
-    let response = await client.get("admin/all_users", {
+    let response = await client.get("admin/last_users", {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
-      params: {
-        expand: 1,
-      },
     });
+
     loaderObject = {
       ...loaderObject,
-      users: response.data,
-      totalUser: response.data.length,
+      users: response.data.users,
+      totalUser: response.data.totalUser,
     };
-    response = await client.get("task_type", {
+
+    response = await client.get("admin/last_task_types", {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     });
     loaderObject = {
       ...loaderObject,
-      task_type: response.data,
-      totalTasktype: response.data.length,
+      task_type: response.data.task_type,
+      totalTasktype: response.data.totalTaskType,
     };
-    response = await client.get("admin/all_tasks", {
+    response = await client.get("admin/last_tasks", {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     });
     loaderObject = {
       ...loaderObject,
-      task: response.data,
-      totalTask: response.data.length,
+      task: response.data.task,
+      totalTask: response.data.totalTask,
     };
     return loaderObject;
   } catch (err) {

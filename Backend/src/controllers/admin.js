@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const { User, Data, Task, Chat } = require("../models");
+const { User, Data, Task, Chat, Task_Type } = require("../models");
 const db = require("../models/index");
 
 const expand_task_aggregation_condition = [
@@ -65,6 +65,50 @@ const allTask = async (req, res) => {
   task = await Task.find().populate("requester task_type data");
 
   return res.status(200).json(task);
+};
+
+const lastUser = async (req, res) => {
+  const currentUser = req.user;
+  if (currentUser.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden request" });
+  }
+
+  try {
+    const users = await User.find({ role: { $ne: "admin" } })
+      .sort({ _id: -1 })
+      .limit(5);
+    const totalUser = await User.countDocuments({ role: { $ne: "admin" } });
+
+    return res.status(200).json({ users, totalUser });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+const lastTask = async (req, res) => {
+  const currentUser = req.user;
+  if (currentUser.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden request" });
+  }
+  let task = [];
+  task = await Task.find()
+    .populate("requester task_type data")
+    .sort({ _id: -1 })
+    .limit(5);
+  const totalTask = await Task.countDocuments();
+
+  return res.status(200).json({ task, totalTask });
+};
+
+const lastTaskType = async (req, res) => {
+  const currentUser = req.user;
+  if (currentUser.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden request" });
+  }
+  const task_type = await Task_Type.find().sort({ _id: -1 }).limit(5);
+  const totalTaskType = await Task_Type.countDocuments();
+
+  return res.status(200).json({ task_type, totalTaskType });
 };
 
 const getUserDetail = async (req, res) => {
@@ -138,8 +182,43 @@ const getUserDetail = async (req, res) => {
   return res.status(200).json(all_task);
 };
 
+const test = async (req, res) => {
+  const currentUser = req.user;
+  if (currentUser.role !== "admin") {
+    return res.status(403).json({ message: "Forbidden request" });
+  }
+  try {
+    const tasks = await Task.find({ active: false })
+      .populate({
+        path: "requester",
+        model: "User",
+      })
+      .populate({
+        path: "task_type",
+        model: "Task_Type",
+      })
+      .populate({
+        path: "data",
+        model: "Data",
+        populate: {
+          path: "labels.worker",
+          model: "User",
+        },
+      })
+      .exec();
+
+    return res.status(200).json(tasks);
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   allUser,
   getUserDetail,
   allTask,
+  lastTask,
+  lastUser,
+  lastTaskType,
+  test,
 };

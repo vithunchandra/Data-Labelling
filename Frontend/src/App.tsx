@@ -52,7 +52,7 @@ import AdminTaskType, {
   getTaskTypes,
   editTasktype,
 } from "./pages/admin/AdminTaskType";
-import AdminKeuangan from "./pages/admin/AdminKeuangan";
+import AdminKeuangan, { test } from "./pages/admin/AdminKeuangan";
 import AdminTask, { getTasks } from "./pages/admin/AdminTask";
 import AdminUserDetail, { getUserDetail } from "./pages/admin/AdminUserDetail";
 import AdminTaskDetail from "./pages/admin/AdminTaskDetail";
@@ -108,7 +108,11 @@ function App() {
           element={<AddTaskType></AddTaskType>}
           action={addTasktype}
         ></Route>
-        <Route path="keuangan" element={<AdminKeuangan />}></Route>
+        <Route
+          path="keuangan"
+          element={<AdminKeuangan />}
+          loader={test}
+        ></Route>
       </Route>,
 
       <Route

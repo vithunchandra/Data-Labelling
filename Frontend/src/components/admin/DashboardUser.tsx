@@ -18,7 +18,7 @@ export default function DashboardUser({ user }: { user: User[] }) {
             <tr key={index}>
               <td className="align-middle">{index + 1}</td>
               <td className="align-middle">{item.name}</td>
-              <td className="align-middle">{item.role}</td>
+              <td className="align-middle text-capitalize">{item.role}</td>
               {item.credibility !== 0 ? (
                 <td className="align-middle text-center">{item.credibility}</td>
               ) : (
