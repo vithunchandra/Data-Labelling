@@ -29,6 +29,8 @@ export default function WorkerDashboard(){
         totalUnfinishedTasks, task,
         data, chats
     } = useLoaderData() as ILoader
+    const {getUser} = useAuth()
+    const user = getUser()
 
     const progressInfo = [
         {
@@ -52,7 +54,7 @@ export default function WorkerDashboard(){
         <>
             <div className="mw-100 h-100 d-flex flex-column">
                 <div className="display-6 fw-lighter">
-                    Welcome Back, Vithun Chandra
+                    Welcome Back, {user.name}
                     <WavingHandIcon sx={{color: '#E8BEAC'}} fontSize='large' className='mx-2'/>
                 </div>
 

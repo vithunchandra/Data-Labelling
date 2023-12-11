@@ -1,7 +1,7 @@
 const { User, Task, Chat } = require("../../models");
 
 const chat = async (req, res) => {
-  const { task_id, text } = req.body;
+  const { task_id, text,worker_id } = req.body;
   // fetch data
   const user_now = req.user;
   const user_id = user_now._id;
@@ -31,7 +31,6 @@ const chat = async (req, res) => {
       });
     }
   } else if (user_now.role == "requester") {
-    const { worker_id } = req.body;
     if (String(requester_id) != String(user_id)) {
       return res.status(403).json({
         msg: "Unauthorized, Not the one who create the task.",
@@ -58,6 +57,7 @@ const chat = async (req, res) => {
 
   const new_chat = {
     user: user_id,
+    targetUser: worker_id,
     task_id: task_id,
     text_chat: text,
     timestamp: Date.now(),

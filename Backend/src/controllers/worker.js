@@ -90,7 +90,7 @@ async function tasks(req, res){
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
-    
+    console.log(req.query)
     const userTasks = await getUserTasks({
         user_id: user._id, 
         skip: (page - 1) * 10,
