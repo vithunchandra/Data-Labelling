@@ -1,4 +1,3 @@
-import User from "../../interface/UserInterface";
 import { Button, FormControl, MenuItem } from "@mui/material";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TextField from "@mui/material/TextField";
@@ -7,7 +6,51 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { Link } from "react-router-dom";
 
-export default function UserList({ user }: { user: User[] }) {
+export default function UserList({ data }) {
+  const user = data.users;
+  const tasks = data.finishedTask;
+  const requester = [];
+  const worker = [];
+  let temp = [];
+
+  tasks.map((task) => {
+    let tempPriceRequester = 0;
+    let tempPriceWorker = 0;
+    task.data.map((temp) => {
+      tempPriceRequester += temp.labels.length * temp.price;
+      tempPriceWorker = temp.price;
+      temp.labels.map((label) => {
+        const tempDataWorker = {
+          name: label.worker.name,
+          money: tempPriceWorker,
+        };
+        const existingIndex = worker.findIndex(
+          (e) => e.name === label.worker.name
+        );
+        if (existingIndex !== -1) {
+          worker[existingIndex].money += tempPriceWorker;
+        } else {
+          worker.push(tempDataWorker);
+        }
+      });
+    });
+
+    const tempDataRequester = {
+      name: task.requester.name,
+      money: tempPriceRequester,
+    };
+    const existingIndex = requester.findIndex(
+      (e) => e.name === task.requester.name
+    );
+
+    if (existingIndex !== -1) {
+      requester[existingIndex].money += tempPriceRequester;
+    } else {
+      requester.push(tempDataRequester);
+    }
+  });
+  temp = [...worker, ...requester];
+
   const [role, setRole] = useState("Both");
   const [taskName, setTaskName] = useState("");
   const [currentFilter, setCurrentFilter] = useState(user);
@@ -88,6 +131,7 @@ export default function UserList({ user }: { user: User[] }) {
             <th className="align-middle ">Role</th>
             <th className="align-middle text-center">Credibility</th>
             <th className="align-middle">Wallet</th>
+            <th className="align-middle">Income/Outcome</th>
             <th className="align-middle">Action</th>
           </tr>
         </thead>
@@ -107,8 +151,17 @@ export default function UserList({ user }: { user: User[] }) {
               ) : (
                 <td></td>
               )}
+              <td
+                className={`align-middle ${
+                  user.role === "worker" ? "text-success" : "text-danger"
+                }`}
+              >
+                Rp.{" "}
+                {temp.find((tempUser) => tempUser.name === user.name)?.money ||
+                  0}
+              </td>
+
               <td className="align-middle">
-                {" "}
                 <Link to={`/admin/user/${user._id}`}>
                   <Button variant="contained" startIcon={<InfoOutlinedIcon />}>
                     Detail

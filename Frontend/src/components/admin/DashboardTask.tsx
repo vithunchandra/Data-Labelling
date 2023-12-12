@@ -1,9 +1,7 @@
 import Task from "../../interface/TaskInterface";
 import { Avatar } from "@mui/material";
 
-export default function DashboardUser({ task }: { task: Task[] }) {
-  console.log(task);
-
+export default function DashboardTask({ task }: { task: Task[] }) {
   return (
     <table className="table">
       <thead>

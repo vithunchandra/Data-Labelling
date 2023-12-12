@@ -1,18 +1,24 @@
-import { Avatar, Button, FormControl, MenuItem } from "@mui/material";
-import { client } from "../../api/client";
+import { Avatar, Button } from "@mui/material";
 import Task from "../../interface/TaskInterface";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Link } from "react-router-dom";
-import useAuth from "../../customHooks/authenticate";
-import { AxiosError } from "axios";
 
 export default function Users({ task }: { task: Task[] }) {
-  console.log(task);
+  let usersTempPrice = [];
+  let totalprice = 0;
+  task.map((item) => {
+    let tempPrice = 0;
+    item.data.map((data) => {
+      tempPrice += data.price * data.labels.length;
+      totalprice += data.price * data.labels.length;
+    });
+    usersTempPrice.push(tempPrice);
+  });
 
   return (
     <>
       <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
-        <div className="fw-bold fs-4">Data : </div>
+        <div className="fw-bold fs-4">Task : </div>
         <table className="table">
           <thead>
             <tr>
@@ -21,6 +27,7 @@ export default function Users({ task }: { task: Task[] }) {
               <th className="align-middle col-3">Requester</th>
               <th className="align-middle text-center col-1">Total Data</th>
               <th className="align-middle col-3">Closed Date</th>
+              <th className="align-middle col-2">Price</th>
               <th className="align-middle col-2">Action</th>
             </tr>
           </thead>
@@ -33,8 +40,6 @@ export default function Users({ task }: { task: Task[] }) {
               </tr>
             ) : (
               task.map((item, index) => {
-                console.log(item);
-
                 return (
                   <tr key={index}>
                     <td className="align-middle">{index + 1}</td>
@@ -58,6 +63,9 @@ export default function Users({ task }: { task: Task[] }) {
                       </span>
                     </td>
                     <td className="align-middle">
+                      Rp. {usersTempPrice[index]}
+                    </td>
+                    <td className="align-middle">
                       <Link to={`detail/${item._id}`}>
                         <Button
                           variant="contained"
@@ -73,6 +81,9 @@ export default function Users({ task }: { task: Task[] }) {
             )}
           </tbody>
         </table>
+        <div className="d-flex align-items-end justify-content-end my-3">
+          <div className="me-5 fw-bold">Total Price : Rp. {totalprice}</div>
+        </div>
       </div>
     </>
   );

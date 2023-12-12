@@ -13,6 +13,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
+import PaymentIcon from "@mui/icons-material/Payment";
 import ListLabel from "../../components/admin/ListLabel";
 import useAuth from "../../customHooks/authenticate";
 import { client } from "../../api/client";
@@ -25,6 +26,11 @@ export default function AdminUserTaskDetail() {
   task.worker.map((item, index) => {
     if (task.worker.length - 1 != index) worker += item.user.name + ", ";
     else worker += item.user.name;
+  });
+
+  let totalTaskPrice = 0;
+  task.data.map((item, index) => {
+    totalTaskPrice += item.labels.length * item.price;
   });
 
   function CircularProgressWithLabel(
@@ -74,7 +80,7 @@ export default function AdminUserTaskDetail() {
           className="me-2"
         ></AttachMoneyIcon>
       ),
-      data: task.task_type[0].price,
+      data: `${task.task_type[0].price}/char`,
     },
     {
       icon: (
@@ -95,6 +101,16 @@ export default function AdminUserTaskDetail() {
         ></PersonIcon>
       ),
       data: `${task.requester[0].name}`,
+    },
+    {
+      icon: (
+        <PaymentIcon
+          sx={{ fontSize: "40px" }}
+          color="success"
+          className="me-2"
+        ></PaymentIcon>
+      ),
+      data: `Rp. ${totalTaskPrice}`,
     },
     {
       icon: (
@@ -203,6 +219,10 @@ export default function AdminUserTaskDetail() {
                       }
                     />
                   </div>
+                </div>
+                <div className="d-flex align-items-end justify-content-end my-3">
+                  <div className="me-4">Base Price : Rp. {item.price}</div>
+                  <div>Total Price : Rp. {item.labels.length * item.price}</div>
                 </div>
                 <div id={"label_" + index} className="collapse">
                   <ListLabel label={item.labels} key={index} />

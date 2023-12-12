@@ -13,6 +13,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
 import PersonIcon from "@mui/icons-material/Person";
 import PeopleIcon from "@mui/icons-material/People";
+import PaymentIcon from "@mui/icons-material/Payment";
 import ListLabel from "../../components/admin/ListLabel";
 
 export default function AdminTaskDetail() {
@@ -23,6 +24,13 @@ export default function AdminTaskDetail() {
     if (task.worker.length - 1 != index) worker += item.user.name + ", ";
     else worker += item.user.name;
   });
+
+  let totalTaskPrice = 0;
+  task.data.map((item, index) => {
+    totalTaskPrice += item.labels.length * item.price;
+  });
+
+  console.log(totalTaskPrice);
 
   function CircularProgressWithLabel(
     props: CircularProgressProps & { value: number }
@@ -90,6 +98,16 @@ export default function AdminTaskDetail() {
         ></PersonIcon>
       ),
       data: `${task.requester[0].name}`,
+    },
+    {
+      icon: (
+        <PaymentIcon
+          sx={{ fontSize: "40px" }}
+          color="success"
+          className="me-2"
+        ></PaymentIcon>
+      ),
+      data: `Rp. ${totalTaskPrice}`,
     },
     {
       icon: (
@@ -199,6 +217,10 @@ export default function AdminTaskDetail() {
                       }
                     />
                   </div>
+                </div>
+                <div className="d-flex align-items-end justify-content-end my-3">
+                  <div className="me-4">Base Price : Rp. {item.price}</div>
+                  <div>Total Price : Rp. {item.labels.length * item.price}</div>
                 </div>
                 <div id={"label_" + index} className="collapse">
                   <ListLabel label={item.labels} key={index} />

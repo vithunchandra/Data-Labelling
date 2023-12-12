@@ -1,6 +1,5 @@
 import { Avatar, Button, FormControl, MenuItem } from "@mui/material";
 import Task from "../../interface/TaskInterface";
-import task_type from "../../dummy_data/task_type.json";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Link } from "react-router-dom";
 import TextField from "@mui/material/TextField";
@@ -8,11 +7,22 @@ import { useEffect, useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 
-export default function Task({ task }: { task: Task[] }) {
+export default function Task({ data }) {
+  const task = data.task;
+  const task_type = data.taskType;
   const [type, setType] = useState("all");
   const [taskName, setTaskName] = useState("");
   const [requesterName, setRequesterName] = useState("");
   const [currentTask, setCurrentTask] = useState(task);
+
+  let usersTempPrice = [];
+  task.map((item) => {
+    let tempPrice = 0;
+    item.data.map((data) => {
+      tempPrice += data.price * data.labels.length;
+    });
+    usersTempPrice.push(tempPrice);
+  });
 
   const handleTypeChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setType(event.target.value as string);
@@ -28,11 +38,9 @@ export default function Task({ task }: { task: Task[] }) {
 
   const handleFilter = () => {
     const filteredTasks = task.filter((item) => {
-      console.log(item);
-
       const filterByType =
         type === "all" ||
-        item.task_type.name.toLowerCase().includes(type.toLowerCase());
+        item.task_type.name.toLowerCase() == type.toLowerCase();
       const filterByTaskName = item.task_name
         .toLowerCase()
         .includes(taskName.toLowerCase());
@@ -63,7 +71,6 @@ export default function Task({ task }: { task: Task[] }) {
               onChange={handleTypeChange}
               fullWidth
               sx={{
-                textTransform: "capitalize",
                 width: "100%",
               }}
             >
@@ -107,11 +114,12 @@ export default function Task({ task }: { task: Task[] }) {
         <thead>
           <tr>
             <th className="align-middle col-1">No</th>
-            <th className="align-middle col-3">Nama</th>
+            <th className="align-middle col-2">Nama</th>
             <th className="align-middle col-3">Requester</th>
             <th className="align-middle col-2">Type</th>
             <th className="align-middle text-center col-1">Total Data</th>
             <th className="align-middle col-2">Closed Date</th>
+            <th className="align-middle col-1">Price</th>
             <th className="align-middle col-1">Action</th>
           </tr>
         </thead>
@@ -147,6 +155,7 @@ export default function Task({ task }: { task: Task[] }) {
                       {new Date(item.end_date).toDateString()}
                     </span>
                   </td>
+                  <td className="align-middle">Rp. {usersTempPrice[index]}</td>
                   <td className="align-middle">
                     <Link to={item._id}>
                       <Button

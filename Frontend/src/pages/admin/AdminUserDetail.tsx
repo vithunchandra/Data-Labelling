@@ -16,17 +16,11 @@ export default function AdminUserDetail() {
   const tempTask = data.userTasks;
   let usersTask = [];
   const navigate = useNavigate();
+  console.log(data);
+
   for (let i = 0; i < data.totalTask; i++) {
     usersTask.push(tempTask[i]);
   }
-
-  // if (user.role == "Requester") {
-  //   usersTask = tasks.filter(
-  //     (task) => task.requester.toLowerCase() == user.name.toLowerCase()
-  //     );
-  //   } else if (user.role == "Worker") {
-  //     usersTask = tasks.filter((task) => task.workers.includes(user.name));
-  //   }
 
   const taskData = [
     {
@@ -135,7 +129,6 @@ export async function getUserDetail({ params }: any) {
       userTasks: { ...response.data },
       totalTask: response.data.length,
     };
-
     return loaderObject;
   } catch (err) {
     if (err instanceof AxiosError) {

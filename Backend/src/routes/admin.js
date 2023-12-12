@@ -7,7 +7,7 @@ const {
   lastTask,
   lastUser,
   lastTaskType,
-  test,
+  getClosedTask,
 } = require("../controllers/admin");
 
 const router = express.Router();
@@ -18,6 +18,6 @@ router.get("/all_tasks", [authentication], allTask);
 router.get("/last_users", [authentication], lastUser);
 router.get("/last_tasks", [authentication], lastTask);
 router.get("/last_task_types", [authentication], lastTaskType);
-router.get("/test", [authentication], test);
+router.get("/closed_task", [authentication], getClosedTask);
 
 module.exports = router;

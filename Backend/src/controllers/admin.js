@@ -118,71 +118,80 @@ const getUserDetail = async (req, res) => {
   }
   const { expand, task_type_id } = req.query;
   const { user_id } = req.params;
-  let condition_now = [
-    { $match: { _id: new mongoose.Types.ObjectId(user_id) } },
-    { $project: { password: 0 } },
-    {
-      $lookup: {
-        from: "Task",
-        localField: "tasks",
-        foreignField: "_id",
-        as: "tasks",
-      },
-    },
-  ];
-
-  if (task_type_id) {
-    condition_now = [
-      ...condition_now,
+  const user = await User.findById(user_id);
+  if (user.role == "requester") {
+    let condition_now = [
+      { $match: { _id: new mongoose.Types.ObjectId(user_id) } },
+      { $project: { password: 0 } },
       {
-        $project: {
-          email: 1,
-          name: 1,
-          role: 1,
-          credibility: 1,
-          wallet: 1,
-          tasks: {
-            $filter: {
-              input: "$tasks",
-              cond: {
-                $eq: [
-                  "$$tasks.task_type",
-                  new mongoose.Types.ObjectId(task_type_id),
-                ],
-              },
-              as: "tasks",
-            },
-          },
+        $lookup: {
+          from: "Task",
+          localField: "tasks",
+          foreignField: "_id",
+          as: "tasks",
         },
       },
     ];
-  }
 
-  condition_now = [
-    ...condition_now,
-    {
-      $project: { tasks: 1 },
-    },
-    {
-      $unwind: "$tasks",
-    },
-    {
-      $replaceRoot: { newRoot: "$tasks" },
-    },
-  ];
-
-  if (expand) {
-    if (expand == "1" || expand == "true" || expand == 1) {
-      condition_now = [...condition_now, ...expand_task_aggregation_condition];
+    if (task_type_id) {
+      condition_now = [
+        ...condition_now,
+        {
+          $project: {
+            email: 1,
+            name: 1,
+            role: 1,
+            credibility: 1,
+            wallet: 1,
+            tasks: {
+              $filter: {
+                input: "$tasks",
+                cond: {
+                  $eq: [
+                    "$$tasks.task_type",
+                    new mongoose.Types.ObjectId(task_type_id),
+                  ],
+                },
+                as: "tasks",
+              },
+            },
+          },
+        },
+      ];
     }
+
+    condition_now = [
+      ...condition_now,
+      {
+        $project: { tasks: 1 },
+      },
+      {
+        $unwind: "$tasks",
+      },
+      {
+        $replaceRoot: { newRoot: "$tasks" },
+      },
+    ];
+
+    if (expand) {
+      if (expand == "1" || expand == "true" || expand == 1) {
+        condition_now = [
+          ...condition_now,
+          ...expand_task_aggregation_condition,
+        ];
+      }
+    }
+
+    const all_task = await User.aggregate(condition_now).exec();
+
+    return res.status(200).json(all_task);
+  } else if (user.role == "worker") {
+    
+    // return res.status(200).json(tasks);
   }
-
-  const all_task = await User.aggregate(condition_now).exec();
-
-  return res.status(200).json(all_task);
 };
 
-const test = async (req, res) => {
+const getClosedTask = async (req, res) => {
   const currentUser = req.user;
   if (currentUser.role !== "admin") {
     return res.status(403).json({ message: "Forbidden request" });
@@ -220,5 +229,5 @@ module.exports = {
   lastTask,
   lastUser,
   lastTaskType,
-  test,
+  getClosedTask,
 };

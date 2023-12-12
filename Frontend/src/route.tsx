@@ -8,7 +8,7 @@ import WorkerDashboard from "./pages/worker/WorkerDashboard";
 import WorkerTask from "./pages/worker/WorkerTask";
 import TopUp from "./pages/requester/TopUp";
 import MonitorTask from "./pages/requester/MonitorTask";
-import { Assignment,  Dashboard, LibraryAdd, Wallet } from "@mui/icons-material";
+import { Assignment, Dashboard, LibraryAdd, Wallet } from "@mui/icons-material";
 import MyWallet from "./pages/worker/MyWallet";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
@@ -23,25 +23,25 @@ import AdminTask from "./pages/admin/AdminTask";
 export const workerNavigation = [
   {
     name: "Dashboard",
-    icon: <Dashboard sx={{ fontSize: "25px", color: 'ThreeDDarkShadow'}} />,
+    icon: <Dashboard sx={{ fontSize: "25px", color: "ThreeDDarkShadow" }} />,
     element: <WorkerDashboard />,
     path: "/worker",
   },
   {
     name: "Marketplace",
-    icon: <LibraryAdd sx={{ fontSize: "25px", color: 'ThreeDDarkShadow'}} />,
+    icon: <LibraryAdd sx={{ fontSize: "25px", color: "ThreeDDarkShadow" }} />,
     element: <Marketplace />,
     path: "/worker/marketplace",
   },
   {
     name: "Task",
-    icon: <Assignment sx={{ fontSize: "25px", color: 'ThreeDDarkShadow'}} />,
+    icon: <Assignment sx={{ fontSize: "25px", color: "ThreeDDarkShadow" }} />,
     element: <WorkerTask />,
     path: "/worker/task",
   },
   {
     name: "Wallet",
-    icon: <Wallet sx={{ fontSize: "25px", color: 'ThreeDDarkShadow'}} />,
+    icon: <Wallet sx={{ fontSize: "25px", color: "ThreeDDarkShadow" }} />,
     element: <MyWallet />,
     path: "/worker/wallet",
   },
@@ -106,11 +106,5 @@ export const adminNavigation = [
     icon: <Assignment color="primary" sx={{ fontSize: "30px" }} />,
     element: <AdminTaskType />,
     path: "/admin/task_type",
-  },
-  {
-    name: "Financial",
-    icon: <i className="bi bi-house"></i>,
-    element: <AdminKeuangan />,
-    path: "/admin/keuangan",
   },
 ];

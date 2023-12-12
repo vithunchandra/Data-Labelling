@@ -5,11 +5,12 @@ import { AxiosError } from "axios";
 import { useLoaderData } from "react-router-dom";
 
 export default function AdminUser() {
-  const users = useLoaderData();
+  const data = useLoaderData();
+  
   return (
     <div className="container-fluid p-3 mt-4 bg-white rounded-2 shadow-sm">
       <div className="fw-bold fs-4 mb-2">User</div>
-      <UserList user={users}></UserList>
+      <UserList data={data}></UserList>
     </div>
   );
 }
@@ -18,15 +19,28 @@ export async function getUsers({ params }: any) {
   const { getToken } = useAuth();
 
   try {
-    const response = await client.get("admin/all_users", {
+    let loaderObject = {};
+    let response = await client.get("admin/all_users", {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
-      params: {
-        expand: 1,
+    });
+    loaderObject = {
+      ...loaderObject,
+      users: response.data,
+      totalUser: response.data.length,
+    };
+    response = await client.get("admin/closed_task", {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
       },
     });
-    return response.data;
+    loaderObject = {
+      ...loaderObject,
+      finishedTask: response.data,
+      totalFinishedTask: response.data.length,
+    };
+    return loaderObject;
   } catch (err) {
     if (err instanceof AxiosError) {
       return console.log(err.response?.data.message);
