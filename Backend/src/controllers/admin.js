@@ -186,8 +186,97 @@ const getUserDetail = async (req, res) => {
 
     return res.status(200).json(all_task);
   } else if (user.role == "worker") {
-    
-    // return res.status(200).json(tasks);
+    let condition_now = [
+      { $unwind: "$labels" },
+      {
+        $project: {
+          "labels.worker": 1,
+          task: 1,
+          _id: 0,
+        },
+      },
+      {
+        $match: { "labels.worker": new mongoose.Types.ObjectId(user_id) },
+      },
+      {
+        $project: {
+          labels: 0,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          tasks: { $push: "$task" },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          tasks: 1,
+        },
+      },
+      {
+        $lookup: {
+          from: "Task",
+          localField: "tasks",
+          foreignField: "_id",
+          as: "tasks",
+        },
+      },
+    ];
+
+    if (task_type_id) {
+      condition_now = [
+        ...condition_now,
+        {
+          $project: {
+            email: 1,
+            name: 1,
+            role: 1,
+            credibility: 1,
+            wallet: 1,
+            tasks: {
+              $filter: {
+                input: "$tasks",
+                cond: {
+                  $eq: [
+                    "$$tasks.task_type",
+                    new mongoose.Types.ObjectId(task_type_id),
+                  ],
+                },
+                as: "tasks",
+              },
+            },
+          },
+        },
+      ];
+    }
+
+    condition_now = [
+      ...condition_now,
+      {
+        $project: { tasks: 1 },
+      },
+      {
+        $unwind: "$tasks",
+      },
+      {
+        $replaceRoot: { newRoot: "$tasks" },
+      },
+    ];
+
+    if (expand) {
+      if (expand == "1" || expand == "true" || expand == 1) {
+        condition_now = [
+          ...condition_now,
+          ...expand_task_aggregation_condition,
+        ];
+      }
+    }
+
+    const all_task = await Data.aggregate(condition_now).exec();
+    return res.status(200).json(all_task);
+    // return res.status(200).json(all_task);
   }
 };
 
