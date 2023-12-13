@@ -44,6 +44,7 @@ export default function WorkerTask(){
     const [searchParams, setSearchParams] = useSearchParams()
 
     const filterHandler: SubmitHandler<IFilters> = (data: IFilters) => {
+        searchParams.delete('page')
         searchParams.delete('name')
         searchParams.delete('startDate')
         searchParams.delete('type')

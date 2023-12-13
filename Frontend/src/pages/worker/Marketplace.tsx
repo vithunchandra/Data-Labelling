@@ -39,6 +39,7 @@ export default function Marketplace(){
 
 
     const filterHandler: SubmitHandler<IFilters> = (data: IFilters) => {
+        searchParams.delete('page')
         searchParams.delete('name')
         searchParams.delete('startDate')
         searchParams.delete('type')

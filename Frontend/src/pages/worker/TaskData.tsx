@@ -28,6 +28,7 @@ export default function TaskData(){
     const navigate = useNavigate()
     
     const handleFilter: SubmitHandler<IFilters> = (data: IFilters) => {
+        searchParams.delete('page')
         searchParams.delete('question')
         searchParams.delete('status')
         const {question, status} = data
