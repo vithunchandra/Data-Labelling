@@ -17,7 +17,7 @@ export default function ChatBox() {
     return (
         <div className='d-flex h-100 py-1 flex-column'>
             <div className='d-flex align-items-center p-2 rounded-top-2 shadow-sm bg-white'>
-                <Avatar className='me-3' src="/static/images/avatar/1.jpg" />
+                <Avatar className='me-3' src={"https://picsum.photos/200?random="+chats.user._id} />
                 <span className='fw-bold'>{chats.user.name}</span>
             </div>
             <div className='flex-fill p-2 shadow overflow-y-auto' style={{scrollbarWidth: 'none'}}>
