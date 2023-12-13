@@ -18,7 +18,7 @@ export default function Chat() {
                         return (
                             <Link to={item.user._id} key={index} className='text-dark link-underline-light'>
                                 <div className='p-3 border-bottom border-1 d-flex align-items-center text-truncate'>
-                                    <Avatar src="/static/images/avatar/1.jpg"></Avatar>
+                                    <Avatar src={"https://picsum.photos/200?random="+item.user._id}></Avatar>
                                     <label className='ms-4'>{item.user.name}</label>
                                 </div>
                             </Link>

@@ -22,7 +22,7 @@ export default function ListLabel({label, task_id, ban_list} : {label : Label[],
 
     const navigate = useNavigate();
     const fetcher = useFetcher();
-    console.log(ban_list);
+    console.log({ban_list, anchorEl: anchorEl?.value});
 
     return (
         <table className="table mt-3">
@@ -42,7 +42,7 @@ export default function ListLabel({label, task_id, ban_list} : {label : Label[],
                         return <tr key={index}>
                             <td className="align-middle text-truncate">
                                 <Button className="d-flex align-items-center text-dark" value={item.worker._id} onClick={handleClick}>
-                                    <Avatar alt={item.worker.name} src="/static/images/avatar/3.jpg" />
+                                    <Avatar src={"https://picsum.photos/200?random="+item.worker._id} />
                                     <label className="ms-2" role="button">{item.worker.name}</label>
                                 </Button>
                                 <Popover
@@ -65,12 +65,12 @@ export default function ListLabel({label, task_id, ban_list} : {label : Label[],
                                                 <span className="ms-2">Chat</span>
                                             </Button>
                                             <Button className="d-flex text-dark" onClick={() => {
-                                                fetcher.submit({task_id: task_id, banned_worker_id: item.worker._id}, {
+                                                fetcher.submit({task_id: task_id, banned_worker_id: anchorEl?.value}, {
                                                     method: "post",
                                                     encType: "application/x-www-form-urlencoded",
                                                     action: "/requester/ban_list"
                                                 })
-                                                ban_list = ban_list.filter((b) => b._id != item.worker._id)
+                                                ban_list = ban_list.filter((b) => b._id != anchorEl?.value)
                                                 setAnchorEl(null)
                                             }}>
                                                 {ban_list.find((b) => b._id == anchorEl?.value) ?

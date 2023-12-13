@@ -38,7 +38,7 @@ export default function BanList() {
                                     <td className="align-middle text-center">{index + 1}</td>
                                     <td className="align-middle text-capitalize text-truncate">
                                         <div className='d-flex align-items-center'>
-                                            <Avatar alt={item.baned_user[0].name} src="/static/images/avatar/3.jpg" />
+                                            <Avatar src={"https://picsum.photos/200?random="+item.baned_user[0]._id} />
                                             <label className='ms-3'>{item.baned_user[0].name}</label>
                                         </div>
                                     </td>
