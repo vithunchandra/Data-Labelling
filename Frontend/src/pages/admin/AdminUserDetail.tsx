@@ -31,7 +31,7 @@ export default function AdminUserDetail() {
           className="me-2"
         ></DataArrayIcon>
       ),
-      data: `${data.totalTask} Task`,
+      data: `${data.totalTask} Data`,
     },
     {
       icon: (
