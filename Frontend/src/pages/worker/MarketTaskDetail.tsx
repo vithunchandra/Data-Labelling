@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import ITask from "../../interface/ITask";
 import useAuth from "../../customHooks/authenticate";
 import { Link } from "react-router-dom"; 
+import { useState } from "react";
 export default function MarketTaskDetail(){
     const {task, next, prev} = useLoaderData() as IFetchData
     const navigate = useNavigate()
@@ -29,6 +30,7 @@ export default function MarketTaskDetail(){
             data: `${task.min_credibility} Credibility Score`
         }
     ]
+    const [error, setError] = useState('')
 
     function cancel(){
         navigate('..', {
@@ -38,11 +40,18 @@ export default function MarketTaskDetail(){
 
     async function accept(){
         const { getToken } = useAuth()
-        const response = await client.post(`worker/marketplace/${task._id}`, {}, {
-            headers: {Authorization: `Bearer ${getToken()}`}
-        })
-
-        navigate('../marketplace')
+        try{
+            const response = await client.post(`worker/marketplace/${task._id}`, {}, {
+                headers: {Authorization: `Bearer ${getToken()}`}
+            })
+    
+            navigate('../marketplace')
+        }catch(err){
+            if(err instanceof AxiosError){
+                setError(err.response?.data.message)
+            }
+            console.log(err)
+        }
     }
 
     return(
@@ -74,7 +83,11 @@ export default function MarketTaskDetail(){
                     {task.task_description}
                 </p>
             </div>
-            <div className="row flex-fill align-items-end">
+            <div className="flex-fill"></div>
+            <div className="text-center">
+                    {error && <span className="text-danger">{error}</span>}
+            </div>
+            <div className="row align-items-end">
                 <div className="col-auto">
                     <Link className={`${!prev ? 'invisible' : ''}`} to={`../marketplace/${prev?._id}`}>
                         <Button variant="contained" startIcon={<ChevronLeftIcon />}>Previous</Button>

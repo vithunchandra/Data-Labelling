@@ -2,11 +2,13 @@ export default function Message(
     {
         message,
         color,
-        position
+        position,
+        timestamp
     } : {
         message: string,
         color: string,
         position: string
+        timestamp: string
     }
 ){
     return(
@@ -14,6 +16,9 @@ export default function Message(
             <div className="col-8">
                 <div id={`${position === 'start' ? 'left-message-border' : 'right-message-border'}`} className={`text-bg-${color} rounded-2 px-3 py-2`}>
                     {message}
+                    <div className={'text-end mt-1'} style={{fontSize: '0.8rem'}}>
+                        {new Date(timestamp).toDateString()}
+                    </div>
                 </div>
             </div>
         </div>

@@ -79,7 +79,8 @@ export default function Chat({task_id, requester_id, user_id}: {task_id: string,
                 {
                     chats?.map((chat, index) => {
                         return <Message 
-                            message={chat.text_chat} 
+                            message={chat.text_chat}
+                            timestamp={chat.timestamp}
                             color={chat.user._id === user_id ? 'primary' : 'secondary'} 
                             position={chat.user._id === user_id ? 'end' : 'start'} 
                             key={index}

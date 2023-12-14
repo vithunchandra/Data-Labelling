@@ -74,6 +74,10 @@ async function acceptTask(req, res){
     if(!task){
         return res.status(404).json({message: "Task not found"})
     }
+    if(!user.credibility < task.min_credibility){
+        return res.status(400).json({message: 'User credibility below minimun threshold'})
+    }
+
     task.worker.push({
         chat: [],
         isBanned: false,
@@ -185,7 +189,14 @@ async function labelling(req, res){
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
-
+    const data = await Data.findById(data_id)
+    const task = await Task.findById(data.task)
+    const isExist = task.ban_list.some((item) => {
+        return item === user._id
+    })
+    if(isExist){
+        return res.status(400).json({message: 'Your account is banned from this task'})
+    }
     const result = await storeLabel({data_id, label_id: req.body.label_id, label: {
         worker: user._id,
         answer: req.body.input

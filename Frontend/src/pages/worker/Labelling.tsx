@@ -9,7 +9,7 @@ import { useTask } from "./Task"
 import FormTextField from "../../components/form/FormTextField"
 import FormSelect from "../../components/form/FormSelect"
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 interface ILoader{
     data: IData;
@@ -27,6 +27,7 @@ export default function Labelling(){
     const navigate = useNavigate()
     const formProps = useForm<IFormInput>()
     const {getToken} =useAuth()
+    const [error, setError] = useState('')
 
     const possible_label = task.possible_label.map( item => {
         return {label: item, value: item.toLowerCase()}
@@ -46,7 +47,7 @@ export default function Labelling(){
             navigate('')   
         }catch(err){
             if(err instanceof AxiosError){
-                console.log(err.response?.data.message)
+                setError(err.response?.data.message)
             }
             console.log(err)
         }
@@ -87,6 +88,7 @@ export default function Labelling(){
                             >Next</Button>
                         </div>
                         <div className="col-auto">
+                            {error && <span className="text-danger">{err}</span>}
                             <Button type="submit" variant="contained" color="success" endIcon={<Save />}>
                                 Save
                             </Button>
