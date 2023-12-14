@@ -16,7 +16,6 @@ export default function AdminUserDetail() {
   const tempTask = data.userTasks;
   let usersTask = [];
   const navigate = useNavigate();
-  console.log(data);
 
   for (let i = 0; i < data.totalTask; i++) {
     usersTask.push(tempTask[i]);
@@ -31,7 +30,7 @@ export default function AdminUserDetail() {
           className="me-2"
         ></DataArrayIcon>
       ),
-      data: `${data.totalTask} Data`,
+      data: `${data.totalTask} Task`,
     },
     {
       icon: (
@@ -96,7 +95,7 @@ export default function AdminUserDetail() {
             })}
           </div>
         </div>
-        <UsersTask task={usersTask}></UsersTask>
+        <UsersTask data={{ usersTask, user }}></UsersTask>
       </>
     </>
   );

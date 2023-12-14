@@ -1,4 +1,5 @@
 import { Avatar, Button, FormControl, MenuItem } from "@mui/material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import Task from "../../interface/TaskInterface";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Link } from "react-router-dom";
@@ -134,7 +135,10 @@ export default function Task({ data }) {
             currentTask.map((item, index) => {
               return (
                 <tr key={index}>
-                  <td className="align-middle">{index + 1}</td>
+                  <td className="align-middle">
+                    {index + 1}
+                    {/* {index + 1 + currentPage * 10} */}
+                  </td>
                   <td className="align-middle text-capitalize text-truncate">
                     {item.task_name}
                   </td>
