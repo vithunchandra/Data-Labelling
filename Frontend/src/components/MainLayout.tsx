@@ -11,6 +11,7 @@ import IUser from "../interface/IUser";
 import useAuth from "../customHooks/authenticate";
 import { client } from "../api/client";
 import { Logout } from "@mui/icons-material";
+import logo from "../../public/Logo_2.png";
 
 export default function MainLayout({
   navigation,
