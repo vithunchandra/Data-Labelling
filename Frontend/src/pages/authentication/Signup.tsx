@@ -7,6 +7,7 @@ import { FormRadio } from "../../components/form/FormRadio"
 import { client } from "../../api/client"
 import { AxiosError } from "axios"
 import useAuth from "../../customHooks/authenticate"
+import logo from '../../../public/Logo_2.png'
 
 const radioOptions = [
     {
@@ -60,7 +61,7 @@ export default function Signup(){
     return(
         <div className="row g-0 vh-100">
             <div className="col-8 d-flex justify-content-center align-items-center">
-                <img src="../../../public/Logo_2.png" className="w-50"></img>
+                <img src={logo} className="w-50"></img>
             </div>
             <div className="col d-flex p-5 align-items-center rounded-5 my-4 me-4 bg-white shadow">
                 <FormProvider {...formProps}>

@@ -6,6 +6,7 @@ import FormTextField from "../../components/form/FormTextField";
 import { client } from "../../api/client";
 import useAuth from "../../customHooks/authenticate";
 import { AxiosError } from "axios";
+import logo from '../../../public/Logo_2.png'
 
 interface IFormInputs{
     email: string;
@@ -47,7 +48,7 @@ export default function Signin(){
     return(
         <div className="row g-0 vh-100">
             <div className="col-8 d-flex justify-content-center align-items-center">
-                <img src="../../../public/Logo_2.png" className="w-50"></img>
+                <img src={logo} className="w-50"></img>
             </div>
             <div className="col d-flex p-5 align-items-center rounded-5 my-4 me-4 bg-white shadow">
                 <FormProvider {...formProps}>
