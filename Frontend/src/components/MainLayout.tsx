@@ -11,6 +11,7 @@ import IUser from "../interface/IUser";
 import useAuth from "../customHooks/authenticate";
 import { client } from "../api/client";
 import { Logout } from "@mui/icons-material";
+import logo from '../../public/Logo_2.png';
 
 
 
@@ -41,7 +42,7 @@ export default function MainLayout({navigation, user}: {navigation: NavigationIn
                         <div id="sidebar-nav" className="d-flex flex-column h-100">
                             <div className="w-100 d-flex align-items-center justify-content-between ps-2 py-2 fs-3 fw-bold">
                                 <div className="d-flex align-items-center fs-3 fw-bold">
-                                    <img src="../../public/Logo_2.png" className="me-2" style={{height: '45px'}}></img>
+                                    <img src={logo} className="me-2" style={{height: '45px'}}></img>
                                 </div>
                                 <IconButton data-bs-toggle="collapse" data-bs-target="#sidebar" color="primary" onClick={() => setIsDrawerOn(!isDrawerOn)}>
                                     <ChevronLeftIcon fontSize="large"/>
