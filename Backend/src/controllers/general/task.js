@@ -295,7 +295,7 @@ const get_task = async (req, res) => {
 const get_task_by_id = async (req, res) => {
   const { task_id } = req.params;
   const { expand } = req.query;
-  
+
   let condition_now = [
     { $addFields: { newField: 1 } },
     { $project: { newField: 0 } },
@@ -482,6 +482,7 @@ const take_task = async (req, res) => {
 const toggle_ban_user = async (req, res) => {
   const { task_id, banned_worker_id } = req.body;
   const user_now = req.user;
+  const banned_worker = await User.findById(banned_worker_id);
 
   const task_now = await Task.findById(task_id).exec();
   if (!task_now) {
@@ -526,15 +527,27 @@ const toggle_ban_user = async (req, res) => {
   });
 
   if (user_in_banned_list.length > 0) {
+    // increment credibility by 10
+
+    await User.findByIdAndUpdate(banned_worker_id, {
+      credibility: Math.min(banned_worker.credibility + 10, 100),
+    });
+
     updated_task = await Task.findByIdAndUpdate(
       task_id,
       {
         // remove banned user id from task ban_list
         $pull: { ban_list: banned_worker_id },
+        // update isBanned from worker
       },
       { new: true }
     );
   } else {
+    // decrement credibility by 10
+    await User.findByIdAndUpdate(banned_worker_id, {
+      credibility: Math.max(banned_worker.credibility - 10, 0),
+    });
+
     updated_task = await Task.findByIdAndUpdate(
       task_id,
       {
@@ -544,6 +557,7 @@ const toggle_ban_user = async (req, res) => {
       { new: true }
     );
   }
+  updated_task["worker"] = undefined;
 
   return res.status(200).json({
     msg: "Suceed",
