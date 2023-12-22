@@ -60,6 +60,7 @@ import AdminUserTaskDetail, {
   userTaskDetail,
 } from "./pages/admin/AdminUserTaskDetail";
 import Authenticate from "./pages/authentication/Authenticate";
+import logo from '../public/Logo_2.png'
 
 function App() {
   const router = createBrowserRouter(
@@ -208,7 +209,7 @@ function App() {
             index
             element={
               <div className="w-100 h-100 d-flex justify-content-center align-items-center">
-                <img src="/public/Logo_2.png" className="w-50" />
+                <img src={logo} className="w-50" />
               </div>
             }
           ></Route>

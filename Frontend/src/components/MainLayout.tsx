@@ -50,7 +50,7 @@ export default function MainLayout({
               <div className="w-100 d-flex align-items-center justify-content-between ps-2 py-2 fs-3 fw-bold">
                 <div className="d-flex align-items-center fs-3 fw-bold">
                   <img
-                    src="/public/Logo_2.png"
+                    src={logo}
                     className="me-2"
                     style={{ height: "45px" }}
                   ></img>
