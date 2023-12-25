@@ -47,13 +47,7 @@ export async function getTaskTypes() {
   }
 }
 
-export async function editTasktype({
-  request,
-  params,
-}: {
-  request: any;
-  params: any;
-}) {
+export async function editTasktype({ request }: { request: any }) {
   const { getToken } = useAuth();
   const formData = await request.formData();
   const name = formData.get("name");

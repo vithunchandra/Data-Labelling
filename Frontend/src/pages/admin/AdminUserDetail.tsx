@@ -68,6 +68,7 @@ export default function AdminUserDetail() {
       <>
         <div className="d-flex justify-content-between">
           <Button
+            id="btn-back"
             color="info"
             variant="contained"
             startIcon={<ArrowBackIosIcon />}

@@ -48,6 +48,7 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
                 {editIndex === index ? (
                   <input
                     value={tempPrice}
+                    id="input-price"
                     onChange={(e) => setTempPrice(e.target.value)}
                   />
                 ) : (
@@ -60,6 +61,7 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
                     startIcon={<SaveIcon />}
                     variant="contained"
                     color="success"
+                    id="btn-edit"
                     onClick={() => handleSave(index)}
                   >
                     Save
@@ -68,6 +70,7 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
                   <Button
                     variant="contained"
                     startIcon={<EditIcon />}
+                    id="btn-edit"
                     onClick={() => handleEdit(index)}
                   >
                     Edit
@@ -88,7 +91,10 @@ export default function TaskType({ TaskType }: { TaskType: TaskType[] }) {
             marginLeft: "90%",
           }}
         >
-          <AddCircleIcon sx={{ fontSize: "100px" }}></AddCircleIcon>
+          <AddCircleIcon
+            sx={{ fontSize: "100px" }}
+            id="btn-add"
+          ></AddCircleIcon>
         </IconButton>
       </Link>
     </div>

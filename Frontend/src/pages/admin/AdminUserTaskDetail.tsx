@@ -128,6 +128,7 @@ export default function AdminUserTaskDetail() {
     <>
       <div className="d-flex justify-content-between">
         <Button
+          id="btn-back"
           color="info"
           variant="contained"
           startIcon={<ArrowBackIosIcon />}
@@ -144,11 +145,6 @@ export default function AdminUserTaskDetail() {
               {task.task_type[0].name}
             </div>
           </div>
-          {/* {task.status ? (
-              <div className="fs-2 fw-light text-success">Finished</div>
-            ) : (
-              <div className="fs-2 fw-light text-danger">Unfinished</div>
-            )} */}
         </div>
         <div className="fs-5 mt-1">
           {new Date(task.start_date).toDateString()} -{" "}
@@ -182,7 +178,11 @@ export default function AdminUserTaskDetail() {
           {task.data.map((item, index) => {
             const isLabeled = item.labels.length;
             return (
-              <div className="w-100 mb-2 border p-3 rounded" key={index}>
+              <div
+                className="w-100 mb-2 border p-3 rounded"
+                key={index}
+                id={`data${index + 1}`}
+              >
                 <div className="w-100 d-flex justify-content-betweeen">
                   <label
                     className="w-100 fs-5 fw-bold"

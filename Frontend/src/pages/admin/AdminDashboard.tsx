@@ -63,6 +63,7 @@ export default function AdminDashboard() {
         <Link
           className="col-7 bg-white rounded-2 shadow-sm p-3"
           to={"/admin/user"}
+          id="dashboard-user"
           style={{ textDecoration: "none" }}
         >
           <label className="fs-2 fw-bold text-black">User</label>
@@ -71,6 +72,7 @@ export default function AdminDashboard() {
         <Link
           className="col ms-4 bg-white rounded-2 shadow-sm p-3"
           to={"/admin/task_type"}
+          id="dashboard-task_type"
           style={{ textDecoration: "none" }}
         >
           <label className="fs-2 fw-bold text-black">Task Type</label>
@@ -81,6 +83,7 @@ export default function AdminDashboard() {
         <Link
           className="bg-white rounded-2 shadow-sm p-3"
           to={"/admin/task"}
+          id="dashboard-task"
           style={{ textDecoration: "none" }}
         >
           <label className="fs-2 fw-bold text-black">Task</label>

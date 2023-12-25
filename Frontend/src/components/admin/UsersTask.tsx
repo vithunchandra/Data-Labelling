@@ -115,6 +115,7 @@ export default function Users({ data }) {
                         <Button
                           variant="contained"
                           startIcon={<InfoOutlinedIcon />}
+                          id={`userTaskDetail${index + 1}`}
                         >
                           Detail
                         </Button>

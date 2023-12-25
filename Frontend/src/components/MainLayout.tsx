@@ -40,7 +40,7 @@ export default function MainLayout({
 
   return (
     <div className="w-100 h-100">
-      <div className="row flex-nowrap h-100 g-0">
+      <div className="row flex-nowrap h-100 g-0" id="outlet">
         <div className="col-auto">
           <div
             id="sidebar"

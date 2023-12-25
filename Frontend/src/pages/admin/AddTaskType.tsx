@@ -4,14 +4,11 @@ import DoneAllIcon from "@mui/icons-material/DoneAll";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useFetcher, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import useAuth from "../../customHooks/authenticate";
 import { AxiosError } from "axios";
 import { client } from "../../api/client";
 
 export default function AddTaskType() {
-  const dispatch = useDispatch();
-
   const { register, handleSubmit, reset } = useForm();
   const [taskHeader, setTaskHeader] = useState<{
     name: string;
@@ -47,6 +44,7 @@ export default function AddTaskType() {
           size="large"
           type="submit"
           startIcon={<DoneAllIcon />}
+          id="btn-done"
         >
           Done
         </Button>
@@ -61,6 +59,7 @@ export default function AddTaskType() {
             required
             {...register("name")}
             placeholder="Name"
+            id="input-name"
           />
         </div>
         <div className="form-group mb-3">
@@ -72,6 +71,7 @@ export default function AddTaskType() {
             required
             {...register("price")}
             placeholder="Price"
+            id="input-price"
           />
         </div>
       </div>
