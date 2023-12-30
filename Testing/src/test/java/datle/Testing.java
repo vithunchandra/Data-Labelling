@@ -17,6 +17,7 @@ public class Testing {
 		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
 		driver = new ChromeDriver();
 		worker = new Worker(driver);
+		admin = new Admin(driver);
 	}
 	
 	@Test
@@ -27,6 +28,12 @@ public class Testing {
 		worker.marketplace();
 		worker.task();
 		worker.wallet();
+
+		admin.signin();
+		admin.dashboard();
+		admin.admin_task_type();
+		admin.task();
+		admin.user();
 	}
 	
 	@AfterTest

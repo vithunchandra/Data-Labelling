@@ -208,6 +208,7 @@ export default function Task({ data }) {
           variant="contained"
           startIcon={<ChevronLeft />}
           onClick={() => updatePage(Math.max(currentPage - 1, 0))}
+          id="btn-prev"
         >
           Previous
         </Button>
@@ -229,6 +230,7 @@ export default function Task({ data }) {
               )
             )
           }
+          id="btn-next"
         >
           Next
         </Button>
