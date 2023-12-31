@@ -4,3 +4,4 @@ dist/
 /.metadata/
 test-output/
 driver/
+/Testing/Requester/JavaTesting/target/
