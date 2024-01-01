@@ -38,32 +38,35 @@ public class AuthTest {
         // Your test logic here
         String email_now = "demo_acc2@email.com";
         WebDriver driver = new ChromeDriver();
-        driver.get(this.website_name + "/signup");
+        driver.get(this.website_name );
+        WebElement signUpLink = driver.findElement(By.xpath("//div[@class='mt-3 text-end']//a[text()='Sign up']"));
+        signUpLink.click();
+        Thread.sleep(100);
        
         
-        WebElement emailInput = driver.findElement(By.id(":r0:"));
+        WebElement emailInput = driver.findElement(By.id(":r2:"));
         emailInput.sendKeys(email_now);
         
-        WebElement nameInput = driver.findElement(By.id(":r1:"));
+        WebElement nameInput = driver.findElement(By.id(":r3:"));
         nameInput.sendKeys("demo_acc1");
         
-        WebElement passInput = driver.findElement(By.id(":r2:"));
+        WebElement passInput = driver.findElement(By.id(":r4:"));
         passInput.sendKeys("demo_pass");
         
-        WebElement passInput2 = driver.findElement(By.id(":r3:"));
+        WebElement passInput2 = driver.findElement(By.id(":r5:"));
         passInput2.sendKeys("demo_pass");
         
-         WebElement radioButtonReq = driver.findElement(By.cssSelector("input[value='requester'][type='radio']"));
+        WebElement radioButtonReq = driver.findElement(By.cssSelector("input[value='requester'][type='radio']"));
         radioButtonReq.click();
         
         WebElement signUpButton = driver.findElement(By.className("MuiButton-containedPrimary"));
         signUpButton.click();
         
-        Thread.sleep(100);
+        Thread.sleep(500);
         String currentUrl = driver.getCurrentUrl();
         
         boolean can_login_or_exist = false;
-        if(currentUrl.equals("http://localhost:5173/requester")) {
+        if(currentUrl.equals(this.website_name + "/requester")) {
             can_login_or_exist = true;
         }
         else {
@@ -84,7 +87,7 @@ public class AuthTest {
     public void checkLogin() throws InterruptedException {
         // Your test logic here
         WebDriver driver = new ChromeDriver();
-        driver.get(this.website_name + "/signin");
+        driver.get(this.website_name);
         String email_now = "demo_acc_fail@email.com";
         
         WebElement emailInput = driver.findElement(By.id(":r0:"));
@@ -97,7 +100,7 @@ public class AuthTest {
         WebElement signInButton = driver.findElement(By.className("MuiButton-containedPrimary"));
         signInButton.click();
         
-        Thread.sleep(100);
+        Thread.sleep(500);
         String currentUrl = driver.getCurrentUrl();
         
         boolean can_login_or_exist = false;

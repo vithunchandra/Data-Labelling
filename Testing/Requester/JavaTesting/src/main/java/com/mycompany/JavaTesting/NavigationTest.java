@@ -36,7 +36,7 @@ public class NavigationTest {
     
     public WebDriver requesterLogin() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
-        driver.get(website_name + "/signin");
+        driver.get(website_name );
         String email_now = "demo_acc2@email.com";
         
         WebElement emailInput = driver.findElement(By.id(":r0:"));
@@ -49,7 +49,7 @@ public class NavigationTest {
         WebElement signInButton = driver.findElement(By.className("MuiButton-containedPrimary"));
         signInButton.click();
         
-        Thread.sleep(200);
+        Thread.sleep(1000);
         return driver;
     }
     
@@ -59,7 +59,7 @@ public class NavigationTest {
         WebElement newTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiButton-containedSuccess') and contains(., 'New Task')]"));
         newTaskButton.click();
         
-        Thread.sleep(100);
+        Thread.sleep(500);
         String currentUrl = driver.getCurrentUrl();
         boolean url_check1 = false;
         if(currentUrl.equals(this.website_name + "/requester/create_task/add")) {
@@ -67,15 +67,15 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check1);
         
-        Thread.sleep(200);
+        Thread.sleep(500);
         WebElement dashboardButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and contains(@class, 'Mui-selected')]//span[text()='Dashboard']"));
         dashboardButton.click();
-        Thread.sleep(300);
-        WebElement createTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and contains(@class, 'css-1q6vf95-MuiButtonBase-root-MuiListItemButton-root')]//span[text()='Create Task']"));
+        Thread.sleep(500);
+        WebElement createTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and contains(@class, 'css-1ulohm0')]//span[text()='Create Task']"));
         createTaskButton.click();
                   
         
-        Thread.sleep(200);
+        Thread.sleep(500);
         currentUrl = driver.getCurrentUrl();
         boolean url_check2 = false;
         if(currentUrl.equals(this.website_name + "/requester/create_task")) {
@@ -83,10 +83,11 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check2);
         
-        Thread.sleep(200);
-        WebElement addTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiButtonBase-root') and contains(@class, 'MuiIconButton-root') and contains(@class, 'css-78trlr-MuiButtonBase-root-MuiIconButton-root')]"));
+        Thread.sleep(500);
+        WebElement addTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiIconButton-root') and contains(@class, 'css-1yxmbwk')]"));
         addTaskButton.click();
-        Thread.sleep(100);
+        
+        Thread.sleep(500);
         currentUrl = driver.getCurrentUrl();
         boolean url_check3 = false;
         if(currentUrl.equals(this.website_name + "/requester/create_task/add")) {
@@ -95,7 +96,7 @@ public class NavigationTest {
         Assert.assertTrue(url_check3);
         
         
-        Thread.sleep(200);
+        Thread.sleep(500);
         driver.close();
         
     }
@@ -106,7 +107,7 @@ public class NavigationTest {
         WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
         monitorTaskButton.click();
         
-        Thread.sleep(100);
+        Thread.sleep(500);
         String currentUrl = driver.getCurrentUrl();
         boolean url_check_now = false;
         if(currentUrl.equals(this.website_name + "/requester/monitor_task")) {
@@ -114,10 +115,10 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check_now);
         
-        Thread.sleep(200);
+        Thread.sleep(500);
         WebElement banListButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Ban List']"));
         banListButton.click();
-        Thread.sleep(100);
+        Thread.sleep(500);
         currentUrl = driver.getCurrentUrl();
         url_check_now = false;
         if(currentUrl.equals(this.website_name + "/requester/ban_list")) {
@@ -125,10 +126,10 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check_now);
         
-        Thread.sleep(200);
+        Thread.sleep(500);
         WebElement topUpButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Top Up']"));
         topUpButton.click();
-        Thread.sleep(100);
+        Thread.sleep(500);
         currentUrl = driver.getCurrentUrl();
         url_check_now = false;
         if(currentUrl.equals(this.website_name + "/requester/top_up")) {
@@ -136,10 +137,10 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check_now);
         
-        Thread.sleep(200);
+        Thread.sleep(500);
         WebElement logoutButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Log Out']"));
         logoutButton.click();
-        Thread.sleep(100);
+        Thread.sleep(500);
         currentUrl = driver.getCurrentUrl();
         url_check_now = false;
         if(currentUrl.equals(this.website_name + "/signin")) {
@@ -147,7 +148,7 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check_now);
         
-        Thread.sleep(300);
+        Thread.sleep(500);
         driver.close();
         
     }

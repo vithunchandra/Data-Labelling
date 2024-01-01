@@ -12,7 +12,7 @@ import org.testng.xml.XmlTest;
 
 public class MainTest {
     
-    public static String website_name = "http://localhost:5173";
+    public static String website_name = "https://datle-frontend.vercel.app";
     public static void main(String[] args) throws InterruptedException {
         // Initialize TestNG
         TestNG testNG = new TestNG();
