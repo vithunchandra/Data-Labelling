@@ -1,5 +1,5 @@
 
-8package datle;
+package datle;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,14 +12,20 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class Admin{
-    WebDriver driver
+    WebDriver driver;
+    Actions actions;
+    JavascriptExecutor js;
 
     Admin (WebDriver driver){
-        this.driver = driver;;l; 
+        this.driver = driver; 
+        actions = new Actions(driver);
+        js = (JavascriptExecutor)driver;
     }
 
     public void signin() throws InterruptedException, IOException {
@@ -93,8 +99,6 @@ public class Admin{
 
     public void admin_task() throws InterruptedException, IOException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        Actions actions = new Actions(driver);
-		
         // go to task type
         driver.findElement(By.xpath("//span[text()='Task']")).click();
         Thread.sleep(7000);

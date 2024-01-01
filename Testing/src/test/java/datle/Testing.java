@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 public class Testing {
 	WebDriver driver;
 	Worker worker;
+	Admin admin;
 	
 	@BeforeTest
 	public void setup() {
@@ -20,20 +21,14 @@ public class Testing {
 		admin = new Admin(driver);
 	}
 	
-	@Test
+	@Test(priority=1)
 	public void testing() throws InterruptedException, IOException {
-//		worker.register();
 		worker.signin();
+	}
+	
+	@Test(priority=2)
+	public void dashboard_worker() throws InterruptedException, IOException {
 		worker.dashboard();
-		worker.marketplace();
-		worker.task();
-		worker.wallet();
-
-		admin.signin();
-		admin.dashboard();
-		admin.admin_task_type();
-		admin.task();
-		admin.user();
 	}
 	
 	@AfterTest

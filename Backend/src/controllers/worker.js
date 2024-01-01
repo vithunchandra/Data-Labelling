@@ -1,6 +1,7 @@
 const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask, getMarketTask, getNearMarketTask, getNearData, storeLabel, getMarketTasksCount, getUserTasksCount, getAllDataCount, getAllChat, getFinishedTask, taskStats, getLastChats } = require('../dao/worker');
 const { Data, Task, Chat } = require('../models');
 const db = require('../models/index');
+const { baseEmailOptions, transporter } = require('../notfication/transporter');
 
 async function taskStatistics(req, res){
     const user = req.user;
@@ -74,7 +75,7 @@ async function acceptTask(req, res){
     if(!task){
         return res.status(404).json({message: "Task not found"})
     }
-    if(!user.credibility < task.min_credibility){
+    if(user.credibility < task.min_credibility){
         return res.status(400).json({message: 'User credibility below minimun threshold'})
     }
 
@@ -83,6 +84,25 @@ async function acceptTask(req, res){
         isBanned: false,
         user_id: user._id
     })
+    
+
+    const mailOptions = {
+        ...baseEmailOptions,
+        to: task.requester.email,
+        subject: "Task Accepted",
+        html: `
+            <h1>Hello, Requester ${user.name}<h1></br>
+            <b>Your task, "${task.task_name}" has been accepted by ${user.email}</b>
+        `,
+        text: `Your task has been accepted by ${user.email}`,
+    }
+
+    try{
+        transporter.sendMail(mailOptions)
+    }catch(err){
+        return res.status(500).json({message: err.message})
+    }
+
     task.save()
 
     return res.status(201).json({message: 'Task accepted successfully'})

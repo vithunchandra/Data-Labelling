@@ -1,6 +1,8 @@
 const { default: mongoose } = require("mongoose");
+var ObjectId = require('mongodb').ObjectId;
 const { Task, User, Task_Type, Chat } = require("../../models");
 const { expand_task } = require("../../utils/helper_function");
+const { baseEmailOptions, transporter } = require("../../notfication/transporter");
 
 const expand_task_aggregation_condition = [
   {
@@ -39,6 +41,7 @@ const expand_task_aggregation_condition = [
 
 const toggle_task = async (req, res) => {
   let { task_id } = req.body;
+  const user = req.user
 
   if (!task_id || task_id == "") {
     return res.status(400).json({
@@ -54,7 +57,7 @@ const toggle_task = async (req, res) => {
     });
   }
 
-  let task = await Task.findById(task_id).exec();
+  let task = await Task.findById(task_id).populate('requester').exec();
   if (!task) {
     return res.status(404).json({
       msg: "Task Not Found",
@@ -71,6 +74,51 @@ const toggle_task = async (req, res) => {
       new: true,
     }
   );
+
+  const workerID = [];
+  for(const worker of task.worker){
+    workerID.push(new ObjectId(worker.user_id))
+  }
+
+  const worker = await User.find({
+    _id: {
+      $in: workerID
+    }
+  })
+
+  const workerEmail = worker.map(item => item.email)
+  console.log(workerEmail)
+
+  const requesterMailOptions = {
+      ...baseEmailOptions,
+      to: task.requester.email,
+      subject: "Task Closed",
+      html: `
+          <h1>Hello, Requester ${user.name}<h1></br>
+          <b>Your task, "${task.task_name}" has been closed</b>
+      `,
+      text: `Your task has been closed`,
+  }
+
+  const workerMailOptions = {
+      ...baseEmailOptions,
+      to: workerEmail,
+      subject: "Task Closed",
+      html: `
+          <h1>Hello, Worker<h1></br>
+          <b>Your task, "${task.task_name}" has been closed</b>
+      `,
+      text: `Your task has been closed`,
+  }
+
+  try{
+      transporter.sendMail(requesterMailOptions)
+      transporter.sendMail(workerMailOptions)
+  }catch(err){
+      return res.status(500).json({message: err.message})
+  }
+
+
 
   return res.status(200).json(new_task);
 };
