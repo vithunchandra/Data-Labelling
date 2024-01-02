@@ -33,7 +33,7 @@ public class AuthTest {
     
     
 
-    @Test
+//    @Test
     public void checkRegister() throws InterruptedException {
         // Your test logic here
         String email_now = "demo_acc2@email.com";

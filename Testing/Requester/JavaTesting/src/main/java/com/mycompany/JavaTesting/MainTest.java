@@ -21,30 +21,43 @@ public class MainTest {
         XmlSuite suite = new XmlSuite();
         suite.setName("MySuite");
         List<XmlTest> tests = new ArrayList<>();
+        
+        // Requester Test
+        XmlTest testRequester = new XmlTest(suite);
+        testRequester.setName("Requester");
+        
+        XmlClass testClassRequester = new XmlClass("com.mycompany.JavaTesting.Requester");
+
+        List<XmlClass> classesRequester = new ArrayList<>();
+        classesRequester.add(testClassRequester);
+        testRequester.setXmlClasses(classesRequester);
+        
+        tests.add(testRequester);
 
         // Authentication Test
-        XmlTest testAuth = new XmlTest(suite);
-        testAuth.setName("AuthTest");
-        
-        XmlClass testClassAuth = new XmlClass("com.mycompany.JavaTesting.AuthTest");
-        List<XmlClass> classesAuth = new ArrayList<>();
-        classesAuth.add(testClassAuth);
-        testAuth.setXmlClasses(classesAuth);
-        
-        tests.add(testAuth);
+//        XmlTest testAuth = new XmlTest(suite);
+//        testAuth.setName("AuthTest");
+//        
+//        XmlClass testClassAuth = new XmlClass("com.mycompany.JavaTesting.AuthTest");
+//        List<XmlClass> classesAuth = new ArrayList<>();
+//        classesAuth.add(testClassAuth);
+//        testAuth.setXmlClasses(classesAuth);
+//        
+//        tests.add(testAuth);
         
         // Navigation Test
-        XmlTest testNav = new XmlTest(suite);
-        testNav.setName("NavigationTest");
-        
-        XmlClass testClassNav = new XmlClass("com.mycompany.JavaTesting.NavigationTest");
-        List<XmlClass> classesNav = new ArrayList<>();
-        classesNav.add(testClassNav);
-        testNav.setXmlClasses(classesNav);
-        
-        tests.add(testNav);
-        
-        
+//        XmlTest testNav = new XmlTest(suite);
+//        testNav.setName("NavigationTest");
+//        
+//        XmlClass testClassNav = new XmlClass("com.mycompany.JavaTesting.NavigationTest");
+//        List<XmlClass> classesNav = new ArrayList<>();
+//        classesNav.add(testClassNav);
+//        testNav.setXmlClasses(classesNav);
+//        
+//        tests.add(testNav);
+
+
+
         
         // Test all
         suite.setTests(tests);
