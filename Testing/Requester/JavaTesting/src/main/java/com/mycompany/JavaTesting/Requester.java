@@ -302,6 +302,53 @@ public class Requester {
         screenshot("./screenshot/monitor_task_after_add.png");
     }
     
+    @Test
+    public void topUp() throws InterruptedException, IOException {
+        driver = requesterLogin();
+        String ammount = "10000";
+        int ammount_int = Integer.parseInt(ammount);
+                
+        
+        Thread.sleep(500);
+        String moneyText = driver.findElement(By.cssSelector("label.me-3")).getText();
+        int moneyValue = Integer.parseInt(moneyText.replaceAll("[^0-9]", ""));
+        
+        WebElement topUpButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Top Up']"));
+        topUpButton.click();
+        Thread.sleep(500);
+        
+        WebElement amountInputElement = driver.findElement(By.cssSelector("input[name='amount']"));
+        amountInputElement.sendKeys(Keys.BACK_SPACE);
+        amountInputElement.sendKeys(ammount);
+        
+        WebElement bankAccountInputElement = driver.findElement(By.cssSelector("input[name='bank_account']"));
+        bankAccountInputElement.sendKeys("12321312424");
+        
+        screenshot("./screenshot/requester_top_up_form.png");
+        
+        WebElement topUpSubmitButton = driver.findElement(By.cssSelector("button.MuiButton-containedSuccess"));
+        topUpSubmitButton.click();
+        
+        screenshot("./screenshot/requester_after_top_up.png");
+        
+        
+        Thread.sleep(500);
+        driver = requesterLogin();
+        Thread.sleep(500);
+        
+        moneyText = driver.findElement(By.cssSelector("label.me-3")).getText();
+        int moneyValueAfter = Integer.parseInt(moneyText.replaceAll("[^0-9]", ""));
+        
+        Boolean checkAmmountTrue = true;
+        if(moneyValue + ammount_int != moneyValueAfter) {
+            checkAmmountTrue = false;
+        }
+        
+        Assert.assertTrue(checkAmmountTrue);
+
+        Thread.sleep(500);
+    }
+    
     
     @AfterTest
     public void close() {
