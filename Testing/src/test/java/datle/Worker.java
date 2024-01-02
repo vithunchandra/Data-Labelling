@@ -292,6 +292,11 @@ public class Worker {
 		screenshot("./screenshot/draw_wallet.png");
 	}
 	
+	public void logout() throws InterruptedException {
+		driver.findElement(By.xpath("//span[text() = 'Log Out']")).click();
+		Thread.sleep(1000);
+	}
+	
 	public void screenshot(String fileName) throws IOException {
 		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		FileUtils.copyFile(scrFile, new File(fileName));

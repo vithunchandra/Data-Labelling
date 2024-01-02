@@ -111,6 +111,11 @@ public class Testing {
 		worker.wallet();
 	}
 	
+	@Test(priority=19)
+	public void logout_worker() throws InterruptedException {
+		worker.logout();
+	}
+	
 	@AfterTest
 	public void close() {
 		driver.close();
