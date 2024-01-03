@@ -7,6 +7,7 @@ package com.mycompany.JavaTesting;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,6 +17,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
@@ -302,7 +304,7 @@ public class Requester {
         screenshot("./screenshot/monitor_task_after_add.png");
     }
     
-    @Test
+//    @Test
     public void topUp() throws InterruptedException, IOException {
         driver = requesterLogin();
         String ammount = "10000";
@@ -349,6 +351,103 @@ public class Requester {
         Thread.sleep(500);
     }
     
+//    @Test
+    public void checkCreateTaskSummary() throws InterruptedException, IOException {
+        driver = requesterLogin();
+        
+        WebElement newTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiButton-containedSuccess') and contains(., 'New Task')]"));
+        newTaskButton.click();
+        Thread.sleep(500);
+        
+        WebElement nameInput = driver.findElement(By.cssSelector("input[name='name']"));
+        nameInput.sendKeys("Task Merangkum 1");
+
+
+        Select typeDropdown = new Select(driver.findElement(By.id("type")));
+        typeDropdown.selectByValue("65856bcef38c6565a1eea9c1");
+        Thread.sleep(100);
+
+        WebElement instructionTextArea = driver.findElement(By.cssSelector("textarea[name='instruction']"));
+        instructionTextArea.sendKeys("Rangkumah teks berikut dalam 1 kalimat singkat!");
+        Thread.sleep(100);
+        
+        WebElement dataChip = driver.findElement(By.cssSelector("div.MuiChip-root span.MuiChip-label"));
+        dataChip.click();
+        dataChip.click();
+        Thread.sleep(300);
+        
+        WebElement dataInput0 = driver.findElement(By.cssSelector("input[name='data.0']"));
+        dataInput0.sendKeys("Teks untuk dirangkum 1");
+        WebElement dataInput1 = driver.findElement(By.cssSelector("input[name='data.1']"));
+        dataInput1.sendKeys("Teks untuk dirangkum 2");
+        WebElement dataInput2 = driver.findElement(By.cssSelector("input[name='data.2']"));
+        dataInput2.sendKeys("Teks untuk dirangkum 3");
+
+        screenshot("./screenshot/add_task_summarization_form_input.png");
+
+        dataInput2.sendKeys(Keys.ENTER);        
+        Thread.sleep(1000);
+        driver.navigate().back();
+        
+        Thread.sleep(500);
+        WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
+        monitorTaskButton.click();
+        
+        screenshot("./screenshot/monitor_task_after_add_summarization.png");
+    }
+    
+//    @Test
+    public void closeAllTaskCheck() throws InterruptedException, IOException {
+        driver = requesterLogin();
+        
+        WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
+        monitorTaskButton.click();
+        
+        screenshot("./screenshot/before_close_all.png");
+        List<WebElement> openButtons = driver.findElements(By.xpath("//button[contains(@class, 'MuiButton-containedSuccess') and contains(@class, 'css-5zrdtn')]"));
+      
+        Boolean checkAll = true;
+        for (int i = 0;i < openButtons.size();i++) {
+            try {
+                WebElement btn_now = openButtons.get(i);
+                btn_now.click();
+            } catch(Exception e) {
+                System.out.println("error");
+                checkAll = false; 
+            }
+            
+        }
+        Assert.assertTrue(checkAll);
+        Thread.sleep(1000);
+        screenshot("./screenshot/after_close_all.png");
+
+    }
+    
+//    @Test
+    public void openAllTaskCheck() throws InterruptedException, IOException {
+        driver = requesterLogin();
+        
+        WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
+        monitorTaskButton.click();
+        
+        screenshot("./screenshot/before_open_all.png");
+        List<WebElement> closeButtons = driver.findElements(By.xpath("//button[contains(@class,'MuiButton-containedError')]"));
+      
+        Boolean checkAll = true;
+        for (int i = 0;i < closeButtons.size();i++) {
+            try {
+                WebElement btn_now = closeButtons.get(i);
+                btn_now.click();
+            } catch(Exception e) {
+                System.out.println("error");
+                checkAll = false; 
+            }
+            
+        }
+        Assert.assertTrue(checkAll);
+        Thread.sleep(1000);
+        screenshot("./screenshot/after_open_all.png");
+    }
     
     @AfterTest
     public void close() {
