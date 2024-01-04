@@ -114,7 +114,6 @@ async function tasks(req, res){
     if(user.role !== 'worker'){
         return res.status(403).json({message: 'Forbidden request'})
     }
-    console.log(req.query)
     const userTasks = await getUserTasks({
         user_id: user._id, 
         skip: (page - 1) * 10,
@@ -252,6 +251,7 @@ async function storeChat(req, res){
     const {message} = req.body
     
     const task = await getAllChat({user_id: user._id, task_id})
+    console.log(task);
     if(task === null){
         return res.status(404).json({message: 'Task not found'})
     }
@@ -262,6 +262,7 @@ async function storeChat(req, res){
         is_read: false,
     })
     task.worker[0].chat.push(chat._id)
+    
     task.save()
 
     return res.status(201).json({message: 'Message sent successfully'})

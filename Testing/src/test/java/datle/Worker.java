@@ -22,7 +22,7 @@ public class Worker {
 	}
 	
 	public void register() throws InterruptedException, IOException {
-		driver.get("https://datle-frontend.vercel.app");
+		driver.get("https://software-testing-frontend.vercel.app");
 		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/form/div[3]/a")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("vithunchandra@gmail.com");
@@ -37,9 +37,9 @@ public class Worker {
 	}
 	
 	public void signin() throws InterruptedException, IOException {
-		driver.get("https://datle-frontend.vercel.app");
-		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("Lola.Hills-Johnston69@hotmail.com");
-		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("FDiFjQ");
+		driver.get("http://localhost:5173");
+		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("Arturo_Gottlieb41@hotmail.com");
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Pqo7D1");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/login.png");
@@ -96,7 +96,7 @@ public class Worker {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//button[text()='5']")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("tac");
+		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("gen");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/marketplace_filter.png");
@@ -156,7 +156,7 @@ public class Worker {
 		driver.findElement(By.xpath("//button[@title='Previous month']")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//button[text()='5']")).click();
-		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("Space");
+		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("Rage");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/task_list_filter.png");
@@ -170,7 +170,7 @@ public class Worker {
 	}
 	
 	public void task_detail() throws InterruptedException, IOException {
-		driver.findElement(By.xpath("(//button[text()='Detail'])[2]")).click();
+		driver.findElement(By.xpath("(//button[text()='Detail'])[1]")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/task_information.png");
 		driver.findElement(By.xpath("//button[text()='Next']")).click();
@@ -181,7 +181,7 @@ public class Worker {
 		screenshot("./screenshot/previous_task_information.png");
 	}
 	
-	public void chat() throws InterruptedException, IOException {
+	public void see_chat() throws InterruptedException, IOException {
 		driver.findElement(By.xpath("//button[@data-bs-target='#chat-wrapper']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/hide_chat.png");
@@ -189,6 +189,15 @@ public class Worker {
 		Thread.sleep(2000);
 		jse.executeScript("document.querySelector(\".overflow-auto.flex-fill\").scroll(0, -1080);");
 		Thread.sleep(3000);
+		jse.executeScript("document.querySelector(\".overflow-auto.flex-fill\").scroll(0, 1080);");
+		Thread.sleep(3000);
+	}
+	
+	public void chat() throws InterruptedException {
+		driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[2]/div/div/div/div[3]/div/div[1]/div/div/textarea[1]")).sendKeys("Chat Testing");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//button[text()='Send']")).click();
+		Thread.sleep(2000);
 		jse.executeScript("document.querySelector(\".overflow-auto.flex-fill\").scroll(0, 1080);");
 		Thread.sleep(3000);
 	}
@@ -212,7 +221,7 @@ public class Worker {
 		driver.findElement(By.xpath("//div[@role='combobox']")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//li[text()='Unlabeled']")).click();
-		driver.findElement(By.xpath("//input[@name='question']")).sendKeys("App");
+		driver.findElement(By.xpath("//input[@name='question']")).sendKeys("Frugal");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/data_filter.png");
@@ -228,6 +237,7 @@ public class Worker {
 	}
 	
 	public void data_information() throws InterruptedException, IOException {
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//button[text()='Label']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/data_detail.png");
@@ -240,6 +250,7 @@ public class Worker {
 	}
 	
 	public void labeling() throws InterruptedException, IOException {
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//div[@role='combobox']")).click();
 		Thread.sleep(2000);
 		screenshot("./screenshot/data_classification_labelling.png");
@@ -284,10 +295,11 @@ public class Worker {
 	}
 	
 	public void wallet() throws InterruptedException, IOException {
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//span[text()='Wallet']")).click();
 		screenshot("./screenshot/wallet.png");
 		Thread.sleep(5000);
-		driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div[3]/div/div/input")).sendKeys("20000");
+		driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div/div/div[3]/div[3]/div/div/input")).sendKeys("1");
 		driver.findElement(By.xpath("//button[text()='Draw']")).click();
 		screenshot("./screenshot/draw_wallet.png");
 	}

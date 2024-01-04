@@ -505,6 +505,9 @@ const getAllChat = async ({ user_id, task_id }) => {
           user_id,
         },
       },
+      ban_list: 1,
+      possible_label: 1,
+      data: 1
     },
     {
       sort: {

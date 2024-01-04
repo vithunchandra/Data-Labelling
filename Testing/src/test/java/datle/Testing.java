@@ -77,41 +77,46 @@ public class Testing {
 	}
 	
 	@Test(priority=12)
+	public void worker_see_chat() throws InterruptedException, IOException {
+		worker.see_chat();
+	}
+	
+	@Test(priority=13)
 	public void worker_chat() throws InterruptedException, IOException {
 		worker.chat();
 	}
 	
-	@Test(priority=13)
+	@Test(priority=14)
 	public void worker_task_data() throws InterruptedException, IOException {
 		worker.task_data();
 	}
 	
-	@Test(priority=14)
+	@Test(priority=15)
 	public void worker_data_pagination() throws InterruptedException, IOException {
 		worker.data_pagination();
 	}
 	
-	@Test(priority=15)
+	@Test(priority=16)
 	public void worker_data_filter() throws InterruptedException, IOException {
 		worker.data_filter();
 	}
 	
-	@Test(priority=16)
+	@Test(priority=17)
 	public void worker_data_information() throws InterruptedException, IOException {
 		worker.data_information();
 	}
 	
-	@Test(priority=17)
+	@Test(priority=18)
 	public void labeling() throws InterruptedException, IOException {
 		worker.labeling();
 	}
 	
-	@Test(priority=18)
+	@Test(priority=19)
 	public void wallet_worker() throws InterruptedException, IOException {
 		worker.wallet();
 	}
 	
-	@Test(priority=19)
+	@Test(priority=20)
 	public void logout_worker() throws InterruptedException {
 		worker.logout();
 	}
