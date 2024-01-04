@@ -443,4 +443,98 @@ public class Requester {
         Thread.sleep(1000);
         screenshot("./screenshot/after_open_all.png");
     }
+    
+    public void editTask() throws InterruptedException, IOException {
+        driver = requesterLogin();
+        Thread.sleep(500);
+        String task_now = "Summary";
+        
+        WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
+        monitorTaskButton.click();
+        
+        Thread.sleep(500);
+        List<WebElement> rowsWithTask = driver.findElements(By.xpath("//td[text()='"+task_now+"']/ancestor::tr"));
+        Thread.sleep(500);
+        
+        String id_row = "";
+        System.out.println("Number of task:" + rowsWithTask.size());
+        for(int i = 0;i < rowsWithTask.size();i++) {
+//            WebElement rowWithTask = driver.findElements(By.xpath("//td[text()='"+task_now+"']/ancestor::tr")).get(i);
+            WebElement rowWithTask = rowsWithTask.get(i);
+            String[] all_row_text_now = rowWithTask.getText().split(" ");
+           
+            id_row = all_row_text_now[0];
+            String btn_text = all_row_text_now[all_row_text_now.length - 1].split("\n")[0];
+            if(btn_text.equals("Opened")) {
+                WebElement closeButton = rowWithTask.findElement(By.xpath(".//button"));
+                closeButton.click();
+                Thread.sleep(500);
+                screenshot("./screenshot/close_task_that_want_to_be_editted.png");
+            } 
+            
+
+            break;
+        }
+        
+        Boolean canEdit = false;
+        if(!rowsWithTask.isEmpty()) {
+            WebElement createTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and contains(@class, 'css-1ulohm0')]//span[text()='Create Task']"));
+            createTaskButton.click();
+            
+            System.out.println("ID_NOW : " + id_row);
+            List<WebElement> rowsAddTask = driver.findElements(By.xpath("//table[contains(@class,'table')]/tbody/tr"));
+            
+            Thread.sleep(1000);
+            System.out.println("ALL ADD TASK COUNT:" + rowsAddTask.size());
+            
+            for(int i = 0;i < rowsAddTask.size();i++) {
+                WebElement rowAddTask = driver.findElements(By.xpath("//table[contains(@class,'table')]/tbody/tr")).get(i);
+                String[] rowAddTaskTextSplit = rowAddTask.getText().split(" ");
+                
+                if(rowAddTaskTextSplit[0].equals(id_row)) {
+                    System.out.println(rowAddTaskTextSplit[0] + ":" + rowAddTaskTextSplit[rowAddTaskTextSplit.length -1 ]);
+                    screenshot("./screenshot/click_edit_on_closed_task.png");
+                    WebElement edit_btn = rowAddTask.findElement(By.xpath(".//button"));
+                    edit_btn.click();
+                    canEdit = true;    
+                    
+                    break;
+                }
+                
+                
+            }
+            
+        }
+        Thread.sleep(500);
+        if(canEdit) {
+            List<WebElement> editButtonsNameCred = driver.findElements(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium ms-1 css-1yxmbwk']"));
+            System.out.println("COUNT EDIT:" + editButtonsNameCred.size());
+            editButtonsNameCred.get(0).click();
+            Thread.sleep(500);
+            editButtonsNameCred.get(1).click();
+            Thread.sleep(500);
+            
+            WebElement editDescButton = driver.findElement(By.xpath("//button[@class='MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1yxmbwk'][@type='submit']"));
+            editDescButton.click();
+            Thread.sleep(500);
+            WebElement nameInput = driver.findElement(By.cssSelector("input.w-50.form-control[name='name']"));
+            nameInput.sendKeys(" Edited!");
+            Thread.sleep(500);
+            WebElement credibilityInput = driver.findElement(By.xpath("//input[@type='number' and @class='w-25 form-control'][@name='credibility']"));
+            credibilityInput.clear();
+            credibilityInput.sendKeys("80");
+            Thread.sleep(500);
+            WebElement instructionTextarea = driver.findElement(By.xpath("//textarea[@name='instruction' and @class='w-100 form-control']"));
+            instructionTextarea.sendKeys(" Edited!");
+            nameInput.sendKeys(Keys.ENTER);
+            Thread.sleep(500);
+            screenshot("./screenshot/requester_edit_task.png");
+            WebElement saveButton = driver.findElement(By.cssSelector("button.MuiButton-containedSuccess[type='submit']"));
+            saveButton.click();
+            Thread.sleep(500);
+            screenshot("./screenshot/saved_requester_edit_task.png");
+        }
+        
+        
+    }   
 }

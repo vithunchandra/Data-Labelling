@@ -83,6 +83,7 @@ public class NavigationTest {
         }
         Assert.assertTrue(url_check2);
         
+        
         Thread.sleep(500);
         WebElement addTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiIconButton-root') and contains(@class, 'css-1yxmbwk')]"));
         addTaskButton.click();
@@ -94,9 +95,9 @@ public class NavigationTest {
             url_check3 = true;
         }
         Assert.assertTrue(url_check3);
+               
         
-        
-        Thread.sleep(500);
+        Thread.sleep(1000);
         driver.close();
         
     }
