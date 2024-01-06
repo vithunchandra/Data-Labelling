@@ -82,6 +82,7 @@ public class Requester {
         
         screenshot("./screenshot/requester_sign_in_form.png");
         
+        Thread.sleep(500);
         WebElement signUpButton = driver.findElement(By.className("MuiButton-containedPrimary"));
         signUpButton.click();
         
@@ -94,6 +95,7 @@ public class Requester {
             screenshot("./screenshot/requester_sucess_register.png");
         }
         else {
+            Thread.sleep(1000);
             WebElement errorMessageElement = driver.findElement(By.className("text-danger"));
             String errorMessage = errorMessageElement.getText();
             String temp_text_now = "User with email "+ email_now +" already exists";
@@ -124,7 +126,7 @@ public class Requester {
         WebElement signInButton = driver.findElement(By.className("MuiButton-containedPrimary"));
         signInButton.click();
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         String currentUrl = driver.getCurrentUrl();
         
         boolean can_login_or_exist = false;
@@ -132,6 +134,7 @@ public class Requester {
             can_login_or_exist = true;
             screenshot("./screenshot/requester_sucess_login.png");
         } else {
+            Thread.sleep(1000);
             String temp_text_now = "User with email "+email_now+" is not exist";
             WebElement errorMessageElement = driver.findElement(By.className("text-danger"));
             String errorMessage = errorMessageElement.getText();
