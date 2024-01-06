@@ -21,6 +21,7 @@ public class Testing {
 		worker = new Worker(driver);
 		admin = new Admin(driver);
 		requester = new Requester(driver);
+        driver.manage().window().maximize();
 	}
 	
 	@Test(priority = 1)
@@ -171,6 +172,86 @@ public class Testing {
 	@Test(priority=44)
 	public void logout_worker() throws InterruptedException {
 		worker.logout();
+	}
+	
+	@Test(priority = 45)
+	public void admin_login() throws InterruptedException, IOException {
+		admin.signin();
+	}
+	
+	@Test(priority = 46)
+	public void admin_dashboard_to_user() throws InterruptedException, IOException {
+		admin.dashboard_to_user();
+	}
+	
+	@Test(priority = 47)
+	public void admin_dashboard_to_task() throws InterruptedException, IOException {
+		admin.dashboard_to_task();
+	}
+	
+	@Test(priority = 48)
+	public void admin_dashboard_to_task_type() throws InterruptedException, IOException {
+		admin.dashboard_to_task_type();
+	}
+	
+	@Test(priority = 49)
+	public void admin_edit_task_type() throws InterruptedException, IOException {
+		admin.edit_task_type();
+	}
+	
+	@Test(priority = 50)
+	public void admin_add_task_type() throws InterruptedException, IOException {
+		admin.add_task_type();
+	}
+	
+	@Test(priority = 51)
+	public void admin_task_filter() throws InterruptedException, IOException {
+		admin.task_filter();
+	}
+	
+	@Test(priority = 52)
+	public void admin_task_to_detail() throws InterruptedException, IOException {
+		admin.task_to_detail();
+	}
+	
+	@Test(priority = 53)
+	public void admin_task_detail_data() throws InterruptedException, IOException {
+		admin.task_detail_data();
+	}
+	
+	@Test(priority = 54)
+	public void admin_task_button_back() throws InterruptedException, IOException {
+		admin.task_button_back();
+	}
+	
+	@Test(priority = 55)
+	public void admin_user_filter() throws InterruptedException, IOException {
+		admin.user_filter();
+	}
+	
+	@Test(priority = 56)
+	public void admin_user_detail() throws InterruptedException, IOException {
+		admin.user_detail();
+	}
+	
+	@Test(priority = 57)
+	public void admin_user_task_detail() throws InterruptedException, IOException {
+		admin.user_task_detail();
+	}
+	
+	@Test(priority = 58)
+	public void admin_user_task_detail_data() throws InterruptedException, IOException {
+		admin.user_task_detail_data();
+	}
+	
+	@Test(priority = 59)
+	public void admin_user_button_back() throws InterruptedException, IOException {
+		admin.user_button_back();
+	}
+	
+	@Test(priority = 60)
+	public void admin_signout() throws InterruptedException, IOException {
+		admin.signout();
 	}
 	
 	@AfterTest
