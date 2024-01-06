@@ -37,9 +37,9 @@ public class Worker {
 	}
 	
 	public void signin() throws InterruptedException, IOException {
-		driver.get("http://localhost:5173");
-		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("Arturo_Gottlieb41@hotmail.com");
-		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("Pqo7D1");
+		driver.get("https://datle-frontend.vercel.app");
+		driver.findElement(By.xpath("//input[@name='email']")).sendKeys("Lola.Hills-Johnston69@hotmail.com");
+		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("FDiFjQ");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/login.png");
@@ -96,7 +96,7 @@ public class Worker {
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//button[text()='5']")).click();
 		Thread.sleep(1000);
-		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("gen");
+		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("Ody");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/marketplace_filter.png");
@@ -156,7 +156,7 @@ public class Worker {
 		driver.findElement(By.xpath("//button[@title='Previous month']")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//button[text()='5']")).click();
-		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("Rage");
+		driver.findElement(By.xpath("//input[@name='name']")).sendKeys("Priest");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/task_list_filter.png");
@@ -221,7 +221,7 @@ public class Worker {
 		driver.findElement(By.xpath("//div[@role='combobox']")).click();
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//li[text()='Unlabeled']")).click();
-		driver.findElement(By.xpath("//input[@name='question']")).sendKeys("Frugal");
+		driver.findElement(By.xpath("//input[@name='question']")).sendKeys("Aboard");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		screenshot("./screenshot/data_filter.png");
