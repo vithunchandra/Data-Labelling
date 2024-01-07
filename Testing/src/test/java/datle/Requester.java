@@ -14,8 +14,12 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 /**
  *
@@ -23,13 +27,19 @@ import org.testng.Assert;
  */
 public class Requester {
     private WebDriver driver;
-    private final String website_name;
+    private String website_name;
 	
-    Requester(WebDriver driver){
-        this.driver = driver;
-        this.website_name = "https://datle-frontend.vercel.app";
-    }
+    @BeforeTest
+	public void setup() {
+    	System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+		driver = new ChromeDriver();
+        website_name = "https://datle-frontend.vercel.app";
+	}
     
+    @AfterTest
+	public void close() {
+		driver.close();
+	}
     private void screenshot(String fileName) throws IOException, InterruptedException {
         Thread.sleep(250);
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -37,6 +47,7 @@ public class Requester {
         Thread.sleep(250);
     }
     
+    @Test(priority = 2)
     private WebDriver requesterLogin() throws InterruptedException {
         driver.get(website_name );
         String email_now = "demo_acc2@email.com";
@@ -55,7 +66,7 @@ public class Requester {
         return driver;
     }
     
-//    @Test
+    @Test(priority = 3)
     public void checkRegister() throws InterruptedException, IOException {
         // Your test logic here
         driver.get(this.website_name );
@@ -110,7 +121,7 @@ public class Requester {
         Thread.sleep(1000);
     }
     
-//    @Test
+    @Test(priority = 4)
     public void checkLogin() throws InterruptedException, IOException {
         // Your test logic here
         driver.get(this.website_name);
@@ -149,13 +160,13 @@ public class Requester {
         Thread.sleep(1000);
     }
     
-//    @Test
+    @Test(priority = 5)
     public void checkNavigateAddTask() throws InterruptedException, IOException {
         driver = requesterLogin();
         WebElement newTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiButton-containedSuccess') and contains(., 'New Task')]"));
         newTaskButton.click();
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         String currentUrl = driver.getCurrentUrl();
         boolean url_check1 = false;
         if(currentUrl.equals(this.website_name + "/requester/create_task/add")) {
@@ -164,16 +175,16 @@ public class Requester {
         Assert.assertTrue(url_check1);
         screenshot("./screenshot/requester_navigate_add_task.png");
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         WebElement dashboardButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and contains(@class, 'Mui-selected')]//span[text()='Dashboard']"));
         dashboardButton.click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         WebElement createTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and contains(@class, 'css-1ulohm0')]//span[text()='Create Task']"));
         createTaskButton.click();
         screenshot("./screenshot/requester_navigate_create_task.png");
                   
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         currentUrl = driver.getCurrentUrl();
         boolean url_check2 = false;
         if(currentUrl.equals(this.website_name + "/requester/create_task")) {
@@ -182,11 +193,11 @@ public class Requester {
         Assert.assertTrue(url_check2);
         
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         WebElement addTaskButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiIconButton-root') and contains(@class, 'css-1yxmbwk')]"));
         addTaskButton.click();
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         currentUrl = driver.getCurrentUrl();
         boolean url_check3 = false;
         if(currentUrl.equals(this.website_name + "/requester/create_task/add")) {
@@ -200,13 +211,13 @@ public class Requester {
         Thread.sleep(1000);
     }
     
-//    @Test
+    @Test(priority = 6)
     public void checkNavigateOtherNavbar() throws InterruptedException, IOException {
         driver = requesterLogin();
         WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
         monitorTaskButton.click();
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         String currentUrl = driver.getCurrentUrl();
         boolean url_check_now = false;
         if(currentUrl.equals(this.website_name + "/requester/monitor_task")) {
@@ -216,10 +227,10 @@ public class Requester {
     
         screenshot("./screenshot/requester_navigate_monitor_task.png");
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         WebElement banListButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Ban List']"));
         banListButton.click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         currentUrl = driver.getCurrentUrl();
         url_check_now = false;
         if(currentUrl.equals(this.website_name + "/requester/ban_list")) {
@@ -229,10 +240,10 @@ public class Requester {
         
         screenshot("./screenshot/requester_navigate_ban_list.png");
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         WebElement topUpButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Top Up']"));
         topUpButton.click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         currentUrl = driver.getCurrentUrl();
         url_check_now = false;
         if(currentUrl.equals(this.website_name + "/requester/top_up")) {
@@ -242,10 +253,10 @@ public class Requester {
         
         screenshot("./screenshot/requester_navigate_top_up.png");
         
-        Thread.sleep(500);
+        Thread.sleep(1000);
         WebElement logoutButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Log Out']"));
         logoutButton.click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         currentUrl = driver.getCurrentUrl();
         url_check_now = false;
         if(currentUrl.equals(this.website_name + "/signin")) {
@@ -259,7 +270,7 @@ public class Requester {
         
     }
     
-//    @Test
+    @Test(priority = 7)
     public void checkCreateTask() throws InterruptedException, IOException {
         driver = requesterLogin();
         
@@ -304,6 +315,7 @@ public class Requester {
         
     }
     
+    @Test(priority = 8)
     public void topUp() throws InterruptedException, IOException {
         driver = requesterLogin();
         String ammount = "10000";
@@ -350,6 +362,7 @@ public class Requester {
         Thread.sleep(500);
     }
     
+    @Test(priority = 9)
     public void checkCreateTaskSummary() throws InterruptedException, IOException {
         driver = requesterLogin();
         
@@ -394,7 +407,7 @@ public class Requester {
         screenshot("./screenshot/monitor_task_after_add_summarization.png");
     }
     
-//    @Test
+    @Test(priority = 10)
     public void closeAllTaskCheck() throws InterruptedException, IOException {
         driver = requesterLogin();
         
@@ -421,7 +434,7 @@ public class Requester {
 
     }
     
-//    @Test
+    @Test(priority = 11)
     public void openAllTaskCheck() throws InterruptedException, IOException {
         driver = requesterLogin();
         
@@ -447,6 +460,7 @@ public class Requester {
         screenshot("./screenshot/after_open_all.png");
     }
     
+    @Test(priority = 12)
     public void editTask() throws InterruptedException, IOException {
         driver = requesterLogin();
         Thread.sleep(500);

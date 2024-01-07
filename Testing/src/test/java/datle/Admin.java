@@ -13,7 +13,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -21,13 +23,21 @@ public class Admin{
     WebDriver driver;
     Actions actions;
     JavascriptExecutor js;
-
-    Admin (WebDriver driver){
-        this.driver = driver; 
-        actions = new Actions(driver);
+    
+    @BeforeTest
+	public void setup() {
+		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+		driver = new ChromeDriver();
+		actions = new Actions(driver);
         js = (JavascriptExecutor)driver;
-    }
-
+	}
+    
+    @AfterTest
+	public void close() {
+		driver.close();
+	}
+    
+    @Test(priority = 1)
     public void signin() throws InterruptedException, IOException {
         // login as admin
 		driver.get("https://datle-frontend.vercel.app");
@@ -39,6 +49,7 @@ public class Admin{
         screenshot("./screenshot/admin_dashboard.png");
 	}
 
+    @Test(priority = 2)
     public void dashboard_to_user() throws InterruptedException, IOException {
         // click dashboard user
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[4]/a[1]")).click();
@@ -48,6 +59,7 @@ public class Admin{
         Thread.sleep(3000);
 	}
     
+    @Test(priority = 3)
     public void dashboard_to_task() throws InterruptedException, IOException {
         // click dashboard task
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[5]/a")).click();
@@ -57,6 +69,7 @@ public class Admin{
         Thread.sleep(3000);
 	}
     
+    @Test(priority = 4)
     public void dashboard_to_task_type() throws InterruptedException, IOException {
         // click dashboard task type
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[4]/a[2]")).click();
@@ -66,6 +79,7 @@ public class Admin{
         Thread.sleep(3000);
 	}
 
+    @Test(priority = 5)
     public void edit_task_type() throws InterruptedException, IOException {
 		// go to task type
         driver.findElement(By.xpath("//span[text()='Task Type']")).click();
@@ -87,6 +101,7 @@ public class Admin{
         screenshot("./screenshot/admin_edit_task_type_price.png");
 	}
     
+    @Test(priority = 6)
     public void add_task_type() throws InterruptedException, IOException {
         // add new task type
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div[2]/a/button")).click();
@@ -103,6 +118,7 @@ public class Admin{
         screenshot("./screenshot/admin_add_task_type.png"); 
 	}
     
+    @Test(priority = 7)
     public void task_navigation() throws InterruptedException, IOException {
         // go to task type
 //        driver.findElement(By.xpath("//span[text()='Task']")).click();
@@ -115,6 +131,7 @@ public class Admin{
 //        Thread.sleep(1000); 
     }
     
+    @Test(priority = 8)
     public void task_filter() throws InterruptedException, IOException {
         driver.findElement(By.xpath("//span[text()='Task']")).click();
         Thread.sleep(3000);
@@ -171,8 +188,7 @@ public class Admin{
         screenshot("./screenshot/admin_task_search_by_task_name_and_requester_name_and_type_classification.png");  
     }
     
-    
-   
+    @Test(priority = 9)
     public void task_to_detail() throws InterruptedException, IOException {
         // klik detail ke 1
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/table/tbody/tr[1]/td[8]/a/button")).click();
@@ -180,6 +196,7 @@ public class Admin{
         screenshot("./screenshot/admin_detail_task"); 
 	}
     
+    @Test(priority = 10)
     public void task_detail_data() throws InterruptedException, IOException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         
@@ -192,6 +209,7 @@ public class Admin{
         Thread.sleep(3000);  
 	}
     
+    @Test(priority = 11)
     public void task_button_back() throws InterruptedException, IOException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
@@ -200,6 +218,7 @@ public class Admin{
         Thread.sleep(3000);
 	}
     
+    @Test(priority = 12)
     public void user_filter() throws InterruptedException, IOException {
         Actions actions = new Actions(driver);
         
@@ -248,6 +267,7 @@ public class Admin{
 //        screenshot("./screenshot/admin_user_prev.png");  
     }
     
+    @Test(priority = 13)
     public void user_detail() throws InterruptedException, IOException {
         // klik detail user ke 2
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/table/tbody/tr[2]/td[7]/a/button")).click();
@@ -255,6 +275,7 @@ public class Admin{
         screenshot("./screenshot/admin_user_detail.png");  
     }
 
+    @Test(priority = 14)
     public void user_task_detail() throws InterruptedException, IOException {
     	// klik task user ke 4
         driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[3]/table/tbody/tr[4]/td[9]/a/button")).click();
@@ -262,6 +283,7 @@ public class Admin{
         screenshot("./screenshot/admin_user_detail_task.png");  
 	}
     
+    @Test(priority = 15)
     public void user_task_detail_data() throws InterruptedException, IOException {  
         // klik detail task user ke 12
         WebElement checkData = driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[3]/div[12]"));
@@ -272,6 +294,7 @@ public class Admin{
         screenshot("./screenshot/admin_user_detail_task_data.png");  
     }
     
+    @Test(priority = 16)
     public void user_button_back() throws InterruptedException, IOException {  
         WebElement buttonBack = driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/button"));
         js.executeScript("arguments[0].scrollIntoView(true);", buttonBack);
@@ -282,6 +305,7 @@ public class Admin{
         Thread.sleep(3000);
     }
     
+    @Test(priority = 17)
     public void signout() throws InterruptedException, IOException {  
         driver.findElement(By.xpath("//span[text()='Log Out']")).click();
         Thread.sleep(3000);

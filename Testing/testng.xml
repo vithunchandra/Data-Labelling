@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Datle">
+  <test thread-count="5" name="Datle Testing">
+    <classes>
+	  <class name="datle.Requester"/>
+      <class name="datle.Worker"/>
+      <class name="datle.Admin"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
