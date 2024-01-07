@@ -47,7 +47,7 @@ public class Requester {
         Thread.sleep(250);
     }
     
-    @Test(priority = 2)
+//    @Test(priority = 2)
     private WebDriver requesterLogin() throws InterruptedException {
         driver.get(website_name );
         String email_now = "demo_acc2@email.com";
@@ -554,4 +554,40 @@ public class Requester {
         
         
     }   
+    
+    @Test
+    public void checkChat() throws InterruptedException, IOException {
+        driver = requesterLogin();
+        
+        WebElement monitorTaskButton = driver.findElement(By.xpath("//div[contains(@class, 'MuiListItemButton-root') and not(contains(@class, 'Mui-selected'))]//span[text()='Monitor Task']"));
+        monitorTaskButton.click();
+        Thread.sleep(750);
+        
+        WebElement rowElement = driver.findElement(By.xpath("//td[text()='9']/parent::tr"));
+        rowElement.click();
+        Thread.sleep(750);
+        
+        
+        WebElement detailElement = driver.findElement(By.xpath("/html/body/div/div/div/div[2]/div[2]/div[1]/div/div[2]/table/tbody/tr[18]/td/div/div/a/button"));
+        detailElement.click();
+        Thread.sleep(1000);
+        
+        WebElement forumButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiButton-containedSuccess') and contains(@class, 'position-fixed') and contains(@class, 'fixed-bottom')]"));
+        forumButton.click();
+        Thread.sleep(500);
+        
+        WebElement avatarElement = driver.findElement(By.xpath("//div[contains(@class, 'p-3')]//img[contains(@class, 'MuiAvatar-img')]"));
+        avatarElement.click();
+        Thread.sleep(500);
+        
+        WebElement textareaElement = driver.findElement(By.cssSelector("textarea.MuiInputBase-input[name='chat']"));
+        textareaElement.sendKeys("Halo?");
+        screenshot("./screenshot/requester_chat.png");
+
+        WebElement sendButton = driver.findElement(By.xpath("//button[contains(@class, 'MuiButton-containedPrimary') and contains(text(), 'Send')]"));
+        sendButton.click();
+        Thread.sleep(500);
+        screenshot("./screenshot/requester_after_chat.png");
+    }
+    
 }
