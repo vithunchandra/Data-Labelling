@@ -2,6 +2,34 @@ const { getMarketTasks, getUserTasks, getTask, getData, getAllData, getNearTask,
 const { Data, Task, Chat } = require('../models');
 const db = require('../models/index');
 const { baseEmailOptions, transporter } = require('../notfication/transporter');
+const {VertexAI} = require('@google-cloud/vertexai');
+
+// Initialize Vertex with your Cloud project and location
+const vertex_ai = new VertexAI({project: 'datle-408710', location: 'asia-southeast1'});
+const model = 'gemini-pro';
+
+// Instantiate the models
+const generativeModel = vertex_ai.preview.getGenerativeModel({
+    model: model,
+    generation_config: {
+        "max_output_tokens": 768,
+        "temperature": 0.2,
+        "top_p": 0.8,
+        "top_k": 40
+    },
+});
+  
+async function generateContent(prompt, text) {
+    const req = {
+        contents: [{role: 'user', parts: [
+            {text: `${prompt}: \n\n${text}`}
+        ]}],
+    };
+
+    const streamingResp = await generativeModel.generateContentStream(req);
+
+    return await streamingResp.response
+};
 
 async function taskStatistics(req, res){
     const user = req.user;
@@ -222,6 +250,10 @@ async function labelling(req, res){
     }})
 
     return res.status(201).json(result)
+}
+
+async function summarizeUsingAi(){
+
 }
 
 async function getChats(req, res){
