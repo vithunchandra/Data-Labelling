@@ -1,0 +1,4 @@
+/node_modules
+/data
+.env
+Proyek.postman_collection.json

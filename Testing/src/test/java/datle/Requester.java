@@ -555,7 +555,7 @@ public class Requester {
         
     }   
     
-    @Test
+    @Test(priority = 13)
     public void checkChat() throws InterruptedException, IOException {
         driver = requesterLogin();
         
