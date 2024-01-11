@@ -28,14 +28,7 @@ const { User, Task, Task_Type, Data, Chat } = require("./src/models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200,
-    credentials: true,
-    exposedHeaders: "Authorization",
-  })
-);
+app.use(cors());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/data", dataRouter);

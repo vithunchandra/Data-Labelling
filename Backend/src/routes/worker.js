@@ -1,9 +1,10 @@
 const express = require("express");
 const { authentication } = require('../middleware/authentication');
-const { tasks, task, market, marketTask, data, getTaskData, labelling, acceptTask, getChats, storeChat, taskStatistics, lastTask, lastChats } = require("../controllers/worker");
+const { tasks, task, market, marketTask, data, getTaskData, labelling, acceptTask, getChats, storeChat, taskStatistics, lastTask, lastChats, useAI } = require("../controllers/worker");
 const { getLastChats } = require("../dao/worker");
 const router = express.Router();
 
+router.post('/ai', useAI)
 router.get('/marketplace', [authentication], market)
 router.get('/marketplace/:task_id', [authentication], marketTask)
 router.post('/marketplace/:task_id', [authentication], acceptTask)

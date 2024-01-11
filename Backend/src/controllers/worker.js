@@ -28,8 +28,17 @@ async function generateContent(prompt, text) {
 
     const streamingResp = await generativeModel.generateContentStream(req);
 
-    return await streamingResp.response
+    return (await streamingResp.response).candidates[0].content.parts[0].text
 };
+
+async function useAI(req, res){
+    const {type, text} = req.body;
+    if(type !== 'summary' && type !== 'translation'){
+        return res.status(400).json({message: "invalid task type to use AI"})
+    }
+    const prompt = `Provide a ${type === 'summary' ? "brief summary" : "indonesian translation"} for the following article`
+    return res.status(200).json({result: await generateContent(prompt, text)})
+}
 
 async function taskStatistics(req, res){
     const user = req.user;
@@ -301,6 +310,7 @@ async function storeChat(req, res){
 }
 
 module.exports = {
+    useAI,
     taskStatistics,
     lastTask,
     lastChats,

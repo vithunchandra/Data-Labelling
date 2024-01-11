@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom"
-import { Button, Chip } from "@mui/material"
-import { ChevronLeft, ChevronRight, Save } from "@mui/icons-material"
+import { Button, Chip, CircularProgress } from "@mui/material"
+import { ChevronLeft, ChevronRight, Save, SmartToy } from "@mui/icons-material"
 import { client } from "../../api/client"
 import useAuth from "../../customHooks/authenticate"
 import { IData } from "../../interface/IData"
@@ -28,6 +28,7 @@ export default function Labelling(){
     const formProps = useForm<IFormInput>()
     const {getToken} =useAuth()
     const [error, setError] = useState('')
+    const [isRequesting, setIsRequesting] = useState(false)
 
     const possible_label = task.possible_label.map( item => {
         return {label: item, value: item.toLowerCase()}
@@ -45,6 +46,20 @@ export default function Labelling(){
                 }
             )
             navigate('')   
+        }catch(err){
+            if(err instanceof AxiosError){
+                setError(err.response?.data.message)
+            }
+            console.log(err)
+        }
+    }
+
+    async function useAI(){
+        try{
+            setIsRequesting(true)
+            const response = await client.post('worker/ai', {type: task.task_type.name.toLocaleLowerCase(), text: data.text})
+            formProps.setValue('input', response.data.result)
+            setIsRequesting(false)
         }catch(err){
             if(err instanceof AxiosError){
                 setError(err.response?.data.message)
@@ -88,10 +103,19 @@ export default function Labelling(){
                             >Next</Button>
                         </div>
                         <div className="col-auto">
-                            {error && <span className="text-danger">{err}</span>}
-                            <Button type="submit" variant="contained" color="success" endIcon={<Save />}>
-                                Save
-                            </Button>
+                            {error && <span className="text-danger">{error}</span>}
+                            <div className="row">
+                                <div className="col-auto">
+                                    <Button type="button" onClick={useAI} className="flex align-items-center" variant="outlined" color="success" startIcon={!isRequesting && <SmartToy />}>
+                                        {isRequesting && <CircularProgress size="1.5rem" className="me-2"/>} Use AI
+                                    </Button>
+                                </div>
+                                <div className="col-auto">
+                                    <Button type="submit" variant="contained" color="success" endIcon={<Save />}>
+                                        Save
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
